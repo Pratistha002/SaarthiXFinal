@@ -374,6 +374,182 @@
             gap: 5px;
         }
 
+        /* Training Request Section Styles */
+        .training-request-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .request-table-container {
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .request-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .request-table thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .request-table th,
+        .request-table td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .request-table th {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .request-table td {
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .request-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .request-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .request-form-container {
+            border-top: 2px solid #e9ecef;
+            padding-top: 30px;
+        }
+
+        .request-form-container h3 {
+            color: #2c3e50;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .request-form-container h3::before {
+            content: '';
+            width: 4px;
+            height: 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .training-request-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .submit-btn,
+        .reset-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .reset-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 1200px) {
             .training-actions {
                 grid-template-columns: 1fr;
@@ -403,6 +579,29 @@
 
             .training-list {
                 grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .request-table-container {
+                font-size: 12px;
+            }
+
+            .request-table th,
+            .request-table td {
+                padding: 10px 8px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .submit-btn,
+            .reset-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -516,275 +715,122 @@
                 <p>Personalized training programs designed to enhance your skills and career prospects</p>
             </div>
 
-            <!-- Training Stats -->
-            <div class="training-stats">
-                <div class="stat-card">
-                    <div class="stat-icon courses">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="stat-number">150+</div>
-                    <div class="stat-label">Available Courses</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon students">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <div class="stat-number">5,000+</div>
-                    <div class="stat-label">Students Trained</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon hours">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-number">10,000+</div>
-                    <div class="stat-label">Training Hours</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon certificates">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <div class="stat-number">3,500+</div>
-                    <div class="stat-label">Certificates Issued</div>
-                </div>
-            </div>
-
-            <!-- Training Categories -->
-            <div class="training-categories">
-                <div class="category-card" onclick="browseCategory('technology')">
-                    <div class="category-icon tech">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="category-title">Technology & Programming</div>
-                    <div class="category-description">
-                        Learn cutting-edge technologies including web development, mobile apps, AI/ML, and cloud computing.
-                    </div>
-                    <div class="category-stats">
-                        <span class="category-courses">45 Courses</span>
-                        <span class="category-duration">20-80 hours</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="browseCategory('business')">
-                    <div class="category-icon business">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="category-title">Business & Management</div>
-                    <div class="category-description">
-                        Develop business acumen with courses on strategy, leadership, project management, and entrepreneurship.
-                    </div>
-                    <div class="category-stats">
-                        <span class="category-courses">32 Courses</span>
-                        <span class="category-duration">15-60 hours</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="browseCategory('design')">
-                    <div class="category-icon design">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <div class="category-title">Design & Creative</div>
-                    <div class="category-description">
-                        Master design principles, UI/UX, graphic design, and creative tools for digital and print media.
-                    </div>
-                    <div class="category-stats">
-                        <span class="category-courses">28 Courses</span>
-                        <span class="category-duration">10-50 hours</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="browseCategory('marketing')">
-                    <div class="category-icon marketing">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <div class="category-title">Digital Marketing</div>
-                    <div class="category-description">
-                        Learn modern marketing strategies including SEO, social media, content marketing, and analytics.
-                    </div>
-                    <div class="category-stats">
-                        <span class="category-courses">25 Courses</span>
-                        <span class="category-duration">12-40 hours</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="browseCategory('data')">
-                    <div class="category-icon data">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="category-title">Data Science & Analytics</div>
-                    <div class="category-description">
-                        Dive into data analysis, machine learning, statistics, and business intelligence tools.
-                    </div>
-                    <div class="category-stats">
-                        <span class="category-courses">20 Courses</span>
-                        <span class="category-duration">25-100 hours</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="browseCategory('soft-skills')">
-                    <div class="category-icon soft">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="category-title">Soft Skills & Communication</div>
-                    <div class="category-description">
-                        Enhance interpersonal skills, communication, leadership, and professional development.
-                    </div>
-                    <div class="category-stats">
-                        <span class="category-courses">18 Courses</span>
-                        <span class="category-duration">8-30 hours</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Training Actions -->
-            <div class="training-actions">
-                <div class="action-card">
-                    <div class="action-icon request">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                    <div class="action-title">Request Custom Training</div>
-                    <div class="action-description">
-                        Need specific training not available in our catalog? Submit a custom training request and we'll create a personalized program for you.
-                    </div>
-                    <button class="action-btn btn-primary" onclick="requestTraining()">
-                        Request Training
-                    </button>
-                </div>
-
-                <div class="action-card">
-                    <div class="action-icon browse">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="action-title">Browse All Courses</div>
-                    <div class="action-description">
-                        Explore our comprehensive catalog of training courses across various domains and skill levels to find the perfect fit for your learning goals.
-                    </div>
-                    <button class="action-btn btn-secondary" onclick="browseCourses()">
-                        Browse Courses
-                    </button>
-                </div>
-            </div>
-
-            <!-- My Training Section -->
-            <div class="my-training-section">
+          
+            <!-- Training Request Form -->
+            <div class="training-request-section">
                 <div class="section-title">
-                    <i class="fas fa-user-graduate"></i>
-                    My Training Progress
+                    <i class="fas fa-plus-circle"></i>
+                    Request Training
                 </div>
                 
-                <div class="training-list">
-                    <div class="training-item">
-                        <div class="training-header-info">
-                            <div>
-                                <div class="training-title">Full Stack Web Development</div>
-                                <div class="training-instructor">Instructor: Sarah Johnson</div>
-                            </div>
-                            <span class="training-status status-ongoing">Ongoing</span>
-                        </div>
-                        <div class="training-progress">
-                            <div class="progress-label">
-                                <span>Progress</span>
-                                <span>65%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        <div class="training-details">
-                            <div class="training-date">
-                                <i class="fas fa-calendar"></i>
-                                Started: Jan 15, 2024
-                            </div>
-                            <div class="training-duration">
-                                <i class="fas fa-clock"></i>
-                                80 hours
-                            </div>
-                        </div>
-                    </div>
+                <!-- Training Request Table -->
+                <div class="request-table-container">
+                    <table class="request-table">
+                        <thead>
+                            <tr>
+                                <th>Student Training</th>
+                                <th>Job</th>
+                                <th>Problem</th>
+                                <th>Training</th>
+                                <th>Requested</th>
+                                <th>My Training</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Web Development</td>
+                                <td>Frontend Developer</td>
+                                <td>React.js Skills Gap</td>
+                                <td>React Fundamentals</td>
+                                <td>Jan 15, 2024</td>
+                                <td>In Progress</td>
+                            </tr>
+                            <tr>
+                                <td>Data Science</td>
+                                <td>Data Analyst</td>
+                                <td>Python Programming</td>
+                                <td>Python for Data Science</td>
+                                <td>Jan 10, 2024</td>
+                                <td>Completed</td>
+                            </tr>
+                            <tr>
+                                <td>Digital Marketing</td>
+                                <td>Marketing Specialist</td>
+                                <td>SEO Knowledge</td>
+                                <td>SEO Mastery</td>
+                                <td>Jan 20, 2024</td>
+                                <td>Scheduled</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <div class="training-item">
-                        <div class="training-header-info">
-                            <div>
-                                <div class="training-title">Data Science Fundamentals</div>
-                                <div class="training-instructor">Instructor: Dr. Michael Chen</div>
+                <!-- Training Request Form -->
+                <div class="request-form-container">
+                    <h3>Submit New Training Request</h3>
+                    <form class="training-request-form" id="trainingRequestForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="requestType">Request</label>
+                                <select id="requestType" name="requestType" required>
+                                    <option value="">Select Request Type</option>
+                                    <option value="new-training">New Training Program</option>
+                                    <option value="skill-upgrade">Skill Upgrade</option>
+                                    <option value="certification">Certification Course</option>
+                                    <option value="workshop">Workshop</option>
+                                </select>
                             </div>
-                            <span class="training-status status-completed">Completed</span>
-                        </div>
-                        <div class="training-progress">
-                            <div class="progress-label">
-                                <span>Progress</span>
-                                <span>100%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        <div class="training-details">
-                            <div class="training-date">
-                                <i class="fas fa-calendar"></i>
-                                Completed: Dec 20, 2023
-                            </div>
-                            <div class="training-duration">
-                                <i class="fas fa-clock"></i>
-                                60 hours
+                            <div class="form-group">
+                                <label for="requestDate">Date</label>
+                                <input type="date" id="requestDate" name="requestDate" required>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="training-item">
-                        <div class="training-header-info">
-                            <div>
-                                <div class="training-title">Digital Marketing Mastery</div>
-                                <div class="training-instructor">Instructor: Emily Rodriguez</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="schedule">Schedule</label>
+                                <select id="schedule" name="schedule" required>
+                                    <option value="">Select Schedule</option>
+                                    <option value="weekdays">Weekdays (Mon-Fri)</option>
+                                    <option value="weekends">Weekends (Sat-Sun)</option>
+                                    <option value="flexible">Flexible</option>
+                                    <option value="intensive">Intensive (Full-time)</option>
+                                </select>
                             </div>
-                            <span class="training-status status-scheduled">Scheduled</span>
-                        </div>
-                        <div class="training-progress">
-                            <div class="progress-label">
-                                <span>Progress</span>
-                                <span>0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                        </div>
-                        <div class="training-details">
-                            <div class="training-date">
-                                <i class="fas fa-calendar"></i>
-                                Starts: Feb 1, 2024
-                            </div>
-                            <div class="training-duration">
-                                <i class="fas fa-clock"></i>
-                                40 hours
+                            <div class="form-group">
+                                <label for="trainingType">Training</label>
+                                <select id="trainingType" name="trainingType" required>
+                                    <option value="">Select Training Type</option>
+                                    <option value="technical">Technical Skills</option>
+                                    <option value="soft-skills">Soft Skills</option>
+                                    <option value="leadership">Leadership</option>
+                                    <option value="business">Business Skills</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="training-item">
-                        <div class="training-header-info">
-                            <div>
-                                <div class="training-title">UI/UX Design Principles</div>
-                                <div class="training-instructor">Instructor: David Kim</div>
-                            </div>
-                            <span class="training-status status-ongoing">Ongoing</span>
+                        <div class="form-group full-width">
+                            <label for="details">Details</label>
+                            <textarea id="details" name="details" rows="4" placeholder="Describe your training requirements, specific skills you want to learn, and any other relevant details..." required></textarea>
                         </div>
-                        <div class="training-progress">
-                            <div class="progress-label">
-                                <span>Progress</span>
-                                <span>30%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 30%"></div>
-                            </div>
+
+                        <div class="form-group full-width">
+                            <label for="scheduleDetails">Schedule Details</label>
+                            <textarea id="scheduleDetails" name="scheduleDetails" rows="3" placeholder="Specify your preferred timing, duration, and any scheduling constraints..."></textarea>
                         </div>
-                        <div class="training-details">
-                            <div class="training-date">
-                                <i class="fas fa-calendar"></i>
-                                Started: Jan 22, 2024
-                            </div>
-                            <div class="training-duration">
-                                <i class="fas fa-clock"></i>
-                                50 hours
-                            </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Request
+                            </button>
+                            <button type="reset" class="reset-btn">
+                                <i class="fas fa-undo"></i>
+                                Reset Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
                         </div>
                     </div>
                 </div>
@@ -831,6 +877,31 @@
         function browseCourses() {
             alert('Opening course catalog. This would typically redirect to a comprehensive course listing page.');
         }
+
+        // Handle training request form submission
+        document.getElementById('trainingRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const requestData = {
+                requestType: formData.get('requestType'),
+                requestDate: formData.get('requestDate'),
+                schedule: formData.get('schedule'),
+                trainingType: formData.get('trainingType'),
+                details: formData.get('details'),
+                scheduleDetails: formData.get('scheduleDetails')
+            };
+            
+            // Show success message
+            alert('Training request submitted successfully! We will review your request and get back to you within 2-3 business days.');
+            
+            // Reset form
+            this.reset();
+            
+            // In a real application, you would send this data to your backend
+            console.log('Training Request Data:', requestData);
+        });
 
         // Animate progress bars on page load
         document.addEventListener('DOMContentLoaded', function() {
