@@ -6,13 +6,382 @@
     <title>Database Access - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <style>
+        .database-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .database-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-title-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .job-title-header h2 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .job-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .status-active {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .resume-access-info {
+            color: #6c757d;
+        }
+
+        .database-layout {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .filters-sidebar {
+            width: 240px;
+            background: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding: 0;
+        }
+
+        .filter-section {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .filter-header {
+            background: #6c757d;
+            color: white;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .filter-content {
+            padding: 16px;
+        }
+
+        .filter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dotted #dee2e6;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .filter-item:hover {
+            background-color: rgba(0,123,255,0.1);
+        }
+
+        .filter-item:last-child {
+            border-bottom: none;
+        }
+
+        .filter-name {
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .filter-count {
+            background: #007bff;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .filter-count.hot {
+            background: #dc3545;
+        }
+
+        .filter-count.zero {
+            background: #6c757d;
+        }
+
+        .courses-filter {
+            padding: 16px;
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            font-size: 14px;
+        }
+
+        .course-item input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .course-count {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        .main-content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .responses-header {
+            background: #6c757d;
+            color: white;
+            padding: 12px 20px;
+            font-weight: 600;
+        }
+
+        .stats-bar {
+            background: white;
+            padding: 16px 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #5a6268;
+        }
+
+        .btn-send {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-send:hover {
+            background: #0056b3;
+        }
+
+        .move-to-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .candidates-table {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .table-header-row {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: grid;
+            grid-template-columns: 40px 200px 1fr 80px 100px 120px;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .candidate-row {
+            padding: 16px 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: grid;
+            grid-template-columns: 40px 200px 1fr 80px 100px 120px;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .candidate-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .candidate-checkbox {
+            width: 18px;
+            height: 18px;
+        }
+
+        .candidate-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .candidate-name {
+            font-weight: 600;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .candidate-name:hover {
+            text-decoration: underline;
+        }
+
+        .candidate-id {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .profile-summary {
+            font-size: 14px;
+            color: #495057;
+            line-height: 1.4;
+        }
+
+        .more-link {
+            color: #007bff;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .marks-score {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .contact-icon {
+            background: #007bff;
+            color: white;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.2s ease;
+        }
+
+        .contact-icon:hover {
+            background: #0056b3;
+        }
+
+        .view-contact-link {
+            font-size: 11px;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .applied-date {
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        .questionnaire-icon {
+            background: #17a2b8;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        .download-icon {
+            background: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        .accepted-icon {
+            background: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .database-layout {
+                flex-direction: column;
+            }
+
+            .filters-sidebar {
+                width: 100%;
+            }
+
+            .candidate-row,
+            .table-header-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .stats-bar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +389,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
+                        <a href="job-metrics.html">Job Metric</a>
                         <a href="demo-courses.html">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling�</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready�Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -45,12 +413,10 @@
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role�Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +424,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
-                        <a href="resume-access.html">Databse Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="database-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
-                          <a href="Expert-session.html">Expert�Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -88,259 +452,369 @@
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Database Management</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="job-dashboard.html"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="database-access.html" class="active"><i class="fas fa-database"></i> Database Search</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Candidates</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
         </div>
-        
-        <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">💼</span>
-                    <span class="badge-text"> Economy Service</span>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Database Container -->
+            <div class="database-container">
+                <!-- Header -->
+                <div class="database-header">
+                    <div class="job-title-header">
+                        <h2>Software Developer (ID: <span style="background: #ffb3d9; padding: 2px 8px; border-radius: 4px;">SW001</span>)</h2>
+                        <i class="fas fa-edit" style="color: #6c757d; cursor: pointer;"></i>
+                    </div>
+                    <div class="job-status">
+                        <span>Job status: <span class="status-active">Active</span></span>
+                        <span class="resume-access-info">Resume Download Access: <strong>70/160</strong></span>
+                    </div>
                 </div>
-                
-                <h1 class="service-title">Database Access</h1>
-                <p class="service-subtitle">Access our comprehensive candidate database with advanced search and filtering capabilities.</p>
-                
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-database"></i>
-                        <span>Full Database Access</span>
+
+                <!-- Database Layout -->
+                <div class="database-layout">
+                    <!-- Filters Sidebar -->
+                    <div class="filters-sidebar">
+                        <!-- Folders Section -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <i class="fas fa-folder"></i> Folders
+                            </div>
+                            <div class="filter-content">
+                                <div class="filter-item">
+                                    <span class="filter-name">All</span>
+                                    <span class="filter-count">245</span>
+                                </div>
+                                <div class="filter-item">
+                                    <span class="filter-name">Hot Profiles 🔥</span>
+                                    <span class="filter-count hot">15</span>
+                                </div>
+                                <div class="filter-item">
+                                    <span class="filter-name">Matching Profiles</span>
+                                    <span class="filter-count">144</span>
+                                </div>
+                                <div class="filter-item">
+                                    <span class="filter-name">Shortlisted</span>
+                                    <span class="filter-count zero">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filters Section -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <i class="fas fa-filter"></i> Filters
+                            </div>
+                        </div>
+
+                        <!-- Courses Section -->
+                        <div class="filter-section">
+                            <div class="filter-header">Courses</div>
+                            <div class="courses-filter">
+                                <div class="course-item">
+                                    <input type="checkbox" id="betech">
+                                    <label for="betech">BE/B.Tech <span class="course-count">(177)</span></label>
+                                </div>
+                                <div class="course-item">
+                                    <input type="checkbox" id="mca">
+                                    <label for="mca">MCA <span class="course-count">(47)</span></label>
+                                </div>
+                                <div class="course-item">
+                                    <input type="checkbox" id="msc">
+                                    <label for="msc">MSc <span class="course-count">(12)</span></label>
+                                </div>
+                                <div class="course-item">
+                                    <input type="checkbox" id="memtech">
+                                    <label for="memtech">ME/M.Tech <span class="course-count">(6)</span></label>
+                                </div>
+                                <div class="course-item">
+                                    <input type="checkbox" id="diploma">
+                                    <label for="diploma">Diploma <span class="course-count">(2)</span></label>
+                                </div>
+                                <div class="course-item">
+                                    <input type="checkbox" id="pgdiploma">
+                                    <label for="pgdiploma">PG Diploma <span class="course-count">(1)</span></label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-database"></i>
-                        <span>Advanced Search</span>
+
+                    <!-- Main Content Area -->
+                    <div class="main-content-area">
+                        <!-- Responses Header -->
+                        <div class="responses-header">
+                            Responses <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; margin-left: 10px;">5</span>
+                        </div>
+
+                        <!-- Stats Bar -->
+                        <div class="stats-bar">
+                            <div class="stat-item">
+                                <div class="stat-number">245</div>
+                                <div class="stat-label">Responses</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">123 <span class="questionnaire-icon">Q</span></div>
+                                <div class="stat-label">Questionnaire Results</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">140 <span class="download-icon">📄</span></div>
+                                <div class="stat-label">Interview Call Letter Sent</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">112 <span class="accepted-icon">✓</span></div>
+                                <div class="stat-label">Interview Call Letter Accepted</div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button class="btn-action btn-download">Download Resume</button>
+                                <button class="btn-action btn-send">Send Call Letter</button>
+                                <div class="move-to-section">
+                                    <span>Move To:</span>
+                                    <select style="padding: 6px; border: 1px solid #ddd; border-radius: 4px;">
+                                        <option>Shortlisted</option>
+                                        <option>Rejected</option>
+                                        <option>Interview</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Table Header -->
+                        <div class="table-header-row">
+                            <input type="checkbox" id="selectAll">
+                            <div>Name & ID</div>
+                            <div>Profile Summary</div>
+                            <div>Marks</div>
+                            <div>Contact</div>
+                            <div>Applied On</div>
+                        </div>
+
+                        <!-- Candidates Table -->
+                        <div class="candidates-table">
+                            <!-- Candidate 1 -->
+                            <div class="candidate-row">
+                                <input type="checkbox" class="candidate-checkbox">
+                                <div class="candidate-info">
+                                    <a href="#" class="candidate-name">Logesh</a>
+                                    <div class="candidate-id">FW17792023</div>
+                                </div>
+                                <div class="profile-summary">
+                                    BE/B.Tech Computer Science & Engineering..
+                                    <br>passout: 2016 | Chennai,Neelangarai ...
+                                    <span class="more-link">More...</span>
+                                </div>
+                                <div class="marks-score">7.7 / 10</div>
+                                <div class="contact-actions">
+                                    <div class="contact-icon">📧</div>
+                                    <a href="#" class="view-contact-link">View Contact</a>
+                                </div>
+                                <div class="applied-date">22-Jan-2016</div>
+                            </div>
+
+                            <!-- Candidate 2 -->
+                            <div class="candidate-row">
+                                <input type="checkbox" class="candidate-checkbox">
+                                <div class="candidate-info">
+                                    <a href="#" class="candidate-name">Arthi</a>
+                                    <div class="candidate-id">FW16909107</div>
+                                </div>
+                                <div class="profile-summary">
+                                    MSc Computer Science..
+                                    <br>passout: 2015 | Pondicherry, ...
+                                    <span class="more-link">More...</span> <span class="questionnaire-icon">Q</span>
+                                </div>
+                                <div class="marks-score">8.38 / 10</div>
+                                <div class="contact-actions">
+                                    <div class="contact-icon">📧</div>
+                                    <a href="#" class="view-contact-link">View Contact</a>
+                                </div>
+                                <div class="applied-date">20-Jan-2016</div>
+                            </div>
+
+                            <!-- Candidate 3 -->
+                            <div class="candidate-row">
+                                <input type="checkbox" class="candidate-checkbox">
+                                <div class="candidate-info">
+                                    <a href="#" class="candidate-name">suganthi</a>
+                                    <div class="candidate-id">FW17908169</div>
+                                </div>
+                                <div class="profile-summary">
+                                    MCA computer..
+                                    <br>passout: 2015 | Chennai, ...
+                                    <span class="more-link">More...</span>
+                                </div>
+                                <div class="marks-score">82 %</div>
+                                <div class="contact-actions">
+                                    <div class="contact-icon">📧</div>
+                                    <a href="#" class="view-contact-link">View Contact</a>
+                                </div>
+                                <div class="applied-date">18-Jan-2016</div>
+                            </div>
+
+                            <!-- Candidate 4 -->
+                            <div class="candidate-row">
+                                <input type="checkbox" class="candidate-checkbox">
+                                <div class="candidate-info">
+                                    <a href="#" class="candidate-name">Madhusmita</a>
+                                    <div class="candidate-id">FW17456453</div>
+                                </div>
+                                <div class="profile-summary">
+                                    BE/B.Tech Electronics & Communication..
+                                    <br>passout: 2014 | Chennai,Sholinganallur ...
+                                    <span class="more-link">More...</span> <span class="questionnaire-icon">Q</span>
+                                </div>
+                                <div class="marks-score">7.9 / 10</div>
+                                <div class="contact-actions">
+                                    <div class="contact-icon">📧</div>
+                                    <a href="#" class="view-contact-link">View Contact</a>
+                                </div>
+                                <div class="applied-date">13-Jan-2016</div>
+                            </div>
+
+                            <!-- Candidate 5 -->
+                            <div class="candidate-row">
+                                <input type="checkbox" class="candidate-checkbox">
+                                <div class="candidate-info">
+                                    <a href="#" class="candidate-name">Priya Sharma</a>
+                                    <div class="candidate-id">FW17123456</div>
+                                </div>
+                                <div class="profile-summary">
+                                    BE/B.Tech Information Technology..
+                                    <br>passout: 2017 | Mumbai, Andheri ...
+                                    <span class="more-link">More...</span>
+                                </div>
+                                <div class="marks-score">8.5 / 10</div>
+                                <div class="contact-actions">
+                                    <div class="contact-icon">📧</div>
+                                    <a href="#" class="view-contact-link">View Contact</a>
+                                </div>
+                                <div class="applied-date">15-Jan-2016</div>
+                            </div>
+
+                            <!-- Candidate 6 -->
+                            <div class="candidate-row">
+                                <input type="checkbox" class="candidate-checkbox">
+                                <div class="candidate-info">
+                                    <a href="#" class="candidate-name">Rahul Kumar</a>
+                                    <div class="candidate-id">FW17654321</div>
+                                </div>
+                                <div class="profile-summary">
+                                    MCA Software Engineering..
+                                    <br>passout: 2016 | Delhi, Rohini ...
+                                    <span class="more-link">More...</span> <span class="questionnaire-icon">Q</span>
+                                </div>
+                                <div class="marks-score">7.2 / 10</div>
+                                <div class="contact-actions">
+                                    <div class="contact-icon">📧</div>
+                                    <a href="#" class="view-contact-link">View Contact</a>
+                                </div>
+                                <div class="applied-date">12-Jan-2016</div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-database"></i>
-                        <span>Detailed Profiles</span>
-                    </div>
-                    
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your organization and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Full Database Access</li><li><i class="fas fa-check"></i> Advanced Search</li><li><i class="fas fa-check"></i> Detailed Profiles</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your organization's growth and success.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Organizational growth</li>
-                            <li><i class="fas fa-check"></i> Enhanced capabilities</li>
-                            <li><i class="fas fa-check"></i> Strategic advantage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Contact Us</h3>
-                        <p>Reach out to our team to discuss your requirements and service expectations.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Planning</h3>
-                        <p>We work with you to create a customized plan that meets your specific needs.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Implementation</h3>
-                        <p>Our team implements the service with regular updates and quality checkpoints.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Receive the completed service with ongoing support and maintenance as needed.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Customized Approach</h4>
-                            <p>Tailored service delivery based on your specific organizational needs and objectives.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
-            </div>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to implement?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The implementation timeline varies based on the specific service and your requirements. We provide detailed timelines during the planning phase and keep you updated throughout.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What support do you provide during implementation?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive support including dedicated account management, regular progress updates, and immediate assistance for any issues or questions.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can the service be customized for our specific needs?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely! We work closely with you to understand your unique requirements and customize the service accordingly to ensure maximum value and effectiveness.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What happens after the service is completed?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide ongoing support, maintenance, and are available for future enhancements or additional services as your needs evolve.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
 
-    <!-- CTA Section -->
-    <section class="service-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Transform your organization with our professional database access service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        Contact Us
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+        // Select all functionality
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.candidate-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        // Filter item clicks
+        document.querySelectorAll('.filter-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all items
+                document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+            });
+        });
+
+        // Course filter functionality
+        document.querySelectorAll('.course-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Here you would typically filter the candidates based on selected courses
+                console.log('Filter by course:', this.id, this.checked);
+            });
+        });
+
+        // Candidate name clicks
+        document.querySelectorAll('.candidate-name').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Here you would typically show candidate details
+                alert('Show candidate profile for: ' + this.textContent);
+            });
+        });
+
+        // Action buttons
+        document.querySelector('.btn-download').addEventListener('click', function() {
+            const selectedCandidates = document.querySelectorAll('.candidate-checkbox:checked');
+            if (selectedCandidates.length === 0) {
+                alert('Please select candidates to download resumes');
+                return;
+            }
+            alert(`Downloading resumes for ${selectedCandidates.length} selected candidates`);
+        });
+
+        document.querySelector('.btn-send').addEventListener('click', function() {
+            const selectedCandidates = document.querySelectorAll('.candidate-checkbox:checked');
+            if (selectedCandidates.length === 0) {
+                alert('Please select candidates to send call letters');
+                return;
+            }
+            alert(`Sending call letters to ${selectedCandidates.length} selected candidates`);
+        });
+    </script>
 </body>
 </html>
-
-
