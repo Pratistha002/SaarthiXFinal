@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            padding-top: 80px; /* Account for fixed navbar */
+        }
+
+        .job-form-container {
+            max-width: 800px;
+            margin: 40px auto 50px;
+            padding: 0 20px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .job-form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .skills-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            min-height: 50px;
+        }
+
+        .skill-tag {
+            background: #007bff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .skill-tag .remove-skill {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .skill-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-draft {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-draft:hover {
+            background: #5a6268;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .job-form {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">SaarthiX</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Students</a>
+                <div class="dropdown-content cols-2">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="basic-profiling.html">Profiling</a>
+                        <a href="resume-building-watermark.html">Resume Building</a>
+                        <a href="job-metrics.html">Job Metric</a>
+                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="interview-questions.html">Interview Preparation</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Additional Services</h4>
+                        <a href="psychometric-independent.html">Psychometric Test</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Institute</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="recorded-trainings.html">Trainings</a>
+                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-sessions.html">Expert Sessions</a>
+                        <a href="collaboration-events.html">Collaboration</a>
+                        <a href="student-training.html">Student Training(On demand)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Industry</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="resume-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="hackathon-info.html">Post Hackathons</a>
+                        <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
+                        <a href="Expert-session.html">Expert Session</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="account-options">
+            <a href="#" class="login-btn" id="loginBtn">
+                <div class="btn-content">
+                    <i class="fas fa-sign-in-alt login-icon"></i>
+                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
+                    <span class="btn-text">Login</span>
+                </div>
+                <div class="btn-bg"></div>
+                <div class="btn-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <div class="job-form-container">
+        <div class="form-header">
+            <h1>Post a New Job</h1>
+            <p>Fill out the details below to post your job opening on SaarthiX</p>
+        </div>
+
+        <form class="job-form" id="jobForm">
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h3 class="section-title">Basic Information</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Job Title <span class="required">*</span></label>
+                    <input type="text" class="form-input" name="jobTitle" required placeholder="e.g. Senior Software Developer">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Company Name <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="companyName" required placeholder="Your Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Department</label>
+                        <input type="text" class="form-input" name="department" placeholder="e.g. Engineering, Marketing">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Job Type <span class="required">*</span></label>
+                        <select class="form-select" name="jobType" required>
+                            <option value="">Select Job Type</option>
+                            <option value="full-time">Full-time</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="contract">Contract</option>
+                            <option value="internship">Internship</option>
+                            <option value="freelance">Freelance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Experience Level <span class="required">*</span></label>
+                        <select class="form-select" name="experienceLevel" required>
+                            <option value="">Select Experience Level</option>
+                            <option value="entry">Entry Level (0-2 years)</option>
+                            <option value="mid">Mid Level (2-5 years)</option>
+                            <option value="senior">Senior Level (5-10 years)</option>
+                            <option value="lead">Lead/Manager (10+ years)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location & Remote -->
+            <div class="form-section">
+                <h3 class="section-title">Location & Work Arrangement</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Location <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="location" required placeholder="City, State/Country">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Work Arrangement</label>
+                        <select class="form-select" name="workArrangement">
+                            <option value="onsite">On-site</option>
+                            <option value="remote">Remote</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compensation -->
+            <div class="form-section">
+                <h3 class="section-title">Compensation</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Salary Range</label>
+                        <input type="text" class="form-input" name="salaryRange" placeholder="e.g. $50,000 - $70,000">
+                        <div class="help-text">Optional: Helps attract qualified candidates</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Currency</label>
+                        <select class="form-select" name="currency">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="INR">INR (₹)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" name="negotiable" id="negotiable">
+                    <label for="negotiable">Salary is negotiable</label>
+                </div>
+            </div>
+
+            <!-- Job Description -->
+            <div class="form-section">
+                <h3 class="section-title">Job Description</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Job Summary <span class="required">*</span></label>
+                    <textarea class="form-textarea" name="jobSummary" required placeholder="Brief overview of the role and what the candidate will be doing..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Key Responsibilities <span class="required">*</span></label>
+                    <textarea class="form-textarea" name="responsibilities" required placeholder="• List the main responsibilities
+• Use bullet points for clarity
+• Be specific about daily tasks"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Required Qualifications <span class="required">*</span></label>
+                    <textarea class="form-textarea" name="qualifications" required placeholder="• Education requirements
+• Years of experience
+• Must-have skills and certifications"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Preferred Qualifications</label>
+                    <textarea class="form-textarea" name="preferredQualifications" placeholder="• Nice-to-have skills
+• Additional certifications
+• Bonus qualifications"></textarea>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="form-section">
+                <h3 class="section-title">Required Skills</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Skills <span class="required">*</span></label>
+                    <div class="skills-input" id="skillsInput">
+                        <input type="text" class="skill-input" placeholder="Type a skill and press Enter" onkeypress="addSkill(event)">
+                    </div>
+                    <div class="help-text">Add relevant skills for this position. Press Enter to add each skill.</div>
+                </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="form-section">
+                <h3 class="section-title">Benefits & Perks</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Benefits</label>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="health-insurance" id="health">
+                            <label for="health">Health Insurance</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="dental" id="dental">
+                            <label for="dental">Dental Insurance</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="vision" id="vision">
+                            <label for="vision">Vision Insurance</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="401k" id="retirement">
+                            <label for="retirement">401(k) / Retirement Plan</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="pto" id="pto">
+                            <label for="pto">Paid Time Off</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="flexible-hours" id="flexible">
+                            <label for="flexible">Flexible Hours</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="remote-work" id="remote">
+                            <label for="remote">Remote Work Options</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="benefits[]" value="professional-development" id="development">
+                            <label for="development">Professional Development</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Details -->
+            <div class="form-section">
+                <h3 class="section-title">Application Details</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Application Deadline</label>
+                        <input type="date" class="form-input" name="applicationDeadline">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number of Positions</label>
+                        <input type="number" class="form-input" name="positions" min="1" value="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How to Apply</label>
+                    <textarea class="form-textarea" name="howToApply" placeholder="Special instructions for applicants (optional)"></textarea>
+                </div>
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="form-buttons">
+                <button type="button" class="btn-draft" onclick="saveDraft()">Save as Draft</button>
+                <button type="submit" class="btn-submit">Post Job</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let skills = [];
+
+        function addSkill(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const input = event.target;
+                const skill = input.value.trim();
+                
+                if (skill && !skills.includes(skill)) {
+                    skills.push(skill);
+                    renderSkills();
+                    input.value = '';
+                }
+            }
+        }
+
+        function removeSkill(skillToRemove) {
+            skills = skills.filter(skill => skill !== skillToRemove);
+            renderSkills();
+        }
+
+        function renderSkills() {
+            const skillsContainer = document.getElementById('skillsInput');
+            const input = skillsContainer.querySelector('.skill-input');
+            
+            // Clear existing skill tags
+            const existingTags = skillsContainer.querySelectorAll('.skill-tag');
+            existingTags.forEach(tag => tag.remove());
+            
+            // Add skill tags
+            skills.forEach(skill => {
+                const skillTag = document.createElement('div');
+                skillTag.className = 'skill-tag';
+                skillTag.innerHTML = `
+                    ${skill}
+                    <span class="remove-skill" onclick="removeSkill('${skill}')">&times;</span>
+                `;
+                skillsContainer.insertBefore(skillTag, input);
+            });
+        }
+
+        function saveDraft() {
+            const formData = new FormData(document.getElementById('jobForm'));
+            formData.append('skills', JSON.stringify(skills));
+            formData.append('status', 'draft');
+            
+            // Here you would typically send the data to your server
+            alert('Job saved as draft!');
+        }
+
+        document.getElementById('jobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (skills.length === 0) {
+                alert('Please add at least one skill for this position.');
+                return;
+            }
+            
+            const formData = new FormData(this);
+            formData.append('skills', JSON.stringify(skills));
+            formData.append('status', 'published');
+            
+            // Here you would typically send the data to your server
+            alert('Job posted successfully!');
+            
+            // Redirect to job dashboard
+            window.location.href = 'job-dashboard.html';
+        });
+    </script>
+</body>
+</html>

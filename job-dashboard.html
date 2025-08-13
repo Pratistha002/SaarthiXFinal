@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Dashboard - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">SaarthiX</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Students</a>
+                <div class="dropdown-content cols-2">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="basic-profiling.html">Profiling</a>
+                        <a href="resume-building-watermark.html">Resume Building</a>
+                        <a href="job-metrics.html">Job Metric</a>
+                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="interview-questions.html">Interview Preparation</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Additional Services</h4>
+                        <a href="psychometric-independent.html">Psychometric Test</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Institute</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="recorded-trainings.html">Trainings</a>
+                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-sessions.html">Expert Sessions</a>
+                        <a href="collaboration-events.html">Collaboration</a>
+                        <a href="student-training.html">Student Training(On demand)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Industry</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="resume-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="hackathon-info.html">Post Hackathons</a>
+                        <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
+                        <a href="Expert-session.html">Expert Session</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="account-options">
+            <a href="#" class="login-btn" id="loginBtn">
+                <div class="btn-content">
+                    <i class="fas fa-sign-in-alt login-icon"></i>
+                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
+                    <span class="btn-text">Login</span>
+                </div>
+                <div class="btn-bg"></div>
+                <div class="btn-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Job Management</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="post-job-form.html" class="active"><i class="fas fa-plus"></i> Post a job</a></li>
+                <li><a href="#"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="#"><i class="fas fa-bullhorn"></i> Campaigns</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Candidates</a></li>
+                <li><a href="#"><i class="fas fa-search"></i> Search resumes</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Interviews</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-tools"></i> Tools</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active">Posted on SaarthiX (5)</button>
+                    <button class="tab-btn">Posted on career site (0)</button>
+                </div>
+            </div>
+
+            <!-- Job Status Tabs -->
+            <div class="dashboard-header">
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active">Open and paused (5)</button>
+                    <button class="tab-btn">Starred (0)</button>
+                    <button class="tab-btn">Closed (0)</button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px; margin-top: 15px;">
+                    <span>3 jobs selected - <a href="#" style="color: #007bff;">deselect all</a></span>
+                    <button class="btn-primary">Create campaign</button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="job-filters">
+                <div class="filter-group">
+                    <i class="fas fa-filter"></i>
+                    <select class="filter-select">
+                        <option>Filter and search jobs</option>
+                        <option>Job Title</option>
+                        <option>Location</option>
+                        <option>Date Posted</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select">
+                        <option>Status</option>
+                        <option>Open</option>
+                        <option>Paused</option>
+                        <option>Closed</option>
+                    </select>
+                    <div class="status-dropdown-content">
+                        <div class="status-option">Reopen jobs</div>
+                        <div class="status-option">Pause jobs</div>
+                        <div class="status-option">Close jobs</div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select">
+                        <option>Sort by: Date created</option>
+                        <option>Job Title</option>
+                        <option>Applications</option>
+                        <option>Status</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Jobs Table -->
+            <div class="jobs-table">
+                <div class="bulk-actions" id="bulkActions">
+                    <span>3 jobs selected</span>
+                    <button class="btn-secondary">Reopen jobs</button>
+                    <button class="btn-secondary">Pause jobs</button>
+                    <button class="btn-secondary">Close jobs</button>
+                </div>
+
+                <div class="table-header">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <input type="checkbox" id="selectAll" class="job-checkbox">
+                        <span>Job Title</span>
+                    </div>
+                </div>
+
+                <div class="jobs-list">
+                    <!-- Job Row 1 -->
+                    <div class="job-row">
+                        <input type="checkbox" class="job-checkbox" checked>
+                        <div>
+                            <a href="#" class="job-title">Cost Accountant</a>
+                            <div class="job-location">Remote</div>
+                        </div>
+                        <div class="candidate-count">0 Active candidates</div>
+                        <div class="candidate-count">0<br><small>Awaiting...</small></div>
+                        <div class="candidate-count">0<br><small>Review...</small></div>
+                        <div class="candidate-count">0<br><small>Contacting...</small></div>
+                        <div class="candidate-count">0<br><small>Hired</small></div>
+                        <div>
+                            <div class="post-type">Free post</div>
+                            <a href="#" class="sponsor-link">Sponsor job</a>
+                        </div>
+                        <div>16 days</div>
+                        <div class="status-dropdown">
+                            <span class="status-badge status-open">● Open</span>
+                            <div class="status-dropdown-content">
+                                <div class="status-option">Pause job</div>
+                                <div class="status-option">Close job</div>
+                                <div class="status-option">Edit job</div>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <button class="action-btn" onclick="toggleDropdown(this)">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item">Edit job</button>
+                                <button class="dropdown-item">Duplicate job</button>
+                                <button class="dropdown-item">View job</button>
+                                <button class="dropdown-item">Archive job</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Row 2 -->
+                    <div class="job-row">
+                        <input type="checkbox" class="job-checkbox" checked>
+                        <div>
+                            <a href="#" class="job-title">Content Writer</a>
+                            <div class="job-location">Remote</div>
+                        </div>
+                        <div class="candidate-count">0 Active candidates</div>
+                        <div class="candidate-count">0<br><small>Awaiting...</small></div>
+                        <div class="candidate-count">0<br><small>Review...</small></div>
+                        <div class="candidate-count">0<br><small>Contacting...</small></div>
+                        <div class="candidate-count">0<br><small>Hired</small></div>
+                        <div>
+                            <div class="post-type">Free post</div>
+                            <a href="#" class="sponsor-link">Sponsor job</a>
+                        </div>
+                        <div>16 days</div>
+                        <div class="status-dropdown">
+                            <span class="status-badge status-open">● Open</span>
+                            <div class="status-dropdown-content">
+                                <div class="status-option">Pause job</div>
+                                <div class="status-option">Close job</div>
+                                <div class="status-option">Edit job</div>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <button class="action-btn" onclick="toggleDropdown(this)">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item">Edit job</button>
+                                <button class="dropdown-item">Duplicate job</button>
+                                <button class="dropdown-item">View job</button>
+                                <button class="dropdown-item">Archive job</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Row 3 -->
+                    <div class="job-row">
+                        <input type="checkbox" class="job-checkbox" checked>
+                        <div>
+                            <a href="#" class="job-title">Software Developer</a>
+                            <div class="job-location">Remote</div>
+                        </div>
+                        <div class="candidate-count">0 Active candidates</div>
+                        <div class="candidate-count">0<br><small>Awaiting...</small></div>
+                        <div class="candidate-count">0<br><small>Review...</small></div>
+                        <div class="candidate-count">0<br><small>Contacting...</small></div>
+                        <div class="candidate-count">0<br><small>Hired</small></div>
+                        <div>
+                            <div class="post-type">Free post</div>
+                            <a href="#" class="sponsor-link">Sponsor job</a>
+                        </div>
+                        <div>16 days</div>
+                        <div class="status-dropdown">
+                            <span class="status-badge status-open">● Open</span>
+                            <div class="status-dropdown-content">
+                                <div class="status-option">Pause job</div>
+                                <div class="status-option">Close job</div>
+                                <div class="status-option">Edit job</div>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <button class="action-btn" onclick="toggleDropdown(this)">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item">Edit job</button>
+                                <button class="dropdown-item">Duplicate job</button>
+                                <button class="dropdown-item">View job</button>
+                                <button class="dropdown-item">Archive job</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Row 4 -->
+                    <div class="job-row">
+                        <input type="checkbox" class="job-checkbox">
+                        <div>
+                            <a href="#" class="job-title">Marketing Manager</a>
+                            <div class="job-location">Remote</div>
+                        </div>
+                        <div class="candidate-count">0 Active candidates</div>
+                        <div class="candidate-count">0<br><small>Awaiting...</small></div>
+                        <div class="candidate-count">0<br><small>Review...</small></div>
+                        <div class="candidate-count">0<br><small>Contacting...</small></div>
+                        <div class="candidate-count">0<br><small>Hired</small></div>
+                        <div>
+                            <div class="post-type">Free post</div>
+                            <a href="#" class="sponsor-link">Sponsor job</a>
+                        </div>
+                        <div>2 months</div>
+                        <div class="status-dropdown">
+                            <span class="status-badge status-open">● Open</span>
+                            <div class="status-dropdown-content">
+                                <div class="status-option">Pause job</div>
+                                <div class="status-option">Close job</div>
+                                <div class="status-option">Edit job</div>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <button class="action-btn" onclick="toggleDropdown(this)">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item">Edit job</button>
+                                <button class="dropdown-item">Duplicate job</button>
+                                <button class="dropdown-item">View job</button>
+                                <button class="dropdown-item">Archive job</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Row 5 -->
+                    <div class="job-row">
+                        <input type="checkbox" class="job-checkbox">
+                        <div>
+                            <a href="#" class="job-title">Data Analyst</a>
+                            <div class="job-location">Remote</div>
+                        </div>
+                        <div class="candidate-count">0 Active candidates</div>
+                        <div class="candidate-count">0<br><small>Awaiting...</small></div>
+                        <div class="candidate-count">0<br><small>Review...</small></div>
+                        <div class="candidate-count">0<br><small>Contacting...</small></div>
+                        <div class="candidate-count">0<br><small>Hired</small></div>
+                        <div>
+                            <div class="post-type">Free post</div>
+                            <a href="#" class="sponsor-link">Sponsor job</a>
+                        </div>
+                        <div>3 months</div>
+                        <div class="status-dropdown">
+                            <span class="status-badge status-open">● Open</span>
+                            <div class="status-dropdown-content">
+                                <div class="status-option">Pause job</div>
+                                <div class="status-option">Close job</div>
+                                <div class="status-option">Edit job</div>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <button class="action-btn" onclick="toggleDropdown(this)">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item">Edit job</button>
+                                <button class="dropdown-item">Duplicate job</button>
+                                <button class="dropdown-item">View job</button>
+                                <button class="dropdown-item">Archive job</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
+            
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Toggle dropdown menus
+        function toggleDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            const allDropdowns = document.querySelectorAll('.dropdown-menu');
+            
+            // Close all other dropdowns
+            allDropdowns.forEach(d => {
+                if (d !== dropdown) d.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.job-actions')) {
+                document.querySelectorAll('.dropdown-menu').forEach(d => {
+                    d.classList.remove('show');
+                });
+            }
+        });
+
+        // Handle checkbox selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const jobCheckboxes = document.querySelectorAll('.job-row .job-checkbox');
+            const bulkActions = document.getElementById('bulkActions');
+
+            // Select all functionality
+            selectAllCheckbox.addEventListener('change', function() {
+                jobCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateBulkActions();
+            });
+
+            // Individual checkbox functionality
+            jobCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateSelectAll();
+                    updateBulkActions();
+                });
+            });
+
+            function updateSelectAll() {
+                const checkedBoxes = document.querySelectorAll('.job-row .job-checkbox:checked');
+                selectAllCheckbox.checked = checkedBoxes.length === jobCheckboxes.length;
+                selectAllCheckbox.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < jobCheckboxes.length;
+            }
+
+            function updateBulkActions() {
+                const checkedBoxes = document.querySelectorAll('.job-row .job-checkbox:checked');
+                if (checkedBoxes.length > 0) {
+                    bulkActions.classList.add('show');
+                    bulkActions.querySelector('span').textContent = `${checkedBoxes.length} jobs selected`;
+                } else {
+                    bulkActions.classList.remove('show');
+                }
+            }
+
+            // Initialize
+            updateSelectAll();
+            updateBulkActions();
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all tabs in the same group
+                const tabGroup = this.parentElement;
+                tabGroup.querySelectorAll('.tab-btn').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+            });
+        });
+
+        // Status dropdown functionality
+        document.querySelectorAll('.status-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const statusBadge = this.closest('.status-dropdown').querySelector('.status-badge');
+                const action = this.textContent;
+                
+                if (action === 'Pause job') {
+                    statusBadge.textContent = '● Paused';
+                    statusBadge.className = 'status-badge status-paused';
+                } else if (action === 'Close job') {
+                    statusBadge.textContent = '● Closed';
+                    statusBadge.className = 'status-badge status-closed';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
