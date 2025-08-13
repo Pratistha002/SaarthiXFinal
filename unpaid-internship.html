@@ -3,16 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unpaid Internship (20 Registrations) - SaarthiX</title>
+    <title>Internship and Placement Access - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .job-cards-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .jobs-header {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .jobs-header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .jobs-header p {
+            color: #6c757d;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .jobs-content {
+            padding: 30px 20px;
+        }
+
+        .search-filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .job-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card:hover {
+            border-color: #007bff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,123,255,0.15);
+        }
+
+        .job-id {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .job-header {
+            margin-bottom: 20px;
+            padding-right: 80px;
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .company-name {
+            color: #007bff;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .job-location {
+            color: #6c757d;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-details {
+            margin-bottom: 20px;
+        }
+
+        .details-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .job-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .job-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #6c757d;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .job-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .hr-contact {
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        .hr-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hr-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .hr-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e9ecef;
+        }
+
+        .hr-details {
+            flex: 1;
+        }
+
+        .hr-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+
+        .hr-position {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .contact-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .apply-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .apply-btn:hover {
+            background: #0056b3;
+        }
+
+        .contact-hr-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .contact-hr-btn:hover {
+            background: #1e7e34;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .load-more-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .load-more-btn {
+            padding: 12px 30px;
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .search-filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-section {
+                justify-content: space-between;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
     </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +392,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
+                        <a href="job-metrics.html">Job Metric</a>
                         <a href="demo-courses.html">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling </a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -45,12 +416,10 @@
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +427,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
-                          <a href="Expert-session.html">Expert Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -88,183 +455,625 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Internships & Placements</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="unpaid-internship.html" class="active"><i class="fas fa-briefcase"></i> Browse Jobs</a></li>
+                <li><a href="#"><i class="fas fa-plus"></i> Post Job</a></li>
+                <li><a href="#"><i class="fas fa-bookmark"></i> Saved Jobs</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Applications</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Job Cards Container -->
+            <div class="job-cards-container">
+                <!-- Header -->
+                <div class="jobs-header">
+                    <h1>Internship & Placement Opportunities</h1>
+                    <p>Discover exciting internship and placement opportunities from top companies</p>
+                </div>
+
+                <!-- Content -->
+                <div class="jobs-content">
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Active Jobs</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Partner Companies</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2,500+</div>
+                            <div class="stat-label">Successful Placements</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                    </div>
+
+                    <!-- Search and Filter -->
+                    <div class="search-filter-section">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search jobs by title, company, or skills...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-section">
+                            <select class="filter-select" id="jobTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="internship">Internship</option>
+                                <option value="full-time">Full Time</option>
+                                <option value="part-time">Part Time</option>
+                                <option value="contract">Contract</option>
+                            </select>
+                            <select class="filter-select" id="locationFilter">
+                                <option value="">All Locations</option>
+                                <option value="remote">Remote</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="pune">Pune</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Jobs Grid -->
+                    <div class="jobs-grid">
+                        <!-- Job 1 -->
+                        <div class="job-card">
+                            <div class="job-id">Job 1</div>
+                            <div class="job-header">
+                                <div class="company-name">TechCorp Solutions</div>
+                                <h3 class="job-title">Software Development Intern</h3>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Bangalore, India
+                                </div>
+                            </div>
+                            
+                            <div class="job-details">
+                                <div class="details-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Details
+                                </div>
+                                <div class="job-info-grid">
+                                    <div class="job-info-item">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">6 Months</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Stipend</span>
+                                        <span class="info-value">â‚¹25,000/month</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Start Date</span>
+                                        <span class="info-value">Immediate</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Type</span>
+                                        <span class="info-value">Full-time</span>
+                                    </div>
+                                </div>
+                                <div class="job-description">
+                                    Work on cutting-edge web applications using React, Node.js, and modern development practices. Great opportunity to learn from experienced developers.
+                                </div>
+                                <div class="job-skills">
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">Node.js</span>
+                                    <span class="skill-tag">MongoDB</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-contact">
+                                <div class="hr-title">
+                                    <i class="fas fa-user-tie"></i>
+                                    HR Contact
+                                </div>
+                                <div class="hr-info">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" alt="Sarah Johnson" class="hr-avatar">
+                                    <div class="hr-details">
+                                        <div class="hr-name">Sarah Johnson</div>
+                                        <div class="hr-position">HR Manager</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn apply-btn" onclick="applyJob('Job 1')">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Apply Now
+                                    </button>
+                                    <button class="contact-btn contact-hr-btn" onclick="contactHR('Sarah Johnson')">
+                                        <i class="fas fa-phone"></i>
+                                        Contact HR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job 2 -->
+                        <div class="job-card">
+                            <div class="job-id">Job 2</div>
+                            <div class="job-header">
+                                <div class="company-name">DataTech Analytics</div>
+                                <h3 class="job-title">Data Science Intern</h3>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Mumbai, India
+                                </div>
+                            </div>
+                            
+                            <div class="job-details">
+                                <div class="details-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Details
+                                </div>
+                                <div class="job-info-grid">
+                                    <div class="job-info-item">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">4 Months</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Stipend</span>
+                                        <span class="info-value">â‚¹30,000/month</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Start Date</span>
+                                        <span class="info-value">1st Feb 2024</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Type</span>
+                                        <span class="info-value">Hybrid</span>
+                                    </div>
+                                </div>
+                                <div class="job-description">
+                                    Analyze large datasets, build predictive models, and create data visualizations. Perfect for students interested in machine learning and analytics.
+                                </div>
+                                <div class="job-skills">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Machine Learning</span>
+                                    <span class="skill-tag">SQL</span>
+                                    <span class="skill-tag">Tableau</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-contact">
+                                <div class="hr-title">
+                                    <i class="fas fa-user-tie"></i>
+                                    HR Contact
+                                </div>
+                                <div class="hr-info">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Michael Chen" class="hr-avatar">
+                                    <div class="hr-details">
+                                        <div class="hr-name">Michael Chen</div>
+                                        <div class="hr-position">Talent Acquisition Lead</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn apply-btn" onclick="applyJob('Job 2')">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Apply Now
+                                    </button>
+                                    <button class="contact-btn contact-hr-btn" onclick="contactHR('Michael Chen')">
+                                        <i class="fas fa-phone"></i>
+                                        Contact HR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job 3 -->
+                        <div class="job-card">
+                            <div class="job-id">Job 3</div>
+                            <div class="job-header">
+                                <div class="company-name">FinanceFlow Inc</div>
+                                <h3 class="job-title">Business Analyst Intern</h3>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Delhi, India
+                                </div>
+                            </div>
+                            
+                            <div class="job-details">
+                                <div class="details-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Details
+                                </div>
+                                <div class="job-info-grid">
+                                    <div class="job-info-item">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">3 Months</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Stipend</span>
+                                        <span class="info-value">â‚¹20,000/month</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Start Date</span>
+                                        <span class="info-value">15th Jan 2024</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Type</span>
+                                        <span class="info-value">Remote</span>
+                                    </div>
+                                </div>
+                                <div class="job-description">
+                                    Support business operations through data analysis, process improvement, and strategic planning. Ideal for business and finance students.
+                                </div>
+                                <div class="job-skills">
+                                    <span class="skill-tag">Excel</span>
+                                    <span class="skill-tag">PowerBI</span>
+                                    <span class="skill-tag">Business Analysis</span>
+                                    <span class="skill-tag">Finance</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-contact">
+                                <div class="hr-title">
+                                    <i class="fas fa-user-tie"></i>
+                                    HR Contact
+                                </div>
+                                <div class="hr-info">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Emily Rodriguez" class="hr-avatar">
+                                    <div class="hr-details">
+                                        <div class="hr-name">Emily Rodriguez</div>
+                                        <div class="hr-position">HR Business Partner</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn apply-btn" onclick="applyJob('Job 3')">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Apply Now
+                                    </button>
+                                    <button class="contact-btn contact-hr-btn" onclick="contactHR('Emily Rodriguez')">
+                                        <i class="fas fa-phone"></i>
+                                        Contact HR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job 4 -->
+                        <div class="job-card">
+                            <div class="job-id">Job 4</div>
+                            <div class="job-header">
+                                <div class="company-name">CreativeDesign Studio</div>
+                                <h3 class="job-title">UI/UX Design Intern</h3>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Pune, India
+                                </div>
+                            </div>
+                            
+                            <div class="job-details">
+                                <div class="details-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Details
+                                </div>
+                                <div class="job-info-grid">
+                                    <div class="job-info-item">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">5 Months</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Stipend</span>
+                                        <span class="info-value">â‚¹22,000/month</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Start Date</span>
+                                        <span class="info-value">1st Mar 2024</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Type</span>
+                                        <span class="info-value">Full-time</span>
+                                    </div>
+                                </div>
+                                <div class="job-description">
+                                    Design user interfaces and experiences for mobile and web applications. Work with senior designers on real client projects.
+                                </div>
+                                <div class="job-skills">
+                                    <span class="skill-tag">Figma</span>
+                                    <span class="skill-tag">Adobe XD</span>
+                                    <span class="skill-tag">Prototyping</span>
+                                    <span class="skill-tag">User Research</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-contact">
+                                <div class="hr-title">
+                                    <i class="fas fa-user-tie"></i>
+                                    HR Contact
+                                </div>
+                                <div class="hr-info">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="David Kim" class="hr-avatar">
+                                    <div class="hr-details">
+                                        <div class="hr-name">David Kim</div>
+                                        <div class="hr-position">Creative Director</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn apply-btn" onclick="applyJob('Job 4')">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Apply Now
+                                    </button>
+                                    <button class="contact-btn contact-hr-btn" onclick="contactHR('David Kim')">
+                                        <i class="fas fa-phone"></i>
+                                        Contact HR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job 5 -->
+                        <div class="job-card">
+                            <div class="job-id">Job 5</div>
+                            <div class="job-header">
+                                <div class="company-name">MarketingPro Agency</div>
+                                <h3 class="job-title">Digital Marketing Intern</h3>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Remote
+                                </div>
+                            </div>
+                            
+                            <div class="job-details">
+                                <div class="details-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Details
+                                </div>
+                                <div class="job-info-grid">
+                                    <div class="job-info-item">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">4 Months</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Stipend</span>
+                                        <span class="info-value">â‚¹18,000/month</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Start Date</span>
+                                        <span class="info-value">Flexible</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Type</span>
+                                        <span class="info-value">Remote</span>
+                                    </div>
+                                </div>
+                                <div class="job-description">
+                                    Manage social media campaigns, create content, and analyze marketing metrics. Perfect for marketing and communications students.
+                                </div>
+                                <div class="job-skills">
+                                    <span class="skill-tag">Social Media</span>
+                                    <span class="skill-tag">Content Creation</span>
+                                    <span class="skill-tag">Google Analytics</span>
+                                    <span class="skill-tag">SEO</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-contact">
+                                <div class="hr-title">
+                                    <i class="fas fa-user-tie"></i>
+                                    HR Contact
+                                </div>
+                                <div class="hr-info">
+                                    <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face" alt="Lisa Wang" class="hr-avatar">
+                                    <div class="hr-details">
+                                        <div class="hr-name">Lisa Wang</div>
+                                        <div class="hr-position">Marketing Manager</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn apply-btn" onclick="applyJob('Job 5')">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Apply Now
+                                    </button>
+                                    <button class="contact-btn contact-hr-btn" onclick="contactHR('Lisa Wang')">
+                                        <i class="fas fa-phone"></i>
+                                        Contact HR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job 6 -->
+                        <div class="job-card">
+                            <div class="job-id">Job 6</div>
+                            <div class="job-header">
+                                <div class="company-name">CloudTech Systems</div>
+                                <h3 class="job-title">DevOps Engineer Intern</h3>
+                                <div class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Hyderabad, India
+                                </div>
+                            </div>
+                            
+                            <div class="job-details">
+                                <div class="details-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Details
+                                </div>
+                                <div class="job-info-grid">
+                                    <div class="job-info-item">
+                                        <span class="info-label">Duration</span>
+                                        <span class="info-value">6 Months</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Stipend</span>
+                                        <span class="info-value">â‚¹28,000/month</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Start Date</span>
+                                        <span class="info-value">1st Apr 2024</span>
+                                    </div>
+                                    <div class="job-info-item">
+                                        <span class="info-label">Type</span>
+                                        <span class="info-value">Hybrid</span>
+                                    </div>
+                                </div>
+                                <div class="job-description">
+                                    Learn cloud infrastructure, CI/CD pipelines, and automation tools. Great opportunity to work with AWS, Docker, and Kubernetes.
+                                </div>
+                                <div class="job-skills">
+                                    <span class="skill-tag">AWS</span>
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Kubernetes</span>
+                                    <span class="skill-tag">Jenkins</span>
+                                </div>
+                            </div>
+
+                            <div class="hr-contact">
+                                <div class="hr-title">
+                                    <i class="fas fa-user-tie"></i>
+                                    HR Contact
+                                </div>
+                                <div class="hr-info">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" alt="Anna Patel" class="hr-avatar">
+                                    <div class="hr-details">
+                                        <div class="hr-name">Anna Patel</div>
+                                        <div class="hr-position">Technical Recruiter</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn apply-btn" onclick="applyJob('Job 6')">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Apply Now
+                                    </button>
+                                    <button class="contact-btn contact-hr-btn" onclick="contactHR('Anna Patel')">
+                                        <i class="fas fa-phone"></i>
+                                        Contact HR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More Section -->
+                    <div class="load-more-section">
+                        <button class="load-more-btn" onclick="loadMoreJobs()">
+                            Load More Opportunities
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
+            
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Apply for job
+        function applyJob(jobId) {
+            alert(`Applying for ${jobId}. This would typically open an application form or redirect to the application process.`);
+        }
+
+        // Contact HR
+        function contactHR(hrName) {
+            alert(`Contacting ${hrName}. This would typically open a contact form or initiate a chat/call.`);
+        }
+
+        // Load more jobs
+        function loadMoreJobs() {
+            alert('Loading more job opportunities... This would typically load additional job cards via AJAX.');
+        }
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const jobCards = document.querySelectorAll('.job-card');
+            
+            jobCards.forEach(card => {
+                const jobTitle = card.querySelector('.job-title').textContent.toLowerCase();
+                const companyName = card.querySelector('.company-name').textContent.toLowerCase();
+                const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                
+                if (jobTitle.includes(searchTerm) || companyName.includes(searchTerm) || skills.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.getElementById('jobTypeFilter').addEventListener('change', function() {
+            filterJobs();
+        });
+
+        document.getElementById('locationFilter').addEventListener('change', function() {
+            filterJobs();
+        });
+
+        function filterJobs() {
+            const jobTypeFilter = document.getElementById('jobTypeFilter').value;
+            const locationFilter = document.getElementById('locationFilter').value;
+            const jobCards = document.querySelectorAll('.job-card');
+            
+            jobCards.forEach(card => {
+                let showCard = true;
+                
+                // Job type filter (based on job description or type info)
+                if (jobTypeFilter && jobTypeFilter !== '') {
+                    const jobTitle = card.querySelector('.job-title').textContent.toLowerCase();
+                    if (jobTypeFilter === 'internship' && !jobTitle.includes('intern')) {
+                        showCard = false;
+                    }
+                }
+                
+                // Location filter
+                if (locationFilter && locationFilter !== '' && showCard) {
+                    const location = card.querySelector('.job-location').textContent.toLowerCase();
+                    if (!location.includes(locationFilter.toLowerCase())) {
+                        showCard = false;
+                    }
+                }
+                
+                card.style.display = showCard ? '' : 'none';
+            });
+        }
+    </script>
+
     <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
-        </div>
-        
-        <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">ðŸ†“</span>
-                    <span class="badge-text"> Free Service</span>
-                </div>
-                
-                <h1 class="service-title">Unpaid Internship (20 Registrations)</h1>
-                <p class="service-subtitle">Get access to unpaid internship opportunities with up to 20 student registrations. Perfect for institutes starting their placement programs.</p>
-                
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-briefcase"></i>
-                        <span>20 Registrations</span>
-                    </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Internship Opportunities</span>
-                    </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Basic Support</span>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your organization and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> 20 Registrations</li><li><i class="fas fa-check"></i> Internship Opportunities</li><li><i class="fas fa-check"></i> Basic Support</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your organization's growth and success.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Organizational growth</li>
-                            <li><i class="fas fa-check"></i> Enhanced capabilities</li>
-                            <li><i class="fas fa-check"></i> Strategic advantage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Contact Us</h3>
-                        <p>Reach out to our team to discuss your requirements and service expectations.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Planning</h3>
-                        <p>We work with you to create a customized plan that meets your specific needs.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Implementation</h3>
-                        <p>Our team implements the service with regular updates and quality checkpoints.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Receive the completed service with ongoing support and maintenance as needed.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Customized Approach</h4>
-                            <p>Tailored service delivery based on your specific organizational needs and objectives.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+   
     <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
