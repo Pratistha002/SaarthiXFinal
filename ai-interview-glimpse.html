@@ -3,16 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Glimpse of Interview Videos - SaarthiX</title>
+    <title>Technical Interview/Assessment AI - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <style>
+        .assessment-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            min-height: 600px;
+        }
+
+        .assessment-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .assessment-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-title h2 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .header-subtitle {
+            color: #6c757d;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .position-tabs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .position-tab {
+            padding: 8px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            background: white;
+            color: #495057;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .position-tab.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .position-tab:hover {
+            background: #e9ecef;
+        }
+
+        .add-position-btn {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+
+        .assessment-nav {
+            background: white;
+            border-bottom: 1px solid #dee2e6;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-tab {
+            padding: 16px 0;
+            color: #6c757d;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+
+        .nav-tab:hover {
+            color: #007bff;
+        }
+
+        .assessment-content {
+            flex: 1;
+            display: flex;
+        }
+
+        .assessments-list {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .search-section {
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 40px 10px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .entries-info {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .assessments-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .assessments-table th {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        .assessments-table td {
+            padding: 16px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        .assessments-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .assessment-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .max-time {
+            color: #495057;
+        }
+
+        .description {
+            color: #6c757d;
+        }
+
+        .created-info {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .action-icon:hover {
+            background-color: #e9ecef;
+        }
+
+        .action-icon i {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .assessment-panel {
+            width: 350px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            margin-bottom: 24px;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .panel-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .checkbox-item label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-list li:before {
+            content: "‚úì";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .security-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .security-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .security-options {
+            display: flex;
+            gap: 16px;
+        }
+
+        .security-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .time-limit {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .time-limit-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .time-limit-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .assessment-container {
+                flex-direction: column;
+            }
+
+            .assessment-panel {
+                width: 100%;
+            }
+
+            .position-tabs {
+                flex-wrap: wrap;
+            }
+
+            .nav-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +407,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
+                        <a href="job-metrics.html">Job Metric</a>
                         <a href="demo-courses.html">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling†</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready†Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -45,12 +431,10 @@
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role†Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +442,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
-                          <a href="Expert-session.html">Expert†Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -88,259 +470,350 @@
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>NinjaInterview</h3>
+                <p style="font-size: 12px; color: #6c757d; margin: 4px 0 0 0;">Online assessment application to conduct seamless examinations</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#"><i class="fas fa-th-large"></i> All Apps</a></li>
+                <li><a href="#"><i class="fas fa-mobile-alt"></i> My Apps</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Collaboration</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Productivity</a></li>
+                <li><a href="#"><i class="fas fa-bullhorn"></i> Marketing</a></li>
+                <li><a href="#"><i class="fas fa-handshake"></i> Sales</a></li>
+                <li><a href="#"><i class="fas fa-user-tie"></i> HR</a></li>
+                <li><a href="ai-interview-glimpse.html" class="active"><i class="fas fa-video"></i> NinjaInterview</a></li>
+                <li><a href="#"><i class="fas fa-headset"></i> Support</a></li>
+                <li><a href="#"><i class="fas fa-code"></i> Developers</a></li>
+                <li><a href="#"><i class="fas fa-puzzle-piece"></i> Extensions & Plugins</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Manage Apps</a></li>
+                <li><a href="#"><i class="fas fa-desktop"></i> Desktop App</a></li>
+                <li><a href="#"><i class="fas fa-heart"></i> Spread the Love</a></li>
+            </ul>
         </div>
-        
-        <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">üÜì</span>
-                    <span class="badge-text"> Free Service</span>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Assessment Container -->
+            <div class="assessment-container">
+                <!-- Main Assessment Area -->
+                <div class="assessment-main">
+                    <!-- Header -->
+                    <div class="assessment-header">
+                        <div class="header-title">
+                            <div>
+                                <h2>NinjaInterview</h2>
+                                <div class="header-subtitle">Online assessment application to conduct seamless examinations</div>
+                            </div>
+                        </div>
+                        <div class="position-tabs">
+                            <a href="#" class="position-tab active">
+                                <i class="fas fa-briefcase"></i> Sales Executive
+                            </a>
+                            <a href="#" class="position-tab">
+                                <i class="fas fa-bullhorn"></i> Marketing Executive
+                            </a>
+                            <a href="#" class="position-tab">
+                                <i class="fas fa-headset"></i> Support Executive
+                            </a>
+                            <a href="#" class="add-position-btn">+ Add Position</a>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Tabs -->
+                    <div class="assessment-nav">
+                        <div class="nav-tabs">
+                            <a href="#" class="nav-tab active">Assessments</a>
+                            <a href="#" class="nav-tab">Results</a>
+                            <a href="#" class="nav-tab">Candidates</a>
+                            <a href="#" class="nav-tab">Reports</a>
+                        </div>
+                    </div>
+
+                    <!-- Assessment Content -->
+                    <div class="assessment-content">
+                        <div class="assessments-list">
+                            <!-- Search Section -->
+                            <div class="search-section">
+                                <div class="search-box">
+                                    <input type="text" placeholder="Search">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+
+                            <!-- Entries Info -->
+                            <div class="entries-info">
+                                Showing <strong>1-6 of 6</strong> entries
+                            </div>
+
+                            <!-- Assessments Table -->
+                            <table class="assessments-table">
+                                <thead>
+                                    <tr>
+                                        <th>NAME</th>
+                                        <th>MAX TIME</th>
+                                        <th>DESCRIPTION</th>
+                                        <th>CREATED</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="assessment-name">Assessment - 2</td>
+                                        <td class="max-time">60</td>
+                                        <td class="description">Second Round</td>
+                                        <td class="created-info">Created by</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </div>
+                                                <div class="action-icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="assessment-name">Assessment - 1</td>
+                                        <td class="max-time">60</td>
+                                        <td class="description">First Round</td>
+                                        <td class="created-info">Created by</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </div>
+                                                <div class="action-icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="assessment-name">Mock Test - 2</td>
+                                        <td class="max-time">45</td>
+                                        <td class="description">Practice Session</td>
+                                        <td class="created-info">Created by</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </div>
+                                                <div class="action-icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="assessment-name">Mock Test - 1</td>
+                                        <td class="max-time">45</td>
+                                        <td class="description">Practice Session</td>
+                                        <td class="created-info">Created by</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </div>
+                                                <div class="action-icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="assessment-name">Sample Test - 2</td>
+                                        <td class="max-time">30</td>
+                                        <td class="description">Testing Purpose</td>
+                                        <td class="created-info">Created by John 2 days ago</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </div>
+                                                <div class="action-icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="assessment-name">Sample Test - 1</td>
+                                        <td class="max-time">30</td>
+                                        <td class="description">Testing Purpose</td>
+                                        <td class="created-info">Created by John 2 days ago</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <div class="action-icon">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </div>
+                                                <div class="action-icon">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                
-                <h1 class="service-title">AI Glimpse of Interview Videos</h1>
-                <p class="service-subtitle">Get AI-powered insights and glimpses of candidate interview videos to assess their potential.</p>
-                
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-eye"></i>
-                        <span>AI Insights</span>
+
+                <!-- Assessment Panel -->
+                <div class="assessment-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Add Assessment</div>
+                        <div class="panel-subtitle">Create a new assessment</div>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-eye"></i>
-                        <span>Interview Analysis</span>
-                    </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-eye"></i>
-                        <span>Candidate Assessment</span>
-                    </div>
-                    
+
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Assessment Name</label>
+                            <input type="text" class="form-input" placeholder="Enter assessment name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input form-textarea" placeholder="Enter description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Features</label>
+                            <ul class="feature-list">
+                                <li>The assessment will comprise of Objective type Multiple Choice Questions (MCQs)</li>
+                                <li>The assessment will have questions from well-known topics like HTML, CSS, JavaScript, etc.</li>
+                                <li>You can configure the number of questions and time limit</li>
+                                <li>Questions will be selected randomly for each candidate</li>
+                                <li>This assessment is designed to test the coding aptitude</li>
+                            </ul>
+                        </div>
+
+                        <div class="security-section">
+                            <div class="security-title">
+                                <i class="fas fa-shield-alt"></i>
+                                SECURITY
+                            </div>
+                            <div class="security-options">
+                                <div class="security-option">
+                                    <input type="checkbox" id="image-proctoring" checked>
+                                    <label for="image-proctoring">Image Proctoring</label>
+                                </div>
+                                <div class="security-option">
+                                    <input type="checkbox" id="safe-exam">
+                                    <label for="safe-exam">Safe Exam Environment</label>
+                                </div>
+                            </div>
+                            <div style="margin-top: 12px;">
+                                <div class="security-option">
+                                    <input type="checkbox" id="work-experience">
+                                    <label for="work-experience">Work Experience</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="time-limit">
+                            <div class="time-limit-value">‚è±Ô∏è Test duration (maximum): 1 hour 5 mins</div>
+                            <div class="time-limit-label">Recommended time for this assessment</div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your organization and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> AI Insights</li><li><i class="fas fa-check"></i> Interview Analysis</li><li><i class="fas fa-check"></i> Candidate Assessment</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your organization's growth and success.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Organizational growth</li>
-                            <li><i class="fas fa-check"></i> Enhanced capabilities</li>
-                            <li><i class="fas fa-check"></i> Strategic advantage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Contact Us</h3>
-                        <p>Reach out to our team to discuss your requirements and service expectations.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Planning</h3>
-                        <p>We work with you to create a customized plan that meets your specific needs.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Implementation</h3>
-                        <p>Our team implements the service with regular updates and quality checkpoints.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Receive the completed service with ongoing support and maintenance as needed.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Customized Approach</h4>
-                            <p>Tailored service delivery based on your specific organizational needs and objectives.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
-            </div>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to implement?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The implementation timeline varies based on the specific service and your requirements. We provide detailed timelines during the planning phase and keep you updated throughout.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What support do you provide during implementation?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive support including dedicated account management, regular progress updates, and immediate assistance for any issues or questions.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can the service be customized for our specific needs?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely! We work closely with you to understand your unique requirements and customize the service accordingly to ensure maximum value and effectiveness.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What happens after the service is completed?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide ongoing support, maintenance, and are available for future enhancements or additional services as your needs evolve.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
 
-    <!-- CTA Section -->
-    <section class="service-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Transform your organization with our professional ai glimpse of interview videos service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        Contact Us
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Remove active class from all tabs
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+            });
+        });
+
+        // Position tab switching
+        document.querySelectorAll('.position-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Remove active class from all position tabs
+                document.querySelectorAll('.position-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+            });
+        });
+
+        // Action icons
+        document.querySelectorAll('.action-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const iconType = this.querySelector('i').classList.contains('fa-share-alt') ? 'share' : 'delete';
+                const row = this.closest('tr');
+                const assessmentName = row.querySelector('.assessment-name').textContent;
+                
+                if (iconType === 'share') {
+                    alert(`Share assessment: ${assessmentName}`);
+                } else {
+                    if (confirm(`Are you sure you want to delete "${assessmentName}"?`)) {
+                        row.remove();
+                        alert(`Assessment "${assessmentName}" deleted successfully`);
+                    }
+                }
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.assessments-table tbody tr');
+            
+            rows.forEach(row => {
+                const assessmentName = row.querySelector('.assessment-name').textContent.toLowerCase();
+                const description = row.querySelector('.description').textContent.toLowerCase();
+                
+                if (assessmentName.includes(searchTerm) || description.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
