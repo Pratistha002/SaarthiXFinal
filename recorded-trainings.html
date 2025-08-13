@@ -3,16 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recorded Trainings - SaarthiX</title>
+    <title>Training - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .experts-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .experts-header {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .experts-header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .experts-header p {
+            color: #6c757d;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .experts-content {
+            padding: 30px 20px;
+        }
+
+        .search-filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .experts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .expert-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .expert-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .course-header {
+            position: relative;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .course-header.training-1 {
+            background: linear-gradient(135deg, #a8e6cf 0%, #7fcdcd 100%);
+        }
+
+        .course-header.training-2 {
+            background: linear-gradient(135deg, #ffd3a5 0%, #fd9853 100%);
+        }
+
+        .course-header.training-3 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .course-header.training-4 {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+        }
+
+        .course-header.training-5 {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+        }
+
+        .course-header.training-6 {
+            background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+        }
+
+        .course-header.training-7 {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .course-header.training-8 {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+        }
+
+        .free-trial-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .provider-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .provider-logo {
+            width: 24px;
+            height: 24px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .provider-name {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .skills-section {
+            margin-bottom: 15px;
+        }
+
+        .skills-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .skills-list {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .degree-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .degree-link:hover {
+            text-decoration: underline;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .rating-star {
+            color: #ffc107;
+            font-size: 16px;
+        }
+
+        .rating-score {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .rating-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .course-meta {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .load-more-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .load-more-btn {
+            padding: 12px 30px;
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .search-filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-section {
+                justify-content: space-between;
+            }
+
+            .experts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
     </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +354,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
+                        <a href="job-metrics.html">Job Metric</a>
                         <a href="demo-courses.html">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling�</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready�Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -45,12 +378,10 @@
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role�Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +389,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
-                          <a href="Expert-session.html">Expert�Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -87,6 +416,456 @@
             </a>
         </div>
     </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Training</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="recorded-trainings.html" class="active"><i class="fas fa-users"></i> Browse Training</a></li>
+                <li><a href="#"><i class="fas fa-plus"></i> Post Training</a></li>
+                <li><a href="#"><i class="fas fa-calendar"></i> My Trainings</a></li>
+                <li><a href="#"><i class="fas fa-star"></i> Favorites</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Experts Container -->
+            <div class="experts-container">
+                <!-- Header -->
+                <div class="experts-header">
+                    <h1>Training Programs</h1>
+                    <p>Connect with industry experts for comprehensive training programs and skill development</p>
+                </div>
+
+                <!-- Content -->
+                <div class="experts-content">
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="stat-item">
+                            <div class="stat-number">300+</div>
+                            <div class="stat-label">Training Instructors</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">40+</div>
+                            <div class="stat-label">Training Categories</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8,000+</div>
+                            <div class="stat-label">Training Sessions Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.8/5</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                    </div>
+
+                    <!-- Search and Filter -->
+                    <div class="search-filter-section">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search training by name, skill, or category...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-section">
+                            <select class="filter-select" id="expertiseFilter">
+                                <option value="">All Categories</option>
+                                <option value="technical">Technical Training</option>
+                                <option value="soft-skills">Soft Skills</option>
+                                <option value="management">Management</option>
+                                <option value="sales">Sales & Marketing</option>
+                                <option value="finance">Finance</option>
+                                <option value="hr">Human Resources</option>
+                            </select>
+                            <select class="filter-select" id="rateFilter">
+                                <option value="">All Rates</option>
+                                <option value="0-30">$0 - $30/hour</option>
+                                <option value="30-60">$30 - $60/hour</option>
+                                <option value="60-100">$60 - $100/hour</option>
+                                <option value="100+">$100+/hour</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Training Programs Grid -->
+                    <div class="experts-grid">
+                        <!-- Training 1 -->
+                        <div class="expert-card">
+                            <div class="course-header training-1">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Java Programming Mastery
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Complete Java Development</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Java Programming, Spring Framework, Microservices, REST APIs, Database Integration, Testing</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.9</span>
+                                    <span class="rating-count">• 4.2K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Professional Certificate • 3 - 6 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 2 -->
+                        <div class="expert-card">
+                            <div class="course-header training-2">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Leadership Development Program
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Executive Leadership Training</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Leadership, Team Management, Strategic Planning, Decision Making, Change Management</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.8</span>
+                                    <span class="rating-count">• 3.1K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Advanced • Professional Certificate • 2 - 4 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 3 -->
+                        <div class="expert-card">
+                            <div class="course-header training-3">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Data Science Specialization
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Machine Learning & Analytics</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Python, Machine Learning, Data Visualization, Statistical Analysis, Deep Learning, AI</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.7</span>
+                                    <span class="rating-count">• 5.8K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Specialization • 4 - 8 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 4 -->
+                        <div class="expert-card">
+                            <div class="course-header training-4">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Digital Marketing Certification
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Advanced Digital Marketing</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">SEO/SEM, Social Media Marketing, Content Strategy, Analytics, Email Marketing, PPC</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.6</span>
+                                    <span class="rating-count">• 2.9K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Beginner • Professional Certificate • 3 - 5 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 5 -->
+                        <div class="expert-card">
+                            <div class="course-header training-5">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Cloud Computing Mastery
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">AWS Cloud Architecture</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">AWS Services, Cloud Architecture, DevOps, Containerization, Security, Monitoring</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.8</span>
+                                    <span class="rating-count">• 3.7K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Advanced • Professional Certificate • 4 - 6 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 6 -->
+                        <div class="expert-card">
+                            <div class="course-header training-6">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Financial Analysis Program
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Corporate Finance & Investment</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Financial Analysis, Investment Planning, Risk Management, Portfolio Management, Valuation</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.5</span>
+                                    <span class="rating-count">• 2.3K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Specialization • 3 - 5 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 7 -->
+                        <div class="expert-card">
+                            <div class="course-header training-7">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Cybersecurity Fundamentals
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Information Security Training</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Network Security, Ethical Hacking, Risk Assessment, Incident Response, Compliance</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.7</span>
+                                    <span class="rating-count">• 4.1K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Professional Certificate • 4 - 7 Months
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Training 8 -->
+                        <div class="expert-card">
+                            <div class="course-header training-8">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Product Management Excellence
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Strategic Product Management</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Product Strategy, User Research, Agile Development, Market Analysis, Product Launch</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a degree
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.9</span>
+                                    <span class="rating-count">• 3.5K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Advanced • Professional Certificate • 3 - 6 Months
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load More Section -->
+                    <div class="load-more-section">
+                        <button class="load-more-btn" onclick="loadMoreExperts()">
+                            See more Training Instructors
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
+            
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // View profile function
+        function viewProfile(expertName) {
+            alert(`Viewing profile for ${expertName}. This would typically open a detailed profile page with portfolio, reviews, and booking options.`);
+        }
+
+        // Load more experts
+        function loadMoreExperts() {
+            alert('Loading more training instructors... This would typically load additional profiles via AJAX.');
+        }
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const expertCards = document.querySelectorAll('.expert-card');
+            
+            expertCards.forEach(card => {
+                const expertName = card.querySelector('.expert-name').textContent.toLowerCase();
+                const expertTitle = card.querySelector('.expert-title').textContent.toLowerCase();
+                const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                
+                if (expertName.includes(searchTerm) || expertTitle.includes(searchTerm) || skills.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.getElementById('expertiseFilter').addEventListener('change', function() {
+            filterExperts();
+        });
+
+        document.getElementById('rateFilter').addEventListener('change', function() {
+            filterExperts();
+        });
+
+        function filterExperts() {
+            const expertiseFilter = document.getElementById('expertiseFilter').value;
+            const rateFilter = document.getElementById('rateFilter').value;
+            const expertCards = document.querySelectorAll('.expert-card');
+            
+            expertCards.forEach(card => {
+                let showCard = true;
+                
+                // Expertise filter
+                if (expertiseFilter && expertiseFilter !== '') {
+                    const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                    const title = card.querySelector('.expert-title').textContent.toLowerCase();
+                    
+                    if (!skills.includes(expertiseFilter.toLowerCase()) && !title.includes(expertiseFilter.toLowerCase())) {
+                        showCard = false;
+                    }
+                }
+                
+                // Rate filter
+                if (rateFilter && rateFilter !== '' && showCard) {
+                    const rateText = card.querySelector('.expert-rate').textContent;
+                    const rate = parseInt(rateText.match(/\d+/)[0]);
+                    
+                    switch(rateFilter) {
+                        case '0-30':
+                            if (rate > 30) showCard = false;
+                            break;
+                        case '30-60':
+                            if (rate < 30 || rate > 60) showCard = false;
+                            break;
+                        case '60-100':
+                            if (rate < 60 || rate > 100) showCard = false;
+                            break;
+                        case '100+':
+                            if (rate < 100) showCard = false;
+                            break;
+                    }
+                }
+                
+                card.style.display = showCard ? '' : 'none';
+            });
+        }
+    </script>
 
     <!-- Service Hero Section -->
     <section class="service-hero">

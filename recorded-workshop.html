@@ -3,16 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recorded Workshop - SaarthiX</title>
+    <title>Workshop - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <style>
+        .experts-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .experts-header {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .experts-header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .experts-header p {
+            color: #6c757d;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .experts-content {
+            padding: 30px 20px;
+        }
+
+        .search-filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .experts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .expert-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .expert-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .course-header {
+            position: relative;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .course-header.workshop-1 {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        .course-header.workshop-2 {
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+        }
+
+        .course-header.workshop-3 {
+            background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%);
+        }
+
+        .course-header.workshop-4 {
+            background: linear-gradient(135deg, #ff9ff3 0%, #f368e0 100%);
+        }
+
+        .course-header.workshop-5 {
+            background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+        }
+
+        .course-header.workshop-6 {
+            background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
+        }
+
+        .course-header.workshop-7 {
+            background: linear-gradient(135deg, #1dd1a1 0%, #10ac84 100%);
+        }
+
+        .course-header.workshop-8 {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        }
+
+        .free-trial-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .provider-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .provider-logo {
+            width: 24px;
+            height: 24px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .provider-name {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .skills-section {
+            margin-bottom: 15px;
+        }
+
+        .skills-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .skills-list {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .degree-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .degree-link:hover {
+            text-decoration: underline;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .rating-star {
+            color: #ffc107;
+            font-size: 16px;
+        }
+
+        .rating-score {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .rating-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .course-meta {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .load-more-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .load-more-btn {
+            padding: 12px 30px;
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .stats-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .search-filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-section {
+                justify-content: space-between;
+            }
+
+            .experts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +354,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
+                        <a href="job-metrics.html">Job Metric</a>
                         <a href="demo-courses.html">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling�</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready�Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -45,12 +378,10 @@
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role�Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +389,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
-                          <a href="Expert-session.html">Expert�Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -88,258 +417,455 @@
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Workshop</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="recorded-workshop.html" class="active"><i class="fas fa-users"></i> Browse Workshop</a></li>
+                <li><a href="#"><i class="fas fa-plus"></i> Post Workshop</a></li>
+                <li><a href="#"><i class="fas fa-calendar"></i> My Workshops</a></li>
+                <li><a href="#"><i class="fas fa-star"></i> Favorites</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
         </div>
-        
-        <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">🆓</span>
-                    <span class="badge-text"> Free Service</span>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Experts Container -->
+            <div class="experts-container">
+                <!-- Header -->
+                <div class="experts-header">
+                    <h1>Workshop Sessions</h1>
+                    <p>Connect with industry experts for workshop sessions, skill development, and knowledge sharing</p>
                 </div>
-                
-                <h1 class="service-title">Recorded Workshop</h1>
-                <p class="service-subtitle">Comprehensive recorded workshops on industry trends, career development, and skill enhancement for students.</p>
-                
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Workshop Content</span>
+
+                <!-- Content -->
+                <div class="experts-content">
+                    <!-- Stats Section -->
+                    <div class="stats-section">
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Workshop Facilitators</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Workshop Topics</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5,000+</div>
+                            <div class="stat-label">Workshops Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.9/5</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Industry Trends</span>
+
+                    <!-- Search and Filter -->
+                    <div class="search-filter-section">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search workshops by name, skill, or topic...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-section">
+                            <select class="filter-select" id="expertiseFilter">
+                                <option value="">All Topics</option>
+                                <option value="technical">Technical Skills</option>
+                                <option value="soft-skills">Soft Skills</option>
+                                <option value="leadership">Leadership</option>
+                                <option value="communication">Communication</option>
+                                <option value="project-management">Project Management</option>
+                                <option value="career-development">Career Development</option>
+                            </select>
+                            <select class="filter-select" id="rateFilter">
+                                <option value="">All Rates</option>
+                                <option value="0-25">$0 - $25/hour</option>
+                                <option value="25-50">$25 - $50/hour</option>
+                                <option value="50-100">$50 - $100/hour</option>
+                                <option value="100+">$100+/hour</option>
+                            </select>
+                        </div>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Career Development</span>
+
+                    <!-- Workshops Grid -->
+                    <div class="experts-grid">
+                        <!-- Workshop 1 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-1">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Leadership Excellence Workshop
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Leadership and Team Management</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Leadership, Team Building, Communication, Conflict Resolution, Strategic Planning</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.8</span>
+                                    <span class="rating-count">• 2.1K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Beginner • Workshop • 2 - 4 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 2 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-2">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Web Development Bootcamp
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Full Stack Web Development</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">HTML, CSS, JavaScript, React, Node.js, Database Design, API Development</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.7</span>
+                                    <span class="rating-count">• 1.8K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Workshop • 6 - 8 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 3 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-3">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Data Science Fundamentals
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Data Science and Analytics</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Python, Data Visualization, Statistical Analysis, Machine Learning, Pandas, NumPy</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.9</span>
+                                    <span class="rating-count">• 3.2K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Workshop • 4 - 6 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 4 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-4">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Digital Marketing Mastery
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Digital Marketing Strategy</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">SEO, Social Media Marketing, Content Strategy, Google Analytics, PPC Advertising</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.6</span>
+                                    <span class="rating-count">• 1.5K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Beginner • Workshop • 3 - 5 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 5 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-5">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Project Management Excellence
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Agile Project Management</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Agile Methodology, Scrum, Risk Management, Resource Planning, Stakeholder Management</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.8</span>
+                                    <span class="rating-count">• 2.7K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Intermediate • Workshop • 4 - 6 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 6 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-6">
+                                <span class="free-trial-badge">Free Trial</span>
+                                UX/UI Design Workshop
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">User Experience Design</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">User Research, Wireframing, Prototyping, Design Thinking, Usability Testing</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.7</span>
+                                    <span class="rating-count">• 1.9K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Beginner • Workshop • 5 - 7 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 7 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-7">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Financial Planning Workshop
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Personal Finance Management</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Budgeting, Investment Planning, Risk Assessment, Financial Analysis, Portfolio Management</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.5</span>
+                                    <span class="rating-count">• 1.2K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Beginner • Workshop • 3 - 4 Hours
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workshop 8 -->
+                        <div class="expert-card">
+                            <div class="course-header workshop-8">
+                                <span class="free-trial-badge">Free Trial</span>
+                                Communication Skills Mastery
+                            </div>
+                            <div class="course-content">
+                                <div class="provider-info">
+                                    <div class="provider-logo">SX</div>
+                                    <span class="provider-name">SaarthiX</span>
+                                </div>
+                                <h3 class="course-title">Effective Communication</h3>
+                                <div class="skills-section">
+                                    <div class="skills-label">Skills you'll gain:</div>
+                                    <div class="skills-list">Public Speaking, Presentation Skills, Active Listening, Interpersonal Communication</div>
+                                </div>
+                                <a href="#" class="degree-link">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Build toward a certificate
+                                </a>
+                                <div class="course-rating">
+                                    <span class="rating-star">★</span>
+                                    <span class="rating-score">4.9</span>
+                                    <span class="rating-count">• 2.8K reviews</span>
+                                </div>
+                                <div class="course-meta">
+                                    Beginner • Workshop • 2 - 3 Hours
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
+
+                    <!-- Load More Section -->
+                    <div class="load-more-section">
+                        <button class="load-more-btn" onclick="loadMoreExperts()">
+                            See more Workshop Facilitators
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-play-circle"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your organization and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Workshop Content</li><li><i class="fas fa-check"></i> Industry Trends</li><li><i class="fas fa-check"></i> Career Development</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your organization's growth and success.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Organizational growth</li>
-                            <li><i class="fas fa-check"></i> Enhanced capabilities</li>
-                            <li><i class="fas fa-check"></i> Strategic advantage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Contact Us</h3>
-                        <p>Reach out to our team to discuss your requirements and service expectations.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Planning</h3>
-                        <p>We work with you to create a customized plan that meets your specific needs.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Implementation</h3>
-                        <p>Our team implements the service with regular updates and quality checkpoints.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Receive the completed service with ongoing support and maintenance as needed.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Customized Approach</h4>
-                            <p>Tailored service delivery based on your specific organizational needs and objectives.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
-            </div>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to implement?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The implementation timeline varies based on the specific service and your requirements. We provide detailed timelines during the planning phase and keep you updated throughout.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What support do you provide during implementation?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive support including dedicated account management, regular progress updates, and immediate assistance for any issues or questions.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can the service be customized for our specific needs?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely! We work closely with you to understand your unique requirements and customize the service accordingly to ensure maximum value and effectiveness.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What happens after the service is completed?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide ongoing support, maintenance, and are available for future enhancements or additional services as your needs evolve.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
 
-    <!-- CTA Section -->
-    <section class="service-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Transform your organization with our professional recorded workshop service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        Contact Us
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+        // View profile function
+        function viewProfile(expertName) {
+            alert(`Viewing profile for ${expertName}. This would typically open a detailed profile page with portfolio, reviews, and booking options.`);
+        }
+
+        // Load more experts
+        function loadMoreExperts() {
+            alert('Loading more workshop facilitators... This would typically load additional profiles via AJAX.');
+        }
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const expertCards = document.querySelectorAll('.expert-card');
+            
+            expertCards.forEach(card => {
+                const expertName = card.querySelector('.expert-name').textContent.toLowerCase();
+                const expertTitle = card.querySelector('.expert-title').textContent.toLowerCase();
+                const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                
+                if (expertName.includes(searchTerm) || expertTitle.includes(searchTerm) || skills.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.getElementById('expertiseFilter').addEventListener('change', function() {
+            filterExperts();
+        });
+
+        document.getElementById('rateFilter').addEventListener('change', function() {
+            filterExperts();
+        });
+
+        function filterExperts() {
+            const expertiseFilter = document.getElementById('expertiseFilter').value;
+            const rateFilter = document.getElementById('rateFilter').value;
+            const expertCards = document.querySelectorAll('.expert-card');
+            
+            expertCards.forEach(card => {
+                let showCard = true;
+                
+                // Expertise filter
+                if (expertiseFilter && expertiseFilter !== '') {
+                    const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                    const title = card.querySelector('.expert-title').textContent.toLowerCase();
+                    
+                    if (!skills.includes(expertiseFilter.toLowerCase()) && !title.includes(expertiseFilter.toLowerCase())) {
+                        showCard = false;
+                    }
+                }
+                
+                // Rate filter
+                if (rateFilter && rateFilter !== '' && showCard) {
+                    const rateText = card.querySelector('.expert-rate').textContent;
+                    const rate = parseInt(rateText.match(/\d+/)[0]);
+                    
+                    switch(rateFilter) {
+                        case '0-25':
+                            if (rate > 25) showCard = false;
+                            break;
+                        case '25-50':
+                            if (rate < 25 || rate > 50) showCard = false;
+                            break;
+                        case '50-100':
+                            if (rate < 50 || rate > 100) showCard = false;
+                            break;
+                        case '100+':
+                            if (rate < 100) showCard = false;
+                            break;
+                    }
+                }
+                
+                card.style.display = showCard ? '' : 'none';
+            });
+        }
+    </script>
 </body>
 </html>
 
