@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTestimonials();
     initializeCTAButtons();
     initializeFormHandling();
+    initializeAssessmentModal();
     
     // Animation on scroll
     function initializeAnimations() {
@@ -125,6 +126,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     const buttonText = this.textContent.trim();
                     const originalHTML = this.innerHTML;
                     
+                    // If Start Free Assessment button, open modal directly
+                    if (this.id === 'startAssessmentBtn') {
+                        const modal = document.getElementById('assessmentModal');
+                        if (modal) {
+                            modal.classList.add('open');
+                            modal.setAttribute('aria-hidden', 'false');
+                            return;
+                        }
+                    }
+                    
                     // Add loading state
                     this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
                     this.style.pointerEvents = 'none';
@@ -165,14 +176,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     const originalText = submitBtn.textContent;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
                     submitBtn.disabled = true;
+
+                    // If assessment form, collect data and show success then close
+                    if (form.id === 'assessmentForm') {
+                        const data = Object.fromEntries(new FormData(form).entries());
+                        console.log('Assessment data:', data);
+                    }
                     
                     // Simulate form submission
                     setTimeout(() => {
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;
                         showNotification('Form submitted successfully! We will contact you soon.', 'success');
+                        if (form.id === 'assessmentForm') {
+                            const modal = document.getElementById('assessmentModal');
+                            if (modal) {
+                                modal.classList.remove('open');
+                                modal.setAttribute('aria-hidden', 'true');
+                            }
+                        }
                         form.reset();
-                    }, 2000);
+                    }, 1200);
                 }
             });
         });
@@ -354,6 +378,33 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'scale(1) rotate(0deg)';
         });
     });
+
+    // Start Free Assessment modal wiring
+    function initializeAssessmentModal() {
+        const openBtn = document.getElementById('startAssessmentBtn');
+        const modal = document.getElementById('assessmentModal');
+        if (!modal) return; // Modal exists only on pages that include it
+        const closeBtn = document.getElementById('closeAssessmentModal');
+        const cancelBtn = document.getElementById('cancelAssessmentBtn');
+
+        const closeModal = () => {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+        };
+
+        if (openBtn) openBtn.addEventListener('click', () => {
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden', 'false');
+        });
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+        });
+    }
 });
 
 // Add CSS for animations
