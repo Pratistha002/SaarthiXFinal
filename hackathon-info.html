@@ -1,38 +1,38 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Info about Previous Hackathons - SaarthiX</title>
+    <title>Hackathon Dashboard - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="job-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
                 <a href="#" class="dropbtn">Students</a>
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
-                        <h4>Free Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <h4>Services</h4>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
+                        <a href="job-metrics.html">Job Metric</a>
                         <a href="demo-courses.html">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling </a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
-                        <h4>Independent Services</h4>
+                    <div class="dropdown-section">
+                        <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -40,33 +40,29 @@
                 <a href="#" class="dropbtn">Institute</a>
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
-                        <h4>Free Services</h4>
+                        <h4>Services</h4>
                         <a href="unpaid-internship.html">Internship and Placement Access</a>
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Industry</a>
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
-                        <h4>Free Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
-                        <a href="resume-access.html">Databse Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <h4>Services</h4>
+                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="database-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Some Video Glimpse of Drives</a>
-                          <a href="Expert-session.html">Expert Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -88,259 +84,407 @@
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <div class="job-dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Hackathon Management</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="hackathon-info.html" class="active"><i class="fas fa-code"></i> Hackathons</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Participants</a></li>
+                <li><a href="#"><i class="fas fa-trophy"></i> Winners</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
         </div>
-        
-        <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">ðŸ†“</span>
-                    <span class="badge-text"> Free Service</span>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <div class="header-left">
+                    <h1>Hackathon Dashboard</h1>
+                    <p>Manage and organize hackathons efficiently</p>
                 </div>
-                
-                <h1 class="service-title">Info about Previous Hackathons</h1>
-                <p class="service-subtitle">Access information about previous hackathons, winners, and innovative projects from our community.</p>
-                
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-trophy"></i>
-                        <span>Hackathon History</span>
+                <div class="header-right">
+                    <a href="post-hackathon-form.html" class="btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Post Hackathon
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-trophy"></i>
-                        <span>Winner Profiles</span>
+                    <div class="stat-content">
+                        <h3>12</h3>
+                        <p>Active Hackathons</p>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-trophy"></i>
-                        <span>Innovation Showcase</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    
+                    <div class="stat-content">
+                        <h3>1,247</h3>
+                        <p>Total Participants</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>45</h3>
+                        <p>Completed Events</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>This Month</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hackathons Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Recent Hackathons</h2>
+                    <div class="table-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search hackathons...">
+                        </div>
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Upcoming</option>
+                            <option>Completed</option>
+                            <option>Draft</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Hackathon Title</th>
+                                <th>Theme</th>
+                                <th>Start Date</th>
+                                <th>Duration</th>
+                                <th>Participants</th>
+                                <th>Prize Pool</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="hackathon-info">
+                                        <h4>AI Innovation Challenge 2024</h4>
+                                        <span class="hackathon-id">HCK-001</span>
+                                    </div>
+                                </td>
+                                <td>Artificial Intelligence</td>
+                                <td>Dec 15, 2024</td>
+                                <td>48 hours</td>
+                                <td>
+                                    <div class="participant-count">
+                                        <span class="count">156</span>
+                                        <span class="registered">registered</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="prize-amount">$50,000</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-active">Active</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="hackathon-info">
+                                        <h4>Blockchain Revolution</h4>
+                                        <span class="hackathon-id">HCK-002</span>
+                                    </div>
+                                </td>
+                                <td>Blockchain & Web3</td>
+                                <td>Dec 20, 2024</td>
+                                <td>72 hours</td>
+                                <td>
+                                    <div class="participant-count">
+                                        <span class="count">89</span>
+                                        <span class="registered">registered</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="prize-amount">$30,000</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-upcoming">Upcoming</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="hackathon-info">
+                                        <h4>Green Tech Solutions</h4>
+                                        <span class="hackathon-id">HCK-003</span>
+                                    </div>
+                                </td>
+                                <td>Sustainability</td>
+                                <td>Nov 28, 2024</td>
+                                <td>36 hours</td>
+                                <td>
+                                    <div class="participant-count">
+                                        <span class="count">234</span>
+                                        <span class="registered">completed</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="prize-amount">$25,000</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-completed">Completed</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-view" title="View Results">
+                                            <i class="fas fa-trophy"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="View Report">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Archive">
+                                            <i class="fas fa-archive"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="hackathon-info">
+                                        <h4>Mobile App Innovation</h4>
+                                        <span class="hackathon-id">HCK-004</span>
+                                    </div>
+                                </td>
+                                <td>Mobile Development</td>
+                                <td>Jan 10, 2025</td>
+                                <td>48 hours</td>
+                                <td>
+                                    <div class="participant-count">
+                                        <span class="count">67</span>
+                                        <span class="registered">registered</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="prize-amount">$40,000</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-draft">Draft</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-view" title="Preview">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-publish" title="Publish">
+                                            <i class="fas fa-rocket"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="hackathon-info">
+                                        <h4>Cybersecurity Challenge</h4>
+                                        <span class="hackathon-id">HCK-005</span>
+                                    </div>
+                                </td>
+                                <td>Security & Privacy</td>
+                                <td>Dec 25, 2024</td>
+                                <td>60 hours</td>
+                                <td>
+                                    <div class="participant-count">
+                                        <span class="count">198</span>
+                                        <span class="registered">registered</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="prize-amount">$60,000</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-upcoming">Upcoming</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-action btn-view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-action btn-edit" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-action btn-delete" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your organization and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Hackathon History</li><li><i class="fas fa-check"></i> Winner Profiles</li><li><i class="fas fa-check"></i> Innovation Showcase</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your organization's growth and success.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Organizational growth</li>
-                            <li><i class="fas fa-check"></i> Enhanced capabilities</li>
-                            <li><i class="fas fa-check"></i> Strategic advantage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Contact Us</h3>
-                        <p>Reach out to our team to discuss your requirements and service expectations.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Planning</h3>
-                        <p>We work with you to create a customized plan that meets your specific needs.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Implementation</h3>
-                        <p>Our team implements the service with regular updates and quality checkpoints.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Receive the completed service with ongoing support and maintenance as needed.</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Customized Approach</h4>
-                            <p>Tailored service delivery based on your specific organizational needs and objectives.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
-            </div>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = sidebar.classList.contains('open');
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to implement?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The implementation timeline varies based on the specific service and your requirements. We provide detailed timelines during the planning phase and keep you updated throughout.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What support do you provide during implementation?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive support including dedicated account management, regular progress updates, and immediate assistance for any issues or questions.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can the service be customized for our specific needs?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely! We work closely with you to understand your unique requirements and customize the service accordingly to ensure maximum value and effectiveness.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What happens after the service is completed?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide ongoing support, maintenance, and are available for future enhancements or additional services as your needs evolve.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
 
-    <!-- CTA Section -->
-    <section class="service-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Transform your organization with our professional info about previous hackathons service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        Contact Us
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.data-table tbody tr');
+            
+            rows.forEach(row => {
+                const title = row.querySelector('.hackathon-info h4').textContent.toLowerCase();
+                const theme = row.cells[1].textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || theme.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.querySelector('.filter-select').addEventListener('change', function() {
+            const filterValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.data-table tbody tr');
+            
+            rows.forEach(row => {
+                if (filterValue === 'all status' || filterValue === '') {
+                    row.style.display = '';
+                } else {
+                    const status = row.querySelector('.status-badge').textContent.toLowerCase();
+                    if (status.includes(filterValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Action button handlers
+        document.querySelectorAll('.btn-action').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const hackathonTitle = row.querySelector('.hackathon-info h4').textContent;
+                const action = this.classList.contains('btn-view') ? 'view' : 
+                              this.classList.contains('btn-edit') ? 'edit' : 
+                              this.classList.contains('btn-publish') ? 'publish' : 'delete';
+                
+                switch(action) {
+                    case 'view':
+                        alert(`Viewing details for: ${hackathonTitle}`);
+                        break;
+                    case 'edit':
+                        alert(`Editing: ${hackathonTitle}`);
+                        break;
+                    case 'publish':
+                        if (confirm(`Publish "${hackathonTitle}"?`)) {
+                            alert(`"${hackathonTitle}" has been published!`);
+                            // Update status badge
+                            const statusBadge = row.querySelector('.status-badge');
+                            statusBadge.textContent = 'Active';
+                            statusBadge.className = 'status-badge status-active';
+                        }
+                        break;
+                    case 'delete':
+                        if (confirm(`Are you sure you want to delete "${hackathonTitle}"?`)) {
+                            row.remove();
+                            alert(`"${hackathonTitle}" has been deleted.`);
+                        }
+                        break;
+                }
+            });
+        });
+
+
+    </script>
 </body>
 </html>
-
-
