@@ -112,24 +112,162 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Dashboard Header -->
-            <div class="dashboard-header">
-                <div class="dashboard-tabs">
-                    <button class="tab-btn active">Posted on SaarthiX (5)</button>
-                    <button class="tab-btn">Posted on career site (0)</button>
+            <!-- Enhanced Dashboard Header -->
+            <div class="enhanced-dashboard-header">
+                <div class="header-section">
+                    <h2 class="dashboard-title">
+                        <i class="fas fa-briefcase"></i>
+                        Job Management Dashboard
+                    </h2>
+                    <p class="dashboard-subtitle">Manage and track your job postings across multiple platforms</p>
+                </div>
+                
+                <!-- Platform Stats Cards -->
+                <div class="platform-stats">
+                    <div class="stat-card saarthix-card active" onclick="switchPlatform('saarthix')">
+                        <div class="stat-header">
+                            <div class="platform-icon saarthix-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="stat-badge">Active</div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-title">SaarthiX Platform</h3>
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Jobs Posted</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 83%"></div>
+                            </div>
+                            <span class="progress-text">83% of limit</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card career-card" onclick="switchPlatform('career')">
+                        <div class="stat-header">
+                            <div class="platform-icon career-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="stat-badge inactive">Inactive</div>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-title">Career Site</h3>
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Jobs Posted</div>
+                        </div>
+                        <div class="stat-action">
+                            <button class="activate-btn">
+                                <i class="fas fa-plus"></i>
+                                Activate Platform
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Job Status Tabs -->
-            <div class="dashboard-header">
-                <div class="dashboard-tabs">
-                    <button class="tab-btn active">Open and paused (5)</button>
-                    <button class="tab-btn">Starred (0)</button>
-                    <button class="tab-btn">Closed (0)</button>
+            <!-- Enhanced Job Status Section -->
+            <div class="job-status-section">
+                <div class="status-header">
+                    <h3 class="section-title">
+                        <i class="fas fa-chart-pie"></i>
+                        Job Status Overview
+                    </h3>
+                    <div class="status-summary">
+                        <span class="total-jobs">Total: <strong>5 Jobs</strong></span>
+                    </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 15px; margin-top: 15px;">
-                    <span>3 jobs selected - <a href="#" style="color: #007bff;">deselect all</a></span>
-                    <button class="btn-primary">Create campaign</button>
+                
+                <div class="status-tabs-container">
+                    <div class="status-tabs">
+                        <div class="status-tab active" onclick="switchStatus('open')" data-count="5">
+                            <div class="tab-icon open-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="tab-content">
+                                <span class="tab-label">Open & Paused</span>
+                                <span class="tab-count">5</span>
+                            </div>
+                            <div class="tab-indicator"></div>
+                        </div>
+                        
+                        <div class="status-tab" onclick="switchStatus('starred')" data-count="0">
+                            <div class="tab-icon starred-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="tab-content">
+                                <span class="tab-label">Starred</span>
+                                <span class="tab-count">0</span>
+                            </div>
+                            <div class="tab-indicator"></div>
+                        </div>
+                        
+                        <div class="status-tab" onclick="switchStatus('closed')" data-count="0">
+                            <div class="tab-icon closed-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="tab-content">
+                                <span class="tab-label">Closed</span>
+                                <span class="tab-count">0</span>
+                            </div>
+                            <div class="tab-indicator"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Selection & Actions Bar -->
+            <div class="selection-actions-bar" id="selectionBar">
+                <div class="selection-info">
+                    <div class="selection-icon">
+                        <i class="fas fa-check-square"></i>
+                    </div>
+                    <div class="selection-text">
+                        <span class="selected-count">3</span> jobs selected
+                        <button class="deselect-btn" onclick="deselectAll()">
+                            <i class="fas fa-times"></i>
+                            Deselect all
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bulk-actions">
+                    <button class="action-btn campaign-btn" onclick="createCampaign()">
+                        <i class="fas fa-bullhorn"></i>
+                        Create Campaign
+                    </button>
+                    <button class="action-btn edit-btn" onclick="bulkEdit()">
+                        <i class="fas fa-edit"></i>
+                        Bulk Edit
+                    </button>
+                    <button class="action-btn archive-btn" onclick="bulkArchive()">
+                        <i class="fas fa-archive"></i>
+                        Archive
+                    </button>
+                    <div class="action-dropdown">
+                        <button class="action-btn dropdown-toggle" onclick="toggleActionDropdown()">
+                            <i class="fas fa-ellipsis-h"></i>
+                            More
+                        </button>
+                        <div class="dropdown-menu" id="actionDropdown">
+                            <button class="dropdown-item" onclick="bulkPause()">
+                                <i class="fas fa-pause"></i>
+                                Pause Jobs
+                            </button>
+                            <button class="dropdown-item" onclick="bulkReopen()">
+                                <i class="fas fa-play"></i>
+                                Reopen Jobs
+                            </button>
+                            <button class="dropdown-item" onclick="bulkClose()">
+                                <i class="fas fa-times"></i>
+                                Close Jobs
+                            </button>
+                            <button class="dropdown-item" onclick="bulkDuplicate()">
+                                <i class="fas fa-copy"></i>
+                                Duplicate Jobs
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -497,6 +635,276 @@
                     statusBadge.className = 'status-badge status-closed';
                 }
             });
+        });
+
+        // Enhanced Dashboard Functions
+        function switchPlatform(platform) {
+            // Remove active class from all platform cards
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Add active class to selected platform
+            const selectedCard = document.querySelector(`.${platform}-card`);
+            if (selectedCard) {
+                selectedCard.classList.add('active');
+                
+                // Show notification
+                showNotification(`Switched to ${platform === 'saarthix' ? 'SaarthiX Platform' : 'Career Site'}`, 'success');
+                
+                // Update job listings based on platform
+                updateJobListings(platform);
+            }
+        }
+
+        function switchStatus(status) {
+            // Remove active class from all status tabs
+            document.querySelectorAll('.status-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Add active class to selected status tab
+            const selectedTab = document.querySelector(`.status-tab[onclick="switchStatus('${status}')"]`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+                
+                // Update job listings based on status
+                filterJobsByStatus(status);
+                
+                // Show notification
+                const statusNames = {
+                    'open': 'Open & Paused Jobs',
+                    'starred': 'Starred Jobs',
+                    'closed': 'Closed Jobs'
+                };
+                showNotification(`Viewing ${statusNames[status]}`, 'info');
+            }
+        }
+
+        function deselectAll() {
+            // Uncheck all job checkboxes
+            document.querySelectorAll('.job-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Hide selection bar
+            const selectionBar = document.getElementById('selectionBar');
+            selectionBar.style.display = 'none';
+            
+            // Update counter
+            updateSelectionCounter();
+            
+            showNotification('All jobs deselected', 'info');
+        }
+
+        function createCampaign() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) {
+                showNotification('Please select at least one job to create a campaign', 'warning');
+                return;
+            }
+            
+            // Show campaign creation modal or redirect
+            showNotification(`Creating campaign for ${selectedJobs} selected jobs...`, 'success');
+            
+            // Simulate campaign creation
+            setTimeout(() => {
+                showNotification('Campaign created successfully!', 'success');
+                deselectAll();
+            }, 2000);
+        }
+
+        function bulkEdit() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) {
+                showNotification('Please select jobs to edit', 'warning');
+                return;
+            }
+            
+            showNotification(`Opening bulk edit for ${selectedJobs} jobs...`, 'info');
+        }
+
+        function bulkArchive() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) {
+                showNotification('Please select jobs to archive', 'warning');
+                return;
+            }
+            
+            if (confirm(`Are you sure you want to archive ${selectedJobs} selected jobs?`)) {
+                showNotification(`${selectedJobs} jobs archived successfully`, 'success');
+                deselectAll();
+            }
+        }
+
+        function toggleActionDropdown() {
+            const dropdown = document.getElementById('actionDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function bulkPause() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) return;
+            
+            showNotification(`${selectedJobs} jobs paused`, 'info');
+            toggleActionDropdown();
+        }
+
+        function bulkReopen() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) return;
+            
+            showNotification(`${selectedJobs} jobs reopened`, 'success');
+            toggleActionDropdown();
+        }
+
+        function bulkClose() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) return;
+            
+            if (confirm(`Are you sure you want to close ${selectedJobs} selected jobs?`)) {
+                showNotification(`${selectedJobs} jobs closed`, 'info');
+                toggleActionDropdown();
+            }
+        }
+
+        function bulkDuplicate() {
+            const selectedJobs = document.querySelectorAll('.job-checkbox:checked').length;
+            if (selectedJobs === 0) return;
+            
+            showNotification(`Duplicating ${selectedJobs} jobs...`, 'info');
+            setTimeout(() => {
+                showNotification(`${selectedJobs} jobs duplicated successfully`, 'success');
+                toggleActionDropdown();
+            }, 1500);
+        }
+
+        function updateJobListings(platform) {
+            // Simulate updating job listings based on platform
+            console.log(`Updating job listings for ${platform} platform`);
+        }
+
+        function filterJobsByStatus(status) {
+            // Simulate filtering jobs by status
+            console.log(`Filtering jobs by status: ${status}`);
+        }
+
+        function updateSelectionCounter() {
+            const selectedCount = document.querySelectorAll('.job-checkbox:checked').length;
+            const counterElement = document.querySelector('.selected-count');
+            if (counterElement) {
+                counterElement.textContent = selectedCount;
+            }
+            
+            // Show/hide selection bar based on selection
+            const selectionBar = document.getElementById('selectionBar');
+            if (selectedCount > 0) {
+                selectionBar.style.display = 'flex';
+            } else {
+                selectionBar.style.display = 'none';
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${getNotificationIcon(type)}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add notification styles if not already added
+            if (!document.querySelector('#notification-styles')) {
+                const styles = document.createElement('style');
+                styles.id = 'notification-styles';
+                styles.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 100px;
+                        right: 20px;
+                        background: white;
+                        border-radius: 8px;
+                        padding: 15px 20px;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                        z-index: 10000;
+                        min-width: 300px;
+                        animation: slideInRight 0.3s ease;
+                        border-left: 4px solid #007bff;
+                    }
+                    .notification-success { border-left-color: #28a745; }
+                    .notification-warning { border-left-color: #ffc107; }
+                    .notification-error { border-left-color: #dc3545; }
+                    .notification-info { border-left-color: #17a2b8; }
+                    .notification-content {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+                    .notification-close {
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        color: #6c757d;
+                        padding: 5px;
+                    }
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(styles);
+            }
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        function getNotificationIcon(type) {
+            const icons = {
+                'success': 'check-circle',
+                'warning': 'exclamation-triangle',
+                'error': 'times-circle',
+                'info': 'info-circle'
+            };
+            return icons[type] || 'info-circle';
+        }
+
+        // Update selection counter when checkboxes change
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('job-checkbox')) {
+                updateSelectionCounter();
+            }
+        });
+
+        // Close action dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.action-dropdown')) {
+                const dropdown = document.getElementById('actionDropdown');
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+
+        // Initialize selection counter on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSelectionCounter();
         });
     </script>
 </body>

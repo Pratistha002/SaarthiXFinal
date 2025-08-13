@@ -84,6 +84,8 @@ body {
     flex: 1;
     margin-left: 0;
     padding: 20px;
+    max-width: calc(100vw - 270px);
+    overflow-x: auto;
 }
 
 .dashboard-header {
@@ -529,5 +531,589 @@ body {
 @media (max-width: 768px) {
     .mobile-menu-toggle {
         display: block;
+    }
+}
+
+/* Enhanced Dashboard Header Styles */
+.enhanced-dashboard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.enhanced-dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.header-section {
+    margin-bottom: 30px;
+}
+
+.dashboard-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dashboard-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.platform-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.2);
+}
+
+.stat-card.active {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.platform-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+}
+
+.saarthix-icon {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.career-icon {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.stat-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stat-badge:not(.inactive) {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.stat-badge.inactive {
+    background: rgba(158, 158, 158, 0.2);
+    color: #9e9e9e;
+    border: 1px solid rgba(158, 158, 158, 0.3);
+}
+
+.stat-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stat-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.stat-progress {
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.stat-action {
+    text-align: center;
+}
+
+.activate-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto;
+}
+
+.activate-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* Job Status Section Styles */
+.job-status-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-summary {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.status-tabs-container {
+    position: relative;
+}
+
+.status-tabs {
+    display: flex;
+    gap: 0;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.status-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    background: transparent;
+    border: none;
+}
+
+.status-tab:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.status-tab.active {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tab-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+}
+
+.open-icon {
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+}
+
+.starred-icon {
+    background: linear-gradient(135deg, #FF9800, #FFC107);
+}
+
+.closed-icon {
+    background: linear-gradient(135deg, #f44336, #e57373);
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tab-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.tab-count {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.status-tab.active .tab-indicator {
+    width: 30px;
+}
+
+/* Selection Actions Bar Styles */
+.selection-actions-bar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    animation: slideInDown 0.3s ease;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.selection-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.selection-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.selection-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.selected-count {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.deselect-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.deselect-btn:hover {
+    color: white;
+}
+
+.bulk-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.action-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.campaign-btn {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: rgba(76, 175, 80, 0.5);
+}
+
+.campaign-btn:hover {
+    background: rgba(76, 175, 80, 0.4);
+}
+
+.action-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    min-width: 180px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    text-align: left;
+    color: #495057;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+}
+
+.dropdown-item:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.dropdown-item:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+/* Responsive Design */
+@media (min-width: 1400px) {
+    .main-content {
+        max-width: calc(100vw - 270px);
+        padding: 30px;
+    }
+}
+
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .main-content {
+        max-width: calc(100vw - 270px);
+        padding: 25px;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+    .main-content {
+        max-width: calc(100vw - 250px);
+        padding: 20px;
+    }
+    
+    .sidebar {
+        width: 230px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .platform-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .status-tabs {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .selection-actions-bar {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .bulk-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .main-content {
+        max-width: 100%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .enhanced-dashboard-header {
+        padding: 20px;
+    }
+    
+    .dashboard-title {
+        font-size: 24px;
+    }
+    
+    .job-status-section {
+        padding: 20px;
+    }
+    
+    .status-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .selection-actions-bar {
+        padding: 15px 20px;
+    }
+    
+    .action-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .main-content {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 10px;
+    }
+    
+    .enhanced-dashboard-header {
+        padding: 15px;
+    }
+    
+    .job-status-section {
+        padding: 15px;
+    }
+    
+    .dashboard-title {
+        font-size: 20px;
+    }
+    
+    .platform-stats {
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
     }
 }
