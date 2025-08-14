@@ -462,7 +462,43 @@
         </div>
     </div>
 
-
+    <!-- Results Modal -->
+    <style>
+        .results-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 10001; padding: 20px; }
+        .results-modal-overlay.open { display: flex; }
+        .results-modal { background: #fff; width: 100%; max-width: 900px; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; }
+        .results-modal-header { display:flex; justify-content: space-between; align-items:center; padding: 20px; background: linear-gradient(135deg, #28a745, #20c997); color:#fff; }
+        .results-modal-body { padding: 30px; max-height: 70vh; overflow: auto; }
+        .profile-result { line-height: 1.8; font-size: 16px; color: #2c3e50; }
+        .profile-result h3 { color: #28a745; margin-bottom: 15px; font-size: 24px; }
+        .profile-result p { margin-bottom: 15px; text-align: justify; }
+        .profile-highlights { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745; }
+        .profile-highlights h4 { color: #28a745; margin-bottom: 10px; }
+        .profile-highlights ul { list-style: none; padding: 0; }
+        .profile-highlights li { padding: 5px 0; }
+        .profile-highlights li:before { content: "✓ "; color: #28a745; font-weight: bold; }
+        .results-actions { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+        .btn-download { background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-new-assessment { background: linear-gradient(135deg, #6c757d, #495057); color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+    </style>
+    <div class="results-modal-overlay" id="resultsModal" aria-hidden="true">
+        <div class="results-modal" role="dialog" aria-modal="true" aria-labelledby="resultsModalTitle">
+            <div class="results-modal-header">
+                <h3 id="resultsModalTitle">Your Profiling Results</h3>
+                <button id="closeResultsModal" class="modal-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="results-modal-body">
+                <div id="profileResults" class="profile-result">
+                    <!-- Generated profile content will be inserted here -->
+                </div>
+                <div class="results-actions">
+                    <button class="btn-download" id="downloadResults">
+                        <i class="fas fa-download"></i> Download Report
+                    </button>
+                    <button class="btn-new-assessment" id="newAssessmentBtn">
+                        <i class="fas fa-redo"></i> New Assessment
+                    </button>
+                </div>
             </div>
         </div>
     </div>
