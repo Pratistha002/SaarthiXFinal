@@ -216,3 +216,340 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Auto-inject Login Modal on all pages
+function injectLoginModal() {
+    // Check if modal already exists
+    if (document.getElementById('loginModal')) {
+        return;
+    }
+
+    const modalHTML = `
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="userType">I am a:</label>
+                        <select id="userType" name="userType" required>
+                            <option value="">Select your role</option>
+                            <option value="student">Student</option>
+                            <option value="institute">Institute</option>
+                            <option value="industry">Industry Partner</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        <i class="fas fa-lock input-icon"></i>
+                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-submit-btn">
+                        <span class="btn-text">Sign In</span>
+                        <i class="fas fa-arrow-right btn-arrow"></i>
+                    </button>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button type="button" class="social-btn google-btn">
+                            <i class="fab fa-google"></i>
+                            Continue with Google
+                        </button>
+                        <button type="button" class="social-btn linkedin-btn">
+                            <i class="fab fa-linkedin"></i>
+                            Continue with LinkedIn
+                        </button>
+                    </div>
+                    
+                    <div class="signup-link">
+                        <p>Don't have an account? <a href="#" id="signupLink">Sign up here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>`;
+
+    // Insert modal before closing body tag
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+// Login Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-inject login modal on every page
+    injectLoginModal();
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+    const loginForm = document.getElementById('loginForm');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const signupLink = document.getElementById('signupLink');
+
+    // Open modal when login button is clicked
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    }
+
+    // Close modal when X is clicked
+    if (closeModal) {
+        closeModal.addEventListener('click', function() {
+            closeModalFunc();
+        });
+    }
+
+    // Close modal when clicking outside
+    if (loginModal) {
+        loginModal.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                closeModalFunc();
+            }
+        });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && loginModal.classList.contains('show')) {
+            closeModalFunc();
+        }
+    });
+
+    // Toggle password visibility
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            if (type === 'text') {
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    }
+
+    // Handle form submission
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const userType = formData.get('userType');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const rememberMe = formData.get('rememberMe');
+
+            // Basic validation
+            if (!userType || !email || !password) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = this.querySelector('.login-submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            submitBtn.disabled = true;
+
+            // Simulate login process (replace with actual authentication)
+            setTimeout(() => {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+
+                // Show success message
+                showNotification(`Welcome back! Logging in as ${userType}`, 'success');
+                
+                // Update login button to show logged in state
+                updateLoginButton(true, userType);
+                
+                // Close modal
+                closeModalFunc();
+                
+                // Here you would typically redirect or update the UI
+                console.log('Login successful:', { userType, email, rememberMe });
+            }, 2000);
+        });
+    }
+
+    // Handle social login buttons
+    const socialBtns = document.querySelectorAll('.social-btn');
+    socialBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const provider = this.classList.contains('google-btn') ? 'Google' : 'LinkedIn';
+            showNotification(`${provider} login will be implemented soon`, 'info');
+        });
+    });
+
+    // Handle signup link
+    if (signupLink) {
+        signupLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showNotification('Signup form will be implemented soon', 'info');
+        });
+    }
+
+    // Functions
+    function openModal() {
+        if (loginModal) {
+            loginModal.style.display = 'flex';
+            setTimeout(() => {
+                loginModal.classList.add('show');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeModalFunc() {
+        if (loginModal) {
+            loginModal.classList.remove('show');
+            setTimeout(() => {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+    }
+
+    function updateLoginButton(isLoggedIn, userType = '') {
+        if (loginBtn) {
+            const btnText = loginBtn.querySelector('.btn-text');
+            const loginIcon = loginBtn.querySelector('.login-icon');
+            const logoutIcon = loginBtn.querySelector('.logout-icon');
+
+            if (isLoggedIn) {
+                btnText.textContent = `${userType} Portal`;
+                loginIcon.style.display = 'none';
+                logoutIcon.style.display = 'inline-block';
+                loginBtn.classList.add('logged-in');
+                
+                // Add logout functionality
+                loginBtn.removeEventListener('click', openModal);
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            } else {
+                btnText.textContent = 'Login';
+                loginIcon.style.display = 'inline-block';
+                logoutIcon.style.display = 'none';
+                loginBtn.classList.remove('logged-in');
+            }
+        }
+    }
+
+    function logout() {
+        showNotification('Logged out successfully', 'success');
+        updateLoginButton(false);
+        
+        // Reset login button event listener
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+    }
+
+    function showNotification(message, type = 'info') {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notification => notification.remove());
+
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas ${getNotificationIcon(type)}"></i>
+                <span>${message}</span>
+                <button class="notification-close">&times;</button>
+            </div>
+        `;
+
+        // Add styles
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10003;
+            background: ${getNotificationColor(type)};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            max-width: 350px;
+            font-size: 14px;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Close button functionality
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+            notification.style.transform = 'translateX(400px)';
+            setTimeout(() => notification.remove(), 300);
+        });
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
+    }
+
+    function getNotificationIcon(type) {
+        switch(type) {
+            case 'success': return 'fa-check-circle';
+            case 'error': return 'fa-exclamation-circle';
+            case 'warning': return 'fa-exclamation-triangle';
+            default: return 'fa-info-circle';
+        }
+    }
+
+    function getNotificationColor(type) {
+        switch(type) {
+            case 'success': return 'linear-gradient(135deg, #10b981, #059669)';
+            case 'error': return 'linear-gradient(135deg, #ef4444, #dc2626)';
+            case 'warning': return 'linear-gradient(135deg, #f59e0b, #d97706)';
+            default: return 'linear-gradient(135deg, #3b82f6, #2563eb)';
+        }
+    }
+});
