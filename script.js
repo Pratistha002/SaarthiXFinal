@@ -216,3 +216,146 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Check login status and update UI accordingly
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userType = localStorage.getItem('userType');
+    
+    if (isLoggedIn && userType) {
+        updateLoginButton(true, userType);
+    }
+}
+
+// Login Button Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check login status on page load
+    checkLoginStatus();
+    
+    const loginBtn = document.getElementById('loginBtn');
+
+    // Handle login button click
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            if (isLoggedIn) {
+                // If logged in, show logout functionality
+                logout();
+            } else {
+                // If not logged in, redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    function updateLoginButton(isLoggedIn, userType = '') {
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            const btnText = loginBtn.querySelector('.btn-text');
+            const loginIcon = loginBtn.querySelector('.login-icon');
+            const logoutIcon = loginBtn.querySelector('.logout-icon');
+
+            if (isLoggedIn) {
+                btnText.textContent = `${userType} Portal`;
+                loginIcon.style.display = 'none';
+                logoutIcon.style.display = 'inline-block';
+                loginBtn.classList.add('logged-in');
+            } else {
+                btnText.textContent = 'Login';
+                loginIcon.style.display = 'inline-block';
+                logoutIcon.style.display = 'none';
+                loginBtn.classList.remove('logged-in');
+            }
+        }
+    }
+
+    function logout() {
+        // Clear login data from localStorage
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userType');
+        localStorage.removeItem('userEmail');
+        
+        // Update button appearance
+        updateLoginButton(false);
+        
+        // Show notification
+        showNotification('Logged out successfully', 'success');
+    }
+
+    function showNotification(message, type = 'info') {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notification => notification.remove());
+
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas ${getNotificationIcon(type)}"></i>
+                <span>${message}</span>
+                <button class="notification-close">&times;</button>
+            </div>
+        `;
+
+        // Add styles
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10003;
+            background: ${getNotificationColor(type)};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            max-width: 350px;
+            font-size: 14px;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Close button functionality
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+            notification.style.transform = 'translateX(400px)';
+            setTimeout(() => notification.remove(), 300);
+        });
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
+    }
+
+    function getNotificationIcon(type) {
+        switch(type) {
+            case 'success': return 'fa-check-circle';
+            case 'error': return 'fa-exclamation-circle';
+            case 'warning': return 'fa-exclamation-triangle';
+            default: return 'fa-info-circle';
+        }
+    }
+
+    function getNotificationColor(type) {
+        switch(type) {
+            case 'success': return 'linear-gradient(135deg, #10b981, #059669)';
+            case 'error': return 'linear-gradient(135deg, #ef4444, #dc2626)';
+            case 'warning': return 'linear-gradient(135deg, #f59e0b, #d97706)';
+            default: return 'linear-gradient(135deg, #3b82f6, #2563eb)';
+        }
+    }
+});
