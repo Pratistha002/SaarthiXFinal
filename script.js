@@ -217,231 +217,42 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Auto-inject Login Modal on all pages
-function injectLoginModal() {
-    // Check if modal already exists
-    if (document.getElementById('loginModal')) {
-        return;
+// Check login status and update UI accordingly
+function checkLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userType = localStorage.getItem('userType');
+    
+    if (isLoggedIn && userType) {
+        updateLoginButton(true, userType);
     }
-
-    const modalHTML = `
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Welcome Back</h2>
-                <span class="close" id="closeModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm" class="login-form">
-                    <div class="form-group">
-                        <label for="userType">I am a:</label>
-                        <select id="userType" name="userType" required>
-                            <option value="">Select your role</option>
-                            <option value="student">Student</option>
-                            <option value="institute">Institute</option>
-                            <option value="industry">Industry Partner</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your email">
-                        <i class="fas fa-envelope input-icon"></i>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password">
-                        <i class="fas fa-lock input-icon"></i>
-                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
-                    </div>
-                    
-                    <div class="form-options">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="rememberMe">
-                            <span class="checkmark"></span>
-                            Remember me
-                        </label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    
-                    <button type="submit" class="login-submit-btn">
-                        <span class="btn-text">Sign In</span>
-                        <i class="fas fa-arrow-right btn-arrow"></i>
-                    </button>
-                    
-                    <div class="divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <div class="social-login">
-                        <button type="button" class="social-btn google-btn">
-                            <i class="fab fa-google"></i>
-                            Continue with Google
-                        </button>
-                        <button type="button" class="social-btn linkedin-btn">
-                            <i class="fab fa-linkedin"></i>
-                            Continue with LinkedIn
-                        </button>
-                    </div>
-                    
-                    <div class="signup-link">
-                        <p>Don't have an account? <a href="#" id="signupLink">Sign up here</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>`;
-
-    // Insert modal before closing body tag
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
-// Login Modal Functionality
+// Login Button Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Auto-inject login modal on every page
-    injectLoginModal();
+    // Check login status on page load
+    checkLoginStatus();
+    
     const loginBtn = document.getElementById('loginBtn');
-    const loginModal = document.getElementById('loginModal');
-    const closeModal = document.getElementById('closeModal');
-    const loginForm = document.getElementById('loginForm');
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
-    const signupLink = document.getElementById('signupLink');
 
-    // Open modal when login button is clicked
+    // Handle login button click
     if (loginBtn) {
         loginBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            openModal();
-        });
-    }
-
-    // Close modal when X is clicked
-    if (closeModal) {
-        closeModal.addEventListener('click', function() {
-            closeModalFunc();
-        });
-    }
-
-    // Close modal when clicking outside
-    if (loginModal) {
-        loginModal.addEventListener('click', function(e) {
-            if (e.target === loginModal) {
-                closeModalFunc();
-            }
-        });
-    }
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && loginModal.classList.contains('show')) {
-            closeModalFunc();
-        }
-    });
-
-    // Toggle password visibility
-    if (togglePassword && passwordInput) {
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
             
-            // Toggle eye icon
-            if (type === 'text') {
-                this.classList.remove('fa-eye');
-                this.classList.add('fa-eye-slash');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            if (isLoggedIn) {
+                // If logged in, show logout functionality
+                logout();
             } else {
-                this.classList.remove('fa-eye-slash');
-                this.classList.add('fa-eye');
+                // If not logged in, redirect to login page
+                window.location.href = 'login.html';
             }
         });
-    }
-
-    // Handle form submission
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const userType = formData.get('userType');
-            const email = formData.get('email');
-            const password = formData.get('password');
-            const rememberMe = formData.get('rememberMe');
-
-            // Basic validation
-            if (!userType || !email || !password) {
-                showNotification('Please fill in all required fields', 'error');
-                return;
-            }
-
-            // Show loading state
-            const submitBtn = this.querySelector('.login-submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
-            submitBtn.disabled = true;
-
-            // Simulate login process (replace with actual authentication)
-            setTimeout(() => {
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-
-                // Show success message
-                showNotification(`Welcome back! Logging in as ${userType}`, 'success');
-                
-                // Update login button to show logged in state
-                updateLoginButton(true, userType);
-                
-                // Close modal
-                closeModalFunc();
-                
-                // Here you would typically redirect or update the UI
-                console.log('Login successful:', { userType, email, rememberMe });
-            }, 2000);
-        });
-    }
-
-    // Handle social login buttons
-    const socialBtns = document.querySelectorAll('.social-btn');
-    socialBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const provider = this.classList.contains('google-btn') ? 'Google' : 'LinkedIn';
-            showNotification(`${provider} login will be implemented soon`, 'info');
-        });
-    });
-
-    // Handle signup link
-    if (signupLink) {
-        signupLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            showNotification('Signup form will be implemented soon', 'info');
-        });
-    }
-
-    // Functions
-    function openModal() {
-        if (loginModal) {
-            loginModal.style.display = 'flex';
-            setTimeout(() => {
-                loginModal.classList.add('show');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        }
-    }
-
-    function closeModalFunc() {
-        if (loginModal) {
-            loginModal.classList.remove('show');
-            setTimeout(() => {
-                loginModal.style.display = 'none';
-                document.body.style.overflow = '';
-            }, 300);
-        }
     }
 
     function updateLoginButton(isLoggedIn, userType = '') {
+        const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             const btnText = loginBtn.querySelector('.btn-text');
             const loginIcon = loginBtn.querySelector('.login-icon');
@@ -452,13 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 loginIcon.style.display = 'none';
                 logoutIcon.style.display = 'inline-block';
                 loginBtn.classList.add('logged-in');
-                
-                // Add logout functionality
-                loginBtn.removeEventListener('click', openModal);
-                loginBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    logout();
-                });
             } else {
                 btnText.textContent = 'Login';
                 loginIcon.style.display = 'inline-block';
@@ -469,14 +273,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function logout() {
-        showNotification('Logged out successfully', 'success');
+        // Clear login data from localStorage
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userType');
+        localStorage.removeItem('userEmail');
+        
+        // Update button appearance
         updateLoginButton(false);
         
-        // Reset login button event listener
-        loginBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            openModal();
-        });
+        // Show notification
+        showNotification('Logged out successfully', 'success');
     }
 
     function showNotification(message, type = 'info') {
