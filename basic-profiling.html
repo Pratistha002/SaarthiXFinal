@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -462,71 +462,7 @@
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Welcome Back</h2>
-                <span class="close" id="closeModal">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm" class="login-form">
-                    <div class="form-group">
-                        <label for="userType">I am a:</label>
-                        <select id="userType" name="userType" required>
-                            <option value="">Select your role</option>
-                            <option value="student">Student</option>
-                            <option value="institute">Institute</option>
-                            <option value="industry">Industry Partner</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your email">
-                        <i class="fas fa-envelope input-icon"></i>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password">
-                        <i class="fas fa-lock input-icon"></i>
-                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
-                    </div>
-                    
-                    <div class="form-options">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="rememberMe">
-                            <span class="checkmark"></span>
-                            Remember me
-                        </label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-                    
-                    <button type="submit" class="login-submit-btn">
-                        <span class="btn-text">Sign In</span>
-                        <i class="fas fa-arrow-right btn-arrow"></i>
-                    </button>
-                    
-                    <div class="divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <div class="social-login">
-                        <button type="button" class="social-btn google-btn">
-                            <i class="fab fa-google"></i>
-                            Continue with Google
-                        </button>
-                        <button type="button" class="social-btn linkedin-btn">
-                            <i class="fab fa-linkedin"></i>
-                            Continue with LinkedIn
-                        </button>
-                    </div>
-                    
-                    <div class="signup-link">
-                        <p>Don't have an account? <a href="#" id="signupLink">Sign up here</a></p>
-                    </div>
-                </form>
+
             </div>
         </div>
     </div>
@@ -534,6 +470,233 @@
     <!-- Scripts -->
     <script src="script.js"></script>
     <script src="services.js"></script>
+    <script>
+        // Assessment Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const startAssessmentBtn = document.getElementById('startAssessmentBtn');
+            const assessmentModal = document.getElementById('assessmentModal');
+            const resultsModal = document.getElementById('resultsModal');
+            const closeAssessmentModal = document.getElementById('closeAssessmentModal');
+            const closeResultsModal = document.getElementById('closeResultsModal');
+            const cancelAssessmentBtn = document.getElementById('cancelAssessmentBtn');
+            const assessmentForm = document.getElementById('assessmentForm');
+            const newAssessmentBtn = document.getElementById('newAssessmentBtn');
+            const downloadResults = document.getElementById('downloadResults');
+
+            // Open assessment modal
+            startAssessmentBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                assessmentModal.classList.add('open');
+                assessmentModal.setAttribute('aria-hidden', 'false');
+            });
+
+            // Close assessment modal
+            function closeAssessment() {
+                assessmentModal.classList.remove('open');
+                assessmentModal.setAttribute('aria-hidden', 'true');
+                assessmentForm.reset();
+            }
+
+            closeAssessmentModal.addEventListener('click', closeAssessment);
+            cancelAssessmentBtn.addEventListener('click', closeAssessment);
+
+            // Close results modal
+            function closeResults() {
+                resultsModal.classList.remove('open');
+                resultsModal.setAttribute('aria-hidden', 'true');
+            }
+
+            closeResultsModal.addEventListener('click', closeResults);
+
+            // New assessment button
+            newAssessmentBtn.addEventListener('click', function() {
+                closeResults();
+                assessmentForm.reset();
+                assessmentModal.classList.add('open');
+                assessmentModal.setAttribute('aria-hidden', 'false');
+            });
+
+            // Close modals when clicking outside
+            assessmentModal.addEventListener('click', function(e) {
+                if (e.target === assessmentModal) closeAssessment();
+            });
+
+            resultsModal.addEventListener('click', function(e) {
+                if (e.target === resultsModal) closeResults();
+            });
+
+            // Handle form submission
+            assessmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(assessmentForm);
+                const userData = {
+                    fullName: formData.get('fullName'),
+                    institute: formData.get('institute'),
+                    course: formData.get('course'),
+                    branch: formData.get('branch'),
+                    cgpa: formData.get('cgpa'),
+                    bio: formData.get('bio'),
+                    projects: formData.get('projects'),
+                    internships: formData.get('internships'),
+                    description: formData.get('description')
+                };
+
+                // Generate profiling paragraph
+                const profileContent = generateProfilingParagraph(userData);
+                
+                // Display results
+                document.getElementById('profileResults').innerHTML = profileContent;
+                
+                // Close assessment modal and open results modal
+                closeAssessment();
+                resultsModal.classList.add('open');
+                resultsModal.setAttribute('aria-hidden', 'false');
+            });
+
+            // Download results functionality
+            downloadResults.addEventListener('click', function() {
+                const resultsContent = document.getElementById('profileResults').innerText;
+                const blob = new Blob([resultsContent], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'profiling-results.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            });
+
+            // Generate profiling paragraph based on user input
+            function generateProfilingParagraph(userData) {
+                const { fullName, institute, course, branch, cgpa, bio, projects, internships, description } = userData;
+                
+                // Analyze the data to generate insights
+                const insights = analyzeUserData(userData);
+                
+                return `
+                    <h3>Personal Profile Analysis for ${fullName}</h3>
+                    
+                    <p><strong>Academic Background:</strong> ${fullName} is currently pursuing ${course} in ${branch} from ${institute}${cgpa ? ` with a CGPA of ${cgpa}` : ''}. This academic foundation demonstrates ${insights.academicStrength} and shows potential for ${insights.careerDirection}.</p>
+                    
+                    <p><strong>Professional Profile:</strong> ${insights.professionalSummary}</p>
+                    
+                    ${projects ? `<p><strong>Project Experience:</strong> The project portfolio reveals ${insights.projectInsights}, indicating strong ${insights.technicalSkills} and ${insights.problemSolving} capabilities.</p>` : ''}
+                    
+                    ${internships ? `<p><strong>Industry Exposure:</strong> ${insights.internshipInsights} This practical experience enhances the overall professional readiness and industry understanding.</p>` : ''}
+                    
+                    <div class="profile-highlights">
+                        <h4>Key Strengths & Recommendations:</h4>
+                        <ul>
+                            ${insights.strengths.map(strength => `<li>${strength}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <p><strong>Career Outlook:</strong> ${insights.careerOutlook}</p>
+                    
+                    <p><strong>Development Areas:</strong> ${insights.developmentAreas}</p>
+                    
+                    ${description ? `<p><strong>Additional Insights:</strong> ${insights.additionalInsights}</p>` : ''}
+                `;
+            }
+
+            // Analyze user data to generate insights
+            function analyzeUserData(userData) {
+                const { fullName, institute, course, branch, cgpa, bio, projects, internships, description } = userData;
+                
+                // Academic strength analysis
+                let academicStrength = "solid academic commitment";
+                if (cgpa && parseFloat(cgpa) >= 8.5) {
+                    academicStrength = "exceptional academic excellence";
+                } else if (cgpa && parseFloat(cgpa) >= 7.5) {
+                    academicStrength = "strong academic performance";
+                }
+                
+                // Career direction based on branch
+                const careerDirections = {
+                    'CSE': 'software development, data science, and technology innovation',
+                    'ECE': 'electronics engineering, telecommunications, and embedded systems',
+                    'MECH': 'mechanical engineering, manufacturing, and design',
+                    'CIVIL': 'construction, infrastructure development, and project management',
+                    'EEE': 'electrical systems, power engineering, and automation',
+                    'IT': 'information technology, system administration, and cybersecurity'
+                };
+                
+                const branchKey = Object.keys(careerDirections).find(key => 
+                    branch.toUpperCase().includes(key)
+                );
+                const careerDirection = careerDirections[branchKey] || 'diverse career opportunities in your field';
+                
+                // Professional summary
+                let professionalSummary = `Based on the academic background in ${branch}, ${fullName} shows strong potential for technical roles and analytical thinking.`;
+                if (bio) {
+                    professionalSummary += ` The personal bio reveals additional interests and motivations that complement the technical foundation.`;
+                }
+                
+                // Project insights
+                let projectInsights = "hands-on experience with practical applications";
+                let technicalSkills = "technical competency";
+                let problemSolving = "analytical problem-solving";
+                
+                if (projects) {
+                    const projectText = projects.toLowerCase();
+                    if (projectText.includes('web') || projectText.includes('app')) {
+                        projectInsights = "strong development experience with modern technologies";
+                        technicalSkills = "software development skills";
+                    } else if (projectText.includes('machine learning') || projectText.includes('ai')) {
+                        projectInsights = "advanced experience with cutting-edge technologies";
+                        technicalSkills = "AI/ML expertise";
+                    } else if (projectText.includes('database') || projectText.includes('system')) {
+                        projectInsights = "solid foundation in system design and data management";
+                        technicalSkills = "system architecture skills";
+                    }
+                }
+                
+                // Internship insights
+                let internshipInsights = "";
+                if (internships) {
+                    internshipInsights = "The internship experience demonstrates practical industry exposure and professional work environment adaptation.";
+                }
+                
+                // Generate strengths
+                const strengths = [
+                    `Strong academic foundation in ${branch}`,
+                    `Demonstrated commitment to continuous learning`,
+                    projects ? "Practical project experience" : "Potential for hands-on learning",
+                    internships ? "Industry exposure and professional experience" : "Ready for industry exposure",
+                    "Analytical and problem-solving mindset"
+                ];
+                
+                // Career outlook
+                const careerOutlook = `With the current academic background and skill set, ${fullName} is well-positioned for entry-level to mid-level positions in ${careerDirection}. The combination of theoretical knowledge and ${projects ? 'practical experience' : 'learning potential'} creates a strong foundation for career growth.`;
+                
+                // Development areas
+                const developmentAreas = `Focus on enhancing industry-specific skills, building a stronger project portfolio, gaining more practical experience through internships, and developing soft skills like communication and leadership.`;
+                
+                // Additional insights
+                let additionalInsights = "";
+                if (description) {
+                    additionalInsights = `The additional information provided shows ${fullName}'s broader perspective and interests, which can be valuable assets in collaborative work environments and cross-functional roles.`;
+                }
+                
+                return {
+                    academicStrength,
+                    careerDirection,
+                    professionalSummary,
+                    projectInsights,
+                    technicalSkills,
+                    problemSolving,
+                    internshipInsights,
+                    strengths,
+                    careerOutlook,
+                    developmentAreas,
+                    additionalInsights
+                };
+            }
+        });
+    </script>
 </body>
 </html>
 
