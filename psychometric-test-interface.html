@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychometric Test - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .test-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .test-header {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .test-title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .test-subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e53e3e;
+        }
+
+        .question-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: #2d3748;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .option.selected .option-letter {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .nav-button.previous {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .nav-button.next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .test-complete {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .complete-icon {
+            font-size: 4rem;
+            color: #48bb78;
+            margin-bottom: 1rem;
+        }
+
+        .complete-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .complete-message {
+            color: #718096;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .results-button {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .results-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 1rem;
+            }
+            
+            .test-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- Test Header -->
+        <div class="test-header">
+            <h1 class="test-title" id="testTitle">Numerical Reasoning Test</h1>
+            <p class="test-subtitle" id="testSubtitle">Assess your ability to work with numerical data and solve mathematical problems</p>
+            
+            <div class="test-info">
+                <div class="info-item">
+                    <span class="info-number" id="totalQuestions">10</span>
+                    <span class="info-label">Questions</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number" id="testDuration">15</span>
+                    <span class="info-label">Minutes</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number" id="currentScore">0</span>
+                    <span class="info-label">Score</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Container -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>Progress: <span id="progressText">1 of 10</span></span>
+                <span class="timer" id="timer">15:00</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Question Container -->
+        <div class="question-container" id="questionContainer">
+            <div class="question-number" id="questionNumber">Question 1 of 10</div>
+            <div class="question-text" id="questionText">Loading question...</div>
+            
+            <div class="options-container" id="optionsContainer">
+                <!-- Options will be dynamically generated -->
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button class="nav-button previous" id="previousBtn" onclick="previousQuestion()">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button class="nav-button next" id="nextBtn" onclick="nextQuestion()">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Test Complete Screen -->
+        <div class="test-complete" id="testComplete">
+            <div class="complete-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="complete-title">Test Completed!</h2>
+            <p class="complete-message">
+                Congratulations! You have successfully completed the psychometric test. 
+                Click below to view your detailed results and analysis.
+            </p>
+            <button class="results-button" onclick="viewResults()">
+                <i class="fas fa-chart-bar"></i> View Results
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Test data structure
+        const testData = {
+            numerical: {
+                title: "Numerical Reasoning Test",
+                subtitle: "Assess your ability to work with numerical data and solve mathematical problems",
+                duration: 15,
+                questions: [
+                    {
+                        question: "If a company's revenue increased from $50,000 to $65,000, what is the percentage increase?",
+                        options: ["25%", "30%", "35%", "40%"],
+                        correct: 1
+                    },
+                    {
+                        question: "A product costs $120 after a 20% discount. What was the original price?",
+                        options: ["$144", "$150", "$160", "$180"],
+                        correct: 1
+                    },
+                    {
+                        question: "If 3x + 7 = 22, what is the value of x?",
+                        options: ["3", "4", "5", "6"],
+                        correct: 2
+                    },
+                    {
+                        question: "A train travels 240 km in 3 hours. What is its average speed?",
+                        options: ["70 km/h", "75 km/h", "80 km/h", "85 km/h"],
+                        correct: 2
+                    },
+                    {
+                        question: "If the ratio of boys to girls in a class is 3:2 and there are 15 boys, how many girls are there?",
+                        options: ["8", "10", "12", "15"],
+                        correct: 1
+                    },
+                    {
+                        question: "What is 15% of 240?",
+                        options: ["32", "36", "40", "44"],
+                        correct: 1
+                    },
+                    {
+                        question: "A rectangle has a length of 12 cm and width of 8 cm. What is its area?",
+                        options: ["88 cm²", "92 cm²", "96 cm²", "100 cm²"],
+                        correct: 2
+                    },
+                    {
+                        question: "If y = 2x + 3 and x = 4, what is the value of y?",
+                        options: ["9", "10", "11", "12"],
+                        correct: 2
+                    },
+                    {
+                        question: "A circle has a radius of 7 cm. What is its circumference? (π ≈ 3.14)",
+                        options: ["42.98 cm", "43.96 cm", "44.94 cm", "45.92 cm"],
+                        correct: 1
+                    },
+                    {
+                        question: "If 40% of a number is 80, what is the number?",
+                        options: ["180", "200", "220", "240"],
+                        correct: 1
+                    }
+                ]
+            },
+            verbal: {
+                title: "Verbal Reasoning Test",
+                subtitle: "Assess your ability to read, understand and pull out key information from written passages",
+                duration: 20,
+                questions: [
+                    {
+                        question: "Choose the word that best completes the sentence: 'The scientist's research was so _____ that it revolutionized the entire field.'",
+                        options: ["mundane", "groundbreaking", "confusing", "expensive"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which word is most similar in meaning to 'meticulous'?",
+                        options: ["careless", "detailed", "quick", "expensive"],
+                        correct: 1
+                    },
+                    {
+                        question: "Complete the analogy: Book is to Library as Painting is to ___",
+                        options: ["Frame", "Artist", "Gallery", "Canvas"],
+                        correct: 2
+                    },
+                    {
+                        question: "Which sentence is grammatically correct?",
+                        options: [
+                            "Neither the students nor the teacher were present.",
+                            "Neither the students nor the teacher was present.",
+                            "Neither the students or the teacher were present.",
+                            "Neither the students or the teacher was present."
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the opposite of 'abundant'?",
+                        options: ["plentiful", "scarce", "numerous", "excessive"],
+                        correct: 1
+                    },
+                    {
+                        question: "Choose the best synonym for 'eloquent':",
+                        options: ["silent", "articulate", "confused", "angry"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which word does NOT belong with the others?",
+                        options: ["happy", "joyful", "elated", "melancholy"],
+                        correct: 3
+                    },
+                    {
+                        question: "Complete the sentence: 'Despite the _____ weather, the outdoor concert was a huge success.'",
+                        options: ["pleasant", "inclement", "perfect", "warm"],
+                        correct: 1
+                    },
+                    {
+                        question: "What does 'ubiquitous' mean?",
+                        options: ["rare", "expensive", "everywhere", "ancient"],
+                        correct: 2
+                    },
+                    {
+                        question: "Choose the correct spelling:",
+                        options: ["accomodate", "accommodate", "acomodate", "acommodate"],
+                        correct: 1
+                    }
+                ]
+            },
+            diagrammatic: {
+                title: "Diagrammatic Reasoning Test",
+                subtitle: "Assess your ability to identify patterns and logical sequences in diagrams",
+                duration: 18,
+                questions: [
+                    {
+                        question: "In a sequence where shapes rotate 45° clockwise each step, what comes next after: Square → Diamond → ?",
+                        options: ["Square", "Diamond", "Rotated Square", "Circle"],
+                        correct: 0
+                    },
+                    {
+                        question: "If Pattern A transforms to Pattern B by adding one dot, what transformation rule applies?",
+                        options: ["Add one dot", "Remove one dot", "Change color", "Rotate shape"],
+                        correct: 0
+                    },
+                    {
+                        question: "In a series: ○, ●, ○○, ●●, ○○○, what comes next?",
+                        options: ["●●●", "○○○○", "●○●", "○●○"],
+                        correct: 0
+                    },
+                    {
+                        question: "If triangles point up, down, up, down, what direction does the 5th triangle point?",
+                        options: ["Up", "Down", "Left", "Right"],
+                        correct: 0
+                    },
+                    {
+                        question: "In a pattern where the number of sides increases by 1 each time: Triangle, Square, Pentagon, what's next?",
+                        options: ["Hexagon", "Heptagon", "Octagon", "Circle"],
+                        correct: 0
+                    },
+                    {
+                        question: "If shapes alternate between filled and empty: ●, ○, ●, ○, what comes next?",
+                        options: ["●", "○", "◐", "◑"],
+                        correct: 0
+                    },
+                    {
+                        question: "In a sequence where each shape doubles in size, what happens to the 4th shape?",
+                        options: ["Same size", "Double size", "Triple size", "Quadruple size"],
+                        correct: 3
+                    },
+                    {
+                        question: "If colors follow the pattern Red, Blue, Green, Red, Blue, what's the 6th color?",
+                        options: ["Red", "Blue", "Green", "Yellow"],
+                        correct: 2
+                    },
+                    {
+                        question: "In a mirror image pattern, if the left side shows ◄, what does the right side show?",
+                        options: ["◄", "►", "▲", "▼"],
+                        correct: 1
+                    },
+                    {
+                        question: "If each step adds one more line to create: |, ||, |||, what comes after ||||?",
+                        options: ["|||||", "||||", "||", "|"],
+                        correct: 0
+                    }
+                ]
+            },
+            abstract: {
+                title: "Abstract Reasoning Test",
+                subtitle: "Assess your ability to identify patterns and relationships in abstract information",
+                duration: 12,
+                questions: [
+                    {
+                        question: "Which shape completes the pattern: Circle, Square, Triangle, Circle, Square, ?",
+                        options: ["Triangle", "Circle", "Square", "Diamond"],
+                        correct: 0
+                    },
+                    {
+                        question: "If A relates to B as C relates to D, and A=1, B=2, C=3, then D=?",
+                        options: ["4", "5", "6", "7"],
+                        correct: 0
+                    },
+                    {
+                        question: "In the sequence 2, 4, 8, 16, what is the next number?",
+                        options: ["24", "32", "48", "64"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which doesn't belong: Apple, Orange, Banana, Carrot?",
+                        options: ["Apple", "Orange", "Banana", "Carrot"],
+                        correct: 3
+                    },
+                    {
+                        question: "If all Bloops are Razzles and all Razzles are Lazzles, then all Bloops are:",
+                        options: ["Bloops", "Razzles", "Lazzles", "None of the above"],
+                        correct: 2
+                    },
+                    {
+                        question: "Complete the pattern: A1, B2, C3, D4, ?",
+                        options: ["E5", "F6", "E4", "D5"],
+                        correct: 0
+                    },
+                    {
+                        question: "If the pattern is +3, +6, +9, what comes after 1, 4, 10, 19?",
+                        options: ["28", "31", "34", "37"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which completes the analogy: Hot is to Cold as Light is to ?",
+                        options: ["Bright", "Dark", "Heavy", "Fast"],
+                        correct: 1
+                    },
+                    {
+                        question: "In the series: Z, Y, X, W, what comes next?",
+                        options: ["V", "U", "T", "S"],
+                        correct: 0
+                    },
+                    {
+                        question: "If Monday is to 1 as Wednesday is to 3, then Friday is to:",
+                        options: ["4", "5", "6", "7"],
+                        correct: 1
+                    }
+                ]
+            },
+            situational: {
+                title: "Situational Judgement Test",
+                subtitle: "Assess how you deal with workplace scenarios and challenges",
+                duration: 25,
+                questions: [
+                    {
+                        question: "You notice a colleague consistently arriving late to important meetings. What is the best approach?",
+                        options: [
+                            "Ignore it as it's not your responsibility",
+                            "Speak to them privately about the impact",
+                            "Report them to management immediately",
+                            "Make jokes about it in front of others"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "You're given a project with an unrealistic deadline. What should you do?",
+                        options: [
+                            "Accept it without question and work overtime",
+                            "Refuse to do the project",
+                            "Discuss concerns and propose alternatives",
+                            "Delegate everything to others"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "A team member takes credit for your idea in a meeting. How do you respond?",
+                        options: [
+                            "Confront them aggressively in the meeting",
+                            "Let it slide to avoid conflict",
+                            "Politely clarify your contribution",
+                            "Complain to everyone about it later"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "You discover an error in a report that's already been submitted. What do you do?",
+                        options: [
+                            "Hope no one notices",
+                            "Immediately inform your supervisor",
+                            "Fix it quietly without telling anyone",
+                            "Blame someone else for the mistake"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Your manager asks you to do something you believe is unethical. What's your response?",
+                        options: [
+                            "Do it without question",
+                            "Refuse and explain your concerns",
+                            "Do it but complain to colleagues",
+                            "Pretend you didn't understand"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "You're working on a team project and one member isn't contributing. What do you do?",
+                        options: [
+                            "Do their work for them",
+                            "Exclude them from the project",
+                            "Address it with the team and find solutions",
+                            "Report them immediately"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "You receive criticism about your work from a supervisor. How do you handle it?",
+                        options: [
+                            "Defend your work aggressively",
+                            "Listen, ask questions, and improve",
+                            "Ignore the feedback",
+                            "Complain to other supervisors"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "You're asked to train a new employee but you're already overwhelmed with work. What do you do?",
+                        options: [
+                            "Refuse to help",
+                            "Train them poorly due to time constraints",
+                            "Discuss workload and find a solution",
+                            "Train them but complain constantly"
+                        ],
+                        correct: 2
+                    },
+                    {
+                        question: "You witness workplace harassment. What is the most appropriate action?",
+                        options: [
+                            "Mind your own business",
+                            "Report it through proper channels",
+                            "Confront the harasser directly",
+                            "Gossip about it with colleagues"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Your team is behind on a deadline due to unexpected challenges. What's the best approach?",
+                        options: [
+                            "Work through the night without telling anyone",
+                            "Communicate the situation and request guidance",
+                            "Deliver incomplete work on time",
+                            "Blame external factors"
+                        ],
+                        correct: 1
+                    }
+                ]
+            },
+            spatial: {
+                title: "Spatial Reasoning Test",
+                subtitle: "Assess your ability to visualize and manipulate objects in space",
+                duration: 15,
+                questions: [
+                    {
+                        question: "If you rotate a cube 90° clockwise, which face that was on top is now facing you?",
+                        options: ["Front face", "Back face", "Left face", "Right face"],
+                        correct: 0
+                    },
+                    {
+                        question: "How many cubes are needed to build a 3×3×3 structure?",
+                        options: ["18", "21", "24", "27"],
+                        correct: 3
+                    },
+                    {
+                        question: "If you fold a flat pattern into a cube, which faces will be opposite each other?",
+                        options: ["Top-Bottom", "Front-Back", "Left-Right", "All of the above"],
+                        correct: 3
+                    },
+                    {
+                        question: "A 2D shape is rotated 180°. Which property remains unchanged?",
+                        options: ["Orientation", "Position", "Size", "Color"],
+                        correct: 2
+                    },
+                    {
+                        question: "If you look at a pyramid from above, what shape do you see?",
+                        options: ["Triangle", "Square", "Circle", "Rectangle"],
+                        correct: 1
+                    },
+                    {
+                        question: "How many edges does a rectangular prism have?",
+                        options: ["8", "10", "12", "14"],
+                        correct: 2
+                    },
+                    {
+                        question: "If you slice a cylinder horizontally, what shape is the cross-section?",
+                        options: ["Rectangle", "Circle", "Triangle", "Oval"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which 3D shape has the most faces?",
+                        options: ["Cube", "Pyramid", "Octahedron", "Dodecahedron"],
+                        correct: 3
+                    },
+                    {
+                        question: "If you unfold a cube, how many different net patterns are possible?",
+                        options: ["6", "8", "11", "14"],
+                        correct: 2
+                    },
+                    {
+                        question: "A sphere is intersected by a plane. What shapes are possible for the cross-section?",
+                        options: ["Only circles", "Circles and ellipses", "Circles and points", "All of the above"],
+                        correct: 2
+                    }
+                ]
+            },
+            mechanical: {
+                title: "Mechanical Reasoning Test",
+                subtitle: "Assess your understanding of mechanical and physical principles",
+                duration: 12,
+                questions: [
+                    {
+                        question: "If gear A has 20 teeth and gear B has 40 teeth, and gear A rotates once, how many times does gear B rotate?",
+                        options: ["0.5 times", "1 time", "2 times", "4 times"],
+                        correct: 0
+                    },
+                    {
+                        question: "Which lever requires the least effort to lift a heavy load?",
+                        options: ["Short lever arm", "Long lever arm", "Medium lever arm", "All are equal"],
+                        correct: 1
+                    },
+                    {
+                        question: "In a pulley system, what happens when you add more pulleys?",
+                        options: ["More force needed", "Less force needed", "Same force needed", "System breaks"],
+                        correct: 1
+                    },
+                    {
+                        question: "If you increase the pressure in a hydraulic system, what happens to the force output?",
+                        options: ["Decreases", "Increases", "Stays the same", "Becomes zero"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which material would be best for conducting heat?",
+                        options: ["Wood", "Plastic", "Copper", "Rubber"],
+                        correct: 2
+                    },
+                    {
+                        question: "In an inclined plane, what angle requires the least force to move an object up?",
+                        options: ["90°", "45°", "30°", "0°"],
+                        correct: 3
+                    },
+                    {
+                        question: "What happens to the speed of water flowing through a pipe when the pipe diameter decreases?",
+                        options: ["Increases", "Decreases", "Stays the same", "Stops flowing"],
+                        correct: 0
+                    },
+                    {
+                        question: "Which type of motion does a pendulum exhibit?",
+                        options: ["Linear", "Rotational", "Oscillatory", "Random"],
+                        correct: 2
+                    },
+                    {
+                        question: "In a screw mechanism, what determines the mechanical advantage?",
+                        options: ["Length", "Width", "Thread pitch", "Material"],
+                        correct: 2
+                    },
+                    {
+                        question: "What principle explains why ships float on water?",
+                        options: ["Gravity", "Buoyancy", "Magnetism", "Friction"],
+                        correct: 1
+                    }
+                ]
+            },
+            logical: {
+                title: "Logical Reasoning Test",
+                subtitle: "Assess your ability to think logically and solve problems systematically",
+                duration: 18,
+                questions: [
+                    {
+                        question: "All cats are mammals. Some mammals are dogs. Therefore:",
+                        options: [
+                            "All cats are dogs",
+                            "Some cats are dogs", 
+                            "No cats are dogs",
+                            "Cannot be determined"
+                        ],
+                        correct: 3
+                    },
+                    {
+                        question: "If A > B and B > C, then:",
+                        options: ["A < C", "A = C", "A > C", "Cannot determine"],
+                        correct: 2
+                    },
+                    {
+                        question: "In a group of 5 people, if everyone shakes hands with everyone else exactly once, how many handshakes occur?",
+                        options: ["8", "10", "12", "15"],
+                        correct: 1
+                    },
+                    {
+                        question: "If it's true that 'All birds can fly' and 'Penguins are birds', what can we conclude?",
+                        options: [
+                            "Penguins can fly",
+                            "The first statement is false",
+                            "Penguins are not birds",
+                            "Both A and B are possible"
+                        ],
+                        correct: 3
+                    },
+                    {
+                        question: "Complete the logical sequence: If P then Q. If Q then R. P is true. Therefore:",
+                        options: ["Q is false", "R is true", "R is false", "Cannot determine"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which statement is logically equivalent to 'If it rains, then the ground is wet'?",
+                        options: [
+                            "If the ground is wet, then it rained",
+                            "If the ground is not wet, then it didn't rain",
+                            "If it doesn't rain, then the ground is not wet",
+                            "The ground is wet if and only if it rains"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "In a logic puzzle, if Red is not Blue, Blue is not Green, and Green is not Red, how many colors are there at minimum?",
+                        options: ["1", "2", "3", "4"],
+                        correct: 2
+                    },
+                    {
+                        question: "If some A are B, and all B are C, then:",
+                        options: [
+                            "All A are C",
+                            "Some A are C", 
+                            "No A are C",
+                            "All C are A"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "What is the contrapositive of 'If you study hard, then you will pass'?",
+                        options: [
+                            "If you pass, then you studied hard",
+                            "If you don't pass, then you didn't study hard",
+                            "If you don't study hard, then you won't pass",
+                            "You will pass if and only if you study hard"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "In a truth table, when is 'P OR Q' false?",
+                        options: [
+                            "When P is true and Q is false",
+                            "When P is false and Q is true", 
+                            "When both P and Q are false",
+                            "When both P and Q are true"
+                        ],
+                        correct: 2
+                    }
+                ]
+            }
+        };
+
+        // Test state variables
+        let currentTest = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let timeRemaining = 0;
+        let timerInterval = null;
+        let testStartTime = null;
+
+        // Initialize test when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const testType = localStorage.getItem('selectedTestType') || 'numerical';
+            initializeTest(testType);
+        });
+
+        function initializeTest(testType) {
+            currentTest = testData[testType];
+            if (!currentTest) {
+                currentTest = testData.numerical; // fallback
+            }
+
+            // Initialize test state
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentTest.questions.length).fill(null);
+            timeRemaining = currentTest.duration * 60; // convert to seconds
+            testStartTime = new Date();
+
+            // Update UI
+            document.getElementById('testTitle').textContent = currentTest.title;
+            document.getElementById('testSubtitle').textContent = currentTest.subtitle;
+            document.getElementById('totalQuestions').textContent = currentTest.questions.length;
+            document.getElementById('testDuration').textContent = currentTest.duration;
+
+            // Start timer
+            startTimer();
+            
+            // Load first question
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    completeTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function loadQuestion() {
+            const question = currentTest.questions[currentQuestionIndex];
+            
+            // Update question info
+            document.getElementById('questionNumber').textContent = 
+                `Question ${currentQuestionIndex + 1} of ${currentTest.questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('progressText').textContent = 
+                `${currentQuestionIndex + 1} of ${currentTest.questions.length}`;
+            
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / currentTest.questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Create options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.onclick = () => selectOption(index);
+                
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update navigation buttons
+            document.getElementById('previousBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').textContent = 
+                currentQuestionIndex === currentTest.questions.length - 1 ? 'Finish Test' : 'Next';
+        }
+
+        function selectOption(optionIndex) {
+            // Remove previous selection
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            document.querySelectorAll('.option')[optionIndex].classList.add('selected');
+            
+            // Store answer
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Update score display
+            updateScore();
+        }
+
+        function updateScore() {
+            let correctAnswers = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer === currentTest.questions[index].correct) {
+                    correctAnswers++;
+                }
+            });
+            document.getElementById('currentScore').textContent = correctAnswers;
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentTest.questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                completeTest();
+            }
+        }
+
+        function completeTest() {
+            clearInterval(timerInterval);
+            
+            // Calculate final results
+            const results = calculateResults();
+            
+            // Store results for the results page
+            localStorage.setItem('testResults', JSON.stringify(results));
+            
+            // Hide test interface and show completion screen
+            document.getElementById('questionContainer').style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.getElementById('testComplete').style.display = 'block';
+        }
+
+        function calculateResults() {
+            let correctAnswers = 0;
+            let totalQuestions = currentTest.questions.length;
+            
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer === currentTest.questions[index].correct) {
+                    correctAnswers++;
+                }
+            });
+            
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            const timeTaken = currentTest.duration * 60 - timeRemaining;
+            
+            return {
+                testType: currentTest.title,
+                correctAnswers: correctAnswers,
+                totalQuestions: totalQuestions,
+                percentage: percentage,
+                timeTaken: timeTaken,
+                completedAt: new Date().toISOString(),
+                answers: userAnswers,
+                questions: currentTest.questions
+            };
+        }
+
+        function viewResults() {
+            window.location.href = 'psychometric-results.html';
+        }
+    </script>
+</body>
+</html>

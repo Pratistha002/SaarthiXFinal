@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .results-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .results-header {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .results-subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#667eea 0deg, #667eea var(--percentage), #e2e8f0 var(--percentage), #e2e8f0 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-inner {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-percentage {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .performance-level {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .performance-excellent {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .performance-good {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+        }
+
+        .performance-average {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+            color: white;
+        }
+
+        .performance-below {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .analysis-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+
+        .strengths-weaknesses {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .strength-item, .weakness-item {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .strength-item {
+            background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+            border-left: 4px solid #48bb78;
+        }
+
+        .weakness-item {
+            background: linear-gradient(135deg, #fed7d7, #feb2b2);
+            border-left: 4px solid #f56565;
+        }
+
+        .recommendations {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .detailed-breakdown {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-review {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-number {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .question-status {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-correct {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .status-unanswered {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .button-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .results-container {
+                padding: 1rem;
+            }
+            
+            .strengths-weaknesses {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <!-- Results Header -->
+        <div class="results-header">
+            <h1 class="results-title" id="testTitle">Test Results</h1>
+            <p class="results-subtitle" id="testSubtitle">Your performance analysis and recommendations</p>
+            
+            <div class="score-display">
+                <div class="score-circle" id="scoreCircle">
+                    <div class="score-inner">
+                        <div class="score-percentage" id="scorePercentage">0%</div>
+                        <div class="score-label">Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="performance-level" id="performanceLevel">
+                Calculating...
+            </div>
+        </div>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-value" id="correctAnswers">0</div>
+                <div class="stat-label">Correct Answers</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div class="stat-value" id="incorrectAnswers">0</div>
+                <div class="stat-label">Incorrect Answers</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-value" id="timeTaken">0:00</div>
+                <div class="stat-label">Time Taken</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="stat-value" id="accuracy">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+        </div>
+
+        <!-- Performance Analysis -->
+        <div class="analysis-section">
+            <h2 class="section-title">Performance Analysis</h2>
+            
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+            
+            <div class="strengths-weaknesses">
+                <div>
+                    <h3 style="color: #48bb78; margin-bottom: 1rem;">
+                        <i class="fas fa-thumbs-up"></i> Strengths
+                    </h3>
+                    <div id="strengthsList">
+                        <!-- Strengths will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #f56565; margin-bottom: 1rem;">
+                        <i class="fas fa-exclamation-triangle"></i> Areas for Improvement
+                    </h3>
+                    <div id="weaknessesList">
+                        <!-- Weaknesses will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="analysis-section">
+            <h2 class="section-title">Personalized Recommendations</h2>
+            
+            <div class="recommendations">
+                <div id="recommendationsList">
+                    <!-- Recommendations will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Breakdown -->
+        <div class="detailed-breakdown">
+            <h2 class="section-title">Question-by-Question Review</h2>
+            <div id="questionBreakdown">
+                <!-- Question breakdown will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="psychometric-tests.html" class="action-button button-secondary">
+                <i class="fas fa-redo"></i> Take Another Test
+            </a>
+            <button onclick="downloadReport()" class="action-button button-primary">
+                <i class="fas fa-download"></i> Download Report
+            </button>
+            <a href="index.html" class="action-button button-secondary">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let testResults = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadResults();
+        });
+
+        function loadResults() {
+            const resultsData = localStorage.getItem('testResults');
+            if (!resultsData) {
+                // Redirect to tests page if no results found
+                window.location.href = 'psychometric-tests.html';
+                return;
+            }
+
+            testResults = JSON.parse(resultsData);
+            displayResults();
+        }
+
+        function displayResults() {
+            // Update header
+            document.getElementById('testTitle').textContent = testResults.testType + ' Results';
+            document.getElementById('testSubtitle').textContent = 
+                `Completed on ${new Date(testResults.completedAt).toLocaleDateString()}`;
+
+            // Update score circle
+            const percentage = testResults.percentage;
+            document.getElementById('scorePercentage').textContent = percentage + '%';
+            document.getElementById('scoreCircle').style.setProperty('--percentage', (percentage * 3.6) + 'deg');
+
+            // Update performance level
+            const performanceLevel = getPerformanceLevel(percentage);
+            const levelElement = document.getElementById('performanceLevel');
+            levelElement.textContent = performanceLevel.text;
+            levelElement.className = 'performance-level ' + performanceLevel.class;
+
+            // Update statistics
+            document.getElementById('correctAnswers').textContent = testResults.correctAnswers;
+            document.getElementById('incorrectAnswers').textContent = 
+                testResults.totalQuestions - testResults.correctAnswers;
+            document.getElementById('timeTaken').textContent = formatTime(testResults.timeTaken);
+            document.getElementById('accuracy').textContent = percentage + '%';
+
+            // Create performance chart
+            createPerformanceChart();
+
+            // Generate strengths and weaknesses
+            generateStrengthsWeaknesses();
+
+            // Generate recommendations
+            generateRecommendations();
+
+            // Generate question breakdown
+            generateQuestionBreakdown();
+        }
+
+        function getPerformanceLevel(percentage) {
+            if (percentage >= 90) {
+                return { text: 'Excellent Performance', class: 'performance-excellent' };
+            } else if (percentage >= 75) {
+                return { text: 'Good Performance', class: 'performance-good' };
+            } else if (percentage >= 60) {
+                return { text: 'Average Performance', class: 'performance-average' };
+            } else {
+                return { text: 'Below Average', class: 'performance-below' };
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function createPerformanceChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            const correct = testResults.correctAnswers;
+            const incorrect = testResults.totalQuestions - testResults.correctAnswers;
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        data: [correct, incorrect],
+                        backgroundColor: [
+                            '#48bb78',
+                            '#f56565'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateStrengthsWeaknesses() {
+            const percentage = testResults.percentage;
+            const strengthsList = document.getElementById('strengthsList');
+            const weaknessesList = document.getElementById('weaknessesList');
+
+            // Generate strengths based on performance
+            let strengths = [];
+            let weaknesses = [];
+
+            if (percentage >= 80) {
+                strengths.push("Excellent problem-solving abilities");
+                strengths.push("Strong analytical thinking");
+                strengths.push("Good time management");
+            } else if (percentage >= 60) {
+                strengths.push("Solid understanding of concepts");
+                strengths.push("Consistent performance");
+            } else {
+                strengths.push("Completed the test");
+                strengths.push("Showed persistence");
+            }
+
+            if (percentage < 70) {
+                weaknesses.push("Need more practice with core concepts");
+                weaknesses.push("Time management could be improved");
+            }
+            if (percentage < 50) {
+                weaknesses.push("Fundamental concepts need reinforcement");
+                weaknesses.push("Consider additional study materials");
+            }
+
+            // Populate strengths
+            strengthsList.innerHTML = '';
+            strengths.forEach(strength => {
+                const item = document.createElement('div');
+                item.className = 'strength-item';
+                item.textContent = strength;
+                strengthsList.appendChild(item);
+            });
+
+            // Populate weaknesses
+            weaknessesList.innerHTML = '';
+            if (weaknesses.length === 0) {
+                const item = document.createElement('div');
+                item.className = 'strength-item';
+                item.textContent = "Great job! No major areas of concern identified.";
+                weaknessesList.appendChild(item);
+            } else {
+                weaknesses.forEach(weakness => {
+                    const item = document.createElement('div');
+                    item.className = 'weakness-item';
+                    item.textContent = weakness;
+                    weaknessesList.appendChild(item);
+                });
+            }
+        }
+
+        function generateRecommendations() {
+            const percentage = testResults.percentage;
+            const recommendationsList = document.getElementById('recommendationsList');
+            
+            let recommendations = [];
+
+            if (percentage >= 90) {
+                recommendations = [
+                    "Excellent work! Consider taking advanced level tests to further challenge yourself.",
+                    "Share your success strategies with others who might benefit from your approach.",
+                    "Explore specialized areas within this domain to deepen your expertise."
+                ];
+            } else if (percentage >= 75) {
+                recommendations = [
+                    "Good performance! Focus on the questions you got wrong to identify specific improvement areas.",
+                    "Practice similar tests regularly to maintain and improve your skills.",
+                    "Consider timing yourself on practice questions to improve speed and accuracy."
+                ];
+            } else if (percentage >= 60) {
+                recommendations = [
+                    "Review the fundamental concepts covered in this test type.",
+                    "Practice regularly with similar questions to build confidence and speed.",
+                    "Consider seeking additional resources or tutoring for challenging topics.",
+                    "Take practice tests under timed conditions to improve performance."
+                ];
+            } else {
+                recommendations = [
+                    "Focus on understanding the basic concepts before attempting more complex problems.",
+                    "Start with easier practice questions and gradually increase difficulty.",
+                    "Consider enrolling in a preparatory course or working with a tutor.",
+                    "Dedicate regular study time to this subject area.",
+                    "Don't be discouraged - improvement comes with consistent practice."
+                ];
+            }
+
+            recommendationsList.innerHTML = '';
+            recommendations.forEach((recommendation, index) => {
+                const item = document.createElement('div');
+                item.className = 'recommendation-item';
+                item.innerHTML = `
+                    <div class="recommendation-icon">${index + 1}</div>
+                    <div>${recommendation}</div>
+                `;
+                recommendationsList.appendChild(item);
+            });
+        }
+
+        function generateQuestionBreakdown() {
+            const breakdown = document.getElementById('questionBreakdown');
+            breakdown.innerHTML = '';
+
+            testResults.questions.forEach((question, index) => {
+                const userAnswer = testResults.answers[index];
+                const correctAnswer = question.correct;
+                const isCorrect = userAnswer === correctAnswer;
+                const isAnswered = userAnswer !== null;
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-review';
+
+                let statusClass, statusText;
+                if (!isAnswered) {
+                    statusClass = 'status-unanswered';
+                    statusText = 'Not Answered';
+                } else if (isCorrect) {
+                    statusClass = 'status-correct';
+                    statusText = 'Correct';
+                } else {
+                    statusClass = 'status-incorrect';
+                    statusText = 'Incorrect';
+                }
+
+                questionDiv.innerHTML = `
+                    <div class="question-header">
+                        <span class="question-number">Question ${index + 1}</span>
+                        <span class="question-status ${statusClass}">${statusText}</span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem; font-weight: 500;">${question.question}</div>
+                    <div style="font-size: 0.9rem; color: #718096;">
+                        ${isAnswered ? `Your answer: ${question.options[userAnswer]}` : 'No answer provided'}<br>
+                        Correct answer: ${question.options[correctAnswer]}
+                    </div>
+                `;
+
+                breakdown.appendChild(questionDiv);
+            });
+        }
+
+        function downloadReport() {
+            // Create a simple text report
+            let report = `PSYCHOMETRIC TEST RESULTS REPORT\n`;
+            report += `=====================================\n\n`;
+            report += `Test: ${testResults.testType}\n`;
+            report += `Date: ${new Date(testResults.completedAt).toLocaleDateString()}\n`;
+            report += `Score: ${testResults.percentage}%\n`;
+            report += `Correct Answers: ${testResults.correctAnswers}/${testResults.totalQuestions}\n`;
+            report += `Time Taken: ${formatTime(testResults.timeTaken)}\n\n`;
+            
+            report += `PERFORMANCE LEVEL: ${getPerformanceLevel(testResults.percentage).text}\n\n`;
+            
+            report += `QUESTION BREAKDOWN:\n`;
+            report += `==================\n`;
+            testResults.questions.forEach((question, index) => {
+                const userAnswer = testResults.answers[index];
+                const correctAnswer = question.correct;
+                const isCorrect = userAnswer === correctAnswer;
+                const isAnswered = userAnswer !== null;
+                
+                report += `\nQ${index + 1}: ${question.question}\n`;
+                report += `Your Answer: ${isAnswered ? question.options[userAnswer] : 'Not answered'}\n`;
+                report += `Correct Answer: ${question.options[correctAnswer]}\n`;
+                report += `Result: ${isCorrect ? 'CORRECT' : 'INCORRECT'}\n`;
+            });
+
+            // Download the report
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${testResults.testType.replace(/\s+/g, '_')}_Results_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

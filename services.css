@@ -137,7 +137,7 @@
     background: white;
     border-radius: 16px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     border: 1px solid #f1f3f4;
     text-align: center;
@@ -145,7 +145,7 @@
 
 .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .feature-icon {
@@ -257,7 +257,7 @@
     background: white;
     border-radius: 20px;
     padding: 40px 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -266,7 +266,7 @@
 
 .pricing-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
 .pricing-card.featured {
@@ -356,13 +356,13 @@
     padding: 25px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }
 
 .benefit-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
 .benefit-icon {
@@ -406,7 +406,7 @@
     background: white;
     border-radius: 12px;
     margin-bottom: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
 
@@ -486,7 +486,8 @@
     flex-wrap: wrap;
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary,
+.btn-secondary {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -509,9 +510,10 @@
     border: 2px solid white;
 }
 
-.btn-primary:hover, .btn-secondary:hover {
+.btn-primary:hover,
+.btn-secondary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Testimonials */
@@ -525,7 +527,7 @@
     background: white;
     border-radius: 16px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: relative;
 }
@@ -598,7 +600,7 @@
     .features-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
-    
+
     .process-steps {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
@@ -608,38 +610,39 @@
     .service-title {
         font-size: 2.5rem;
     }
-    
+
     .service-features-preview {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .features-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .process-steps {
         grid-template-columns: 1fr;
     }
-    
+
     .process-step::after {
         display: none;
     }
-    
+
     .benefits-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .testimonials-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .cta-actions {
         flex-direction: column;
         align-items: center;
     }
-    
-    .btn-primary, .btn-secondary {
+
+    .btn-primary,
+    .btn-secondary {
         width: 100%;
         max-width: 300px;
         justify-content: center;
@@ -650,19 +653,19 @@
     .service-hero-content {
         padding: 0 15px;
     }
-    
+
     .service-title {
         font-size: 2rem;
     }
-    
+
     .feature-card {
         padding: 20px;
     }
-    
+
     .pricing-card {
         padding: 30px 20px;
     }
-    
+
     .benefit-item {
         flex-direction: column;
         text-align: center;
