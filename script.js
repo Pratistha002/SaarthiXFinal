@@ -1,50 +1,50 @@
 // Enhanced Interactive Animations for SaarthiX
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // Node interaction effects
     const nodes = document.querySelectorAll('.node');
     const connectionLines = document.querySelectorAll('.connection-line');
     const flowParticles = document.querySelectorAll('.flow-particle');
-    
+
     // Add click effects to nodes
     nodes.forEach(node => {
-        node.addEventListener('click', function() {
+        node.addEventListener('click', function () {
             // Create ripple effect
             const ripple = document.createElement('div');
             ripple.className = 'click-ripple';
             this.appendChild(ripple);
-            
+
             // Remove ripple after animation
             setTimeout(() => {
                 ripple.remove();
             }, 600);
-            
+
             // Highlight connections temporarily
             highlightConnections(this.classList[1]);
         });
-        
+
         // Enhanced hover effects
-        node.addEventListener('mouseenter', function() {
+        node.addEventListener('mouseenter', function () {
             // Pause other animations
             nodes.forEach(otherNode => {
                 if (otherNode !== this) {
                     otherNode.style.animationPlayState = 'paused';
                 }
             });
-            
+
             // Enhance connection visibility
             connectionLines.forEach(line => {
                 line.style.opacity = '0.8';
                 line.style.transform += ' scale(1.1)';
             });
         });
-        
-        node.addEventListener('mouseleave', function() {
+
+        node.addEventListener('mouseleave', function () {
             // Resume animations
             nodes.forEach(otherNode => {
                 otherNode.style.animationPlayState = 'running';
             });
-            
+
             // Reset connections
             connectionLines.forEach(line => {
                 line.style.opacity = '';
@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-    
+
     // Function to highlight specific connections
     function highlightConnections(nodeType) {
         let targetConnections = [];
-        
-        switch(nodeType) {
+
+        switch (nodeType) {
             case 'node-student':
                 targetConnections = ['.student-to-institute', '.student-to-industry'];
                 break;
@@ -68,14 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 targetConnections = ['.student-to-industry', '.institute-to-industry'];
                 break;
         }
-        
+
         targetConnections.forEach(selector => {
             const connection = document.querySelector(selector);
             if (connection) {
                 connection.style.background = 'linear-gradient(90deg, #FFD700, #FFA500, #FF6B6B)';
                 connection.style.height = '4px';
                 connection.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.6)';
-                
+
                 setTimeout(() => {
                     connection.style.background = '';
                     connection.style.height = '';
@@ -84,16 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Animated counter for trust indicators
     const trustNumbers = document.querySelectorAll('.trust-number');
-    
+
     function animateCounter(element) {
         const target = parseInt(element.getAttribute('data-target'));
         const duration = 2000; // 2 seconds
         const increment = target / (duration / 16); // 60fps
         let current = 0;
-        
+
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
@@ -103,13 +103,13 @@ document.addEventListener('DOMContentLoaded', function() {
             element.textContent = Math.floor(current);
         }, 16);
     }
-    
+
     // Intersection Observer for trust indicators
     const observerOptions = {
         threshold: 0.5,
         rootMargin: '0px 0px -100px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -121,16 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, observerOptions);
-    
+
     // Observe trust indicators
     const trustItems = document.querySelectorAll('.trust-item');
     trustItems.forEach(item => observer.observe(item));
-    
+
     // Enhanced particle system
     function createParticles() {
         const particlesContainer = document.getElementById('particles');
         if (!particlesContainer) return;
-        
+
         for (let i = 0; i < 50; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -140,34 +140,38 @@ document.addEventListener('DOMContentLoaded', function() {
             particlesContainer.appendChild(particle);
         }
     }
-    
+
     // Initialize particles
     createParticles();
-    
+
     // Smooth scroll for action buttons
     const actionButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
     actionButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             // Add click animation
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 150);
-            
+
             // Check if this is the demo button
             if (this.id === 'learnMoreBtn' || this.textContent.includes('Watch Demo')) {
                 // Open NattLabs website in new tab
                 window.open('https://nattlabs.com', '_blank');
                 console.log('Opening NattLabs demo website...');
+            } else if (this.id === 'signupBtn' || this.textContent.includes('Start Your Journey')) {
+                // Navigate to psychometric tests page
+                window.location.href = 'psychometric-tests.html';
+                console.log('Navigating to psychometric tests...');
             } else {
                 // You can add other navigation logic here
                 console.log('Button clicked:', this.textContent.trim());
             }
         });
     });
-    
+
     // Dynamic background gradient
     let gradientAngle = 135;
     setInterval(() => {
@@ -221,26 +225,26 @@ document.head.appendChild(style);
 function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userType = localStorage.getItem('userType');
-    
+
     if (isLoggedIn && userType) {
         updateLoginButton(true, userType);
     }
 }
 
 // Login Button Functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Check login status on page load
     checkLoginStatus();
-    
+
     const loginBtn = document.getElementById('loginBtn');
 
     // Handle login button click
     if (loginBtn) {
-        loginBtn.addEventListener('click', function(e) {
+        loginBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            
+
             if (isLoggedIn) {
                 // If logged in, show logout functionality
                 logout();
@@ -277,10 +281,10 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userType');
         localStorage.removeItem('userEmail');
-        
+
         // Update button appearance
         updateLoginButton(false);
-        
+
         // Show notification
         showNotification('Logged out successfully', 'success');
     }
@@ -342,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getNotificationIcon(type) {
-        switch(type) {
+        switch (type) {
             case 'success': return 'fa-check-circle';
             case 'error': return 'fa-exclamation-circle';
             case 'warning': return 'fa-exclamation-triangle';
@@ -351,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function getNotificationColor(type) {
-        switch(type) {
+        switch (type) {
             case 'success': return 'linear-gradient(135deg, #10b981, #059669)';
             case 'error': return 'linear-gradient(135deg, #ef4444, #dc2626)';
             case 'warning': return 'linear-gradient(135deg, #f59e0b, #d97706)';

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychometric Tests - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .psychometric-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 0 80px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .psychometric-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .psychometric-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .psychometric-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .test-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .test-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .test-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .test-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        .test-description {
+            color: #718096;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .test-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .difficulty-stars {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .difficulty-stars .stars {
+            margin-left: 0.5rem;
+        }
+
+        .star {
+            color: #ffd700;
+            margin-right: 2px;
+        }
+
+        .star.empty {
+            color: #e2e8f0;
+        }
+
+        .test-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .features-section {
+            background: #f8fafc;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .tests-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+            
+            .psychometric-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">SaarthiX</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Students</a>
+                <div class="dropdown-content cols-2">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="basic-profiling.html">Profiling</a>
+                        <a href="resume-building-watermark.html">Resume Building</a>
+                        <a href="job-metrics.html">Job Metric</a>
+                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="interview-questions.html">Interview Preparation</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Additional Services</h4>
+                        <a href="psychometric-tests.html">Psychometric Test</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Institute</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="recorded-trainings.html">Trainings</a>
+                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-sessions.html">Expert Sessions</a>
+                        <a href="collaboration-events.html">Collaboration</a>
+                        <a href="student-training.html">Student Training(On demand)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Industry</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="database-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="hackathon-info.html">Post Hackathons</a>
+                        <a href="drive-glimpse.html">Hiring Drives</a>
+                        <a href="Expert-session.html">Expert Session</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="account-options">
+            <a href="#" class="login-btn" id="loginBtn">
+                <div class="btn-content">
+                    <i class="fas fa-sign-in-alt login-icon"></i>
+                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
+                    <span class="btn-text">Login</span>
+                </div>
+                <div class="btn-bg"></div>
+                <div class="btn-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="psychometric-hero">
+        <div class="container">
+            <div class="hero-badge">
+                <i class="fas fa-brain"></i> INDUSTRY LEADERS
+            </div>
+            <h1>Watch your confidence skyrocket</h1>
+            <p>Try an example of any of our aptitude packages for free.</p>
+        </div>
+    </section>
+
+    <!-- Tests Grid -->
+    <section class="tests-grid">
+        <!-- Numerical Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="test-title">Numerical Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Numerical reasoning tests are designed to assess your ability to work with numerical data and solve mathematical problems.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">30</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">480</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('numerical')">View more</button>
+        </div>
+
+        <!-- Verbal Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="test-title">Verbal Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Verbal reasoning tests assess your ability to read, understand and pull out key information from written passages of text.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">30</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">450</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('verbal')">View more</button>
+        </div>
+
+        <!-- Diagrammatic Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3 class="test-title">Diagrammatic Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Diagrammatic reasoning tests are also known as abstract reasoning tests. They assess your ability to identify patterns.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">30</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">300</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('diagrammatic')">View more</button>
+        </div>
+
+        <!-- Abstract Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-shapes"></i>
+                </div>
+                <h3 class="test-title">Abstract Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Abstract reasoning tests are also known as diagrammatic or inductive reasoning tests.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('abstract')">View more</button>
+        </div>
+
+        <!-- Situational Judgement -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3 class="test-title">Situational Judgement</h3>
+            </div>
+            <p class="test-description">
+                Situational judgement tests assess how you deal with scenarios and challenges that come up in the workplace.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">480</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('situational')">View more</button>
+        </div>
+
+        <!-- Spatial Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3 class="test-title">Spatial Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Spatial reasoning tests are also known as logical or abstract reasoning tests.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('spatial')">View more</button>
+        </div>
+
+        <!-- Mechanical Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="test-title">Mechanical Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Mechanical reasoning tests are used to assess your ability to understand mechanical and electrical concepts in order to solve problems.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">80</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('mechanical')">View more</button>
+        </div>
+
+        <!-- Logical Reasoning -->
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="test-title">Logical Reasoning</h3>
+            </div>
+            <p class="test-description">
+                Logical reasoning tests are designed to examine your logical thinking skills.
+            </p>
+            <div class="test-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">MINS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100</span>
+                    <span class="stat-label">QUESTIONS</span>
+                </div>
+            </div>
+            <div class="difficulty-stars">
+                <span>Difficulty:</span>
+                <div class="stars">
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star"></i>
+                    <i class="fas fa-star star empty"></i>
+                </div>
+            </div>
+            <button class="test-button" onclick="startTest('logical')">View more</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #2d3748;">Essential tests for exceptional roles</h2>
+            <p style="font-size: 1.1rem; color: #718096; margin-bottom: 3rem;">Comprehensive assessment tools designed to evaluate your potential</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Flexible practice 24/7</h4>
+                    <p>Practice anytime, anywhere with our 24/7 available platform</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Full solutions and explanations</h4>
+                    <p>Detailed explanations for every question to help you learn</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Written by accredited psychologists</h4>
+                    <p>Tests created by certified professionals in psychology</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Intelligent learning platform</h4>
+                    <p>AI-powered platform that adapts to your learning style</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Available on desktop and mobile</h4>
+                    <p>Access your tests on any device, anywhere</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>95% recommend Psychometric Tests</h4>
+                    <p>Trusted by thousands of successful candidates</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>30 day money-back guarantee</h4>
+                    <p>Risk-free trial with full money-back guarantee</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        function startTest(testType) {
+            // Store the test type in localStorage for the test page
+            localStorage.setItem('selectedTestType', testType);
+            // Navigate to the test taking page
+            window.location.href = 'psychometric-test-interface.html';
+        }
+    </script>
+</body>
+</html>
