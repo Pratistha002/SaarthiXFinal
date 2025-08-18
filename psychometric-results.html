@@ -1,740 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Results - SaarthiX</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-
-        .results-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .results-header {
-            background: white;
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .results-title {
-            font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .results-subtitle {
-            color: #718096;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .score-display {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(#667eea 0deg, #667eea var(--percentage), #e2e8f0 var(--percentage), #e2e8f0 360deg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .score-inner {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .score-percentage {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .score-label {
-            font-size: 0.9rem;
-            color: #718096;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .performance-level {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            margin-top: 1rem;
-        }
-
-        .performance-excellent {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-        }
-
-        .performance-good {
-            background: linear-gradient(135deg, #4299e1, #3182ce);
-            color: white;
-        }
-
-        .performance-average {
-            background: linear-gradient(135deg, #ed8936, #dd6b20);
-            color: white;
-        }
-
-        .performance-below {
-            background: linear-gradient(135deg, #f56565, #e53e3e);
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            margin: 0 auto 1rem;
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
-        .analysis-section {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            color: #2d3748;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin-bottom: 2rem;
-        }
-
-        .strengths-weaknesses {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .strength-item, .weakness-item {
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-
-        .strength-item {
-            background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
-            border-left: 4px solid #48bb78;
-        }
-
-        .weakness-item {
-            background: linear-gradient(135deg, #fed7d7, #feb2b2);
-            border-left: 4px solid #f56565;
-        }
-
-        .recommendations {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .recommendation-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .recommendation-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #667eea;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-
-        .detailed-breakdown {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .question-review {
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .question-number {
-            font-weight: 600;
-            color: #667eea;
-        }
-
-        .question-status {
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .status-correct {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-
-        .status-incorrect {
-            background: #fed7d7;
-            color: #742a2a;
-        }
-
-        .status-unanswered {
-            background: #e2e8f0;
-            color: #4a5568;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .action-button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .button-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .button-secondary {
-            background: #e2e8f0;
-            color: #4a5568;
-        }
-
-        .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .results-container {
-                padding: 1rem;
-            }
-            
-            .strengths-weaknesses {
-                grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test Results - SaarthiX</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .results-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .results-header {
+      text-align: center;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      margin-bottom: 2rem;
+    }
+    .results-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      color: #2d3748;
+    }
+    .results-subtitle {
+      color: #718096;
+      margin-bottom: 1rem;
+    }
+    .score-display {
+      margin: 1.5rem auto;
+      width: 160px;
+      height: 160px;
+    }
+    .score-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(#4c6ef5 var(--percentage), #e9ecef 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.6s ease;
+    }
+    .score-inner {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .score-percentage {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4c6ef5;
+    }
+    .performance-level {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .5rem 1.2rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: .9rem;
+    }
+    .excellent { background:#48bb78; color:#fff; }
+    .good { background:#4299e1; color:#fff; }
+    .average { background:#ed8936; color:#fff; }
+    .below { background:#f56565; color:#fff; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: .3rem 0;
+    }
+    .analysis-section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #2d3748;
+    }
+    .strengths-weaknesses { 
+      display:grid; 
+      grid-template-columns:1fr 1fr; 
+      gap:1rem; 
+    }
+    .strength-item,.weakness-item {
+      padding:.8rem;
+      border-radius:8px;
+      font-size:.95rem;
+    }
+    .strength-item { background:#e6fffa; border-left:4px solid #38a169; }
+    .weakness-item { background:#fff5f5; border-left:4px solid #e53e3e; }
+    .recommendation-item {
+      margin-bottom: .6rem;
+      padding: .6rem;
+      background:#f8fafc;
+      border-radius:6px;
+      font-size:.95rem;
+    }
+    .question-review {
+      border:1px solid #e2e8f0;
+      padding:.8rem;
+      border-radius:8px;
+      margin-bottom:.8rem;
+    }
+    .question-header {
+      display:flex;justify-content:space-between;align-items:center;
+      margin-bottom:.4rem;
+    }
+    .status { 
+      padding:2px 8px;
+      border-radius:12px;
+      font-size:.75rem;
+      font-weight:600;
+    }
+    .correct { background:#c6f6d5; color:#22543d; }
+    .incorrect { background:#fed7d7; color:#742a2a; }
+    .unanswered { background:#e2e8f0; color:#4a5568; }
+    .action-buttons {
+      text-align:center;
+      margin-top:2rem;
+    }
+    .action-button {
+      display:inline-block;
+      margin:0 .5rem;
+      padding:.8rem 1.5rem;
+      border-radius:8px;
+      font-weight:600;
+      text-decoration:none;
+      color:#fff;
+      background:#4c6ef5;
+      transition:.2s;
+    }
+    .action-button.secondary { background:#718096; }
+    .action-button:hover { opacity:.9; }
+    
+    /* Performance Overview Styles */
+    .performance-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .chart-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .chart-wrapper {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .chart-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f8fafc;
+      border-radius: 50%;
+      border: 3px dashed #e2e8f0;
+    }
+    
+    .fallback-content {
+      text-align: center;
+    }
+    
+    .performance-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: center;
+    }
+    
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .stat-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .correct-stat {
+      background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+      border-left: 4px solid #10b981;
+    }
+    
+    .incorrect-stat {
+      background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+      border-left: 4px solid #ef4444;
+    }
+    
+    .unanswered-stat {
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      border-left: 4px solid #6b7280;
+    }
+    
+    .stat-icon {
+      font-size: 2rem;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .correct-stat .stat-icon { color: #10b981; }
+    .incorrect-stat .stat-icon { color: #ef4444; }
+    .unanswered-stat .stat-icon { color: #6b7280; }
+    
+    .stat-content {
+      flex: 1;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    
+    .correct-stat .stat-number { color: #065f46; }
+    .incorrect-stat .stat-number { color: #991b1b; }
+    .unanswered-stat .stat-number { color: #374151; }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4a5568;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-percentage {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .correct-stat .stat-percentage { color: #10b981; }
+    .incorrect-stat .stat-percentage { color: #ef4444; }
+    .unanswered-stat .stat-percentage { color: #6b7280; }
+    
+    /* Progress Section */
+    .progress-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid #e2e8f0;
+    }
+    
+    .progress-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .progress-title::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+    
+    .progress-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .progress-item {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+    
+    .progress-item:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e0;
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    .progress-value {
+      font-weight: 600;
+      color: #4a5568;
+    }
+    
+    .progress-bar-container {
+      background: #e2e8f0;
+      border-radius: 10px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .correct-progress {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+    
+    .incorrect-progress {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    
+    .unanswered-progress {
+      background: linear-gradient(135deg, #6b7280, #4b5563);
+    }
+    
+    .correct-color { color: #10b981; }
+    .incorrect-color { color: #ef4444; }
+    
+    @media(max-width:768px){
+      .strengths-weaknesses{grid-template-columns:1fr}
+      
+      .performance-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .chart-wrapper {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .performance-stats {
+        gap: 0.75rem;
+      }
+      
+      .stat-item {
+        padding: 0.75rem;
+      }
+      
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+      
+      .stat-number {
+        font-size: 1.5rem;
+      }
+      
+      .progress-item {
+        padding: 1rem;
+      }
+      
+      .progress-bars {
+        gap: 1rem;
+      }
+    }
+    
+    @media(max-width:480px){
+      .chart-wrapper {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .stat-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+      
+      .progress-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="results-container">
-        <!-- Results Header -->
-        <div class="results-header">
-            <h1 class="results-title" id="testTitle">Test Results</h1>
-            <p class="results-subtitle" id="testSubtitle">Your performance analysis and recommendations</p>
-            
-            <div class="score-display">
-                <div class="score-circle" id="scoreCircle">
-                    <div class="score-inner">
-                        <div class="score-percentage" id="scorePercentage">0%</div>
-                        <div class="score-label">Score</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="performance-level" id="performanceLevel">
-                Calculating...
-            </div>
+  <div class="results-container">
+    <!-- Header -->
+    <div class="results-header">
+      <h1 class="results-title" id="testTitle">Test Results</h1>
+      <p class="results-subtitle" id="testSubtitle">Completed on --</p>
+      <div class="score-display">
+        <div class="score-circle" id="scoreCircle">
+          <div class="score-inner">
+            <div class="score-percentage" id="scorePercentage">0%</div>
+            <div style="font-size:.8rem;color:#718096;">Score</div>
+          </div>
         </div>
-
-        <!-- Statistics Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="stat-value" id="correctAnswers">0</div>
-                <div class="stat-label">Correct Answers</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-times-circle"></i>
-                </div>
-                <div class="stat-value" id="incorrectAnswers">0</div>
-                <div class="stat-label">Incorrect Answers</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-value" id="timeTaken">0:00</div>
-                <div class="stat-label">Time Taken</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fas fa-percentage"></i>
-                </div>
-                <div class="stat-value" id="accuracy">0%</div>
-                <div class="stat-label">Accuracy</div>
-            </div>
-        </div>
-
-        <!-- Performance Analysis -->
-        <div class="analysis-section">
-            <h2 class="section-title">Performance Analysis</h2>
-            
-            <div class="chart-container">
-                <canvas id="performanceChart"></canvas>
-            </div>
-            
-            <div class="strengths-weaknesses">
-                <div>
-                    <h3 style="color: #48bb78; margin-bottom: 1rem;">
-                        <i class="fas fa-thumbs-up"></i> Strengths
-                    </h3>
-                    <div id="strengthsList">
-                        <!-- Strengths will be populated by JavaScript -->
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="color: #f56565; margin-bottom: 1rem;">
-                        <i class="fas fa-exclamation-triangle"></i> Areas for Improvement
-                    </h3>
-                    <div id="weaknessesList">
-                        <!-- Weaknesses will be populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recommendations -->
-        <div class="analysis-section">
-            <h2 class="section-title">Personalized Recommendations</h2>
-            
-            <div class="recommendations">
-                <div id="recommendationsList">
-                    <!-- Recommendations will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Detailed Breakdown -->
-        <div class="detailed-breakdown">
-            <h2 class="section-title">Question-by-Question Review</h2>
-            <div id="questionBreakdown">
-                <!-- Question breakdown will be populated by JavaScript -->
-            </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-            <a href="psychometric-tests.html" class="action-button button-secondary">
-                <i class="fas fa-redo"></i> Take Another Test
-            </a>
-            <button onclick="downloadReport()" class="action-button button-primary">
-                <i class="fas fa-download"></i> Download Report
-            </button>
-            <a href="index.html" class="action-button button-secondary">
-                <i class="fas fa-home"></i> Back to Home
-            </a>
-        </div>
+      </div>
+      <div class="performance-level" id="performanceLevel">Calculating...</div>
     </div>
 
-    <script>
-        let testResults = null;
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value correct-color" id="correctAnswers">0</div>
+        <div>Correct</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value incorrect-color" id="incorrectAnswers">0</div>
+        <div>Incorrect</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="unansweredQuestions">0</div>
+        <div>Unanswered</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="timeTaken">0:00</div>
+        <div>Time Taken</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="accuracy">0%</div>
+        <div>Accuracy</div>
+      </div>
+    </div>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            loadResults();
+
+
+    <!-- Strengths / Weaknesses -->
+    <div class="analysis-section">
+      <h2 class="section-title">Strengths & Improvements</h2>
+      <div class="strengths-weaknesses">
+        <div id="strengthsList"></div>
+        <div id="weaknessesList"></div>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="analysis-section">
+      <h2 class="section-title">Recommendations</h2>
+      <div id="recommendationsList"></div>
+    </div>
+
+    <!-- Question Review -->
+    <div class="analysis-section">
+      <h2 class="section-title">Review Questions</h2>
+      <div id="questionBreakdown"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-buttons">
+      <a href="psychometric-tests.html" class="action-button secondary">Retake Test</a>
+      <a href="#" onclick="downloadReport()" class="action-button">Download Report</a>
+      <a href="index.html" class="action-button secondary">Home</a>
+    </div>
+  </div>
+
+  <script>
+    let testResults = null;
+    document.addEventListener('DOMContentLoaded', loadResults);
+
+    function loadResults(){
+      const data = localStorage.getItem('testResults');
+      if(!data){
+        // Create sample data for testing
+        testResults = {
+          testType: 'Sample Test',
+          correctAnswers: 7,
+          totalQuestions: 10,
+          percentage: 70,
+          timeTaken: 300,
+          answers: [0, 1, null, 2, 1, 0, null, 1, 2, 0],
+          questions: [
+            {question: "Sample question 1", options: ["A", "B", "C", "D"], correct: 0},
+            {question: "Sample question 2", options: ["A", "B", "C", "D"], correct: 1},
+            {question: "Sample question 3", options: ["A", "B", "C", "D"], correct: 2},
+            {question: "Sample question 4", options: ["A", "B", "C", "D"], correct: 2},
+            {question: "Sample question 5", options: ["A", "B", "C", "D"], correct: 1},
+            {question: "Sample question 6", options: ["A", "B", "C", "D"], correct: 0},
+            {question: "Sample question 7", options: ["A", "B", "C", "D"], correct: 1},
+            {question: "Sample question 8", options: ["A", "B", "C", "D"], correct: 1},
+            {question: "Sample question 9", options: ["A", "B", "C", "D"], correct: 2},
+            {question: "Sample question 10", options: ["A", "B", "C", "D"], correct: 0}
+          ],
+          completedAt: new Date().toISOString()
+        };
+      } else {
+        testResults=JSON.parse(data);
+      }
+      
+      // Ensure all required properties exist
+      if (!testResults.correctAnswers) testResults.correctAnswers = 0;
+      if (!testResults.totalQuestions) testResults.totalQuestions = testResults.questions ? testResults.questions.length : 0;
+      if (!testResults.percentage) testResults.percentage = testResults.totalQuestions > 0 ? Math.round((testResults.correctAnswers / testResults.totalQuestions) * 100) : 0;
+      if (!testResults.answers) testResults.answers = [];
+      if (!testResults.timeTaken) testResults.timeTaken = 0;
+      
+      displayResults();
+    }
+
+    function displayResults(){
+      document.getElementById('testTitle').textContent = testResults.testType+" Results";
+      document.getElementById('testSubtitle').textContent="Completed on "+new Date(testResults.completedAt).toLocaleDateString();
+      
+      const percentage = testResults.percentage;
+      document.getElementById('scorePercentage').textContent=percentage+"%";
+      document.getElementById('scoreCircle').style.setProperty('--percentage',(percentage*3.6)+'deg');
+
+      const perf=getPerformanceLevel(percentage);
+      const level=document.getElementById('performanceLevel');
+      level.textContent=perf.text;level.className="performance-level "+perf.class;
+
+      // Calculate statistics
+      const correctAnswers = testResults.correctAnswers;
+      const totalQuestions = testResults.totalQuestions;
+      const incorrectAnswers = totalQuestions - correctAnswers;
+      const unansweredQuestions = testResults.answers.filter(answer => answer === null).length;
+      const actualIncorrect = incorrectAnswers - unansweredQuestions;
+
+      document.getElementById('correctAnswers').textContent=correctAnswers;
+      document.getElementById('incorrectAnswers').textContent=actualIncorrect;
+      document.getElementById('unansweredQuestions').textContent=unansweredQuestions;
+      document.getElementById('timeTaken').textContent=formatTime(testResults.timeTaken);
+      document.getElementById('accuracy').textContent=percentage+"%";
+
+
+
+      generateStrengthsWeaknesses();
+      generateRecommendations();
+      generateQuestionBreakdown();
+    }
+
+    function getPerformanceLevel(p){
+      if(p>=90) return {text:"Excellent",class:"excellent"};
+      if(p>=75) return {text:"Good",class:"good"};
+      if(p>=60) return {text:"Average",class:"average"};
+      return {text:"Below Average",class:"below"};
+    }
+
+    function formatTime(s){
+      const m=Math.floor(s/60),r=s%60;
+      return `${m}:${r.toString().padStart(2,'0')}`;
+    }
+
+    function updatePerformanceUI(correct, incorrect, unanswered) {
+      const total = correct + incorrect + unanswered;
+      if (total === 0) {
+        return;
+      }
+      
+      // Calculate percentages
+      const correctPerc = Math.round((correct / total) * 100);
+      const incorrectPerc = Math.round((incorrect / total) * 100);
+      const unansweredPerc = Math.round((unanswered / total) * 100);
+      
+      // Update stat cards
+      document.getElementById('correctCount').textContent = correct;
+      document.getElementById('incorrectCount').textContent = incorrect;
+      document.getElementById('unansweredCount').textContent = unanswered;
+      
+      document.getElementById('correctPercentage').textContent = correctPerc + '%';
+      document.getElementById('incorrectPercentage').textContent = incorrectPerc + '%';
+      document.getElementById('unansweredPercentage').textContent = unansweredPerc + '%';
+      
+      // Update progress values
+      document.getElementById('correctProgressValue').textContent = `${correct} (${correctPerc}%)`;
+      document.getElementById('incorrectProgressValue').textContent = `${incorrect} (${incorrectPerc}%)`;
+      document.getElementById('unansweredProgressValue').textContent = `${unanswered} (${unansweredPerc}%)`;
+      
+      // Animate progress bars
+      setTimeout(() => {
+        document.getElementById('correctBar').style.width = correctPerc + '%';
+        document.getElementById('incorrectBar').style.width = incorrectPerc + '%';
+        document.getElementById('unansweredBar').style.width = unansweredPerc + '%';
+      }, 500);
+      
+      // Hide chart fallback if chart loads successfully
+      if (window.resultsChart) {
+        document.getElementById('chartFallback').style.display = 'none';
+      }
+    }
+
+    function createResultsChart(correct, incorrect, unanswered) {
+      if (typeof Chart === 'undefined') {
+        console.log('Chart.js not available, showing fallback');
+        document.getElementById('resultsChart').style.display = 'none';
+        document.getElementById('chartFallback').innerHTML = `
+          <div class="fallback-content">
+            <i class="fas fa-chart-pie" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 1rem;"></i>
+            <p style="color: #718096; margin: 0;">Chart.js not loaded</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const canvas = document.getElementById('resultsChart');
+      const ctx = canvas.getContext('2d');
+      
+      // Destroy existing chart if it exists
+      if (window.resultsChart) {
+        window.resultsChart.destroy();
+      }
+      
+      const data = [];
+      const labels = [];
+      const colors = [];
+      
+      // Only include categories with values > 0
+      if (correct > 0) {
+        data.push(correct);
+        labels.push(`Correct (${correct})`);
+        colors.push('#10b981');
+      }
+      
+      if (incorrect > 0) {
+        data.push(incorrect);
+        labels.push(`Incorrect (${incorrect})`);
+        colors.push('#ef4444');
+      }
+      
+      if (unanswered > 0) {
+        data.push(unanswered);
+        labels.push(`Unanswered (${unanswered})`);
+        colors.push('#6b7280');
+      }
+      
+      // If all values are 0, show a placeholder
+      if (data.length === 0) {
+        data.push(1);
+        labels.push('No data available');
+        colors.push('#e2e8f0');
+      }
+      
+      try {
+        window.resultsChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: data,
+              backgroundColor: colors,
+              borderColor: '#ffffff',
+              borderWidth: 4,
+              hoverOffset: 8,
+              cutout: '60%'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                borderColor: '#ffffff',
+                borderWidth: 1,
+                cornerRadius: 8,
+                callbacks: {
+                  label: function(context) {
+                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                    const percentage = Math.round((context.parsed / total) * 100);
+                    return `${context.label}: ${percentage}%`;
+                  }
+                }
+              }
+            },
+            animation: {
+              animateRotate: true,
+              duration: 1500,
+              easing: 'easeOutQuart'
+            },
+            elements: {
+              arc: {
+                borderWidth: 0
+              }
+            }
+          }
         });
+        
+        // Hide fallback when chart loads successfully
+        document.getElementById('chartFallback').style.display = 'none';
+        canvas.style.display = 'block';
+        
+      } catch (error) {
+        console.error('Error creating chart:', error);
+        canvas.style.display = 'none';
+        document.getElementById('chartFallback').innerHTML = `
+          <div class="fallback-content">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #f59e0b; margin-bottom: 1rem;"></i>
+            <p style="color: #718096; margin: 0;">Chart failed to load</p>
+          </div>
+        `;
+      }
+    }
 
-        function loadResults() {
-            const resultsData = localStorage.getItem('testResults');
-            if (!resultsData) {
-                // Redirect to tests page if no results found
-                window.location.href = 'psychometric-tests.html';
-                return;
-            }
+    function generateStrengthsWeaknesses(){
+      const perc=testResults.percentage;
+      const correctAnswers = testResults.correctAnswers;
+      const totalQuestions = testResults.totalQuestions;
+      const unansweredCount = testResults.answers.filter(answer => answer === null).length;
+      const completionRate = ((totalQuestions - unansweredCount) / totalQuestions) * 100;
+      
+      const strengthsList=document.getElementById('strengthsList');
+      const weaknessesList=document.getElementById('weaknessesList');
+      let strengths=[],weaknesses=[];
 
-            testResults = JSON.parse(resultsData);
-            displayResults();
-        }
+      // Analyze strengths based on performance
+      if(perc>=90){
+        strengths=["Excellent problem-solving skills","Strong analytical thinking","Outstanding performance"];
+      } else if(perc>=80){
+        strengths=["Good problem-solving ability","Solid understanding of concepts","Above average performance"];
+      } else if(perc>=70){
+        strengths=["Decent conceptual knowledge","Consistent effort","Room for improvement identified"];
+      } else if(perc>=60){
+        strengths=["Basic understanding present","Completed the test","Shows potential"];
+      } else {
+        strengths=["Persistence in attempting","Learning opportunity identified"];
+      }
 
-        function displayResults() {
-            // Update header
-            document.getElementById('testTitle').textContent = testResults.testType + ' Results';
-            document.getElementById('testSubtitle').textContent = 
-                `Completed on ${new Date(testResults.completedAt).toLocaleDateString()}`;
+      // Add completion-based strengths
+      if(completionRate >= 95) {
+        strengths.push("Excellent time management");
+      } else if(completionRate >= 80) {
+        strengths.push("Good time management");
+      }
 
-            // Update score circle
-            const percentage = testResults.percentage;
-            document.getElementById('scorePercentage').textContent = percentage + '%';
-            document.getElementById('scoreCircle').style.setProperty('--percentage', (percentage * 3.6) + 'deg');
+      // Analyze weaknesses
+      if(perc < 70) {
+        weaknesses.push("Needs more practice with core concepts");
+      }
+      if(perc < 50) {
+        weaknesses.push("Fundamental concepts need strengthening");
+      }
+      if(completionRate < 80) {
+        weaknesses.push("Time management needs improvement");
+      }
+      if(unansweredCount > totalQuestions * 0.2) {
+        weaknesses.push("Consider attempting all questions");
+      }
+      
+      strengthsList.innerHTML=strengths.map(s=>`<div class="strength-item">✓ ${s}</div>`).join("");
+      weaknessesList.innerHTML=weaknesses.length?
+        weaknesses.map(w=>`<div class="weakness-item">⚠ ${w}</div>`).join(""):
+        `<div class="strength-item">🎉 Excellent performance - no major concerns!</div>`;
+    }
 
-            // Update performance level
-            const performanceLevel = getPerformanceLevel(percentage);
-            const levelElement = document.getElementById('performanceLevel');
-            levelElement.textContent = performanceLevel.text;
-            levelElement.className = 'performance-level ' + performanceLevel.class;
+    function generateRecommendations(){
+      const p=testResults.percentage;
+      const unansweredCount = testResults.answers.filter(answer => answer === null).length;
+      const totalQuestions = testResults.totalQuestions;
+      const completionRate = ((totalQuestions - unansweredCount) / totalQuestions) * 100;
+      
+      let rec=[];
+      
+      if(p>=90) {
+        rec=["Consider taking advanced level tests","Share your strategies with others","Explore specialized topics in this area","Mentor others who need help"];
+      } else if(p>=75) {
+        rec=["Review incorrect answers to understand mistakes","Practice similar questions regularly","Work on improving speed and accuracy","Consider taking more challenging tests"];
+      } else if(p>=60) {
+        rec=["Revise fundamental concepts thoroughly","Practice more questions in weak areas","Seek guidance from mentors or tutors","Focus on understanding rather than memorizing"];
+      } else {
+        rec=["Start with basic concepts and build foundation","Practice easier questions before attempting harder ones","Consider getting additional tutoring or guidance","Stay consistent with daily practice","Don't get discouraged - improvement takes time"];
+      }
+      
+      // Add time management recommendations
+      if(completionRate < 80) {
+        rec.push("Practice time management - try to attempt all questions");
+        rec.push("Consider skipping difficult questions initially and returning to them");
+      }
+      
+      // Add specific recommendations based on test type
+      const testType = testResults.testType;
+      if(testType === 'numerical') {
+        rec.push("Practice mental math and calculation shortcuts");
+      } else if(testType === 'verbal') {
+        rec.push("Read more to improve vocabulary and comprehension");
+      } else if(testType === 'logical') {
+        rec.push("Practice pattern recognition and logical reasoning puzzles");
+      }
+      
+      document.getElementById('recommendationsList').innerHTML=rec.map(r=>`<div class="recommendation-item">💡 ${r}</div>`).join("");
+    }
 
-            // Update statistics
-            document.getElementById('correctAnswers').textContent = testResults.correctAnswers;
-            document.getElementById('incorrectAnswers').textContent = 
-                testResults.totalQuestions - testResults.correctAnswers;
-            document.getElementById('timeTaken').textContent = formatTime(testResults.timeTaken);
-            document.getElementById('accuracy').textContent = percentage + '%';
+    function generateQuestionBreakdown(){
+      const b=document.getElementById('questionBreakdown');b.innerHTML='';
+      testResults.questions.forEach((q,i)=>{
+        const ua=testResults.answers[i],ca=q.correct;
+        let statusClass,statusText;
+        if(ua===null){statusClass="unanswered";statusText="Unanswered";}
+        else if(ua===ca){statusClass="correct";statusText="Correct";}
+        else {statusClass="incorrect";statusText="Incorrect";}
+        b.innerHTML+=`
+        <div class="question-review">
+          <div class="question-header">
+            <span><b>Q${i+1}</b> ${q.question}</span>
+            <span class="status ${statusClass}">${statusText}</span>
+          </div>
+          <div style="font-size:.9rem;color:#4a5568;">
+            Your answer: ${ua!==null?q.options[ua]:"—"} <br>
+            Correct: ${q.options[ca]}
+          </div>
+        </div>`;
+      });
+    }
 
-            // Create performance chart
-            createPerformanceChart();
+    function downloadReport(){
+      const unansweredCount = testResults.answers.filter(answer => answer === null).length;
+      const incorrectCount = testResults.totalQuestions - testResults.correctAnswers - unansweredCount;
+      
+      let report=`PSYCHOMETRIC TEST REPORT
+=========================
+Test Type: ${testResults.testType.toUpperCase()}
+Date: ${new Date(testResults.completedAt).toLocaleDateString()}
+Time: ${new Date(testResults.completedAt).toLocaleTimeString()}
 
-            // Generate strengths and weaknesses
-            generateStrengthsWeaknesses();
+PERFORMANCE SUMMARY
+==================
+Overall Score: ${testResults.percentage}%
+Correct Answers: ${testResults.correctAnswers}/${testResults.totalQuestions}
+Incorrect Answers: ${incorrectCount}
+Unanswered: ${unansweredCount}
+Time Taken: ${formatTime(testResults.timeTaken)}
+Completion Rate: ${Math.round(((testResults.totalQuestions - unansweredCount) / testResults.totalQuestions) * 100)}%
 
-            // Generate recommendations
-            generateRecommendations();
+DETAILED BREAKDOWN
+==================`;
 
-            // Generate question breakdown
-            generateQuestionBreakdown();
-        }
-
-        function getPerformanceLevel(percentage) {
-            if (percentage >= 90) {
-                return { text: 'Excellent Performance', class: 'performance-excellent' };
-            } else if (percentage >= 75) {
-                return { text: 'Good Performance', class: 'performance-good' };
-            } else if (percentage >= 60) {
-                return { text: 'Average Performance', class: 'performance-average' };
-            } else {
-                return { text: 'Below Average', class: 'performance-below' };
-            }
-        }
-
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
-
-        function createPerformanceChart() {
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            
-            const correct = testResults.correctAnswers;
-            const incorrect = testResults.totalQuestions - testResults.correctAnswers;
-            
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Correct', 'Incorrect'],
-                    datasets: [{
-                        data: [correct, incorrect],
-                        backgroundColor: [
-                            '#48bb78',
-                            '#f56565'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        function generateStrengthsWeaknesses() {
-            const percentage = testResults.percentage;
-            const strengthsList = document.getElementById('strengthsList');
-            const weaknessesList = document.getElementById('weaknessesList');
-
-            // Generate strengths based on performance
-            let strengths = [];
-            let weaknesses = [];
-
-            if (percentage >= 80) {
-                strengths.push("Excellent problem-solving abilities");
-                strengths.push("Strong analytical thinking");
-                strengths.push("Good time management");
-            } else if (percentage >= 60) {
-                strengths.push("Solid understanding of concepts");
-                strengths.push("Consistent performance");
-            } else {
-                strengths.push("Completed the test");
-                strengths.push("Showed persistence");
-            }
-
-            if (percentage < 70) {
-                weaknesses.push("Need more practice with core concepts");
-                weaknesses.push("Time management could be improved");
-            }
-            if (percentage < 50) {
-                weaknesses.push("Fundamental concepts need reinforcement");
-                weaknesses.push("Consider additional study materials");
-            }
-
-            // Populate strengths
-            strengthsList.innerHTML = '';
-            strengths.forEach(strength => {
-                const item = document.createElement('div');
-                item.className = 'strength-item';
-                item.textContent = strength;
-                strengthsList.appendChild(item);
-            });
-
-            // Populate weaknesses
-            weaknessesList.innerHTML = '';
-            if (weaknesses.length === 0) {
-                const item = document.createElement('div');
-                item.className = 'strength-item';
-                item.textContent = "Great job! No major areas of concern identified.";
-                weaknessesList.appendChild(item);
-            } else {
-                weaknesses.forEach(weakness => {
-                    const item = document.createElement('div');
-                    item.className = 'weakness-item';
-                    item.textContent = weakness;
-                    weaknessesList.appendChild(item);
-                });
-            }
-        }
-
-        function generateRecommendations() {
-            const percentage = testResults.percentage;
-            const recommendationsList = document.getElementById('recommendationsList');
-            
-            let recommendations = [];
-
-            if (percentage >= 90) {
-                recommendations = [
-                    "Excellent work! Consider taking advanced level tests to further challenge yourself.",
-                    "Share your success strategies with others who might benefit from your approach.",
-                    "Explore specialized areas within this domain to deepen your expertise."
-                ];
-            } else if (percentage >= 75) {
-                recommendations = [
-                    "Good performance! Focus on the questions you got wrong to identify specific improvement areas.",
-                    "Practice similar tests regularly to maintain and improve your skills.",
-                    "Consider timing yourself on practice questions to improve speed and accuracy."
-                ];
-            } else if (percentage >= 60) {
-                recommendations = [
-                    "Review the fundamental concepts covered in this test type.",
-                    "Practice regularly with similar questions to build confidence and speed.",
-                    "Consider seeking additional resources or tutoring for challenging topics.",
-                    "Take practice tests under timed conditions to improve performance."
-                ];
-            } else {
-                recommendations = [
-                    "Focus on understanding the basic concepts before attempting more complex problems.",
-                    "Start with easier practice questions and gradually increase difficulty.",
-                    "Consider enrolling in a preparatory course or working with a tutor.",
-                    "Dedicate regular study time to this subject area.",
-                    "Don't be discouraged - improvement comes with consistent practice."
-                ];
-            }
-
-            recommendationsList.innerHTML = '';
-            recommendations.forEach((recommendation, index) => {
-                const item = document.createElement('div');
-                item.className = 'recommendation-item';
-                item.innerHTML = `
-                    <div class="recommendation-icon">${index + 1}</div>
-                    <div>${recommendation}</div>
-                `;
-                recommendationsList.appendChild(item);
-            });
-        }
-
-        function generateQuestionBreakdown() {
-            const breakdown = document.getElementById('questionBreakdown');
-            breakdown.innerHTML = '';
-
-            testResults.questions.forEach((question, index) => {
-                const userAnswer = testResults.answers[index];
-                const correctAnswer = question.correct;
-                const isCorrect = userAnswer === correctAnswer;
-                const isAnswered = userAnswer !== null;
-
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question-review';
-
-                let statusClass, statusText;
-                if (!isAnswered) {
-                    statusClass = 'status-unanswered';
-                    statusText = 'Not Answered';
-                } else if (isCorrect) {
-                    statusClass = 'status-correct';
-                    statusText = 'Correct';
-                } else {
-                    statusClass = 'status-incorrect';
-                    statusText = 'Incorrect';
-                }
-
-                questionDiv.innerHTML = `
-                    <div class="question-header">
-                        <span class="question-number">Question ${index + 1}</span>
-                        <span class="question-status ${statusClass}">${statusText}</span>
-                    </div>
-                    <div style="margin-bottom: 0.5rem; font-weight: 500;">${question.question}</div>
-                    <div style="font-size: 0.9rem; color: #718096;">
-                        ${isAnswered ? `Your answer: ${question.options[userAnswer]}` : 'No answer provided'}<br>
-                        Correct answer: ${question.options[correctAnswer]}
-                    </div>
-                `;
-
-                breakdown.appendChild(questionDiv);
-            });
-        }
-
-        function downloadReport() {
-            // Create a simple text report
-            let report = `PSYCHOMETRIC TEST RESULTS REPORT\n`;
-            report += `=====================================\n\n`;
-            report += `Test: ${testResults.testType}\n`;
-            report += `Date: ${new Date(testResults.completedAt).toLocaleDateString()}\n`;
-            report += `Score: ${testResults.percentage}%\n`;
-            report += `Correct Answers: ${testResults.correctAnswers}/${testResults.totalQuestions}\n`;
-            report += `Time Taken: ${formatTime(testResults.timeTaken)}\n\n`;
-            
-            report += `PERFORMANCE LEVEL: ${getPerformanceLevel(testResults.percentage).text}\n\n`;
-            
-            report += `QUESTION BREAKDOWN:\n`;
-            report += `==================\n`;
-            testResults.questions.forEach((question, index) => {
-                const userAnswer = testResults.answers[index];
-                const correctAnswer = question.correct;
-                const isCorrect = userAnswer === correctAnswer;
-                const isAnswered = userAnswer !== null;
-                
-                report += `\nQ${index + 1}: ${question.question}\n`;
-                report += `Your Answer: ${isAnswered ? question.options[userAnswer] : 'Not answered'}\n`;
-                report += `Correct Answer: ${question.options[correctAnswer]}\n`;
-                report += `Result: ${isCorrect ? 'CORRECT' : 'INCORRECT'}\n`;
-            });
-
-            // Download the report
-            const blob = new Blob([report], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${testResults.testType.replace(/\s+/g, '_')}_Results_${new Date().toISOString().split('T')[0]}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-    </script>
+      testResults.questions.forEach((q,i)=>{
+        const ua=testResults.answers[i],ca=q.correct;
+        const status = ua === null ? "UNANSWERED" : (ua === ca ? "CORRECT" : "INCORRECT");
+        report+=`\nQ${i+1}: ${q.question}
+Your Answer: ${ua!==null?q.options[ua]:"Not Answered"}
+Correct Answer: ${q.options[ca]}
+Status: ${status}
+${'='.repeat(50)}`;
+      });
+      
+      report += `\n\nRECOMMendations: Visit the results page for personalized recommendations based on your performance.`;
+      
+      const blob=new Blob([report],{type:"text/plain"}),url=URL.createObjectURL(blob);
+      const a=document.createElement('a');a.href=url;a.download=`${testResults.testType}_Test_Results_${new Date().toISOString().split('T')[0]}.txt`;a.click();URL.revokeObjectURL(url);
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results Page</title>
+</head>
+<body>
+    <h1>Test Results Page</h1>
+    <p>This page will set sample test data and redirect to the results page.</p>
+    
+    <button onclick="testWithSampleData()">Test with Sample Data</button>
+    <button onclick="clearData()">Clear Data</button>
+    <button onclick="goToResults()">Go to Results</button>
+
+    <script>
+        function testWithSampleData() {
+            const sampleResults = {
+                testType: 'Numerical Reasoning',
+                correctAnswers: 7,
+                totalQuestions: 10,
+                percentage: 70,
+                timeTaken: 450, // 7.5 minutes
+                answers: [0, 1, null, 2, 1, 0, null, 1, 2, 0],
+                questions: [
+                    {question: "What is 15 + 27?", options: ["42", "41", "43", "44"], correct: 0},
+                    {question: "If x = 5, what is 2x + 3?", options: ["10", "13", "15", "8"], correct: 1},
+                    {question: "What is 144 ÷ 12?", options: ["11", "12", "13", "14"], correct: 1},
+                    {question: "What is 25% of 80?", options: ["15", "20", "25", "30"], correct: 1},
+                    {question: "What comes next: 2, 4, 8, 16, ?", options: ["24", "32", "28", "20"], correct: 1},
+                    {question: "What is 7 × 8?", options: ["56", "54", "58", "52"], correct: 0},
+                    {question: "What is 100 - 37?", options: ["63", "67", "73", "53"], correct: 0},
+                    {question: "What is 3² + 4²?", options: ["12", "25", "14", "49"], correct: 1},
+                    {question: "What is 60% of 150?", options: ["80", "85", "90", "95"], correct: 2},
+                    {question: "What is 9 × 7?", options: ["63", "56", "72", "54"], correct: 0}
+                ],
+                completedAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('testResults', JSON.stringify(sampleResults));
+            alert('Sample test data has been set!');
+        }
+        
+        function clearData() {
+            localStorage.removeItem('testResults');
+            alert('Test data cleared!');
+        }
+        
+        function goToResults() {
+            window.location.href = 'psychometric-results.html';
+        }
+    </script>
+</body>
+</html>
