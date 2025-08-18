@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychometric Test Interface - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Test Interface Specific Styles */
+        .test-interface {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 0;
+        }
+
+        .test-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .test-header {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .test-type-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .test-details h2 {
+            margin: 0;
+            color: #2d3748;
+            font-size: 1.5rem;
+        }
+
+        .test-details p {
+            margin: 5px 0 0 0;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .test-timer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 10px;
+        }
+
+        .timer-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e53e3e;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-info {
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .test-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .question-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .question-difficulty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .difficulty-stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 1rem;
+        }
+
+        .star.empty {
+            color: #e2e8f0;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #2d3748;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+        }
+
+        .option.selected {
+            background: #e6fffa;
+            border-color: #38b2ac;
+            box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.1);
+        }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #4a5568;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-letter {
+            background: #38b2ac;
+            color: white;
+        }
+
+        .option-text {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #4a5568;
+        }
+
+        .test-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-previous {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-previous:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-next, .btn-submit {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-next:hover, .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-previous:disabled, .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question-palette {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .palette-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .palette-item {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .palette-item.current {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .palette-item.answered {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .palette-item.unanswered {
+            background: #f8fafc;
+            color: #4a5568;
+            border-color: #e2e8f0;
+        }
+
+        .palette-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .test-complete {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .complete-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .complete-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .complete-message {
+            font-size: 1.1rem;
+            color: #718096;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .results-preview {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .result-stat {
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-results {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-results:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-retake {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-retake:hover {
+            background: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            .test-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .test-timer {
+                justify-content: center;
+            }
+
+            .test-content {
+                padding: 25px;
+            }
+
+            .question-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .test-navigation {
+                flex-direction: column;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .palette-grid {
+                grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+            }
+
+            .palette-item {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">SaarthiX</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Students</a>
+                <div class="dropdown-content cols-2">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="basic-profiling.html">Profiling</a>
+                        <a href="resume-building-watermark.html">Resume Building</a>
+                        <a href="job-metrics.html">Job Metric</a>
+                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="interview-questions.html">Interview Preparation</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Additional Services</h4>
+                        <a href="psychometric-tests.html">Psychometric Test</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Institute</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="recorded-trainings.html">Trainings</a>
+                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-sessions.html">Expert Sessions</a>
+                        <a href="collaboration-events.html">Collaboration</a>
+                        <a href="student-training.html">Student Training(On demand)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Industry</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="database-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="hackathon-info.html">Post Hackathons</a>
+                        <a href="drive-glimpse.html">Hiring Drives</a>
+                        <a href="Expert-session.html">Expert Session</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="account-options">
+            <a href="#" class="login-btn" id="loginBtn">
+                <div class="btn-content">
+                    <i class="fas fa-sign-in-alt login-icon"></i>
+                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
+                    <span class="btn-text">Login</span>
+                </div>
+                <div class="btn-bg"></div>
+                <div class="btn-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Test Interface -->
+    <section class="test-interface">
+        <div class="test-container">
+            <!-- Test Header -->
+            <div class="test-header">
+                <div class="test-info">
+                    <div class="test-type-icon" id="testIcon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="test-details">
+                        <h2 id="testTitle">Psychometric Test</h2>
+                        <p id="testDescription">Complete the assessment to evaluate your cognitive abilities</p>
+                    </div>
+                </div>
+                <div class="test-timer">
+                    <i class="fas fa-clock"></i>
+                    <div class="timer-display" id="timer">30:00</div>
+                    <div class="progress-info">
+                        <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start;">
+                <!-- Test Content -->
+                <div class="test-content" id="testContent">
+                    <div class="question-header">
+                        <div class="question-number" id="questionNumber">Question 1</div>
+                        <div class="question-difficulty">
+                            <span>Difficulty:</span>
+                            <div class="difficulty-stars" id="difficultyStars">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star empty"></i>
+                                <i class="fas fa-star star empty"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-text" id="questionText">
+                        Loading question...
+                    </div>
+
+                    <div class="options-container" id="optionsContainer">
+                        <!-- Options will be dynamically loaded -->
+                    </div>
+
+                    <div class="test-navigation">
+                        <button class="nav-button btn-previous" id="prevBtn" onclick="previousQuestion()">
+                            <i class="fas fa-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button class="nav-button btn-next" id="nextBtn" onclick="nextQuestion()">
+                            Next
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="nav-button btn-submit" id="submitBtn" onclick="submitTest()" style="display: none;">
+                            <i class="fas fa-check"></i>
+                            Submit Test
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question Palette -->
+                <div class="question-palette">
+                    <div class="palette-header">
+                        <i class="fas fa-th-large"></i>
+                        Question Palette
+                    </div>
+                    <div class="palette-grid" id="paletteGrid">
+                        <!-- Palette items will be dynamically generated -->
+                    </div>
+                    <div class="palette-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                            <span>Current</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #10b981;"></div>
+                            <span>Answered</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #f8fafc; border: 1px solid #e2e8f0;"></div>
+                            <span>Unanswered</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Complete Screen -->
+            <div class="test-content test-complete" id="testComplete">
+                <div class="complete-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 class="complete-title">Test Completed!</h2>
+                <p class="complete-message">
+                    Congratulations! You have successfully completed the psychometric test. 
+                    Your responses have been recorded and your detailed results are being processed.
+                </p>
+                <div class="results-preview">
+                    <div class="result-stat">
+                        <span class="result-number" id="questionsAnswered">0</span>
+                        <span class="result-label">Questions Answered</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-number" id="timeSpent">0:00</span>
+                        <span class="result-label">Time Spent</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="result-number" id="completionRate">0%</span>
+                        <span class="result-label">Completion Rate</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="psychometric-results.html" class="btn-results">
+                        <i class="fas fa-chart-bar"></i>
+                        View Detailed Results
+                    </a>
+                    <a href="psychometric-tests.html" class="btn-retake">
+                        <i class="fas fa-redo"></i>
+                        Take Another Test
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Test Configuration
+        let currentQuestionIndex = 0;
+        let testQuestions = [];
+        let userAnswers = {};
+        let testStartTime = new Date();
+        let timerInterval;
+        let testDuration = 30 * 60; // 30 minutes in seconds
+        let timeRemaining = testDuration;
+
+        // Test Types Configuration
+        const testTypes = {
+            'numerical': {
+                title: 'Numerical Reasoning Test',
+                description: 'Assess your ability to work with numerical data and solve mathematical problems',
+                icon: 'fas fa-calculator',
+                duration: 30,
+                questions: 10
+            },
+            'verbal': {
+                title: 'Verbal Reasoning Test',
+                description: 'Evaluate your ability to understand and analyze written information',
+                icon: 'fas fa-comments',
+                duration: 30,
+                questions: 10
+            },
+            'diagrammatic': {
+                title: 'Diagrammatic Reasoning Test',
+                description: 'Test your ability to identify patterns and logical sequences',
+                icon: 'fas fa-project-diagram',
+                duration: 30,
+                questions: 10
+            },
+            'abstract': {
+                title: 'Abstract Reasoning Test',
+                description: 'Measure your ability to think conceptually and analyze patterns',
+                icon: 'fas fa-shapes',
+                duration: 10,
+                questions: 8
+            },
+            'situational': {
+                title: 'Situational Judgement Test',
+                description: 'Assess how you handle workplace scenarios and challenges',
+                icon: 'fas fa-balance-scale',
+                duration: 50,
+                questions: 15
+            },
+            'spatial': {
+                title: 'Spatial Reasoning Test',
+                description: 'Evaluate your ability to visualize and manipulate objects in space',
+                icon: 'fas fa-cube',
+                duration: 10,
+                questions: 8
+            },
+            'mechanical': {
+                title: 'Mechanical Reasoning Test',
+                description: 'Test your understanding of mechanical and physical principles',
+                icon: 'fas fa-cogs',
+                duration: 10,
+                questions: 8
+            },
+            'logical': {
+                title: 'Logical Reasoning Test',
+                description: 'Assess your logical thinking and problem-solving abilities',
+                icon: 'fas fa-brain',
+                duration: 10,
+                questions: 8
+            }
+        };
+
+        // Sample Questions Database
+        const questionDatabase = {
+            numerical: [
+                {
+                    question: "If a company's revenue increased by 15% from $200,000 to what amount?",
+                    options: ["$215,000", "$230,000", "$225,000", "$235,000"],
+                    correct: 1,
+                    difficulty: 3
+                },
+                {
+                    question: "What is 25% of 480?",
+                    options: ["110", "120", "130", "140"],
+                    correct: 1,
+                    difficulty: 2
+                },
+                {
+                    question: "If 3x + 7 = 22, what is the value of x?",
+                    options: ["3", "4", "5", "6"],
+                    correct: 2,
+                    difficulty: 3
+                },
+                {
+                    question: "A product costs $80 after a 20% discount. What was the original price?",
+                    options: ["$96", "$100", "$104", "$108"],
+                    correct: 1,
+                    difficulty: 4
+                },
+                {
+                    question: "What is the average of 15, 25, 35, and 45?",
+                    options: ["25", "30", "35", "40"],
+                    correct: 1,
+                    difficulty: 2
+                },
+                {
+                    question: "If a train travels 240 miles in 4 hours, what is its average speed?",
+                    options: ["50 mph", "55 mph", "60 mph", "65 mph"],
+                    correct: 2,
+                    difficulty: 2
+                },
+                {
+                    question: "What is 15% of 200 plus 10% of 150?",
+                    options: ["40", "45", "50", "55"],
+                    correct: 1,
+                    difficulty: 3
+                },
+                {
+                    question: "If a rectangle has length 12 and width 8, what is its area?",
+                    options: ["88", "92", "96", "100"],
+                    correct: 2,
+                    difficulty: 2
+                },
+                {
+                    question: "What is the next number in the sequence: 2, 6, 18, 54, ?",
+                    options: ["108", "126", "162", "180"],
+                    correct: 2,
+                    difficulty: 4
+                },
+                {
+                    question: "If 2/3 of a number is 40, what is the number?",
+                    options: ["50", "55", "60", "65"],
+                    correct: 2,
+                    difficulty: 3
+                }
+            ],
+            verbal: [
+                {
+                    question: "Choose the word that is most similar in meaning to 'ABUNDANT':",
+                    options: ["Scarce", "Plentiful", "Limited", "Restricted"],
+                    correct: 1,
+                    difficulty: 2
+                },
+                {
+                    question: "Which word does NOT belong with the others?",
+                    options: ["Apple", "Orange", "Banana", "Carrot"],
+                    correct: 3,
+                    difficulty: 2
+                },
+                {
+                    question: "Complete the analogy: Book is to Reading as Fork is to ____",
+                    options: ["Kitchen", "Eating", "Metal", "Utensil"],
+                    correct: 1,
+                    difficulty: 3
+                },
+                {
+                    question: "What is the opposite of 'OPTIMISTIC'?",
+                    options: ["Hopeful", "Positive", "Pessimistic", "Confident"],
+                    correct: 2,
+                    difficulty: 2
+                },
+                {
+                    question: "Choose the correct spelling:",
+                    options: ["Accomodate", "Accommodate", "Acommodate", "Acomodate"],
+                    correct: 1,
+                    difficulty: 3
+                },
+                {
+                    question: "Which sentence is grammatically correct?",
+                    options: ["She don't like coffee", "She doesn't likes coffee", "She doesn't like coffee", "She not like coffee"],
+                    correct: 2,
+                    difficulty: 2
+                },
+                {
+                    question: "What does 'METICULOUS' mean?",
+                    options: ["Careless", "Detailed", "Quick", "Lazy"],
+                    correct: 1,
+                    difficulty: 4
+                },
+                {
+                    question: "Complete: 'A stitch in time saves ____'",
+                    options: ["seven", "eight", "nine", "ten"],
+                    correct: 2,
+                    difficulty: 2
+                },
+                {
+                    question: "Which word is spelled incorrectly?",
+                    options: ["Necessary", "Separate", "Definately", "Privilege"],
+                    correct: 2,
+                    difficulty: 3
+                },
+                {
+                    question: "Choose the best synonym for 'ELOQUENT':",
+                    options: ["Silent", "Articulate", "Confused", "Boring"],
+                    correct: 1,
+                    difficulty: 4
+                }
+            ],
+            logical: [
+                {
+                    question: "If all roses are flowers and some flowers are red, which statement must be true?",
+                    options: ["All roses are red", "Some roses are red", "Some roses might be red", "No roses are red"],
+                    correct: 2,
+                    difficulty: 4
+                },
+                {
+                    question: "What comes next in the pattern: A, C, F, J, ?",
+                    options: ["M", "N", "O", "P"],
+                    correct: 2,
+                    difficulty: 4
+                },
+                {
+                    question: "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+                    options: ["5 minutes", "20 minutes", "100 minutes", "500 minutes"],
+                    correct: 0,
+                    difficulty: 5
+                },
+                {
+                    question: "Which number doesn't belong: 2, 3, 6, 7, 8, 14, 15, 30?",
+                    options: ["2", "6", "8", "30"],
+                    correct: 2,
+                    difficulty: 4
+                },
+                {
+                    question: "If some cats are dogs and all dogs are animals, then:",
+                    options: ["Some cats are animals", "All cats are animals", "No cats are animals", "Cannot be determined"],
+                    correct: 0,
+                    difficulty: 3
+                },
+                {
+                    question: "What is the next number: 1, 1, 2, 3, 5, 8, ?",
+                    options: ["11", "13", "15", "16"],
+                    correct: 1,
+                    difficulty: 3
+                },
+                {
+                    question: "If A = 1, B = 2, C = 3, what does CAB equal?",
+                    options: ["6", "312", "123", "321"],
+                    correct: 0,
+                    difficulty: 2
+                },
+                {
+                    question: "Which shape completes the pattern: Circle, Square, Triangle, Circle, Square, ?",
+                    options: ["Circle", "Square", "Triangle", "Pentagon"],
+                    correct: 2,
+                    difficulty: 2
+                }
+            ]
+        };
+
+        // Initialize test on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTest();
+        });
+
+        function initializeTest() {
+            // Get test type from localStorage or default to 'numerical'
+            const testType = localStorage.getItem('selectedTestType') || 'numerical';
+            const config = testTypes[testType] || testTypes['numerical'];
+            
+            // Update test header
+            document.getElementById('testTitle').textContent = config.title;
+            document.getElementById('testDescription').textContent = config.description;
+            document.getElementById('testIcon').innerHTML = `<i class="${config.icon}"></i>`;
+            
+            // Set test duration and questions
+            testDuration = config.duration * 60;
+            timeRemaining = testDuration;
+            
+            // Load questions for this test type
+            testQuestions = questionDatabase[testType] || questionDatabase['numerical'];
+            testQuestions = testQuestions.slice(0, config.questions);
+            
+            // Update total questions display
+            document.getElementById('totalQuestions').textContent = testQuestions.length;
+            
+            // Generate question palette
+            generateQuestionPalette();
+            
+            // Load first question
+            loadQuestion(0);
+            
+            // Start timer
+            startTimer();
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+        }
+
+        function generateQuestionPalette() {
+            const paletteGrid = document.getElementById('paletteGrid');
+            paletteGrid.innerHTML = '';
+            
+            for (let i = 0; i < testQuestions.length; i++) {
+                const paletteItem = document.createElement('div');
+                paletteItem.className = 'palette-item unanswered';
+                paletteItem.textContent = i + 1;
+                paletteItem.onclick = () => goToQuestion(i);
+                paletteGrid.appendChild(paletteItem);
+            }
+            
+            // Mark first question as current
+            paletteGrid.children[0].className = 'palette-item current';
+        }
+
+        function loadQuestion(index) {
+            if (index < 0 || index >= testQuestions.length) return;
+            
+            currentQuestionIndex = index;
+            const question = testQuestions[index];
+            
+            // Update question display
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}`;
+            document.getElementById('currentQuestion').textContent = index + 1;
+            document.getElementById('questionText').textContent = question.question;
+            
+            // Update difficulty stars
+            updateDifficultyStars(question.difficulty);
+            
+            // Load options
+            loadOptions(question.options, index);
+            
+            // Update palette
+            updateQuestionPalette();
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+        }
+
+        function updateDifficultyStars(difficulty) {
+            const starsContainer = document.getElementById('difficultyStars');
+            starsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('i');
+                star.className = i <= difficulty ? 'fas fa-star star' : 'fas fa-star star empty';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function loadOptions(options, questionIndex) {
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.onclick = () => selectOption(questionIndex, index);
+                
+                // Check if this option was previously selected
+                if (userAnswers[questionIndex] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                container.appendChild(optionDiv);
+            });
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            // Store the answer
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Update visual selection
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.toggle('selected', index === optionIndex);
+            });
+            
+            // Update question palette
+            updateQuestionPalette();
+        }
+
+        function updateQuestionPalette() {
+            const paletteItems = document.querySelectorAll('.palette-item');
+            
+            paletteItems.forEach((item, index) => {
+                item.className = 'palette-item';
+                
+                if (index === currentQuestionIndex) {
+                    item.classList.add('current');
+                } else if (userAnswers.hasOwnProperty(index)) {
+                    item.classList.add('answered');
+                } else {
+                    item.classList.add('unanswered');
+                }
+            });
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Previous button
+            prevBtn.disabled = currentQuestionIndex === 0;
+            
+            // Next/Submit button
+            if (currentQuestionIndex === testQuestions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'flex';
+            } else {
+                nextBtn.style.display = 'flex';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < testQuestions.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            }
+        }
+
+        function goToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function submitTest() {
+            clearInterval(timerInterval);
+            
+            // Calculate results
+            const answeredQuestions = Object.keys(userAnswers).length;
+            const totalTime = testDuration - timeRemaining;
+            const completionRate = Math.round((answeredQuestions / testQuestions.length) * 100);
+            
+            // Update results display
+            document.getElementById('questionsAnswered').textContent = answeredQuestions;
+            document.getElementById('timeSpent').textContent = formatTime(totalTime);
+            document.getElementById('completionRate').textContent = completionRate + '%';
+            
+            // Store results in localStorage for results page
+            const results = {
+                testType: localStorage.getItem('selectedTestType') || 'numerical',
+                answers: userAnswers,
+                questions: testQuestions,
+                timeSpent: totalTime,
+                completionRate: completionRate,
+                submittedAt: new Date().toISOString()
+            };
+            localStorage.setItem('testResults', JSON.stringify(results));
+            
+            // Show completion screen
+            document.getElementById('testContent').style.display = 'none';
+            document.querySelector('.question-palette').style.display = 'none';
+            document.getElementById('testComplete').style.display = 'block';
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Prevent page refresh during test
+        window.addEventListener('beforeunload', function(e) {
+            if (timeRemaining > 0 && timeRemaining < testDuration) {
+                e.preventDefault();
+                e.returnValue = 'Are you sure you want to leave? Your test progress will be lost.';
+            }
+        });
+    </script>
+</body>
+</html>
