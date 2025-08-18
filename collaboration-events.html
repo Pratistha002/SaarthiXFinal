@@ -3,16 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conduct Events in Collaboration - SaarthiX</title>
+    <title>Institute Collaboration Platform - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <style>
+        /* Collaboration Platform Specific Styles */
+        .collaboration-hero {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collaboration-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="collab" patternUnits="userSpaceOnUse" width="25" height="25"><circle cx="12.5" cy="12.5" r="2" fill="rgba(255,255,255,0.1)"/><path d="M5,12.5 L20,12.5 M12.5,5 L12.5,20" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23collab)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .collaboration-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .collaboration-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .collaboration-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #d1fae5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .collaboration-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .collaboration-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .collaboration-stat {
+            text-align: center;
+        }
+
+        .collaboration-stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 5px;
+        }
+
+        .collaboration-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .collaboration-types {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .collab-type-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collab-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #059669, #047857);
+        }
+
+        .collab-type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .collab-type-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #059669, #047857);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .collab-type-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .collab-type-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .collab-type-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .collab-type-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .collab-type-features i {
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .collab-type-btn {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .collab-type-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(5, 150, 105, 0.3);
+        }
+
+        .event-planner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+        }
+
+        .event-planner-container {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .event-planner-header {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-planner-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .event-planner-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .event-planner-content {
+            padding: 40px;
+        }
+
+        .planner-form {
+            display: grid;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #059669;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-event-btn {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-event-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(5, 150, 105, 0.3);
+        }
+
+        .partnership-network {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .partner-card {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .partner-card:hover {
+            background: white;
+            border-color: #059669;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(5, 150, 105, 0.1);
+        }
+
+        .partner-logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #059669, #047857);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .partner-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .partner-type {
+            color: #059669;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .partner-description {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .success-stories {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .story-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .story-info p {
+            margin: 5px 0 0 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .story-content {
+            opacity: 0.9;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .collaboration-benefits {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            background: #f8fafc;
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #059669, #047857);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .benefit-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .contact-collaboration {
+            background: #f8fafc;
+            padding: 80px 0;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-method {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-method-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #059669, #047857);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .collaboration-title {
+                font-size: 2.5rem;
+            }
+            
+            .event-planner-container {
+                margin: 10px;
+                max-height: 95vh;
+            }
+            
+            .event-planner-content {
+                padding: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +562,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
-                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="job-metrics.html">Job Metrics</a>
+                        <a href="demo-courses.html">Demo Courses</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling�</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready�Training</a>
+                        <a href="communication-skills.html">Apply Jobs/Internships</a>
+                        <a href="certification-courses.html">Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -41,16 +582,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="unpaid-internship.html">Internship Access</a>
                         <a href="recorded-trainings.html">Trainings</a>
-                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-workshop.html">Workshops</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
-                        <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role�Ready)</a>
+                        <a href="collaboration-events.html">Collaboration</a>
+                        <a href="student-training.html">Student Training</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +596,12 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">AI Interviews</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Hiring Drives</a>
-                          <a href="Expert-session.html">Expert�Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -74,274 +609,704 @@
             <a href="#" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
-                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
                     <span class="btn-text">Login</span>
-                </div>
-                <div class="btn-bg"></div>
-                <div class="btn-particles">
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
                 </div>
             </a>
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
-        </div>
-        
+    <!-- Collaboration Hero Section -->
+    <section class="collaboration-hero">
         <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">��</span>
-                    <span class="badge-text">Prudent Service</span>
+            <div class="collaboration-hero-content">
+                <div class="collaboration-badge">
+                    <span>🤝</span>
+                    <span>Institute Collaboration Platform</span>
                 </div>
                 
-                <h1 class="service-title">Conduct Events in Collaboration</h1>
-                <p class="service-subtitle">Collaborative events, seminars, and conferences organized jointly with your institute.</p>
+                <h1 class="collaboration-title">Build Strategic Partnerships</h1>
+                <p class="collaboration-subtitle">
+                    Connect, collaborate, and create impactful educational experiences through our 
+                    comprehensive institute partnership platform. Join a network of leading educational 
+                    institutions working together to enhance student outcomes and industry readiness.
+                </p>
                 
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-handshake"></i>
-                        <span>Joint Events</span>
+                <div class="collaboration-stats">
+                    <div class="collaboration-stat">
+                        <span class="collaboration-stat-number">500+</span>
+                        <span class="collaboration-stat-label">Partner Institutes</span>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-handshake"></i>
-                        <span>Seminars & Conferences</span>
+                    <div class="collaboration-stat">
+                        <span class="collaboration-stat-number">1000+</span>
+                        <span class="collaboration-stat-label">Collaborative Events</span>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-handshake"></i>
-                        <span>Collaborative Planning</span>
+                    <div class="collaboration-stat">
+                        <span class="collaboration-stat-number">50K+</span>
+                        <span class="collaboration-stat-label">Students Benefited</span>
                     </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your organization and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Joint Events</li><li><i class="fas fa-check"></i> Seminars & Conferences</li><li><i class="fas fa-check"></i> Collaborative Planning</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your organization's growth and success.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Organizational growth</li>
-                            <li><i class="fas fa-check"></i> Enhanced capabilities</li>
-                            <li><i class="fas fa-check"></i> Strategic advantage</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Contact Us</h3>
-                        <p>Reach out to our team to discuss your requirements and service expectations.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Planning</h3>
-                        <p>We work with you to create a customized plan that meets your specific needs.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Implementation</h3>
-                        <p>Our team implements the service with regular updates and quality checkpoints.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Receive the completed service with ongoing support and maintenance as needed.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Customized Approach</h4>
-                            <p>Tailored service delivery based on your specific organizational needs and objectives.</p>
-                        </div>
+                    <div class="collaboration-stat">
+                        <span class="collaboration-stat-number">95%</span>
+                        <span class="collaboration-stat-label">Success Rate</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
+    <!-- Collaboration Types Section -->
+    <section class="collaboration-types">
         <div class="container">
             <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
+                <h2>Collaboration Opportunities</h2>
+                <p>Diverse partnership models to enhance educational excellence and student success</p>
             </div>
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to implement?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The implementation timeline varies based on the specific service and your requirements. We provide detailed timelines during the planning phase and keep you updated throughout.</p>
+            <div class="types-grid">
+                <div class="collab-type-card">
+                    <div class="collab-type-icon">
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
+                    <h3 class="collab-type-title">Joint Events & Conferences</h3>
+                    <p class="collab-type-description">
+                        Organize impactful educational events, conferences, and seminars together. 
+                        Share resources, expertise, and audiences for maximum impact and reach.
+                    </p>
+                    <ul class="collab-type-features">
+                        <li><i class="fas fa-check"></i> Event co-hosting</li>
+                        <li><i class="fas fa-check"></i> Resource sharing</li>
+                        <li><i class="fas fa-check"></i> Joint marketing</li>
+                        <li><i class="fas fa-check"></i> Expert speakers</li>
+                    </ul>
+                    <button class="collab-type-btn" onclick="planEvent('joint-events')">Plan Joint Event</button>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What support do you provide during implementation?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive support including dedicated account management, regular progress updates, and immediate assistance for any issues or questions.</p>
+                <div class="collab-type-card">
+                    <div class="collab-type-icon">
+                        <i class="fas fa-exchange-alt"></i>
                     </div>
+                    <h3 class="collab-type-title">Student Exchange Programs</h3>
+                    <p class="collab-type-description">
+                        Facilitate student exchange programs to provide diverse learning experiences, 
+                        cultural exposure, and broader educational perspectives.
+                    </p>
+                    <ul class="collab-type-features">
+                        <li><i class="fas fa-check"></i> Student mobility</li>
+                        <li><i class="fas fa-check"></i> Cultural exchange</li>
+                        <li><i class="fas fa-check"></i> Academic credits</li>
+                        <li><i class="fas fa-check"></i> Support services</li>
+                    </ul>
+                    <button class="collab-type-btn" onclick="planEvent('exchange-program')">Start Exchange Program</button>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can the service be customized for our specific needs?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely! We work closely with you to understand your unique requirements and customize the service accordingly to ensure maximum value and effectiveness.</p>
+                <div class="collab-type-card">
+                    <div class="collab-type-icon">
+                        <i class="fas fa-project-diagram"></i>
                     </div>
+                    <h3 class="collab-type-title">Research Collaborations</h3>
+                    <p class="collab-type-description">
+                        Partner on research projects, share facilities and expertise, and publish 
+                        joint research papers to advance knowledge and innovation.
+                    </p>
+                    <ul class="collab-type-features">
+                        <li><i class="fas fa-check"></i> Joint research</li>
+                        <li><i class="fas fa-check"></i> Facility sharing</li>
+                        <li><i class="fas fa-check"></i> Co-publications</li>
+                        <li><i class="fas fa-check"></i> Grant applications</li>
+                    </ul>
+                    <button class="collab-type-btn" onclick="planEvent('research-collab')">Propose Research</button>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What happens after the service is completed?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We provide ongoing support, maintenance, and are available for future enhancements or additional services as your needs evolve.</p>
+                <div class="collab-type-card">
+                    <div class="collab-type-icon">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
+                    <h3 class="collab-type-title">Joint Degree Programs</h3>
+                    <p class="collab-type-description">
+                        Develop and offer joint degree programs that combine strengths of multiple 
+                        institutions to provide comprehensive and specialized education.
+                    </p>
+                    <ul class="collab-type-features">
+                        <li><i class="fas fa-check"></i> Dual degrees</li>
+                        <li><i class="fas fa-check"></i> Curriculum design</li>
+                        <li><i class="fas fa-check"></i> Faculty exchange</li>
+                        <li><i class="fas fa-check"></i> Quality assurance</li>
+                    </ul>
+                    <button class="collab-type-btn" onclick="planEvent('joint-degree')">Design Program</button>
+                </div>
+                
+                <div class="collab-type-card">
+                    <div class="collab-type-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="collab-type-title">Industry Partnerships</h3>
+                    <p class="collab-type-description">
+                        Connect with industry partners through collaborative initiatives, internship 
+                        programs, and real-world project implementations.
+                    </p>
+                    <ul class="collab-type-features">
+                        <li><i class="fas fa-check"></i> Industry connections</li>
+                        <li><i class="fas fa-check"></i> Internship programs</li>
+                        <li><i class="fas fa-check"></i> Live projects</li>
+                        <li><i class="fas fa-check"></i> Placement support</li>
+                    </ul>
+                    <button class="collab-type-btn" onclick="planEvent('industry-partnership')">Connect Industry</button>
+                </div>
+                
+                <div class="collab-type-card">
+                    <div class="collab-type-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="collab-type-title">Technology Sharing</h3>
+                    <p class="collab-type-description">
+                        Share technological resources, online platforms, and digital infrastructure 
+                        to enhance learning experiences and reduce costs.
+                    </p>
+                    <ul class="collab-type-features">
+                        <li><i class="fas fa-check"></i> Platform sharing</li>
+                        <li><i class="fas fa-check"></i> Resource pooling</li>
+                        <li><i class="fas fa-check"></i> Cost reduction</li>
+                        <li><i class="fas fa-check"></i> Technical support</li>
+                    </ul>
+                    <button class="collab-type-btn" onclick="planEvent('tech-sharing')">Share Technology</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="service-cta">
+    <!-- Partnership Network -->
+    <section class="partnership-network">
         <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Transform your organization with our professional conduct events in collaboration service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        Contact Us
-                    </a>
+            <div class="section-header">
+                <h2>Our Partner Network</h2>
+                <p>Leading educational institutions and organizations in our collaboration ecosystem</p>
+            </div>
+            
+            <div class="partners-grid">
+                <div class="partner-card" onclick="viewPartnerDetails('iit')">
+                    <div class="partner-logo">IIT</div>
+                    <h3 class="partner-name">Indian Institute of Technology</h3>
+                    <p class="partner-type">Premier Technical Institute</p>
+                    <p class="partner-description">
+                        Leading technical education and research institution with excellence in 
+                        engineering, technology, and innovation.
+                    </p>
+                </div>
+                
+                <div class="partner-card" onclick="viewPartnerDetails('iim')">
+                    <div class="partner-logo">IIM</div>
+                    <h3 class="partner-name">Indian Institute of Management</h3>
+                    <p class="partner-type">Business School</p>
+                    <p class="partner-description">
+                        Top-tier management education institution known for producing business 
+                        leaders and entrepreneurs.
+                    </p>
+                </div>
+                
+                <div class="partner-card" onclick="viewPartnerDetails('nit')">
+                    <div class="partner-logo">NIT</div>
+                    <h3 class="partner-name">National Institute of Technology</h3>
+                    <p class="partner-type">Technical University</p>
+                    <p class="partner-description">
+                        Prestigious engineering and technology institutes with strong industry 
+                        connections and research focus.
+                    </p>
+                </div>
+                
+                <div class="partner-card" onclick="viewPartnerDetails('iisc')">
+                    <div class="partner-logo">IISc</div>
+                    <h3 class="partner-name">Indian Institute of Science</h3>
+                    <p class="partner-type">Research Institute</p>
+                    <p class="partner-description">
+                        Premier research institution focusing on advanced scientific research 
+                        and postgraduate education.
+                    </p>
+                </div>
+                
+                <div class="partner-card" onclick="viewPartnerDetails('du')">
+                    <div class="partner-logo">DU</div>
+                    <h3 class="partner-name">Delhi University</h3>
+                    <p class="partner-type">Central University</p>
+                    <p class="partner-description">
+                        One of India's largest universities offering diverse academic programs 
+                        across multiple disciplines.
+                    </p>
+                </div>
+                
+                <div class="partner-card" onclick="viewPartnerDetails('bits')">
+                    <div class="partner-logo">BITS</div>
+                    <h3 class="partner-name">BITS Pilani</h3>
+                    <p class="partner-type">Private University</p>
+                    <p class="partner-description">
+                        Leading private technical university known for innovation, research, 
+                        and industry partnerships.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+    <!-- Success Stories -->
+    <section class="success-stories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Collaboration Success Stories</h2>
+                <p>Real impact stories from our partner institutions and collaborative initiatives</p>
+            </div>
+            
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar">IIT</div>
+                        <div class="story-info">
+                            <h4>IIT Delhi & NIT Collaboration</h4>
+                            <p>Joint Research Project</p>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        "Our collaboration with NIT resulted in groundbreaking research in AI and Machine Learning. 
+                        The joint project involved 50+ students and led to 3 international publications. 
+                        The resource sharing model reduced costs by 40% while doubling research output."
+                    </div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar">IIM</div>
+                        <div class="story-info">
+                            <h4>IIM Bangalore & Industry Partners</h4>
+                            <p>Executive Education Program</p>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        "Through SaarthiX collaboration platform, we connected with 15 industry partners 
+                        to create a comprehensive executive education program. Over 500 professionals 
+                        have benefited, with 95% reporting significant career advancement."
+                    </div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="story-header">
+                        <div class="story-avatar">DU</div>
+                        <div class="story-info">
+                            <h4>Multi-University Student Exchange</h4>
+                            <p>Cultural & Academic Exchange</p>
+                        </div>
+                    </div>
+                    <div class="story-content">
+                        "The student exchange program facilitated through SaarthiX has been transformative. 
+                        200+ students participated across 10 universities, leading to enhanced cultural 
+                        understanding and improved academic performance by 25%."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Benefits -->
+    <section class="collaboration-benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>Benefits of Collaboration</h2>
+                <p>Why institutes choose to partner with us for collaborative initiatives</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="benefit-title">Expanded Network</h3>
+                    <p class="benefit-description">
+                        Access to a vast network of educational institutions, industry partners, 
+                        and academic resources for enhanced collaboration opportunities.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="benefit-title">Cost Efficiency</h3>
+                    <p class="benefit-description">
+                        Reduce operational costs through resource sharing, joint programs, 
+                        and collaborative infrastructure utilization.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="benefit-title">Enhanced Reputation</h3>
+                    <p class="benefit-description">
+                        Build institutional reputation through association with leading partners 
+                        and successful collaborative initiatives.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="benefit-title">Innovation Boost</h3>
+                    <p class="benefit-description">
+                        Foster innovation through diverse perspectives, shared expertise, 
+                        and collaborative research opportunities.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="benefit-title">Faculty Development</h3>
+                    <p class="benefit-description">
+                        Provide faculty with opportunities for professional development, 
+                        research collaboration, and knowledge exchange.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="benefit-title">Student Outcomes</h3>
+                    <p class="benefit-description">
+                        Improve student learning outcomes through diverse educational experiences, 
+                        industry exposure, and enhanced opportunities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Collaboration -->
+    <section class="contact-collaboration">
+        <div class="container">
+            <div class="contact-container">
+                <div class="section-header">
+                    <h2>Start Your Collaboration Journey</h2>
+                    <p>Ready to partner with us? Get in touch to explore collaboration opportunities</p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="collaborationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="instituteName">Institute Name</label>
+                                <input type="text" id="instituteName" name="instituteName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPerson">Contact Person</label>
+                                <input type="text" id="contactPerson" name="contactPerson" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="collaborationType">Collaboration Interest</label>
+                            <select id="collaborationType" name="collaborationType" required>
+                                <option value="">Select Collaboration Type</option>
+                                <option value="joint-events">Joint Events & Conferences</option>
+                                <option value="student-exchange">Student Exchange Programs</option>
+                                <option value="research">Research Collaborations</option>
+                                <option value="joint-degree">Joint Degree Programs</option>
+                                <option value="industry-partnership">Industry Partnerships</option>
+                                <option value="technology-sharing">Technology Sharing</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message & Requirements</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your collaboration ideas, requirements, and expectations..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-event-btn">
+                            <i class="fas fa-handshake"></i> Start Collaboration
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email Us</h4>
+                        <p>partnerships@saarthix.com</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h4>Call Us</h4>
+                        <p>+91 98765 43210</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <h4>Schedule Meeting</h4>
+                        <p>Book a consultation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Planner Modal -->
+    <div class="event-planner" id="eventPlanner">
+        <div class="event-planner-container">
+            <div class="event-planner-header">
+                <div>
+                    <h2>Plan Collaborative Event</h2>
+                    <p>Create impactful educational experiences together</p>
+                </div>
+                <button class="event-planner-close" onclick="closeEventPlanner()">×</button>
+            </div>
+            
+            <div class="event-planner-content">
+                <form class="planner-form" id="eventPlannerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventTitle">Event Title</label>
+                            <input type="text" id="eventTitle" name="eventTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventType">Event Type</label>
+                            <select id="eventType" name="eventType" required>
+                                <option value="">Select Event Type</option>
+                                <option value="conference">Conference</option>
+                                <option value="seminar">Seminar</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="symposium">Symposium</option>
+                                <option value="hackathon">Hackathon</option>
+                                <option value="competition">Competition</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventDate">Event Date</label>
+                            <input type="date" id="eventDate" name="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Duration (Days)</label>
+                            <select id="duration" name="duration" required>
+                                <option value="">Select Duration</option>
+                                <option value="1">1 Day</option>
+                                <option value="2">2 Days</option>
+                                <option value="3">3 Days</option>
+                                <option value="5">5 Days</option>
+                                <option value="7">1 Week</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expectedAttendees">Expected Attendees</label>
+                            <select id="expectedAttendees" name="expectedAttendees" required>
+                                <option value="">Select Range</option>
+                                <option value="50-100">50-100</option>
+                                <option value="100-250">100-250</option>
+                                <option value="250-500">250-500</option>
+                                <option value="500-1000">500-1000</option>
+                                <option value="1000+">1000+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" name="budget" required>
+                                <option value="">Select Budget</option>
+                                <option value="1-5L">₹1-5 Lakhs</option>
+                                <option value="5-10L">₹5-10 Lakhs</option>
+                                <option value="10-25L">₹10-25 Lakhs</option>
+                                <option value="25-50L">₹25-50 Lakhs</option>
+                                <option value="50L+">₹50+ Lakhs</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDescription">Event Description & Objectives</label>
+                        <textarea id="eventDescription" name="eventDescription" placeholder="Describe the event, its objectives, target audience, and expected outcomes..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="collaborationRequirements">Collaboration Requirements</label>
+                        <textarea id="collaborationRequirements" name="collaborationRequirements" placeholder="What kind of collaboration are you looking for? Resource sharing, co-hosting, speaker exchange, etc."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-event-btn">
+                        <i class="fas fa-calendar-plus"></i> Submit Event Proposal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Event Planning System
+        function planEvent(eventType) {
+            document.getElementById('eventPlanner').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Pre-fill event type based on collaboration type
+            const eventTypeSelect = document.getElementById('eventType');
+            const eventTypeMap = {
+                'joint-events': 'conference',
+                'exchange-program': 'seminar',
+                'research-collab': 'symposium',
+                'joint-degree': 'workshop',
+                'industry-partnership': 'conference',
+                'tech-sharing': 'workshop'
+            };
+            
+            if (eventTypeMap[eventType]) {
+                eventTypeSelect.value = eventTypeMap[eventType];
+            }
+        }
+        
+        function closeEventPlanner() {
+            document.getElementById('eventPlanner').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event Planner Form Submission
+        document.getElementById('eventPlannerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const eventData = Object.fromEntries(formData);
+            
+            // Simulate form processing
+            const submitBtn = document.querySelector('.submit-event-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert(`🎉 Event Proposal Submitted Successfully!\n\nEvent: ${eventData.eventTitle}\nType: ${eventData.eventType}\nDate: ${eventData.eventDate}\nAttendees: ${eventData.expectedAttendees}\n\nOur collaboration team will review your proposal and contact you within 24 hours with potential partners and next steps!`);
+                
+                closeEventPlanner();
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+        
+        // Collaboration Form Submission
+        document.getElementById('collaborationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const collabData = Object.fromEntries(formData);
+            
+            // Simulate form processing
+            const submitBtn = document.querySelector('#collaborationForm .submit-event-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert(`🤝 Collaboration Request Submitted!\n\nInstitute: ${collabData.instituteName}\nContact: ${collabData.contactPerson}\nType: ${collabData.collaborationType}\n\nThank you for your interest in collaboration! Our partnership team will review your request and schedule a consultation call within 48 hours to discuss opportunities and next steps.`);
+                
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+        
+        // Partner Details Function
+        function viewPartnerDetails(partnerId) {
+            const partnerInfo = {
+                'iit': {
+                    name: 'Indian Institute of Technology',
+                    type: 'Premier Technical Institute',
+                    collaborations: '50+ joint research projects, 200+ student exchanges',
+                    specialties: 'Engineering, Technology, Research, Innovation'
+                },
+                'iim': {
+                    name: 'Indian Institute of Management',
+                    type: 'Business School',
+                    collaborations: '30+ executive programs, 100+ industry partnerships',
+                    specialties: 'Management, Leadership, Business Strategy, Entrepreneurship'
+                },
+                'nit': {
+                    name: 'National Institute of Technology',
+                    type: 'Technical University',
+                    collaborations: '40+ research collaborations, 150+ student projects',
+                    specialties: 'Engineering, Applied Sciences, Technology Transfer'
+                },
+                'iisc': {
+                    name: 'Indian Institute of Science',
+                    type: 'Research Institute',
+                    collaborations: '60+ research partnerships, 25+ joint publications',
+                    specialties: 'Advanced Research, Scientific Innovation, PhD Programs'
+                },
+                'du': {
+                    name: 'Delhi University',
+                    type: 'Central University',
+                    collaborations: '80+ academic partnerships, 300+ student exchanges',
+                    specialties: 'Liberal Arts, Sciences, Social Sciences, Humanities'
+                },
+                'bits': {
+                    name: 'BITS Pilani',
+                    type: 'Private University',
+                    collaborations: '35+ industry partnerships, 120+ collaborative projects',
+                    specialties: 'Engineering, Sciences, Management, Entrepreneurship'
+                }
+            };
+            
+            const partner = partnerInfo[partnerId];
+            if (partner) {
+                alert(`🏛️ ${partner.name}\n\nType: ${partner.type}\nSpecialties: ${partner.specialties}\nCollaborations: ${partner.collaborations}\n\nInterested in partnering? Contact our collaboration team to explore opportunities!`);
+            }
+        }
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.collab-type-card, .partner-card, .story-card, .benefit-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Close modal when clicking outside
+        document.getElementById('eventPlanner').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEventPlanner();
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-

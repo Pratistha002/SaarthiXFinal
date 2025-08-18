@@ -80,6 +80,7 @@
             display: flex;
             gap: 15px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .filter-select {
@@ -89,11 +90,164 @@
             font-size: 14px;
             background: white;
             cursor: pointer;
+            min-width: 150px;
         }
 
         .filter-select:focus {
             outline: none;
             border-color: #007bff;
+        }
+
+        .advanced-filters {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+            text-transform: uppercase;
+        }
+
+        .rating-filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .rating-filter-btn {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-filter-btn:hover {
+            border-color: #007bff;
+            background: #f8f9ff;
+        }
+
+        .rating-filter-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .rating-filter-btn.best {
+            border-color: #28a745;
+            color: #28a745;
+        }
+
+        .rating-filter-btn.best:hover,
+        .rating-filter-btn.best.active {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .rating-filter-btn.worst {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .rating-filter-btn.worst:hover,
+        .rating-filter-btn.worst.active {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .price-range-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 200px;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price-input {
+            width: 80px;
+            padding: 6px 8px;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .price-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e9ecef;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .price-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+        }
+
+        .price-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            border: none;
+        }
+
+        .clear-filters-btn {
+            padding: 8px 16px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-filters-btn:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        .filter-results-count {
+            margin-left: auto;
+            padding: 8px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .experts-grid {
@@ -449,7 +603,7 @@
                     <!-- Search and Filter -->
                     <div class="search-filter-section">
                         <div class="search-box">
-                            <input type="text" placeholder="Search experts by name, skill, or expertise...">
+                            <input type="text" placeholder="Search experts by name, skill, or expertise..." id="searchInput">
                             <i class="fas fa-search"></i>
                         </div>
                         <div class="filter-section">
@@ -461,14 +615,73 @@
                                 <option value="marketing">Marketing</option>
                                 <option value="design">Design</option>
                                 <option value="finance">Finance</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="ai-ml">AI & Machine Learning</option>
+                                <option value="product-management">Product Management</option>
                             </select>
-                            <select class="filter-select" id="rateFilter">
-                                <option value="">All Rates</option>
-                                <option value="0-25">$0 - $25/hour</option>
-                                <option value="25-50">$25 - $50/hour</option>
-                                <option value="50-100">$50 - $100/hour</option>
-                                <option value="100+">$100+/hour</option>
+                            <select class="filter-select" id="experienceFilter">
+                                <option value="">All Experience</option>
+                                <option value="1-3">1-3 Years</option>
+                                <option value="3-5">3-5 Years</option>
+                                <option value="5-10">5-10 Years</option>
+                                <option value="10+">10+ Years</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Filters -->
+                    <div class="advanced-filters">
+                        <div class="filter-group">
+                            <div class="filter-label">Teacher Rating</div>
+                            <div class="rating-filter-buttons">
+                                <button class="rating-filter-btn" data-rating="all" onclick="filterByRating('all')">
+                                    <i class="fas fa-star"></i> All
+                                </button>
+                                <button class="rating-filter-btn best" data-rating="best" onclick="filterByRating('best')">
+                                    <i class="fas fa-trophy"></i> Best (4.5+)
+                                </button>
+                                <button class="rating-filter-btn" data-rating="good" onclick="filterByRating('good')">
+                                    <i class="fas fa-thumbs-up"></i> Good (4.0+)
+                                </button>
+                                <button class="rating-filter-btn" data-rating="average" onclick="filterByRating('average')">
+                                    <i class="fas fa-minus"></i> Average (3.0+)
+                                </button>
+                                <button class="rating-filter-btn worst" data-rating="worst" onclick="filterByRating('worst')">
+                                    <i class="fas fa-thumbs-down"></i> Below 3.0
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-label">Price Range ($/hour)</div>
+                            <div class="price-range-slider">
+                                <div class="price-inputs">
+                                    <input type="number" class="price-input" id="minPrice" placeholder="Min" min="0" max="200" value="0">
+                                    <span>-</span>
+                                    <input type="number" class="price-input" id="maxPrice" placeholder="Max" min="0" max="200" value="200">
+                                </div>
+                                <input type="range" class="price-slider" id="priceRange" min="0" max="200" value="100" oninput="updatePriceRange(this.value)">
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-label">Quick Filters</div>
+                            <select class="filter-select" id="quickFilter">
+                                <option value="">All Experts</option>
+                                <option value="verified">✓ Verified Only</option>
+                                <option value="top-rated">⭐ Top Rated</option>
+                                <option value="rising-talent">🚀 Rising Talent</option>
+                                <option value="available-now">🟢 Available Now</option>
+                                <option value="new-experts">🆕 New Experts</option>
+                            </select>
+                        </div>
+
+                        <button class="clear-filters-btn" onclick="clearAllFilters()">
+                            <i class="fas fa-times"></i> Clear All
+                        </button>
+
+                        <div class="filter-results-count" id="resultsCount">
+                            Showing 12 experts
                         </div>
                     </div>
 
@@ -701,6 +914,124 @@
                             </div>
                             <button class="view-profile-btn" onclick="viewProfile('Jinu M.')">View Profile</button>
                         </div>
+
+                        <!-- Expert 9 - High Rating, High Price -->
+                        <div class="expert-card">
+                            <div class="expert-profile">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face" alt="Dr. Rajesh K." class="expert-avatar">
+                                <div class="expert-info">
+                                    <div class="expert-name">Dr. Rajesh K.</div>
+                                    <div class="expert-title">AI & Machine Learning Expert</div>
+                                    <div class="expert-rate">$150 per hour</div>
+                                </div>
+                            </div>
+                            <div class="expert-badges">
+                                <span class="badge badge-verified">✓ Verified</span>
+                                <span class="badge badge-top-rated">⭐ Top Rated</span>
+                            </div>
+                            <div class="expert-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-score">4.9</span>
+                                <span class="rating-count">(127 reviews)</span>
+                            </div>
+                            <div class="expert-skills">
+                                <div class="skills-list">
+                                    <span class="skill-tag">Machine Learning</span>
+                                    <span class="skill-tag">Deep Learning</span>
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">TensorFlow</span>
+                                </div>
+                            </div>
+                            <button class="view-profile-btn" onclick="viewProfile('Dr. Rajesh K.')">View Profile</button>
+                        </div>
+
+                        <!-- Expert 10 - Low Rating, Low Price -->
+                        <div class="expert-card">
+                            <div class="expert-profile">
+                                <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face" alt="Amit S." class="expert-avatar">
+                                <div class="expert-info">
+                                    <div class="expert-name">Amit S.</div>
+                                    <div class="expert-title">Junior Developer</div>
+                                    <div class="expert-rate">$15 per hour</div>
+                                </div>
+                            </div>
+                            <div class="expert-badges">
+                                <span class="badge badge-rising-talent">🚀 Rising Talent</span>
+                            </div>
+                            <div class="expert-rating">
+                                <div class="stars">★★☆☆☆</div>
+                                <span class="rating-score">2.8</span>
+                                <span class="rating-count">(23 reviews)</span>
+                            </div>
+                            <div class="expert-skills">
+                                <div class="skills-list">
+                                    <span class="skill-tag">HTML</span>
+                                    <span class="skill-tag">CSS</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                </div>
+                            </div>
+                            <button class="view-profile-btn" onclick="viewProfile('Amit S.')">View Profile</button>
+                        </div>
+
+                        <!-- Expert 11 - Medium Rating, Medium Price -->
+                        <div class="expert-card">
+                            <div class="expert-profile">
+                                <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=face" alt="Sarah L." class="expert-avatar">
+                                <div class="expert-info">
+                                    <div class="expert-name">Sarah L.</div>
+                                    <div class="expert-title">Product Manager</div>
+                                    <div class="expert-rate">$75 per hour</div>
+                                </div>
+                            </div>
+                            <div class="expert-badges">
+                                <span class="badge badge-verified">✓ Verified</span>
+                            </div>
+                            <div class="expert-rating">
+                                <div class="stars">★★★★☆</div>
+                                <span class="rating-score">3.8</span>
+                                <span class="rating-count">(64 reviews)</span>
+                            </div>
+                            <div class="expert-skills">
+                                <div class="skills-list">
+                                    <span class="skill-tag">Product Strategy</span>
+                                    <span class="skill-tag">Agile</span>
+                                    <span class="skill-tag">User Research</span>
+                                    <span class="skill-tag">Analytics</span>
+                                </div>
+                            </div>
+                            <button class="view-profile-btn" onclick="viewProfile('Sarah L.')">View Profile</button>
+                        </div>
+
+                        <!-- Expert 12 - Excellent Rating, Premium Price -->
+                        <div class="expert-card">
+                            <div class="expert-profile">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Prof. Michael Chen" class="expert-avatar">
+                                <div class="expert-info">
+                                    <div class="expert-name">Prof. Michael Chen</div>
+                                    <div class="expert-title">Data Science Consultant</div>
+                                    <div class="expert-rate">$180 per hour</div>
+                                </div>
+                            </div>
+                            <div class="expert-badges">
+                                <span class="badge badge-verified">✓ Verified</span>
+                                <span class="badge badge-top-rated">⭐ Top Rated</span>
+                            </div>
+                            <div class="expert-rating">
+                                <div class="stars">★★★★★</div>
+                                <span class="rating-score">4.8</span>
+                                <span class="rating-count">(203 reviews)</span>
+                            </div>
+                            <div class="expert-skills">
+                                <div class="skills-list">
+                                    <span class="skill-tag">Data Science</span>
+                                    <span class="skill-tag">Statistics</span>
+                                    <span class="skill-tag">R</span>
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">SQL</span>
+                                </div>
+                            </div>
+                            <button class="view-profile-btn" onclick="viewProfile('Prof. Michael Chen')">View Profile</button>
+                        </div>
                     </div>
 
                     <!-- Load More Section -->
@@ -818,6 +1149,170 @@
                 card.style.display = showCard ? '' : 'none';
             });
         }
+
+        // Advanced filtering functions
+        let currentRatingFilter = 'all';
+        let currentPriceRange = { min: 0, max: 200 };
+
+        function filterByRating(rating) {
+            // Update active button
+            document.querySelectorAll('.rating-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-rating="${rating}"]`).classList.add('active');
+            
+            currentRatingFilter = rating;
+            applyAllFilters();
+        }
+
+        function updatePriceRange(value) {
+            currentPriceRange.max = parseInt(value);
+            document.getElementById('maxPrice').value = value;
+            applyAllFilters();
+        }
+
+        function applyAllFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const expertiseFilter = document.getElementById('expertiseFilter').value;
+            const experienceFilter = document.getElementById('experienceFilter').value;
+            const quickFilter = document.getElementById('quickFilter').value;
+            const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
+            const maxPrice = parseInt(document.getElementById('maxPrice').value) || 200;
+            
+            const expertCards = document.querySelectorAll('.expert-card');
+            let visibleCount = 0;
+            
+            expertCards.forEach(card => {
+                let showCard = true;
+                
+                // Search filter
+                if (searchTerm) {
+                    const name = card.querySelector('.expert-name').textContent.toLowerCase();
+                    const title = card.querySelector('.expert-title').textContent.toLowerCase();
+                    const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                    
+                    if (!name.includes(searchTerm) && !title.includes(searchTerm) && !skills.includes(searchTerm)) {
+                        showCard = false;
+                    }
+                }
+                
+                // Expertise filter
+                if (expertiseFilter && showCard) {
+                    const title = card.querySelector('.expert-title').textContent.toLowerCase();
+                    const skills = Array.from(card.querySelectorAll('.skill-tag')).map(skill => skill.textContent.toLowerCase()).join(' ');
+                    
+                    if (!title.includes(expertiseFilter.toLowerCase()) && !skills.includes(expertiseFilter.toLowerCase())) {
+                        showCard = false;
+                    }
+                }
+                
+                // Rating filter
+                if (currentRatingFilter !== 'all' && showCard) {
+                    const ratingElement = card.querySelector('.rating-score');
+                    if (ratingElement) {
+                        const rating = parseFloat(ratingElement.textContent);
+                        
+                        switch(currentRatingFilter) {
+                            case 'best':
+                                if (rating < 4.5) showCard = false;
+                                break;
+                            case 'good':
+                                if (rating < 4.0) showCard = false;
+                                break;
+                            case 'average':
+                                if (rating < 3.0) showCard = false;
+                                break;
+                            case 'worst':
+                                if (rating >= 3.0) showCard = false;
+                                break;
+                        }
+                    }
+                }
+                
+                // Price filter
+                if (showCard) {
+                    const rateText = card.querySelector('.expert-rate').textContent;
+                    const rate = parseInt(rateText.match(/\d+/)[0]);
+                    
+                    if (rate < minPrice || rate > maxPrice) {
+                        showCard = false;
+                    }
+                }
+                
+                // Quick filter
+                if (quickFilter && showCard) {
+                    const badges = Array.from(card.querySelectorAll('.badge')).map(badge => badge.textContent.toLowerCase());
+                    
+                    switch(quickFilter) {
+                        case 'verified':
+                            if (!badges.some(badge => badge.includes('verified'))) showCard = false;
+                            break;
+                        case 'top-rated':
+                            if (!badges.some(badge => badge.includes('top rated'))) showCard = false;
+                            break;
+                        case 'rising-talent':
+                            if (!badges.some(badge => badge.includes('rising talent'))) showCard = false;
+                            break;
+                    }
+                }
+                
+                card.style.display = showCard ? '' : 'none';
+                if (showCard) visibleCount++;
+            });
+            
+            // Update results count
+            document.getElementById('resultsCount').textContent = `Showing ${visibleCount} experts`;
+        }
+
+        function clearAllFilters() {
+            // Reset all form elements
+            document.getElementById('searchInput').value = '';
+            document.getElementById('expertiseFilter').value = '';
+            document.getElementById('experienceFilter').value = '';
+            document.getElementById('quickFilter').value = '';
+            document.getElementById('minPrice').value = '0';
+            document.getElementById('maxPrice').value = '200';
+            document.getElementById('priceRange').value = '100';
+            
+            // Reset rating filter
+            document.querySelectorAll('.rating-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('[data-rating="all"]').classList.add('active');
+            currentRatingFilter = 'all';
+            
+            // Reset price range
+            currentPriceRange = { min: 0, max: 200 };
+            
+            // Show all cards
+            document.querySelectorAll('.expert-card').forEach(card => {
+                card.style.display = '';
+            });
+            
+            // Update results count
+            const totalExperts = document.querySelectorAll('.expert-card').length;
+            document.getElementById('resultsCount').textContent = `Showing ${totalExperts} experts`;
+        }
+
+        // Event listeners for real-time filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchInput').addEventListener('input', applyAllFilters);
+            document.getElementById('expertiseFilter').addEventListener('change', applyAllFilters);
+            document.getElementById('experienceFilter').addEventListener('change', applyAllFilters);
+            document.getElementById('quickFilter').addEventListener('change', applyAllFilters);
+            document.getElementById('minPrice').addEventListener('input', function() {
+                currentPriceRange.min = parseInt(this.value) || 0;
+                applyAllFilters();
+            });
+            document.getElementById('maxPrice').addEventListener('input', function() {
+                currentPriceRange.max = parseInt(this.value) || 200;
+                document.getElementById('priceRange').value = this.value;
+                applyAllFilters();
+            });
+            
+            // Set initial active rating filter
+            document.querySelector('[data-rating="all"]').classList.add('active');
+        });
     </script>
     <script src="script.js"></script>
 </body>
