@@ -3,16 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Courses Videos - SaarthiX</title>
+    <title>Demo Course Videos - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <style>
+        /* Demo Videos Specific Styles */
+        .demo-videos-hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .demo-videos-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .video-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .video-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .video-stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 120px;
+        }
+
+        .video-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFD700;
+            display: block;
+        }
+
+        .video-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* Video Categories Filter */
+        .video-categories {
+            padding: 60px 0 40px;
+            background: #f8fafc;
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .category-filter {
+            padding: 12px 24px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .category-filter:hover,
+        .category-filter.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Video Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="70" r="1.2" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .play-button i {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-left: 3px;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .video-info {
+            padding: 25px;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .video-description {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .video-instructor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .video-level {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .level-beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .level-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .level-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-watch {
+            flex: 1;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-watch:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-bookmark {
+            padding: 10px 12px;
+            background: #f1f5f9;
+            color: #64748b;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-bookmark:hover {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        /* Featured Video Section */
+        .featured-video {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .featured-video-player {
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            position: relative;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .featured-play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .featured-play-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .featured-play-button i {
+            color: #667eea;
+            font-size: 2rem;
+            margin-left: 4px;
+        }
+
+        .featured-info {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .featured-details h3 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .featured-details p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .featured-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .featured-stat {
+            text-align: center;
+        }
+
+        .featured-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .featured-stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .course-outline {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .course-outline h4 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .outline-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .outline-item:last-child {
+            border-bottom: none;
+        }
+
+        .outline-number {
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .outline-title {
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .service-title {
+                font-size: 2.5rem;
+            }
+
+            .video-stats {
+                gap: 20px;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .featured-info {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .featured-details h3 {
+                font-size: 1.5rem;
+            }
+
+            .category-filters {
+                gap: 10px;
+            }
+
+            .category-filter {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +478,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
-                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="job-metrics.html">Job Metric</a>
+                        <a href="demo-courses.html" class="active">Demo Courses Videos</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling�</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready�Training</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -45,12 +502,10 @@
                         <a href="recorded-trainings.html">Trainings</a>
                         <a href="recorded-workshop.html">Workshop</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role�Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role Ready)</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +513,13 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Hiring Drives</a>
-                          <a href="Expert-session.html">Expert�Session</a>
+                        <a href="Expert-session.html">Expert Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -88,260 +541,582 @@
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
+    <!-- Demo Videos Hero Section -->
+    <section class="demo-videos-hero">
         <div class="hero-background">
             <div class="bg-gradient-overlay"></div>
             <div class="bg-pattern"></div>
         </div>
         
         <div class="container">
-            <div class="service-hero-content">
+            <div class="video-hero-content">
                 <div class="service-badge">
-                    <span class="badge-icon">🆓</span>
-                    <span class="badge-text"> Free Service</span>
+                    <span class="badge-icon">🎬</span>
+                    <span class="badge-text">Free Demo Content</span>
                 </div>
                 
-                <h1 class="service-title">Demo Courses Videos</h1>
-                <p class="service-subtitle">Access free demo videos of our premium courses. Get a preview of our training content and teaching methodology.</p>
+                <h1 class="service-title">Demo Course Videos</h1>
+                <p class="service-subtitle">
+                    Explore our comprehensive course library with free demo videos. Get a taste of our premium content 
+                    and discover the perfect learning path for your career goals.
+                </p>
                 
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Course Previews</span>
+                <div class="video-stats">
+                    <div class="video-stat">
+                        <span class="video-stat-number">50+</span>
+                        <span class="video-stat-label">Demo Videos</span>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Expert Instructors</span>
+                    <div class="video-stat">
+                        <span class="video-stat-number">15</span>
+                        <span class="video-stat-label">Course Categories</span>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Quality Content</span>
+                    <div class="video-stat">
+                        <span class="video-stat-number">100+</span>
+                        <span class="video-stat-label">Hours of Content</span>
                     </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-play-circle"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your career development and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Course Previews</li><li><i class="fas fa-check"></i> Expert Instructors</li><li><i class="fas fa-check"></i> Quality Content</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your career progression and professional development.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Career advancement</li>
-                            <li><i class="fas fa-check"></i> Skill enhancement</li>
-                            <li><i class="fas fa-check"></i> Professional growth</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Enroll</h3>
-                        <p>Sign up for the service and complete your profile with relevant information.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Assessment</h3>
-                        <p>Complete initial assessments or provide necessary information for service delivery.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Service Delivery</h3>
-                        <p>Receive the service through our platform with expert guidance and support.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Get your results, reports, or completed deliverables with follow-up support.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Personalized Approach</h4>
-                            <p>Customized service delivery based on your specific needs, goals, and career objectives.</p>
-                        </div>
+                    <div class="video-stat">
+                        <span class="video-stat-number">4.8★</span>
+                        <span class="video-stat-label">Average Rating</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
+    <!-- Featured Video Section -->
+    <section class="featured-video">
+        <div class="featured-container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <h2>Featured Demo Video</h2>
+                <p>Start your learning journey with our most popular course introduction</p>
             </div>
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to complete?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The duration varies based on the specific service and your requirements. We provide estimated timelines during the enrollment process and keep you updated throughout.</p>
+            <div class="featured-video-player">
+                <div class="featured-play-button" onclick="playFeaturedVideo()">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+            
+            <div class="featured-info">
+                <div class="featured-details">
+                    <h3>Full Stack Web Development Fundamentals</h3>
+                    <p>
+                        Dive into the world of modern web development with this comprehensive introduction to full-stack development. 
+                        Learn the essential technologies, frameworks, and best practices that power today's web applications.
+                    </p>
+                    
+                    <div class="featured-stats">
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">45</span>
+                            <span class="featured-stat-label">Minutes</span>
+                        </div>
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">12K</span>
+                            <span class="featured-stat-label">Views</span>
+                        </div>
+                        <div class="featured-stat">
+                            <span class="featured-stat-number">4.9</span>
+                            <span class="featured-stat-label">Rating</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="#" class="btn-primary">
+                            <span class="btn-content">
+                                <i class="fas fa-play"></i>
+                                <span>Watch Full Course</span>
+                            </span>
+                            <div class="btn-glow"></div>
+                        </a>
+                        
+                        <a href="#" class="btn-secondary">
+                            <span class="btn-content">
+                                <i class="fas fa-bookmark"></i>
+                                <span>Save for Later</span>
+                            </span>
+                            <div class="btn-border"></div>
+                        </a>
                     </div>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What qualifications do your experts have?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our experts are industry professionals with relevant qualifications, certifications, and extensive experience in their respective fields.</p>
+                <div class="course-outline">
+                    <h4>What You'll Learn</h4>
+                    <div class="outline-item">
+                        <div class="outline-number">1</div>
+                        <div class="outline-title">HTML5 & CSS3 Fundamentals</div>
                     </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can I get a refund if I'm not satisfied?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We offer a satisfaction guarantee. If you're not satisfied with our service, please contact our support team to discuss your concerns and possible solutions.</p>
+                    <div class="outline-item">
+                        <div class="outline-number">2</div>
+                        <div class="outline-title">JavaScript ES6+ Features</div>
                     </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Do you provide ongoing support after service completion?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, we provide follow-up support and are available to answer questions or provide clarifications even after the service is completed.</p>
+                    <div class="outline-item">
+                        <div class="outline-number">3</div>
+                        <div class="outline-title">React.js Component Development</div>
+                    </div>
+                    <div class="outline-item">
+                        <div class="outline-number">4</div>
+                        <div class="outline-title">Node.js & Express Backend</div>
+                    </div>
+                    <div class="outline-item">
+                        <div class="outline-number">5</div>
+                        <div class="outline-title">Database Integration</div>
+                    </div>
+                    <div class="outline-item">
+                        <div class="outline-number">6</div>
+                        <div class="outline-title">Deployment & Best Practices</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="service-cta">
+    <!-- Video Categories and Grid -->
+    <section class="video-categories">
         <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Take the next step in your career journey with our professional demo courses videos service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        Learn More
-                    </a>
+            <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+                <h2>Browse Demo Videos by Category</h2>
+                <p>Choose from our diverse range of technology and skill-based courses</p>
+            </div>
+            
+            <div class="category-filters">
+                <button class="category-filter active" data-category="all">All Videos</button>
+                <button class="category-filter" data-category="web-development">Web Development</button>
+                <button class="category-filter" data-category="data-science">Data Science</button>
+                <button class="category-filter" data-category="mobile-development">Mobile Development</button>
+                <button class="category-filter" data-category="cloud-computing">Cloud Computing</button>
+                <button class="category-filter" data-category="ai-ml">AI & Machine Learning</button>
+                <button class="category-filter" data-category="cybersecurity">Cybersecurity</button>
+                <button class="category-filter" data-category="soft-skills">Soft Skills</button>
+            </div>
+            
+            <div class="videos-grid" id="videosGrid">
+                <!-- Web Development Videos -->
+                <div class="video-card fade-in" data-category="web-development">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">15:30</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">React.js Fundamentals</h3>
+                        <p class="video-description">Learn the basics of React.js, including components, props, and state management.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Sarah Johnson</span>
+                            </div>
+                            <div class="video-level level-beginner">Beginner</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in" data-category="web-development">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">22:45</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Node.js Backend Development</h3>
+                        <p class="video-description">Build scalable backend applications with Node.js and Express framework.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Mike Chen</span>
+                            </div>
+                            <div class="video-level level-intermediate">Intermediate</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Science Videos -->
+                <div class="video-card fade-in" data-category="data-science">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">18:20</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Python for Data Analysis</h3>
+                        <p class="video-description">Master data manipulation and analysis using Python, Pandas, and NumPy.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Dr. Emily Rodriguez</span>
+                            </div>
+                            <div class="video-level level-beginner">Beginner</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in" data-category="data-science">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">25:10</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Machine Learning Basics</h3>
+                        <p class="video-description">Introduction to machine learning algorithms and their practical applications.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Alex Kumar</span>
+                            </div>
+                            <div class="video-level level-intermediate">Intermediate</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Development Videos -->
+                <div class="video-card fade-in" data-category="mobile-development">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">20:15</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Flutter App Development</h3>
+                        <p class="video-description">Build cross-platform mobile apps with Flutter and Dart programming language.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Lisa Park</span>
+                            </div>
+                            <div class="video-level level-beginner">Beginner</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card fade-in" data-category="mobile-development">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">17:30</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">React Native Essentials</h3>
+                        <p class="video-description">Create native mobile apps using React Native and JavaScript.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>James Wilson</span>
+                            </div>
+                            <div class="video-level level-intermediate">Intermediate</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud Computing Videos -->
+                <div class="video-card fade-in" data-category="cloud-computing">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">24:45</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">AWS Cloud Fundamentals</h3>
+                        <p class="video-description">Get started with Amazon Web Services and learn core cloud computing concepts.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>David Thompson</span>
+                            </div>
+                            <div class="video-level level-beginner">Beginner</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI & ML Videos -->
+                <div class="video-card fade-in" data-category="ai-ml">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">30:20</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Deep Learning with TensorFlow</h3>
+                        <p class="video-description">Explore neural networks and deep learning using TensorFlow framework.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Dr. Rachel Green</span>
+                            </div>
+                            <div class="video-level level-advanced">Advanced</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cybersecurity Videos -->
+                <div class="video-card fade-in" data-category="cybersecurity">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">19:40</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ethical Hacking Basics</h3>
+                        <p class="video-description">Learn the fundamentals of ethical hacking and cybersecurity testing.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Marcus Black</span>
+                            </div>
+                            <div class="video-level level-intermediate">Intermediate</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills Videos -->
+                <div class="video-card fade-in" data-category="soft-skills">
+                    <div class="video-thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">14:25</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Effective Communication</h3>
+                        <p class="video-description">Master professional communication skills for workplace success.</p>
+                        <div class="video-meta">
+                            <div class="video-instructor">
+                                <i class="fas fa-user"></i>
+                                <span>Anna Martinez</span>
+                            </div>
+                            <div class="video-level level-beginner">Beginner</div>
+                        </div>
+                        <div class="video-actions">
+                            <button class="btn-watch">Watch Demo</button>
+                            <button class="btn-bookmark"><i class="fas fa-bookmark"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+    <!-- Call to Action -->
+    <section class="cta-section" style="padding: 80px 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to Start Learning?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">
+                Join thousands of students who have transformed their careers with our comprehensive courses.
+            </p>
+            <div class="hero-actions">
+                <a href="#" class="btn-primary">
+                    <span class="btn-content">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Enroll Now</span>
+                    </span>
+                    <div class="btn-glow"></div>
+                </a>
+                
+                <a href="#" class="btn-secondary" style="background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.3);">
+                    <span class="btn-content">
+                        <i class="fas fa-phone"></i>
+                        <span>Contact Us</span>
+                    </span>
+                    <div class="btn-border"></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SaarthiX</h3>
+                    <p>Empowering careers through innovative education and industry connections.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Students</h4>
+                    <ul>
+                        <li><a href="basic-profiling.html">Profiling</a></li>
+                        <li><a href="resume-building-watermark.html">Resume Building</a></li>
+                        <li><a href="demo-courses.html">Demo Videos</a></li>
+                        <li><a href="interview-questions.html">Interview Prep</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Institutes</h4>
+                    <ul>
+                        <li><a href="unpaid-internship.html">Internships</a></li>
+                        <li><a href="recorded-trainings.html">Trainings</a></li>
+                        <li><a href="recorded-workshop.html">Workshops</a></li>
+                        <li><a href="collaboration-events.html">Collaboration</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For Industry</h4>
+                    <ul>
+                        <li><a href="job-dashboard.html">Post Jobs</a></li>
+                        <li><a href="database-access.html">Database Access</a></li>
+                        <li><a href="ai-interview-glimpse.html">AI Interviews</a></li>
+                        <li><a href="drive-glimpse.html">Hiring Drives</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SaarthiX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryFilters = document.querySelectorAll('.category-filter');
+            const videoCards = document.querySelectorAll('.video-card');
+
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remove active class from all filters
+                    categoryFilters.forEach(f => f.classList.remove('active'));
+                    // Add active class to clicked filter
+                    this.classList.add('active');
+
+                    const selectedCategory = this.getAttribute('data-category');
+
+                    // Filter video cards
+                    videoCards.forEach(card => {
+                        if (selectedCategory === 'all' || card.getAttribute('data-category') === selectedCategory) {
+                            card.style.display = 'block';
+                            card.style.animation = 'fadeInUp 0.5s ease forwards';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Video card interactions
+            const watchButtons = document.querySelectorAll('.btn-watch');
+            const bookmarkButtons = document.querySelectorAll('.btn-bookmark');
+            const playButtons = document.querySelectorAll('.play-button');
+
+            watchButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Demo video will play here. In the full version, this would open a video player.');
+                });
+            });
+
+            bookmarkButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = button.querySelector('i');
+                    if (icon.classList.contains('fas')) {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        button.style.background = '#f1f5f9';
+                    } else {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        button.style.background = '#667eea';
+                        button.style.color = 'white';
+                    }
+                });
+            });
+
+            playButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Demo video will play here. In the full version, this would open a video player.');
+                });
+            });
+        });
+
+        function playFeaturedVideo() {
+            alert('Featured video will play here. In the full version, this would open a video player with the full course introduction.');
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
-
-
-

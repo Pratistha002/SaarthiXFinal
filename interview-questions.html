@@ -3,16 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interview Questions Topic Wise - SaarthiX</title>
+    <title>Interview Preparation - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <style>
+        /* Interview Preparation Specific Styles */
+        .interview-hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interview-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="interview" patternUnits="userSpaceOnUse" width="30" height="30"><circle cx="15" cy="15" r="3" fill="rgba(255,255,255,0.1)"/><rect x="10" y="10" width="10" height="10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23interview)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .interview-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .interview-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .interview-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interview-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .interview-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .interview-stat {
+            text-align: center;
+        }
+
+        .interview-stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 5px;
+        }
+
+        .interview-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .preparation-tools {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .prep-tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prep-tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #1e40af);
+        }
+
+        .prep-tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .prep-tool-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .prep-tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .prep-tool-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .prep-tool-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .prep-tool-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+
+        .prep-tool-features i {
+            color: #10b981;
+            font-size: 0.8rem;
+        }
+
+        .prep-tool-btn {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .prep-tool-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .mock-interview-interface {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+        }
+
+        .mock-interview-container {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .mock-interview-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mock-interview-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .mock-interview-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mock-interview-content {
+            padding: 40px;
+        }
+
+        .question-display {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .question-number {
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .answer-section {
+            margin-bottom: 30px;
+        }
+
+        .answer-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .answer-textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .interview-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .control-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .control-btn.primary {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+        }
+
+        .control-btn.secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 2px solid #e2e8f0;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-bank {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .category-card {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            background: white;
+            border-color: #2563eb;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .category-count {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .category-description {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tip-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .tip-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .tip-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .progress-tracker {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .progress-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .progress-stat {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .progress-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .interview-title {
+                font-size: 2.5rem;
+            }
+            
+            .mock-interview-container {
+                margin: 10px;
+                max-height: 95vh;
+            }
+            
+            .mock-interview-content {
+                padding: 20px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .interview-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="#">SaarthiX</a>
+            <a href="index.html">SaarthiX</a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -20,19 +501,18 @@
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                     <a href="basic-profiling.html">Profiling</a>
+                        <a href="basic-profiling.html">Profiling</a>
                         <a href="resume-building-watermark.html">Resume Building</a>
-                        <a href="job-metrics.html"> Job Metric</a>
-                        <a href="demo-courses.html">Demo Courses Videos</a>
+                        <a href="job-metrics.html">Job Metrics</a>
+                        <a href="demo-courses.html">Demo Courses</a>
                         <a href="interview-questions.html">Interview Preparation</a>
-                         <a href="career-counselling-ai.html">Career Counselling�</a>
+                        <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
-<div class="dropdown-section">
-                       
+                    <div class="dropdown-section">
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
-                        <a href="communication-skills.html">Apply Jobs/ Internships/Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready�Training</a>
+                        <a href="communication-skills.html">Apply Jobs/Internships</a>
+                        <a href="certification-courses.html">Role-ready Training</a>
                     </div>
                 </div>
             </li>
@@ -41,16 +521,12 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="unpaid-internship.html">Internship Access</a>
                         <a href="recorded-trainings.html">Trainings</a>
-                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-workshop.html">Workshops</a>
                         <a href="recorded-sessions.html">Expert Sessions</a>
-                         <a href="collaboration-events.html">Collaboration</a>
-                        <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role�Ready)</a>
+                        <a href="collaboration-events.html">Collaboration</a>
                     </div>
-
-
                 </div>
             </li>
             <li class="dropdown">
@@ -58,15 +534,12 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="limited-job-posting.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interviev/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">AI Interviews</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Hiring Drives</a>
-                          <a href="Expert-session.html">Expert�Session</a>
                     </div>
-
-
                 </div>
             </li>
         </ul>
@@ -74,274 +547,628 @@
             <a href="#" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
-                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
                     <span class="btn-text">Login</span>
-                </div>
-                <div class="btn-bg"></div>
-                <div class="btn-particles">
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
-                    <span class="particle"></span>
                 </div>
             </a>
         </div>
     </nav>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero">
-        <div class="hero-background">
-            <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
-        </div>
-        
+    <!-- Interview Hero Section -->
+    <section class="interview-hero">
         <div class="container">
-            <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">🆓</span>
-                    <span class="badge-text"> Free Service</span>
+            <div class="interview-hero-content">
+                <div class="interview-badge">
+                    <span>🎯</span>
+                    <span>Comprehensive Interview Preparation</span>
                 </div>
                 
-                <h1 class="service-title">Interview Questions Topic Wise</h1>
-                <p class="service-subtitle">Access comprehensive collection of interview questions organized by topics and industries. Prepare effectively for your interviews.</p>
+                <h1 class="interview-title">Master Your Interview Skills</h1>
+                <p class="interview-subtitle">
+                    Comprehensive interview preparation platform with AI-powered mock interviews, 
+                    extensive question banks, personalized feedback, and expert tips to help you 
+                    land your dream job with confidence.
+                </p>
                 
-                <div class="service-features-preview">
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Topic-wise Questions</span>
+                <div class="interview-stats">
+                    <div class="interview-stat">
+                        <span class="interview-stat-number">5000+</span>
+                        <span class="interview-stat-label">Interview Questions</span>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Industry Specific</span>
+                    <div class="interview-stat">
+                        <span class="interview-stat-number">50+</span>
+                        <span class="interview-stat-label">Job Categories</span>
                     </div>
-                    
-                    <div class="feature-preview">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Regular Updates</span>
+                    <div class="interview-stat">
+                        <span class="interview-stat-number">95%</span>
+                        <span class="interview-stat-label">Success Rate</span>
                     </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Content -->
-    <section class="service-content">
-        <div class="container">
-            <!-- Features Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Service Features</h2>
-                    <p>Comprehensive features designed to help you succeed</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
-                        <h3>Core Features</h3>
-                        <p>Essential features that make this service valuable for your career development and professional growth.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Topic-wise Questions</li><li><i class="fas fa-check"></i> Industry Specific</li><li><i class="fas fa-check"></i> Regular Updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Quality Assurance</h3>
-                        <p>We ensure high-quality service delivery with experienced professionals and proven methodologies.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Expert guidance</li>
-                            <li><i class="fas fa-check"></i> Proven methods</li>
-                            <li><i class="fas fa-check"></i> Quality support</li>
-                            <li><i class="fas fa-check"></i> Regular updates</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Results & Impact</h3>
-                        <p>Measurable outcomes and positive impact on your career progression and professional development.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Measurable results</li>
-                            <li><i class="fas fa-check"></i> Career advancement</li>
-                            <li><i class="fas fa-check"></i> Skill enhancement</li>
-                            <li><i class="fas fa-check"></i> Professional growth</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Process Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>How It Works</h2>
-                    <p>Simple process to get started with our service</p>
-                </div>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <h3>Enroll</h3>
-                        <p>Sign up for the service and complete your profile with relevant information.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <h3>Assessment</h3>
-                        <p>Complete initial assessments or provide necessary information for service delivery.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <h3>Service Delivery</h3>
-                        <p>Receive the service through our platform with expert guidance and support.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-number">4</div>
-                        <h3>Results</h3>
-                        <p>Get your results, reports, or completed deliverables with follow-up support.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Benefits Section -->
-            <div class="content-section">
-                <div class="section-header">
-                    <h2>Why Choose This Service?</h2>
-                    <p>Key benefits and advantages of our service</p>
-                </div>
-                
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Expert Quality</h4>
-                            <p>Service delivered by experienced professionals with proven track records in their respective fields.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Timely Delivery</h4>
-                            <p>We ensure timely delivery of services without compromising on quality or attention to detail.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Ongoing Support</h4>
-                            <p>Continuous support and guidance throughout the service period and beyond for your success.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-target"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Personalized Approach</h4>
-                            <p>Customized service delivery based on your specific needs, goals, and career objectives.</p>
-                        </div>
+                    <div class="interview-stat">
+                        <span class="interview-stat-number">24/7</span>
+                        <span class="interview-stat-label">AI Practice</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
+    <!-- Preparation Tools Section -->
+    <section class="preparation-tools">
         <div class="container">
             <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about this service</p>
+                <h2>Interview Preparation Tools</h2>
+                <p>Comprehensive suite of tools to prepare you for any interview scenario</p>
             </div>
             
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does this service take to complete?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The duration varies based on the specific service and your requirements. We provide estimated timelines during the enrollment process and keep you updated throughout.</p>
+            <div class="tools-grid">
+                <div class="prep-tool-card">
+                    <div class="prep-tool-icon">
+                        <i class="fas fa-robot"></i>
                     </div>
+                    <h3 class="prep-tool-title">AI Mock Interview</h3>
+                    <p class="prep-tool-description">
+                        Practice with our AI interviewer that adapts to your responses and provides 
+                        real-time feedback on your answers, body language, and communication skills.
+                    </p>
+                    <ul class="prep-tool-features">
+                        <li><i class="fas fa-check"></i> Real-time AI feedback</li>
+                        <li><i class="fas fa-check"></i> Adaptive questioning</li>
+                        <li><i class="fas fa-check"></i> Performance analytics</li>
+                        <li><i class="fas fa-check"></i> Video recording</li>
+                    </ul>
+                    <button class="prep-tool-btn" onclick="startMockInterview()">Start Mock Interview</button>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What qualifications do your experts have?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our experts are industry professionals with relevant qualifications, certifications, and extensive experience in their respective fields.</p>
+                <div class="prep-tool-card">
+                    <div class="prep-tool-icon">
+                        <i class="fas fa-question-circle"></i>
                     </div>
+                    <h3 class="prep-tool-title">Question Bank Explorer</h3>
+                    <p class="prep-tool-description">
+                        Access our comprehensive database of 5000+ interview questions organized 
+                        by industry, role, and difficulty level with detailed answer guidelines.
+                    </p>
+                    <ul class="prep-tool-features">
+                        <li><i class="fas fa-check"></i> 5000+ questions</li>
+                        <li><i class="fas fa-check"></i> Industry-specific</li>
+                        <li><i class="fas fa-check"></i> Difficulty levels</li>
+                        <li><i class="fas fa-check"></i> Sample answers</li>
+                    </ul>
+                    <button class="prep-tool-btn" onclick="exploreQuestions()">Explore Questions</button>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can I get a refund if I'm not satisfied?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We offer a satisfaction guarantee. If you're not satisfied with our service, please contact our support team to discuss your concerns and possible solutions.</p>
+                <div class="prep-tool-card">
+                    <div class="prep-tool-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
+                    <h3 class="prep-tool-title">Performance Analytics</h3>
+                    <p class="prep-tool-description">
+                        Track your progress with detailed analytics showing improvement areas, 
+                        strengths, and personalized recommendations for better performance.
+                    </p>
+                    <ul class="prep-tool-features">
+                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                        <li><i class="fas fa-check"></i> Strength analysis</li>
+                        <li><i class="fas fa-check"></i> Improvement areas</li>
+                        <li><i class="fas fa-check"></i> Performance trends</li>
+                    </ul>
+                    <button class="prep-tool-btn" onclick="viewAnalytics()">View Analytics</button>
                 </div>
                 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Do you provide ongoing support after service completion?
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, we provide follow-up support and are available to answer questions or provide clarifications even after the service is completed.</p>
+                <div class="prep-tool-card">
+                    <div class="prep-tool-icon">
+                        <i class="fas fa-video"></i>
                     </div>
+                    <h3 class="prep-tool-title">Video Practice Sessions</h3>
+                    <p class="prep-tool-description">
+                        Record yourself answering questions and get AI-powered analysis of your 
+                        body language, tone, pace, and overall presentation skills.
+                    </p>
+                    <ul class="prep-tool-features">
+                        <li><i class="fas fa-check"></i> Video recording</li>
+                        <li><i class="fas fa-check"></i> Body language analysis</li>
+                        <li><i class="fas fa-check"></i> Speech analysis</li>
+                        <li><i class="fas fa-check"></i> Presentation tips</li>
+                    </ul>
+                    <button class="prep-tool-btn" onclick="startVideoSession()">Start Video Session</button>
+                </div>
+                
+                <div class="prep-tool-card">
+                    <div class="prep-tool-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="prep-tool-title">Peer Practice Groups</h3>
+                    <p class="prep-tool-description">
+                        Join practice groups with other candidates, participate in group discussions, 
+                        and learn from shared experiences and feedback.
+                    </p>
+                    <ul class="prep-tool-features">
+                        <li><i class="fas fa-check"></i> Group practice</li>
+                        <li><i class="fas fa-check"></i> Peer feedback</li>
+                        <li><i class="fas fa-check"></i> Discussion forums</li>
+                        <li><i class="fas fa-check"></i> Networking opportunities</li>
+                    </ul>
+                    <button class="prep-tool-btn" onclick="joinPeerGroup()">Join Practice Group</button>
+                </div>
+                
+                <div class="prep-tool-card">
+                    <div class="prep-tool-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="prep-tool-title">Expert Masterclasses</h3>
+                    <p class="prep-tool-description">
+                        Learn from industry experts and HR professionals through exclusive 
+                        masterclasses covering advanced interview techniques and strategies.
+                    </p>
+                    <ul class="prep-tool-features">
+                        <li><i class="fas fa-check"></i> Expert sessions</li>
+                        <li><i class="fas fa-check"></i> Advanced techniques</li>
+                        <li><i class="fas fa-check"></i> Industry insights</li>
+                        <li><i class="fas fa-check"></i> Q&A sessions</li>
+                    </ul>
+                    <button class="prep-tool-btn" onclick="viewMasterclasses()">View Masterclasses</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="service-cta">
+    <!-- Question Bank Categories -->
+    <section class="question-bank">
         <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Take the next step in your career journey with our professional interview questions topic wise service.</p>
-                <div class="cta-actions">
-                    <a href="#" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started Now
-                    </a>
-                    <a href="#" class="btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                        Learn More
-                    </a>
+            <div class="section-header">
+                <h2>Interview Question Categories</h2>
+                <p>Explore questions by category and prepare for specific interview types</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card" onclick="openCategory('behavioral')">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="category-title">Behavioral Questions</h3>
+                    <p class="category-count">800+ Questions</p>
+                    <p class="category-description">
+                        STAR method questions about past experiences, leadership, teamwork, and problem-solving scenarios.
+                    </p>
+                </div>
+                
+                <div class="category-card" onclick="openCategory('technical')">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="category-title">Technical Questions</h3>
+                    <p class="category-count">1200+ Questions</p>
+                    <p class="category-description">
+                        Role-specific technical questions covering programming, system design, and domain expertise.
+                    </p>
+                </div>
+                
+                <div class="category-card" onclick="openCategory('situational')">
+                    <div class="category-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="category-title">Situational Questions</h3>
+                    <p class="category-count">600+ Questions</p>
+                    <p class="category-description">
+                        Hypothetical scenarios to assess decision-making, critical thinking, and problem-solving skills.
+                    </p>
+                </div>
+                
+                <div class="category-card" onclick="openCategory('company')">
+                    <div class="category-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="category-title">Company-Specific</h3>
+                    <p class="category-count">900+ Questions</p>
+                    <p class="category-description">
+                        Questions specific to top companies like Google, Microsoft, Amazon, and other industry leaders.
+                    </p>
+                </div>
+                
+                <div class="category-card" onclick="openCategory('hr')">
+                    <div class="category-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="category-title">HR & General</h3>
+                    <p class="category-count">700+ Questions</p>
+                    <p class="category-description">
+                        Common HR questions about motivation, career goals, strengths, weaknesses, and cultural fit.
+                    </p>
+                </div>
+                
+                <div class="category-card" onclick="openCategory('leadership')">
+                    <div class="category-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="category-title">Leadership & Management</h3>
+                    <p class="category-count">500+ Questions</p>
+                    <p class="category-description">
+                        Questions for senior roles focusing on leadership style, team management, and strategic thinking.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="services.js"></script>
+    <!-- Interview Tips Section -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Expert Interview Tips</h2>
+                <p>Professional advice from industry experts and successful candidates</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="tip-title">Before the Interview</h3>
+                    <p class="tip-description">
+                        Research the company thoroughly, practice common questions, prepare your STAR stories, 
+                        and plan your route. First impressions matter, so arrive 10-15 minutes early.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="tip-title">During the Interview</h3>
+                    <p class="tip-description">
+                        Maintain eye contact, listen actively, ask thoughtful questions, and use the STAR method 
+                        for behavioral questions. Show enthusiasm and let your personality shine through.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="tip-title">After the Interview</h3>
+                    <p class="tip-description">
+                        Send a thank-you email within 24 hours, reiterate your interest, and address any 
+                        concerns that came up. Follow up appropriately and stay patient during the process.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="tip-title">STAR Method</h3>
+                    <p class="tip-description">
+                        Structure your answers using Situation, Task, Action, Result. This method helps you 
+                        provide concrete examples and demonstrate your problem-solving abilities effectively.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="tip-title">Body Language</h3>
+                    <p class="tip-description">
+                        Maintain good posture, offer a firm handshake, make appropriate eye contact, and use 
+                        natural gestures. Your non-verbal communication is as important as your words.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-question"></i>
+                    </div>
+                    <h3 class="tip-title">Asking Questions</h3>
+                    <p class="tip-description">
+                        Prepare thoughtful questions about the role, team, company culture, and growth 
+                        opportunities. This shows your genuine interest and helps you evaluate the fit.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Tracker -->
+    <section class="progress-tracker">
+        <div class="container">
+            <div class="progress-container">
+                <div class="section-header">
+                    <h2>Your Interview Preparation Progress</h2>
+                    <p>Track your improvement and stay motivated on your journey to interview success</p>
+                </div>
+                
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <div class="progress-number" id="questionsAnswered">0</div>
+                        <div class="progress-label">Questions Practiced</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-number" id="mockInterviews">0</div>
+                        <div class="progress-label">Mock Interviews</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-number" id="averageScore">0%</div>
+                        <div class="progress-label">Average Score</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-number" id="streakDays">0</div>
+                        <div class="progress-label">Day Streak</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mock Interview Interface -->
+    <div class="mock-interview-interface" id="mockInterviewInterface">
+        <div class="mock-interview-container">
+            <div class="mock-interview-header">
+                <div>
+                    <h2>AI Mock Interview</h2>
+                    <p>Practice with our intelligent interviewer</p>
+                </div>
+                <button class="mock-interview-close" onclick="closeMockInterview()">×</button>
+            </div>
+            
+            <div class="mock-interview-content">
+                <div class="question-display">
+                    <div class="question-number" id="questionNumber">Question 1 of 10</div>
+                    <div class="question-text" id="questionText">
+                        Tell me about yourself and why you're interested in this position.
+                    </div>
+                </div>
+                
+                <div class="answer-section">
+                    <label for="answerInput" style="display: block; margin-bottom: 10px; font-weight: 600; color: #1e293b;">
+                        Your Answer:
+                    </label>
+                    <textarea 
+                        id="answerInput" 
+                        class="answer-textarea" 
+                        placeholder="Type your answer here... Take your time to think through your response."
+                    ></textarea>
+                </div>
+                
+                <div class="interview-controls">
+                    <button class="control-btn secondary" onclick="skipQuestion()">
+                        <i class="fas fa-forward"></i> Skip Question
+                    </button>
+                    <button class="control-btn primary" onclick="submitAnswer()">
+                        <i class="fas fa-check"></i> Submit Answer
+                    </button>
+                    <button class="control-btn secondary" onclick="nextQuestion()">
+                        <i class="fas fa-arrow-right"></i> Next Question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock Interview System
+        let currentQuestionIndex = 0;
+        let interviewQuestions = [
+            "Tell me about yourself and why you're interested in this position.",
+            "What are your greatest strengths and how do they relate to this role?",
+            "Describe a challenging situation you faced at work and how you handled it.",
+            "Where do you see yourself in 5 years?",
+            "Why do you want to work for our company?",
+            "Tell me about a time when you had to work with a difficult team member.",
+            "What is your biggest weakness and how are you working to improve it?",
+            "Describe a project you're particularly proud of.",
+            "How do you handle stress and pressure?",
+            "Do you have any questions for me?"
+        ];
+        
+        let userAnswers = [];
+        let interviewStartTime = null;
+        
+        function startMockInterview() {
+            document.getElementById('mockInterviewInterface').style.display = 'flex';
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            interviewStartTime = new Date();
+            loadQuestion();
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMockInterview() {
+            document.getElementById('mockInterviewInterface').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            if (userAnswers.length > 0) {
+                showInterviewSummary();
+            }
+        }
+        
+        function loadQuestion() {
+            const questionNumber = document.getElementById('questionNumber');
+            const questionText = document.getElementById('questionText');
+            const answerInput = document.getElementById('answerInput');
+            
+            questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${interviewQuestions.length}`;
+            questionText.textContent = interviewQuestions[currentQuestionIndex];
+            answerInput.value = '';
+            answerInput.focus();
+        }
+        
+        function submitAnswer() {
+            const answer = document.getElementById('answerInput').value.trim();
+            
+            if (answer) {
+                userAnswers.push({
+                    question: interviewQuestions[currentQuestionIndex],
+                    answer: answer,
+                    timestamp: new Date()
+                });
+                
+                // Simulate AI feedback
+                setTimeout(() => {
+                    showAIFeedback(answer);
+                }, 1000);
+            } else {
+                alert('Please provide an answer before submitting.');
+            }
+        }
+        
+        function showAIFeedback(answer) {
+            const feedback = generateAIFeedback(answer);
+            alert(`AI Feedback:\n\n${feedback}\n\nClick "Next Question" to continue.`);
+        }
+        
+        function generateAIFeedback(answer) {
+            const feedbacks = [
+                "Great answer! You provided specific examples and showed good self-awareness. Consider adding more quantifiable results.",
+                "Good response! Your answer demonstrates relevant experience. Try to be more concise and focus on the most impactful points.",
+                "Nice work! You used the STAR method effectively. Consider adding more details about the outcome and what you learned.",
+                "Solid answer! You showed good problem-solving skills. Try to connect your experience more directly to the role requirements.",
+                "Well done! Your enthusiasm comes through clearly. Consider providing more specific examples to support your points."
+            ];
+            
+            return feedbacks[Math.floor(Math.random() * feedbacks.length)];
+        }
+        
+        function nextQuestion() {
+            if (currentQuestionIndex < interviewQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                finishInterview();
+            }
+        }
+        
+        function skipQuestion() {
+            userAnswers.push({
+                question: interviewQuestions[currentQuestionIndex],
+                answer: "[Skipped]",
+                timestamp: new Date()
+            });
+            nextQuestion();
+        }
+        
+        function finishInterview() {
+            closeMockInterview();
+            showInterviewSummary();
+        }
+        
+        function showInterviewSummary() {
+            const duration = Math.round((new Date() - interviewStartTime) / 1000 / 60);
+            const answeredQuestions = userAnswers.filter(a => a.answer !== "[Skipped]").length;
+            const score = Math.round((answeredQuestions / interviewQuestions.length) * 100);
+            
+            alert(`🎉 Mock Interview Complete!\n\nSummary:\n• Duration: ${duration} minutes\n• Questions Answered: ${answeredQuestions}/${interviewQuestions.length}\n• Completion Score: ${score}%\n\nDetailed feedback and analysis will be available in your dashboard!`);
+            
+            // Update progress stats
+            updateProgressStats();
+        }
+        
+        function updateProgressStats() {
+            const questionsAnswered = document.getElementById('questionsAnswered');
+            const mockInterviews = document.getElementById('mockInterviews');
+            const averageScore = document.getElementById('averageScore');
+            const streakDays = document.getElementById('streakDays');
+            
+            // Simulate progress updates
+            const currentQuestions = parseInt(questionsAnswered.textContent) || 0;
+            const currentMocks = parseInt(mockInterviews.textContent) || 0;
+            
+            questionsAnswered.textContent = currentQuestions + userAnswers.length;
+            mockInterviews.textContent = currentMocks + 1;
+            averageScore.textContent = Math.round(75 + Math.random() * 20) + '%';
+            streakDays.textContent = Math.floor(Math.random() * 15) + 1;
+        }
+        
+        // Question Bank Functions
+        function exploreQuestions() {
+            alert('🔍 Question Bank Explorer\n\nExploring our comprehensive database of 5000+ interview questions:\n\n• Behavioral Questions (800+)\n• Technical Questions (1200+)\n• Situational Questions (600+)\n• Company-Specific (900+)\n• HR & General (700+)\n• Leadership (500+)\n\nFull question bank access available in premium version!');
+        }
+        
+        function openCategory(category) {
+            const categoryInfo = {
+                behavioral: {
+                    name: 'Behavioral Questions',
+                    count: '800+',
+                    description: 'Questions about past experiences using the STAR method'
+                },
+                technical: {
+                    name: 'Technical Questions',
+                    count: '1200+',
+                    description: 'Role-specific technical and domain expertise questions'
+                },
+                situational: {
+                    name: 'Situational Questions',
+                    count: '600+',
+                    description: 'Hypothetical scenarios to test decision-making skills'
+                },
+                company: {
+                    name: 'Company-Specific Questions',
+                    count: '900+',
+                    description: 'Questions tailored for top companies and industries'
+                },
+                hr: {
+                    name: 'HR & General Questions',
+                    count: '700+',
+                    description: 'Common HR questions about motivation and cultural fit'
+                },
+                leadership: {
+                    name: 'Leadership & Management',
+                    count: '500+',
+                    description: 'Questions for senior roles and management positions'
+                }
+            };
+            
+            const info = categoryInfo[category];
+            alert(`📚 ${info.name}\n\n${info.count} questions available\n\n${info.description}\n\nSample questions and detailed preparation guides available in the full version!`);
+        }
+        
+        // Other Tool Functions
+        function viewAnalytics() {
+            alert('📊 Performance Analytics Dashboard\n\nYour Interview Performance:\n\n• Overall Score: 78%\n• Strengths: Communication, Problem-solving\n• Areas to Improve: Technical depth, Confidence\n• Recommendation: Practice more technical questions\n• Progress Trend: +15% improvement this month\n\nDetailed analytics available in your dashboard!');
+        }
+        
+        function startVideoSession() {
+            alert('🎥 Video Practice Session\n\nStarting video recording session:\n\n• Camera and microphone access required\n• AI analysis of body language and speech\n• Real-time feedback on presentation\n• Recording saved for review\n\nThis feature requires camera permissions and is available in the premium version!');
+        }
+        
+        function joinPeerGroup() {
+            alert('👥 Peer Practice Groups\n\nJoin our community:\n\n• Connect with other job seekers\n• Practice group interviews\n• Share experiences and tips\n• Get peer feedback\n• Network with professionals\n\nGroup sessions available daily. Sign up to join the next session!');
+        }
+        
+        function viewMasterclasses() {
+            alert('🎓 Expert Masterclasses\n\nUpcoming Sessions:\n\n• "Mastering Technical Interviews" - Google Engineer\n• "Behavioral Interview Excellence" - HR Director\n• "Salary Negotiation Strategies" - Career Coach\n• "Executive Interview Skills" - Leadership Expert\n\nRegister now for exclusive access to expert-led sessions!');
+        }
+        
+        // Initialize progress stats with random values for demo
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('questionsAnswered').textContent = Math.floor(Math.random() * 100) + 50;
+                document.getElementById('mockInterviews').textContent = Math.floor(Math.random() * 10) + 5;
+                document.getElementById('averageScore').textContent = Math.floor(Math.random() * 20) + 75 + '%';
+                document.getElementById('streakDays').textContent = Math.floor(Math.random() * 15) + 1;
+            }, 1000);
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.prep-tool-card, .category-card, .tip-card, .progress-stat').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
-
-
-
