@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -461,6 +461,7 @@
       }
     }
   </style>
+    <script src="js/dropdown-nav.js" defer></script>
 </head>
 <body>
   <div class="results-container">
@@ -821,10 +822,10 @@
         weaknesses.push("Consider attempting all questions");
       }
       
-      strengthsList.innerHTML=strengths.map(s=>`<div class="strength-item">âœ“ ${s}</div>`).join("");
+      strengthsList.innerHTML=strengths.map(s=>`<div class="strength-item">✓ ${s}</div>`).join("");
       weaknessesList.innerHTML=weaknesses.length?
-        weaknesses.map(w=>`<div class="weakness-item">âš  ${w}</div>`).join(""):
-        `<div class="strength-item">🚀Ž‰ Excellent performance - no major concerns!</div>`;
+        weaknesses.map(w=>`<div class="weakness-item">⚠ ${w}</div>`).join(""):
+        `<div class="strength-item">??�� Excellent performance - no major concerns!</div>`;
     }
 
     function generateRecommendations(){
@@ -861,7 +862,7 @@
         rec.push("Practice pattern recognition and logical reasoning puzzles");
       }
       
-      document.getElementById('recommendationsList').innerHTML=rec.map(r=>`<div class="recommendation-item">🚀’¡ ${r}</div>`).join("");
+      document.getElementById('recommendationsList').innerHTML=rec.map(r=>`<div class="recommendation-item">??�� ${r}</div>`).join("");
     }
 
     function generateQuestionBreakdown(){
@@ -879,7 +880,7 @@
             <span class="status ${statusClass}">${statusText}</span>
           </div>
           <div style="font-size:.9rem;color:#4a5568;">
-            Your answer: ${ua!==null?q.options[ua]:"â€”"} <br>
+            Your answer: ${ua!==null?q.options[ua]:"—"} <br>
             Correct: ${q.options[ca]}
           </div>
         </div>`;
@@ -926,6 +927,8 @@ ${'='.repeat(50)}`;
   </script>
 </body>
 </html>
+
+
 
 
 

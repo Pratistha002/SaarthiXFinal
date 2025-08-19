@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -488,6 +488,7 @@
             }
         }
     </style>
+    <script src="js/dropdown-nav.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -497,7 +498,7 @@
         </div>
         <ul class="nav-links">
             <li class="dropdown">
-                <a href="#" class="dropbtn">Students</a>
+                <a href="students.html" class="dropbtn">Students</a>
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
@@ -517,7 +518,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropbtn">Institute</a>
+                <a href="institute.html" class="dropbtn">Institute</a>
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
@@ -530,7 +531,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropbtn">Industry</a>
+                <a href="industry.html" class="dropbtn">Industry</a>
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
@@ -568,7 +569,7 @@
         <div class="container">
             <div class="interview-hero-content">
                 <div class="interview-badge">
-                    <span>ðŸš€</span>
+                    <span>??</span>
                     <span>Comprehensive Interview Preparation</span>
                 </div>
                 
@@ -916,7 +917,7 @@
                     <h2>AI Mock Interview</h2>
                     <p>Practice with our intelligent interviewer</p>
                 </div>
-                <button class="mock-interview-close" onclick="closeMockInterview()">Ã—</button>
+                <button class="mock-interview-close" onclick="closeMockInterview()">×</button>
             </div>
             
             <div class="mock-interview-content">
@@ -1065,7 +1066,7 @@
             const answeredQuestions = userAnswers.filter(a => a.answer !== "[Skipped]").length;
             const score = Math.round((answeredQuestions / interviewQuestions.length) * 100);
             
-            alert(`ðŸš€ Mock Interview Complete!\n\nSummary:\nâ€¢ Duration: ${duration} minutes\nâ€¢ Questions Answered: ${answeredQuestions}/${interviewQuestions.length}\nâ€¢ Completion Score: ${score}%\n\nDetailed feedback and analysis will be available in your dashboard!`);
+            alert(`?? Mock Interview Complete!\n\nSummary:\n• Duration: ${duration} minutes\n• Questions Answered: ${answeredQuestions}/${interviewQuestions.length}\n• Completion Score: ${score}%\n\nDetailed feedback and analysis will be available in your dashboard!`);
             
             // Update progress stats
             updateProgressStats();
@@ -1089,7 +1090,7 @@
         
         // Question Bank Functions
         function exploreQuestions() {
-            alert('ðŸš€ Question Bank Explorer\n\nExploring our comprehensive database of 5000+ interview questions:\n\nâ€¢ Behavioral Questions (800+)\nâ€¢ Technical Questions (1200+)\nâ€¢ Situational Questions (600+)\nâ€¢ Company-Specific (900+)\nâ€¢ HR & General (700+)\nâ€¢ Leadership (500+)\n\nFull question bank access available in premium version!');
+            alert('?? Question Bank Explorer\n\nExploring our comprehensive database of 5000+ interview questions:\n\n• Behavioral Questions (800+)\n• Technical Questions (1200+)\n• Situational Questions (600+)\n• Company-Specific (900+)\n• HR & General (700+)\n• Leadership (500+)\n\nFull question bank access available in premium version!');
         }
         
         function openCategory(category) {
@@ -1127,24 +1128,24 @@
             };
             
             const info = categoryInfo[category];
-            alert(`ðŸš€ ${info.name}\n\n${info.count} questions available\n\n${info.description}\n\nSample questions and detailed preparation guides available in the full version!`);
+            alert(`?? ${info.name}\n\n${info.count} questions available\n\n${info.description}\n\nSample questions and detailed preparation guides available in the full version!`);
         }
         
         // Other Tool Functions
         function viewAnalytics() {
-            alert('ðŸš€ Performance Analytics Dashboard\n\nYour Interview Performance:\n\nâ€¢ Overall Score: 78%\nâ€¢ Strengths: Communication, Problem-solving\nâ€¢ Areas to Improve: Technical depth, Confidence\nâ€¢ Recommendation: Practice more technical questions\nâ€¢ Progress Trend: +15% improvement this month\n\nDetailed analytics available in your dashboard!');
+            alert('?? Performance Analytics Dashboard\n\nYour Interview Performance:\n\n• Overall Score: 78%\n• Strengths: Communication, Problem-solving\n• Areas to Improve: Technical depth, Confidence\n• Recommendation: Practice more technical questions\n• Progress Trend: +15% improvement this month\n\nDetailed analytics available in your dashboard!');
         }
         
         function startVideoSession() {
-            alert('ðŸš€ Video Practice Session\n\nStarting video recording session:\n\nâ€¢ Camera and microphone access required\nâ€¢ AI analysis of body language and speech\nâ€¢ Real-time feedback on presentation\nâ€¢ Recording saved for review\n\nThis feature requires camera permissions and is available in the premium version!');
+            alert('?? Video Practice Session\n\nStarting video recording session:\n\n• Camera and microphone access required\n• AI analysis of body language and speech\n• Real-time feedback on presentation\n• Recording saved for review\n\nThis feature requires camera permissions and is available in the premium version!');
         }
         
         function joinPeerGroup() {
-            alert('ðŸš€ Peer Practice Groups\n\nJoin our community:\n\nâ€¢ Connect with other job seekers\nâ€¢ Practice group interviews\nâ€¢ Share experiences and tips\nâ€¢ Get peer feedback\nâ€¢ Network with professionals\n\nGroup sessions available daily. Sign up to join the next session!');
+            alert('?? Peer Practice Groups\n\nJoin our community:\n\n• Connect with other job seekers\n• Practice group interviews\n• Share experiences and tips\n• Get peer feedback\n• Network with professionals\n\nGroup sessions available daily. Sign up to join the next session!');
         }
         
         function viewMasterclasses() {
-            alert('ðŸš€ Expert Masterclasses\n\nUpcoming Sessions:\n\nâ€¢ "Mastering Technical Interviews" - Google Engineer\nâ€¢ "Behavioral Interview Excellence" - HR Director\nâ€¢ "Salary Negotiation Strategies" - Career Coach\nâ€¢ "Executive Interview Skills" - Leadership Expert\n\nRegister now for exclusive access to expert-led sessions!');
+            alert('?? Expert Masterclasses\n\nUpcoming Sessions:\n\n• "Mastering Technical Interviews" - Google Engineer\n• "Behavioral Interview Excellence" - HR Director\n• "Salary Negotiation Strategies" - Career Coach\n• "Executive Interview Skills" - Leadership Expert\n\nRegister now for exclusive access to expert-led sessions!');
         }
         
         // Initialize progress stats with random values for demo
@@ -1182,6 +1183,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
