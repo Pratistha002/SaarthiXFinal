@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -621,7 +621,7 @@
         <div class="container">
             <div class="collaboration-hero-content">
                 <div class="collaboration-badge">
-                    <span>??</span>
+                    <span>🚀</span>
                     <span>Institute Collaboration Platform</span>
                 </div>
                 
@@ -1075,7 +1075,7 @@
                     <h2>Plan Collaborative Event</h2>
                     <p>Create impactful educational experiences together</p>
                 </div>
-                <button class="event-planner-close" onclick="closeEventPlanner()">�</button>
+                <button class="event-planner-close" onclick="closeEventPlanner()">×</button>
             </div>
             
             <div class="event-planner-content">
@@ -1201,7 +1201,7 @@
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert(`?? Event Proposal Submitted Successfully!\n\nEvent: ${eventData.eventTitle}\nType: ${eventData.eventType}\nDate: ${eventData.eventDate}\nAttendees: ${eventData.expectedAttendees}\n\nOur collaboration team will review your proposal and contact you within 24 hours with potential partners and next steps!`);
+                alert(`🚀 Event Proposal Submitted Successfully!\n\nEvent: ${eventData.eventTitle}\nType: ${eventData.eventType}\nDate: ${eventData.eventDate}\nAttendees: ${eventData.expectedAttendees}\n\nOur collaboration team will review your proposal and contact you within 24 hours with potential partners and next steps!`);
                 
                 closeEventPlanner();
                 this.reset();
@@ -1224,7 +1224,7 @@
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert(`?? Collaboration Request Submitted!\n\nInstitute: ${collabData.instituteName}\nContact: ${collabData.contactPerson}\nType: ${collabData.collaborationType}\n\nThank you for your interest in collaboration! Our partnership team will review your request and schedule a consultation call within 48 hours to discuss opportunities and next steps.`);
+                alert(`🚀 Collaboration Request Submitted!\n\nInstitute: ${collabData.instituteName}\nContact: ${collabData.contactPerson}\nType: ${collabData.collaborationType}\n\nThank you for your interest in collaboration! Our partnership team will review your request and schedule a consultation call within 48 hours to discuss opportunities and next steps.`);
                 
                 this.reset();
                 submitBtn.innerHTML = originalText;
@@ -1275,7 +1275,7 @@
             
             const partner = partnerInfo[partnerId];
             if (partner) {
-                alert(`??? ${partner.name}\n\nType: ${partner.type}\nSpecialties: ${partner.specialties}\nCollaborations: ${partner.collaborations}\n\nInterested in partnering? Contact our collaboration team to explore opportunities!`);
+                alert(`🚀? ${partner.name}\n\nType: ${partner.type}\nSpecialties: ${partner.specialties}\nCollaborations: ${partner.collaborations}\n\nInterested in partnering? Contact our collaboration team to explore opportunities!`);
             }
         }
         
@@ -1311,6 +1311,10 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -772,7 +772,7 @@
         <div class="container">
             <div class="tpo-hero-content">
                 <div class="tpo-badge">
-                    <span>??</span>
+                    <span>🚀</span>
                     <span>Apply Jobs/Internships/Hackathons</span>
                 </div>
                 
@@ -1080,7 +1080,7 @@
                     <h2 id="portalTitle">Career Opportunities</h2>
                     <p>Find your perfect match from thousands of opportunities</p>
                 </div>
-                <button class="portal-close" onclick="closeOpportunities()">�</button>
+                <button class="portal-close" onclick="closeOpportunities()">×</button>
             </div>
             
             <div class="portal-content">
@@ -1455,7 +1455,7 @@
         function applyToOpportunity(id, type) {
             const opportunity = getOpportunityById(id, type);
             if (opportunity) {
-                alert(`?? Application Submitted!\n\nYou have successfully applied for:\n${opportunity.title} at ${type === 'hackathons' ? opportunity.organizer : opportunity.company}\n\nApplication Status: Under Review\nYou will receive updates via email and in your application tracker.\n\nGood luck! ??`);
+                alert(`🚀 Application Submitted!\n\nYou have successfully applied for:\n${opportunity.title} at ${type === 'hackathons' ? opportunity.organizer : opportunity.company}\n\nApplication Status: Under Review\nYou will receive updates via email and in your application tracker.\n\nGood luck! 🚀`);
                 
                 // Update application stats
                 updateApplicationStats();
@@ -1464,7 +1464,7 @@
 
         // Save opportunity
         function saveOpportunity(id, type) {
-            alert(`?? Opportunity Saved!\n\nThis opportunity has been added to your saved list. You can access it anytime from your dashboard.`);
+            alert(`🚀 Opportunity Saved!\n\nThis opportunity has been added to your saved list. You can access it anytime from your dashboard.`);
         }
 
         // Get opportunity by ID
@@ -1545,7 +1545,7 @@
             
             const company = companyInfo[companyId];
             if (company) {
-                alert(`?? ${company.name}\n\nIndustry: ${company.industry}\nDescription: ${company.description}\n\nOpen Roles: ${company.openRoles}\nAverage Package: ${company.avgPackage}\n\nBenefits: ${company.benefits}\n\nInterested? Check out their open positions in the opportunities portal!`);
+                alert(`🚀 ${company.name}\n\nIndustry: ${company.industry}\nDescription: ${company.description}\n\nOpen Roles: ${company.openRoles}\nAverage Package: ${company.avgPackage}\n\nBenefits: ${company.benefits}\n\nInterested? Check out their open positions in the opportunities portal!`);
             }
         }
 
@@ -1587,6 +1587,10 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
