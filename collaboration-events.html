@@ -604,6 +604,7 @@
                     </div>
                 </div>
             </li>
+                    
         </ul>
         <div class="account-options">
             <a href="#" class="login-btn" id="loginBtn">
@@ -620,7 +621,7 @@
         <div class="container">
             <div class="collaboration-hero-content">
                 <div class="collaboration-badge">
-                    <span>🤝</span>
+                    <span>🚀</span>
                     <span>Institute Collaboration Platform</span>
                 </div>
                 
@@ -1132,11 +1133,11 @@
                             <label for="budget">Budget Range</label>
                             <select id="budget" name="budget" required>
                                 <option value="">Select Budget</option>
-                                <option value="1-5L">₹1-5 Lakhs</option>
-                                <option value="5-10L">₹5-10 Lakhs</option>
-                                <option value="10-25L">₹10-25 Lakhs</option>
-                                <option value="25-50L">₹25-50 Lakhs</option>
-                                <option value="50L+">₹50+ Lakhs</option>
+                                <option value="1-5L">?1-5 Lakhs</option>
+                                <option value="5-10L">?5-10 Lakhs</option>
+                                <option value="10-25L">?10-25 Lakhs</option>
+                                <option value="25-50L">?25-50 Lakhs</option>
+                                <option value="50L+">?50+ Lakhs</option>
                             </select>
                         </div>
                     </div>
@@ -1200,7 +1201,7 @@
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert(`🎉 Event Proposal Submitted Successfully!\n\nEvent: ${eventData.eventTitle}\nType: ${eventData.eventType}\nDate: ${eventData.eventDate}\nAttendees: ${eventData.expectedAttendees}\n\nOur collaboration team will review your proposal and contact you within 24 hours with potential partners and next steps!`);
+                alert(`🚀 Event Proposal Submitted Successfully!\n\nEvent: ${eventData.eventTitle}\nType: ${eventData.eventType}\nDate: ${eventData.eventDate}\nAttendees: ${eventData.expectedAttendees}\n\nOur collaboration team will review your proposal and contact you within 24 hours with potential partners and next steps!`);
                 
                 closeEventPlanner();
                 this.reset();
@@ -1223,7 +1224,7 @@
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert(`🤝 Collaboration Request Submitted!\n\nInstitute: ${collabData.instituteName}\nContact: ${collabData.contactPerson}\nType: ${collabData.collaborationType}\n\nThank you for your interest in collaboration! Our partnership team will review your request and schedule a consultation call within 48 hours to discuss opportunities and next steps.`);
+                alert(`🚀 Collaboration Request Submitted!\n\nInstitute: ${collabData.instituteName}\nContact: ${collabData.contactPerson}\nType: ${collabData.collaborationType}\n\nThank you for your interest in collaboration! Our partnership team will review your request and schedule a consultation call within 48 hours to discuss opportunities and next steps.`);
                 
                 this.reset();
                 submitBtn.innerHTML = originalText;
@@ -1274,7 +1275,7 @@
             
             const partner = partnerInfo[partnerId];
             if (partner) {
-                alert(`🏛️ ${partner.name}\n\nType: ${partner.type}\nSpecialties: ${partner.specialties}\nCollaborations: ${partner.collaborations}\n\nInterested in partnering? Contact our collaboration team to explore opportunities!`);
+                alert(`🚀? ${partner.name}\n\nType: ${partner.type}\nSpecialties: ${partner.specialties}\nCollaborations: ${partner.collaborations}\n\nInterested in partnering? Contact our collaboration team to explore opportunities!`);
             }
         }
         
@@ -1310,4 +1311,12 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
