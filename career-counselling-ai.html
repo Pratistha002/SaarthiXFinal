@@ -1,4 +1,4 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -626,6 +626,16 @@
                     </div>
                 </div>
             </li>
+                    <li class="dropdown">
+                <a href="#" class="dropbtn">Resources</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Student Resources</h4>
+                        <a href="jobs.html">Jobs</a>
+                        <a href="blogs.html">Blogs & Articles</a>
+                    </div>
+                </div>
+            </li>
         </ul>
         <div class="account-options">
             <a href="#" class="login-btn" id="loginBtn">
@@ -642,7 +652,7 @@
         <div class="container">
             <div class="ai-hero-content">
                 <div class="ai-badge">
-                    <span>ü§ñ</span>
+                    <span>??</span>
                     <span>AI-Powered Career Guidance</span>
                 </div>
                 
@@ -1019,17 +1029,17 @@
     <!-- AI Chat Interface -->
     <div class="ai-chat-interface" id="aiChatInterface">
         <div class="chat-header">
-            <div class="chat-avatar">ü§ñ</div>
+            <div class="chat-avatar">??</div>
             <div class="chat-info">
                 <h3>AI Career Counselor</h3>
-                <p>Online ‚Ä¢ Ready to help</p>
+                <p>Online ï Ready to help</p>
             </div>
-            <button class="chat-close" onclick="closeAIChat()">√ó</button>
+            <button class="chat-close" onclick="closeAIChat()">◊</button>
         </div>
         
         <div class="chat-messages" id="chatMessages">
             <div class="message ai">
-                <div class="message-avatar">ü§ñ</div>
+                <div class="message-avatar">??</div>
                 <div class="message-content">
                     Hi! I'm your AI Career Counselor. I'm here to help you with career guidance, 
                     job search advice, skill development, and any career-related questions you might have. 
@@ -1087,7 +1097,7 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
             
-            const avatar = sender === 'ai' ? 'ü§ñ' : 'üë§';
+            const avatar = sender === 'ai' ? '??' : '??';
             messageDiv.innerHTML = `
                 <div class="message-avatar">${avatar}</div>
                 <div class="message-content">${content}</div>
@@ -1165,7 +1175,7 @@
         function showCareerResults(data) {
             const results = generateCareerRecommendations(data);
             
-            alert(`üéâ Career Analysis Complete!\n\nBased on your profile, here are your top career recommendations:\n\n${results.join('\n')}\n\nDetailed report has been sent to your email!`);
+            alert(`?? Career Analysis Complete!\n\nBased on your profile, here are your top career recommendations:\n\n${results.join('\n')}\n\nDetailed report has been sent to your email!`);
         }
         
         function generateCareerRecommendations(data) {
@@ -1189,19 +1199,19 @@
         
         // Other tool functions
         function generateRoadmap() {
-            alert('üó∫Ô∏è Generating your personalized career roadmap...\n\nThis will include:\n‚Ä¢ Skill development timeline\n‚Ä¢ Learning milestones\n‚Ä¢ Career progression steps\n‚Ä¢ Industry insights\n\nYour roadmap will be ready in 24 hours!');
+            alert('??? Generating your personalized career roadmap...\n\nThis will include:\nï Skill development timeline\nï Learning milestones\nï Career progression steps\nï Industry insights\n\nYour roadmap will be ready in 24 hours!');
         }
         
         function viewMarketInsights() {
-            alert('üìä Market Insights Dashboard\n\n‚Ä¢ Tech jobs: +15% growth\n‚Ä¢ Average salary increase: 8%\n‚Ä¢ Top skills in demand: AI/ML, Cloud, Data Analysis\n‚Ä¢ Remote work: 65% of positions\n\nDetailed insights available in your dashboard!');
+            alert('?? Market Insights Dashboard\n\nï Tech jobs: +15% growth\nï Average salary increase: 8%\nï Top skills in demand: AI/ML, Cloud, Data Analysis\nï Remote work: 65% of positions\n\nDetailed insights available in your dashboard!');
         }
         
         function analyzeSkillGaps() {
-            alert('üéØ Skill Gap Analysis\n\nAnalyzing your current skills vs. market demands...\n\n‚Ä¢ Technical skills: 75% match\n‚Ä¢ Soft skills: 85% match\n‚Ä¢ Recommended learning: Python, AWS, Leadership\n\nPersonalized learning path will be created for you!');
+            alert('?? Skill Gap Analysis\n\nAnalyzing your current skills vs. market demands...\n\nï Technical skills: 75% match\nï Soft skills: 85% match\nï Recommended learning: Python, AWS, Leadership\n\nPersonalized learning path will be created for you!');
         }
         
         function buildNetwork() {
-            alert('ü§ù Career Network Builder\n\nConnecting you with:\n‚Ä¢ 50+ industry professionals\n‚Ä¢ 10 potential mentors\n‚Ä¢ 25 peers in your field\n‚Ä¢ 15 upcoming networking events\n\nNetwork recommendations sent to your email!');
+            alert('?? Career Network Builder\n\nConnecting you with:\nï 50+ industry professionals\nï 10 potential mentors\nï 25 peers in your field\nï 15 upcoming networking events\n\nNetwork recommendations sent to your email!');
         }
         
         // Smooth scrolling for navigation
@@ -1240,4 +1250,6 @@
     </script>
 </body>
 </html>
+
+
 
