@@ -1,34 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all dropdown buttons
-    const dropdownBtns = document.querySelectorAll('.dropdown .dropbtn');
-    
-    // Add click event listeners to each dropdown button
+    // Make top-level dropdown buttons clickable for navigation, while preserving hover dropdowns
+    const dropdownBtns = document.querySelectorAll('.dropdown > .dropbtn');
+
     dropdownBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Check if the user clicked directly on the button (not a child element)
-            if (e.target === this) {
-                // If the button has an href attribute and it's not "#", navigate to that URL
-                const href = this.getAttribute('href');
-                if (href && href !== '#') {
-                    window.location.href = href;
-                }
-            }
+        // If href is missing or '#', set sensible defaults based on label
+        const label = btn.textContent.trim().toLowerCase();
+        const href = btn.getAttribute('href');
+        if (!href || href === '#') {
+            if (label === 'students') btn.setAttribute('href', 'students.html');
+            if (label === 'institute') btn.setAttribute('href', 'institute.html');
+            if (label === 'industry') btn.setAttribute('href', 'industry.html');
+        }
+
+        // Navigate on click anywhere on the button
+        btn.addEventListener('click', function() {
+            const to = this.getAttribute('href');
+            if (to && to !== '#') window.location.href = to;
         });
-        
-        // Add mouseover event to show dropdown
-        btn.parentElement.addEventListener('mouseover', function() {
+
+        // Show dropdown on hover
+        const parent = btn.parentElement;
+        parent.addEventListener('mouseover', function() {
             const dropdown = this.querySelector('.dropdown-content');
-            if (dropdown) {
-                dropdown.style.display = 'flex';
-            }
+            if (dropdown) dropdown.style.display = 'flex';
         });
-        
-        // Add mouseout event to hide dropdown
-        btn.parentElement.addEventListener('mouseout', function() {
+
+        // Hide dropdown when mouse leaves
+        parent.addEventListener('mouseout', function() {
             const dropdown = this.querySelector('.dropdown-content');
-            if (dropdown) {
-                dropdown.style.display = '';
-            }
+            if (dropdown) dropdown.style.display = '';
         });
     });
 });

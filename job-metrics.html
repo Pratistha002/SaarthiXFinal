@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Metrics - SaarthiX</title>
+    <title>Career Path Explorer - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="job-metrics.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
@@ -103,237 +104,660 @@
         </div>
     </nav>
 
-    <!-- Job Metrics Hero Section -->
-    <section class="metrics-hero">
+    <!-- Hero Section -->
+    <section class="career-hero">
         <div class="hero-background">
             <div class="bg-gradient-overlay"></div>
-            <div class="bg-pattern"></div>
-            <div class="floating-charts">
-                <div class="floating-chart chart-1">📊</div>
-                <div class="floating-chart chart-2">📈</div>
-                <div class="floating-chart chart-3">📉</div>
-                <div class="floating-chart chart-4">📋</div>
+            <div class="floating-icons">
+                <div class="floating-icon icon-1">🎯</div>
+                <div class="floating-icon icon-2">🚀</div>
+                <div class="floating-icon icon-3">💼</div>
+                <div class="floating-icon icon-4">📈</div>
+                <div class="floating-icon icon-5">💡</div>
+                <div class="floating-icon icon-6">🌟</div>
             </div>
         </div>
         
         <div class="container">
-            <div class="metrics-hero-content">
-                <div class="hero-badge">
-                    <span class="badge-icon">🚀</span>
-                    <span class="badge-text">Course-Based Career Guidance</span>
+            <div class="hero-content">
+                
+                <div class="hero-description">
+                    <p class="hero-main-text">
+                        <strong>Confused about your career? You're not alone!</strong> 
+                        Over 70% of students struggle to choose the right career path.
+                    </p>
+                    <p class="hero-sub-text">
+                        Our AI-powered Career Blueprint analyzes your education, interests, and market trends 
+                        to create a <span class="highlight">personalized 6-month skill development plan</span> 
+                        with exact salary expectations, required skills, and step-by-step guidance.
+                    </p>
                 </div>
-                
-                <h1 class="metrics-title">
-                    <span class="title-line">Career Roadmap</span>
-                    <span class="title-line gradient-text">By Course & Stream</span>
-                    <span class="title-line">Industry Pathways</span>
-                </h1>
-                
-                <p class="metrics-description">
-                    Explore career opportunities based on your educational background. 
-                    Discover industry requirements, skills needed, and certification roadmaps 
-                    tailored to your course and specialization.
-                </p>
-                
-                <div class="quick-stats">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="5">0</div>
-                        <div class="stat-label">Courses</div>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text">
+                            <strong>2-Minute Assessment</strong>
+                            <span>Get instant career recommendations</span>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="25">0</div>
-                        <div class="stat-label">Streams</div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-text">
+                            <strong>Real Salary Data</strong>
+                            <span>Know exactly what you'll earn</span>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Industries</div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎓</div>
+                        <div class="feature-text">
+                            <strong>Skill Roadmap</strong>
+                            <span>Month-by-month learning plan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <button class="cta-primary" onclick="document.querySelector('.career-explorer').scrollIntoView({behavior: 'smooth'})">
+                        <span class="cta-text">Discover My Career Path</span>
+                        
+                        <div class="cta-arrow">→</div>
+                    </button>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50,000+</div>
+                            <div class="stat-label">Students Guided</div>
+                        </div>
+                        <div class="stat-divider">|</div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                        <div class="stat-divider">|</div>
+                        <div class="stat-item">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Career Paths</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-testimonial">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "This tool helped me discover Data Science as my perfect career match. 
+                            I followed their 6-month roadmap and landed a ₹12 LPA job!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👨‍💻</div>
+                            <div class="author-info">
+                                <div class="author-name">Rahul Sharma</div>
+                                <div class="author-title">B.Tech CSE • Now Data Scientist at TCS</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Navigation Breadcrumb -->
+    <!-- Breadcrumb Navigation -->
     <section class="breadcrumb-section">
         <div class="container">
             <div class="breadcrumb-nav" id="breadcrumbNav">
-                <span class="breadcrumb-item active">Select Course</span>
+                <span class="breadcrumb-item active">Choose Path</span>
             </div>
             
-            <!-- Progress Indicator -->
             <div class="progress-indicator" id="progressIndicator">
                 <div class="progress-dot active" data-step="1"></div>
                 <div class="progress-dot" data-step="2"></div>
                 <div class="progress-dot" data-step="3"></div>
                 <div class="progress-dot" data-step="4"></div>
+                <div class="progress-dot" data-step="5"></div>
+                <div class="progress-dot" data-step="6"></div>
+                <div class="progress-dot" data-step="7"></div>
             </div>
         </div>
     </section>
 
-    <!-- Main Navigation Dashboard -->
-    <section class="navigation-dashboard">
+    <!-- Main Content -->
+    <section class="career-explorer">
         <div class="container">
-            <!-- Course Selection Level -->
-            <div class="navigation-level" id="courseLevel">
-                <div class="level-header">
-                    <h2>Select Your Course</h2>
-                    <p class="level-subtitle">Choose your educational background to explore career opportunities</p>
+            <!-- Step 1: Choose Career Path Method -->
+            <div class="explorer-step active" id="step1">
+                <div class="step-header">
+                    <h2>How would you like to explore your career path?</h2>
+                    <p class="step-subtitle">Choose the approach that best suits your current situation</p>
                 </div>
                 
-                <div class="course-grid">
-                    <div class="course-card" data-course="btech">
-                        <div class="course-icon">
+                <div class="path-options">
+                    <div class="path-card" data-path="industry">
+                        <div class="path-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3>By Industry</h3>
+                        <p>Explore careers based on industry sectors and market opportunities</p>
+                        <div class="path-stats">
+                            <span class="stat">7 Industries</span>
+                            <span class="stat">100+ Roles</span>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card" data-path="education">
+                        <div class="path-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>By Education</h3>
+                        <p>Find careers that match your educational background and qualifications</p>
+                        <div class="path-stats">
+                            <span class="stat">7 Degrees</span>
+                            <span class="stat">50+ Streams</span>
+                        </div>
+                    </div>
+                    
+                    <div class="path-card" data-path="role">
+                        <div class="path-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>By Role</h3>
+                        <p>Start with specific job roles and discover the path to reach them</p>
+                        <div class="path-stats">
+                            <span class="stat">50+ Roles</span>
+                            <span class="stat">Multiple Paths</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Industry Selection -->
+            <div class="explorer-step" id="step2">
+                <div class="step-header">
+                    <button class="back-btn" onclick="goToStep(1)">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <h2>Select Industry</h2>
+                    <p class="step-subtitle">Choose the industry you're interested in exploring</p>
+                </div>
+                
+                <div class="industry-grid">
+                    <div class="industry-card" data-industry="bfsi">
+                        <div class="industry-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>BFSI</h3>
+                        <p>Banking, Financial Services & Insurance</p>
+                    </div>
+                    
+                    <div class="industry-card" data-industry="healthcare">
+                        <div class="industry-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Healthcare</h3>
+                        <p>Medical, Pharmaceutical & Health Services</p>
+                    </div>
+                    
+                    <div class="industry-card" data-industry="technology">
+                        <div class="industry-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Technology</h3>
+                        <p>IT, Software & Digital Solutions</p>
+                    </div>
+                    
+                    <div class="industry-card" data-industry="lifescience">
+                        <div class="industry-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <h3>Life Science</h3>
+                        <p>Biotechnology, Research & Development</p>
+                    </div>
+                    
+                    <div class="industry-card" data-industry="telecommunication">
+                        <div class="industry-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <h3>Telecommunication</h3>
+                        <p>Telecom, Networks & Communication</p>
+                    </div>
+                    
+                    <div class="industry-card" data-industry="education">
+                        <div class="industry-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Education</h3>
+                        <p>Teaching, Training & Academic Services</p>
+                    </div>
+                    
+                    <div class="industry-card" data-industry="edtech">
+                        <div class="industry-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Ed-Tech</h3>
+                        <p>Educational Technology & E-Learning</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Technology Sub-options -->
+            <div class="explorer-step" id="step3">
+                <div class="step-header">
+                    <button class="back-btn" onclick="goToStep(2)">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Industries
+                    </button>
+                    <h2>Technology Career Path</h2>
+                    <p class="step-subtitle">How would you like to explore technology careers?</p>
+                </div>
+                
+                <div class="tech-options">
+                    <div class="tech-card" data-option="role">
+                        <div class="tech-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Continue by Role</h3>
+                        <p>Explore specific technology roles and positions</p>
+                        <div class="tech-stats">
+                            <span class="stat">50+ Tech Roles</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card" data-option="education">
+                        <div class="tech-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Continue by Education</h3>
+                        <p>Find tech careers based on your educational background</p>
+                        <div class="tech-stats">
+                            <span class="stat">7 Degree Types</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Education Selection -->
+            <div class="explorer-step" id="step4">
+                <div class="step-header">
+                    <button class="back-btn" onclick="goToStep(3)">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <h2>Select Your Education</h2>
+                    <p class="step-subtitle">Choose your educational qualification</p>
+                </div>
+                
+                <div class="education-grid">
+                    <div class="education-card" data-education="btech">
+                        <div class="education-icon">
                             <i class="fas fa-microchip"></i>
                         </div>
                         <h3>B.Tech</h3>
                         <p>Bachelor of Technology</p>
-                        <div class="course-stats">
-                            <span class="stat">8 Streams</span>
-                            <span class="stat">25+ Industries</span>
-                        </div>
                     </div>
                     
-                    <div class="course-card" data-course="bcom">
-                        <div class="course-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>B.Com</h3>
-                        <p>Bachelor of Commerce</p>
-                        <div class="course-stats">
-                            <span class="stat">5 Streams</span>
-                            <span class="stat">15+ Industries</span>
-                        </div>
-                    </div>
-                    
-                    <div class="course-card" data-course="bsc">
-                        <div class="course-icon">
+                    <div class="education-card" data-education="bsc">
+                        <div class="education-icon">
                             <i class="fas fa-flask"></i>
                         </div>
-                        <h3>BSc</h3>
+                        <h3>B.Sc</h3>
                         <p>Bachelor of Science</p>
-                        <div class="course-stats">
-                            <span class="stat">6 Streams</span>
-                            <span class="stat">20+ Industries</span>
-                        </div>
                     </div>
                     
-                    <div class="course-card" data-course="bca">
-                        <div class="course-icon">
+                    <div class="education-card" data-education="bca">
+                        <div class="education-icon">
                             <i class="fas fa-laptop-code"></i>
                         </div>
                         <h3>BCA</h3>
                         <p>Bachelor of Computer Applications</p>
-                        <div class="course-stats">
-                            <span class="stat">4 Streams</span>
-                            <span class="stat">12+ Industries</span>
-                        </div>
                     </div>
                     
-                    <div class="course-card" data-course="mca">
-                        <div class="course-icon">
+                    <div class="education-card" data-education="mca">
+                        <div class="education-icon">
                             <i class="fas fa-code"></i>
                         </div>
                         <h3>MCA</h3>
                         <p>Master of Computer Applications</p>
-                        <div class="course-stats">
-                            <span class="stat">5 Streams</span>
-                            <span class="stat">18+ Industries</span>
+                    </div>
+                    
+                    <div class="education-card" data-education="bcom">
+                        <div class="education-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>B.Com</h3>
+                        <p>Bachelor of Commerce</p>
+                    </div>
+                    
+                    <div class="education-card" data-education="mba">
+                        <div class="education-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>MBA</h3>
+                        <p>Master of Business Administration</p>
+                    </div>
+                    
+                    <div class="education-card" data-education="mtech">
+                        <div class="education-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>M.Tech</h3>
+                        <p>Master of Technology</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: B.Tech Specializations -->
+            <div class="explorer-step" id="step5">
+                <div class="step-header">
+                    <button class="back-btn" onclick="goToStep(4)">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Education
+                    </button>
+                    <h2>B.Tech Specialization</h2>
+                    <p class="step-subtitle">Select your B.Tech specialization</p>
+                </div>
+                
+                <div class="specialization-grid">
+                    <div class="specialization-card" data-specialization="computer-science">
+                        <div class="specialization-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Computer Science</h3>
+                        <p>Software Development & Programming</p>
+                    </div>
+                    
+                    <div class="specialization-card" data-specialization="information-technology">
+                        <div class="specialization-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Information Technology</h3>
+                        <p>IT Systems & Infrastructure</p>
+                    </div>
+                    
+                    <div class="specialization-card" data-specialization="artificial-intelligence">
+                        <div class="specialization-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Artificial Intelligence</h3>
+                        <p>AI, ML & Deep Learning</p>
+                    </div>
+                    
+                    <div class="specialization-card" data-specialization="data-science">
+                        <div class="specialization-icon">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        <h3>Data Science</h3>
+                        <p>Data Analytics & Big Data</p>
+                    </div>
+                    
+                    <div class="specialization-card" data-specialization="cybersecurity">
+                        <div class="specialization-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Cybersecurity</h3>
+                        <p>Information Security & Protection</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Computer Science Roles -->
+            <div class="explorer-step" id="step6">
+                <div class="step-header">
+                    <button class="back-btn" onclick="goToStep(5)">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Specializations
+                    </button>
+                    <h2>Computer Science Roles</h2>
+                    <p class="step-subtitle">Choose your target role in Computer Science</p>
+                </div>
+                
+                <div class="roles-grid">
+                    <div class="role-card" data-role="software-developer">
+                        <div class="role-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Software Developer</h3>
+                        <p>Build applications and software solutions</p>
+                        <div class="role-stats">
+                            <span class="salary">₹6-15 LPA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="software-engineer">
+                        <div class="role-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Software Engineer</h3>
+                        <p>Design and develop software systems</p>
+                        <div class="role-stats">
+                            <span class="salary">₹7-18 LPA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="fullstack-developer">
+                        <div class="role-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Fullstack Developer</h3>
+                        <p>Frontend and backend development</p>
+                        <div class="role-stats">
+                            <span class="salary">₹8-20 LPA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="backend-developer">
+                        <div class="role-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Backend Developer</h3>
+                        <p>Server-side development and APIs</p>
+                        <div class="role-stats">
+                            <span class="salary">₹7-16 LPA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="frontend-developer">
+                        <div class="role-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Frontend Developer</h3>
+                        <p>User interface and experience design</p>
+                        <div class="role-stats">
+                            <span class="salary">₹6-14 LPA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="data-scientist">
+                        <div class="role-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Data Scientist</h3>
+                        <p>Data analysis and machine learning</p>
+                        <div class="role-stats">
+                            <span class="salary">₹8-22 LPA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="role-card" data-role="ai-engineer">
+                        <div class="role-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI Engineer</h3>
+                        <p>Artificial intelligence and ML systems</p>
+                        <div class="role-stats">
+                            <span class="salary">₹10-25 LPA</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Stream Selection Level -->
-            <div class="navigation-level hidden" id="streamLevel">
-                <div class="level-header">
-                    <button class="back-btn" id="backToCourse">
+            <!-- Step 7: Role Details -->
+            <div class="explorer-step" id="step7">
+                <div class="step-header">
+                    <button class="back-btn" onclick="goToStep(6)">
                         <i class="fas fa-arrow-left"></i>
-                        Back to Courses
+                        Back to Roles
                     </button>
-                    <h2>Select Your Stream</h2>
-                    <p class="level-subtitle">Choose your specialization within <span id="selectedCourse"></span></p>
+                    <h2 id="roleTitle">Software Developer</h2>
+                    <p class="step-subtitle">Complete career roadmap and skill development plan</p>
                 </div>
                 
-                <div class="stream-grid" id="streamGrid">
-                    <!-- Streams will be populated dynamically -->
-                </div>
-            </div>
-
-            <!-- Industry Selection Level -->
-            <div class="navigation-level hidden" id="industryLevel">
-                <div class="level-header">
-                    <button class="back-btn" id="backToStream">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Streams
-                    </button>
-                    <h2>Select Industry</h2>
-                    <p class="level-subtitle">Industries hiring for <span id="selectedStream"></span> graduates</p>
-                </div>
-                
-                <div class="industry-grid" id="industryGrid">
-                    <!-- Industries will be populated dynamically -->
-                </div>
-            </div>
-
-            <!-- Roadmap Level -->
-            <div class="navigation-level hidden" id="roadmapLevel">
-                <div class="level-header">
-                    <button class="back-btn" id="backToIndustry">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Industries
-                    </button>
-                    <h2>Career Roadmap</h2>
-                    <p class="level-subtitle">Skills and certifications for <span id="selectedIndustry"></span></p>
-                </div>
-                
-                <div class="roadmap-container" id="roadmapContainer">
-                    <!-- Roadmap will be populated dynamically -->
+                <div class="role-details">
+                    <div class="role-overview">
+                        <div class="overview-card">
+                            <h3>Job Description</h3>
+                            <div id="jobDescription">
+                                <p>Software Developers design, create, and maintain software applications and systems. They work with programming languages, frameworks, and tools to build solutions that meet user needs and business requirements.</p>
+                                
+                                <h4>Key Responsibilities:</h4>
+                                <ul>
+                                    <li>Write clean, efficient, and maintainable code</li>
+                                    <li>Design and develop software applications</li>
+                                    <li>Debug and troubleshoot software issues</li>
+                                    <li>Collaborate with cross-functional teams</li>
+                                    <li>Participate in code reviews and testing</li>
+                                    <li>Stay updated with latest technologies and trends</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="skills-section">
+                            <div class="skills-card">
+                                <h3>Technical Skills Required</h3>
+                                <div class="skills-list" id="technicalSkills">
+                                    <div class="skill-item">
+                                        <span class="skill-name">Programming Languages</span>
+                                        <span class="skill-level">Essential</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Data Structures & Algorithms</span>
+                                        <span class="skill-level">Essential</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Version Control (Git)</span>
+                                        <span class="skill-level">Essential</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Database Management</span>
+                                        <span class="skill-level">Important</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Web Technologies</span>
+                                        <span class="skill-level">Important</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Testing & Debugging</span>
+                                        <span class="skill-level">Important</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="skills-card">
+                                <h3>Soft Skills Required</h3>
+                                <div class="skills-list" id="softSkills">
+                                    <div class="skill-item">
+                                        <span class="skill-name">Problem Solving</span>
+                                        <span class="skill-level">Essential</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Communication</span>
+                                        <span class="skill-level">Essential</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Team Collaboration</span>
+                                        <span class="skill-level">Essential</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Continuous Learning</span>
+                                        <span class="skill-level">Important</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Time Management</span>
+                                        <span class="skill-level">Important</span>
+                                    </div>
+                                    <div class="skill-item">
+                                        <span class="skill-name">Attention to Detail</span>
+                                        <span class="skill-level">Important</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="roadmap-section">
+                        <h3>6-Month Skill Development Plan</h3>
+                        <div class="roadmap-chart">
+                            <canvas id="skillChart" width="800" height="400"></canvas>
+                        </div>
+                        
+                        <div class="roadmap-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1</div>
+                                <div class="timeline-content">
+                                    <h4>Month 1-2: Foundation</h4>
+                                    <ul>
+                                        <li>Master a programming language (Python/Java)</li>
+                                        <li>Learn basic data structures</li>
+                                        <li>Understand version control with Git</li>
+                                        <li>Build simple projects</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2</div>
+                                <div class="timeline-content">
+                                    <h4>Month 3-4: Intermediate Skills</h4>
+                                    <ul>
+                                        <li>Advanced algorithms and problem solving</li>
+                                        <li>Database fundamentals (SQL)</li>
+                                        <li>Web development basics (HTML, CSS, JavaScript)</li>
+                                        <li>Build portfolio projects</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker">3</div>
+                                <div class="timeline-content">
+                                    <h4>Month 5-6: Advanced & Specialization</h4>
+                                    <ul>
+                                        <li>Framework specialization (React, Spring, etc.)</li>
+                                        <li>Testing and debugging techniques</li>
+                                        <li>System design basics</li>
+                                        <li>Complete capstone project</li>
+                                        <li>Prepare for interviews</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="metrics-cta">
+    <section class="career-cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Advance Your Career?</h2>
-                <p>Get personalized career recommendations and skill development plans based on these insights</p>
+                <h2>Ready to Start Your Career Journey?</h2>
+                <p>Get personalized guidance and resources to achieve your career goals</p>
                 <div class="cta-actions">
                     <a href="#" class="btn-primary">
                         <i class="fas fa-rocket"></i>
-                        Get Career Plan
+                        Get Started
                     </a>
                     <a href="#" class="btn-secondary">
                         <i class="fas fa-download"></i>
-                        Download Report
+                        Download Roadmap
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Floating Action Button -->
-    <div class="floating-action tooltip" id="floatingAction">
-        <i class="fas fa-question-circle"></i>
-        <span class="tooltiptext">Need help? Click for guidance!</span>
-    </div>
-
     <!-- Scripts -->
     <script src="script.js"></script>
-    <script src="job-metrics-navigation.js"></script>
+    <script src="job-metrics-new.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
