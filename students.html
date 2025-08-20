@@ -168,6 +168,72 @@
         .icon-4 { bottom: 10%; right: 10%; animation-delay: 3s; }
         .icon-5 { top: 50%; left: 50%; animation-delay: 4s; }
         .icon-6 { top: 30%; left: 70%; animation-delay: 5s; }
+
+        /* Student Journey Flow section */
+        .student-flow-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #0f2238 0%, #0d1b2a 100%);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .student-flow-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .student-flow-title {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .student-flow-subtitle {
+            color: rgba(255,255,255,0.8);
+            margin: 0 auto 1.5rem;
+            max-width: 760px;
+            line-height: 1.6;
+        }
+        .student-flow-figure {
+            margin: 0;
+        }
+        .student-flow-img {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+        }
+        .student-flow-caption {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+        /* Vector flow diagram styles */
+        .flow-svg {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            display: block;
+            margin: 20px auto 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.0) 60%);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .flow-node { fill: #14273d; stroke: #4cc9f0; stroke-width: 2; }
+        .flow-node:hover { filter: brightness(1.2); }
+        .flow-label { fill: #e6f1ff; font-size: 14px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+        .center-ring { fill: none; stroke: rgba(255,255,255,0.15); stroke-width: 2; }
+        .flow-link { stroke: #64ffda; stroke-width: 2; fill: none; }
+        .flow-marker { fill: #64ffda; }
+        /* Stick-figure student */
+        .student-figure { stroke: #e6f1ff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        /* Accessories (cap, briefcase) with subtle fill */
+        .student-accessory { stroke: #e6f1ff; fill: rgba(230,241,255,0.08); stroke-width: 2; }
+        /* Subtle flow animation for arrows */
+        .flow-link { stroke-dasharray: 6 6; animation: flowDash 4s linear infinite; }
+        @keyframes flowDash {
+            to { stroke-dashoffset: -24; }
+        }
     </style>
 </head>
 <body>
@@ -275,14 +341,77 @@
             </div>
         </div>
         
-        <div class="services-container">
-            <h1 class="services-title">Student Services</h1>
-            <p class="services-description">
-                Explore our comprehensive range of services designed to help students navigate their career journey, 
-                from skill development to job placement. Each service is tailored to enhance your employability and 
-                prepare you for the professional world.
-            </p>
+      
             
+            
+            <!-- Student Journey Flow -->
+            <section class="student-flow-section" id="student-journey-flow">
+                <div class="student-flow-container">
+                    <h2 class="student-flow-title">Student Journey Flow</h2>
+                    <p class="student-flow-subtitle">A visual overview of the complete flow: Career Blueprint → Hire Me Profile → Resume Builder → Skill Chart → Interviews → Final Report.</p>
+                    <figure class="student-flow-figure">
+                       
+                    </figure>
+
+                    <!-- Option B: Clean, responsive SVG recreation -->
+                    <svg class="flow-svg" viewBox="0 0 900 540" role="img" aria-label="Student Journey Flow Diagram">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L9,3 L0,6 Z" class="flow-marker" />
+                            </marker>
+                        </defs>
+
+                        <!-- Concentric rings in center -->
+                        <circle cx="450" cy="270" r="110" class="center-ring" />
+                        <circle cx="450" cy="270" r="70" class="center-ring" />
+                        <circle cx="450" cy="270" r="35" class="center-ring" />
+
+                        <!-- Central text -->
+                        <text x="450" y="260" class="flow-label">Assessment</text>
+                        <text x="450" y="280" class="flow-label">Roadmap</text>
+                        <text x="450" y="300" class="flow-label">Monitoring</text>
+
+                        <!-- Outer circular nodes (clockwise) -->
+                        <!-- 1. Career Blueprint -->
+                        <ellipse class="flow-node" cx="680" cy="280" rx="90" ry="35" />
+                        <text x="680" y="280" class="flow-label">Career Blueprint</text>
+
+                        <!-- 2. Hire Me Profile -->
+                        <ellipse class="flow-node" cx="600" cy="410" rx="90" ry="35" />
+                        <text x="600" y="410" class="flow-label">Hire Me Profile</text>
+
+                        <!-- 3. Resume Builder -->
+                        <ellipse class="flow-node" cx="450" cy="470" rx="90" ry="35" />
+                        <text x="450" y="470" class="flow-label">Resume Builder</text>
+
+                        <!-- 4. Skill Chart -->
+                        <ellipse class="flow-node" cx="300" cy="410" rx="90" ry="35" />
+                        <text x="300" y="410" class="flow-label">Skill Chart</text>
+
+                        <!-- 5. Interviews -->
+                        <ellipse class="flow-node" cx="220" cy="280" rx="90" ry="35" />
+                        <text x="220" y="280" class="flow-label">Interviews</text>
+
+                        <!-- 6. Final Report -->
+                        <ellipse class="flow-node" cx="300" cy="150" rx="90" ry="35" />
+                        <text x="300" y="150" class="flow-label">Jobs/Placed</text>
+
+                        <!-- Student image centered top -->
+                        <image href="OIP.jpeg" x="402" y="22" width="96" height="96" preserveAspectRatio="xMidYMid meet" />
+                        <text x="450" y="190" class="flow-label">Student</text>
+
+                        <!-- Arrows connecting nodes clockwise -->
+                        <path class="flow-link" d="M 770 280 C 800 280, 820 320, 780 360 S 660 400, 650 410" marker-end="url(#arrow)" />
+                        <path class="flow-link" d="M 540 440 C 520 455, 500 465, 480 468" marker-end="url(#arrow)" />
+                        <path class="flow-link" d="M 410 468 C 380 465, 360 455, 340 440" marker-end="url(#arrow)" />
+                        <path class="flow-link" d="M 255 380 C 230 350, 220 320, 220 315" marker-end="url(#arrow)" />
+                        <path class="flow-link" d="M 220 245 C 220 220, 240 185, 270 165" marker-end="url(#arrow)" />
+                        <!-- Final Report should point to centered Student -->
+                        <path class="flow-link" d="M 360 150 C 420 130, 430 120, 450 110" marker-end="url(#arrow)" />
+                    </svg>
+                </div>
+            </section>
+
             <div class="services-grid">
                 <!-- Career Blueprint -->
                 <div class="service-card">
