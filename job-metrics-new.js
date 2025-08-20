@@ -145,8 +145,11 @@ class CareerPathExplorer {
             this.updateProgressIndicator(stepNumber);
         }
 
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Scroll to career explorer section instead of top
+        const careerExplorer = document.querySelector('.career-explorer');
+        if (careerExplorer) {
+            careerExplorer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     updateProgressIndicator(step) {
