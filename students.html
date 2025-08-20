@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Services - SaarthiX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/dropdown-nav.js" defer></script>
+    <style>
+        /* Additional styles for the services page */
+        .services-hero {
+            min-height: 50vh;
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0 40px;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .services-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .services-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #64ffda;
+            background: rgba(100, 255, 218, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .service-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .service-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .service-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.1) 2%, transparent 0%),
+                radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.1) 2%, transparent 0%);
+            background-size: 100px 100px;
+            opacity: 0.5;
+        }
+        
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .icon-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .icon-2 { top: 20%; right: 20%; animation-delay: 1s; }
+        .icon-3 { bottom: 30%; left: 30%; animation-delay: 2s; }
+        .icon-4 { bottom: 10%; right: 10%; animation-delay: 3s; }
+        .icon-5 { top: 50%; left: 50%; animation-delay: 4s; }
+        .icon-6 { top: 30%; left: 70%; animation-delay: 5s; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">SaarthiX</a>
+        </div>
+        <ul class="nav-links">
+            <li class="dropdown">
+                <a href="students.html" class="dropbtn">Students</a>
+                <div class="dropdown-content cols-2">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                     <a href="job-metrics.html">Carrier Blueprint</a>
+
+                     <a href="basic-profiling.html">Hire me Profile</a>
+
+                     <a href="resume-building-watermark.html">Resume builder</a>
+
+                     <a href="demo-courses.html">Courses</a>
+
+                     <a href="interview-questions.html">Interview Preparation</a>
+
+                     <a href="career-counselling-ai.html">Carrier Counselling</a>
+                    </div>
+                    <div class="dropdown-section">
+                       
+                        <h4>Additional Services</h4>
+                        <a href="psychometric-independent.html">Psychometric Test</a>
+                        <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
+                        <a href="certification-courses.html">Advance Role-ready?Training</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="institute.html" class="dropbtn">Institute</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                        <a href="unpaid-internship.html">Internship and Placement Access</a>
+                        <a href="recorded-trainings.html">Trainings</a>
+                        <a href="recorded-workshop.html">Workshop</a>
+                        <a href="recorded-sessions.html">Expert Sessions</a>
+                         <a href="collaboration-events.html">Collaboration</a>
+                        <a href="student-training.html">Student Training(On demand)</a>
+                        <a href="student-training-role-ready.html">Student Training(Role?Ready)</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="industry.html" class="dropbtn">Industry</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Services</h4>
+                       <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="database-access.html">Database Access</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="hackathon-info.html">Post Hackathons</a>
+                        <a href="drive-glimpse.html">Hiring Drives</a>
+                          <a href="Expert-session.html">Expert?Session</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Resources</a>
+                <div class="dropdown-content cols-1">
+                    <div class="dropdown-section">
+                        <h4>Student Resources</h4>
+                        <a href="jobs.html">Jobs</a>
+                        <a href="blogs.html">Blogs & Articles</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="account-options">
+            <a href="#" class="login-btn" id="loginBtn">
+                <div class="btn-content">
+                    <i class="fas fa-sign-in-alt login-icon"></i>
+                    <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
+                    <span class="btn-text">Login</span>
+                </div>
+                <div class="btn-bg"></div>
+                <div class="btn-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero">
+        <div class="hero-background">
+            <div class="bg-pattern"></div>
+            <div class="floating-icons">
+                <div class="floating-icon icon-1">🎓</div>
+                <div class="floating-icon icon-2">📝</div>
+                <div class="floating-icon icon-3">💼</div>
+                <div class="floating-icon icon-4">🚀</div>
+                <div class="floating-icon icon-5">⚡</div>
+                <div class="floating-icon icon-6">🌟</div>
+            </div>
+        </div>
+        
+        <div class="services-container">
+            <h1 class="services-title">Student Services</h1>
+            <p class="services-description">
+                Explore our comprehensive range of services designed to help students navigate their career journey, 
+                from skill development to job placement. Each service is tailored to enhance your employability and 
+                prepare you for the professional world.
+            </p>
+            
+            <div class="services-grid">
+                <!-- Career Blueprint -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="service-title">Career Blueprint</h3>
+                    <p class="service-description">
+                        Explore career opportunities based on your educational background. Discover industry requirements, 
+                        skills needed, and certification roadmaps tailored to your course and specialization.
+                    </p>
+                    <a href="job-metrics.html" class="service-link">Explore Careers</a>
+                </div>
+                
+                <!-- Hire Me Profile -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <h3 class="service-title">Hire Me Profile</h3>
+                    <p class="service-description">
+                        Create a professional profile that showcases your skills, experience, and achievements to potential 
+                        employers. Stand out from the crowd with a personalized digital presence.
+                    </p>
+                    <a href="basic-profiling.html" class="service-link">Create Profile</a>
+                </div>
+                
+                <!-- Resume Builder -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="service-title">Resume Builder</h3>
+                    <p class="service-description">
+                        Build a professional, ATS-friendly resume with our intuitive builder. Choose from industry-specific 
+                        templates and get expert tips to highlight your strengths effectively.
+                    </p>
+                    <a href="resume-building-watermark.html" class="service-link">Build Resume</a>
+                </div>
+                
+                <!-- Courses -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="service-title">Courses</h3>
+                    <p class="service-description">
+                        Access a wide range of courses designed to enhance your technical and soft skills. Learn from industry 
+                        experts and gain practical knowledge that employers value.
+                    </p>
+                    <a href="demo-courses.html" class="service-link">Browse Courses</a>
+                </div>
+                
+                <!-- Interview Preparation -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="service-title">Interview Preparation</h3>
+                    <p class="service-description">
+                        Prepare for job interviews with our comprehensive resources including mock interviews, common questions, 
+                        and expert tips to help you make a great impression.
+                    </p>
+                    <a href="interview-questions.html" class="service-link">Prepare Now</a>
+                </div>
+                
+                <!-- Career Counselling -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3 class="service-title">Career Counselling</h3>
+                    <p class="service-description">
+                        Get personalized guidance from career experts who can help you identify your strengths, explore suitable 
+                        career paths, and develop a strategic plan for your professional growth.
+                    </p>
+                    <a href="career-counselling-ai.html" class="service-link">Get Guidance</a>
+                </div>
+                
+                <!-- Psychometric Test -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="service-title">Psychometric Test</h3>
+                    <p class="service-description">
+                        Discover your personality traits, work preferences, and aptitudes with our comprehensive psychometric 
+                        assessments. Gain insights that help align your career choices with your natural strengths.
+                    </p>
+                    <a href="psychometric-independent.html" class="service-link">Take Test</a>
+                </div>
+                
+                <!-- Apply Jobs/Internships -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="service-title">Apply for Opportunities</h3>
+                    <p class="service-description">
+                        Browse and apply for jobs, internships, and hackathons that match your skills and interests. 
+                        Get exclusive access to opportunities from our partner companies.
+                    </p>
+                    <a href="communication-skills.html" class="service-link">Find Opportunities</a>
+                </div>
+                
+                <!-- Advanced Role-ready Training -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="service-title">Advanced Role-ready Training</h3>
+                    <p class="service-description">
+                        Participate in intensive training programs designed to prepare you for specific job roles. 
+                        Develop industry-relevant skills and gain practical experience through hands-on projects.
+                    </p>
+                    <a href="certification-courses.html" class="service-link">Start Training</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>SaarthiX</h2>
+                <p>Connecting Dreams to Opportunities</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="students.html">Students</a></li>
+                        <li><a href="institute.html">Institute</a></li>
+                        <li><a href="industry.html">Industry</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="blogs.html">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 SaarthiX. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add any JavaScript functionality here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation for service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            serviceCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
