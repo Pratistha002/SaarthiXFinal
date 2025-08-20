@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -577,7 +577,7 @@
         </div>
         <ul class="nav-links">
             <li class="dropdown">
-                <a href="#" class="dropbtn">Students</a>
+                <a href="students.html" class="dropbtn">Students</a>
                 <div class="dropdown-content cols-2">
                     <div class="dropdown-section">
                         <h4>Services</h4>
@@ -602,7 +602,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropbtn">Institute</a>
+                <a href="institute.html" class="dropbtn">Institute</a>
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
@@ -615,7 +615,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropbtn">Industry</a>
+                <a href="industry.html" class="dropbtn">Industry</a>
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
@@ -1027,17 +1027,17 @@
     <!-- AI Chat Interface -->
     <div class="ai-chat-interface" id="aiChatInterface">
         <div class="chat-header">
-            <div class="chat-avatar">🚀</div>
+            <div class="chat-avatar">??</div>
             <div class="chat-info">
                 <h3>AI Career Counselor</h3>
-                <p>Online ï¿½ Ready to help</p>
+                <p>Online � Ready to help</p>
             </div>
-            <button class="chat-close" onclick="closeAIChat()">ï¿½</button>
+            <button class="chat-close" onclick="closeAIChat()">�</button>
         </div>
         
         <div class="chat-messages" id="chatMessages">
             <div class="message ai">
-                <div class="message-avatar">🚀</div>
+                <div class="message-avatar">??</div>
                 <div class="message-content">
                     Hi! I'm your AI Career Counselor. I'm here to help you with career guidance, 
                     job search advice, skill development, and any career-related questions you might have. 
@@ -1095,7 +1095,7 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
             
-            const avatar = sender === 'ai' ? '🚀' : '🚀';
+            const avatar = sender === 'ai' ? '??' : '??';
             messageDiv.innerHTML = `
                 <div class="message-avatar">${avatar}</div>
                 <div class="message-content">${content}</div>
@@ -1173,7 +1173,7 @@
         function showCareerResults(data) {
             const results = generateCareerRecommendations(data);
             
-            alert(`🚀 Career Analysis Complete!\n\nBased on your profile, here are your top career recommendations:\n\n${results.join('\n')}\n\nDetailed report has been sent to your email!`);
+            alert(`?? Career Analysis Complete!\n\nBased on your profile, here are your top career recommendations:\n\n${results.join('\n')}\n\nDetailed report has been sent to your email!`);
         }
         
         function generateCareerRecommendations(data) {
@@ -1197,19 +1197,19 @@
         
         // Other tool functions
         function generateRoadmap() {
-            alert('📊 Generating your personalized career roadmap...\n\nThis will include:\n• Skill development timeline\n• Learning milestones\n• Career progression steps\n• Industry insights\n\nYour roadmap will be ready in 24 hours!');
+            alert('?? Generating your personalized career roadmap...\n\nThis will include:\n� Skill development timeline\n� Learning milestones\n� Career progression steps\n� Industry insights\n\nYour roadmap will be ready in 24 hours!');
         }
         
         function viewMarketInsights() {
-            alert('📈 Market Insights Dashboard\n\n• Tech jobs: +15% growth\n• Average salary increase: 8%\n• Top skills in demand: AI/ML, Cloud, Data Analysis\n• Remote work: 65% of positions\n\nDetailed insights available in your dashboard!');
+            alert('?? Market Insights Dashboard\n\n� Tech jobs: +15% growth\n� Average salary increase: 8%\n� Top skills in demand: AI/ML, Cloud, Data Analysis\n� Remote work: 65% of positions\n\nDetailed insights available in your dashboard!');
         }
         
         function analyzeSkillGaps() {
-            alert('🔍 Skill Gap Analysis\n\nAnalyzing your current skills vs. market demands...\n\n• Technical skills: 75% match\n• Soft skills: 85% match\n• Recommended learning: Python, AWS, Leadership\n\nPersonalized learning path will be created for you!');
+            alert('?? Skill Gap Analysis\n\nAnalyzing your current skills vs. market demands...\n\n� Technical skills: 75% match\n� Soft skills: 85% match\n� Recommended learning: Python, AWS, Leadership\n\nPersonalized learning path will be created for you!');
         }
         
         function buildNetwork() {
-            alert('🌐 Career Network Builder\n\nConnecting you with:\n• 50+ industry professionals\n• 10 potential mentors\n• 25 peers in your field\n• 15 upcoming networking events\n\nNetwork recommendations sent to your email!');
+            alert('?? Career Network Builder\n\nConnecting you with:\n� 50+ industry professionals\n� 10 potential mentors\n� 25 peers in your field\n� 15 upcoming networking events\n\nNetwork recommendations sent to your email!');
         }        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
