@@ -1350,14 +1350,16 @@ nav.nav-hidden {
 }
 
 .node:hover {
-    transform: scale(1.2) rotate(5deg);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    animation-play-state: paused;
+    /* Disable hover animations/effects */
+    transform: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    animation-play-state: running;
 }
 
 .node:hover::before,
 .node:hover::after {
-    animation-play-state: paused;
+    /* Keep ripples running on hover */
+    animation-play-state: running;
 }
 
 /* Student Node - Green Theme */
@@ -1457,35 +1459,9 @@ nav.nav-hidden {
     }
 }
 
-/* Enhanced Tooltip Styles */
-.node[data-tooltip]:hover::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    z-index: 1000;
-    animation: tooltipFadeIn 0.3s ease-out;
-}
-
-@keyframes tooltipFadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
+/* Tooltips disabled */
+.node[data-tooltip]:hover::before { content: none; display: none; }
+@keyframes tooltipFadeIn { from { opacity: 1; } to { opacity: 1; } }
 
 /* Node Labels */
 .node-label {
