@@ -1,12 +1,25 @@
-﻿?<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Profiling - SaarthiX</title>
+    <title>Profiling - SaarthiX</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/nav-scroll.js" defer></script>
+    <style>
+        /* Profiling page specific CTA color override */
+        .service-hero .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.25);
+        }
+        .service-hero .btn-primary:hover {
+            box-shadow: 0 14px 28px rgba(76, 175, 80, 0.35);
+            transform: translateY(-2px);
+        }
+    </style>
     </head>
 <body>
     <!-- Navbar -->
@@ -112,15 +125,11 @@
         
         <div class="container">
             <div class="service-hero-content">
-                <div class="service-badge">
-                    <span class="badge-icon">🚀</span>
-                    <span class="badge-text">Free Service</span>
-                </div>
                 
-                <h1 class="service-title">Basic Profiling</h1>
+                <h1 class="service-title">Profiling</h1>
                 <p class="service-subtitle">
                     Discover your strengths, interests, and career potential with our comprehensive 
-                    basic profiling assessment. Get insights into your personality and career preferences.
+                    profiling assessment. Get insights into your personality and career preferences.
                 </p>
                 
                 <div class="service-features-preview">
@@ -136,6 +145,18 @@
                         <i class="fas fa-lightbulb"></i>
                         <span>Psychometric Test</span>
                     </div>
+                </div>
+
+                <!-- Primary CTAs placed prominently in hero -->
+                <div class="service-hero-actions">
+                    <a href="#" class="btn btn-primary" id="startAssessmentBtn">
+                        <i class="fas fa-play"></i>
+                        <span>Start Profiling</span>
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        <span>How it works</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -184,13 +205,13 @@
                         <div class="feature-icon">
                             <i class="fas fa-compass"></i>
                         </div>
-                        <h3>Career Guidance</h3>
-                        <p>Get personalized career recommendations based on your profile, interests, and market opportunities.</p>
+                        <h3>Great for personal alignment</h3>
+                        <p>Understand the kind of work culture and environment where you thrive best.</p>
                         <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Top 5 career matches</li>
-                            <li><i class="fas fa-check"></i> Industry recommendations</li>
-                            <li><i class="fas fa-check"></i> Skill development areas</li>
-                            <li><i class="fas fa-check"></i> Next steps guidance</li>
+                            <li><i class="fas fa-check"></i> Core values assessment</li>
+                            <li><i class="fas fa-check"></i> Ideal workplace culture</li>
+                            <li><i class="fas fa-check"></i> Team vs. independent role fit</li>
+                            <li><i class="fas fa-check"></i> Motivation alignment</li>
                         </ul>
                     </div>
                 </div>
@@ -198,9 +219,9 @@
 
             <!-- Process Section -->
             <div class="content-section">
-                <div class="section-header">
+                <div class="section-header" id="how-it-works">
                     <h2>How It Works</h2>
-                    <p>Simple 4-step process to complete your basic profiling</p>
+                    <p>Simple 4-step process to complete your profiling</p>
                 </div>
                 
                 <div class="process-steps">
@@ -224,7 +245,7 @@
                     
                     <div class="process-step">
                         <div class="step-number">4</div>
-                        <h3>Results</h3>
+                        <h3>Report</h3>
                         <p>Receive your detailed profile report with career recommendations and development suggestions.</p>
                     </div>
                 </div>
@@ -233,7 +254,7 @@
             <!-- Benefits Section -->
             <div class="content-section">
                 <div class="section-header">
-                    <h2>Why Choose Basic Profiling?</h2>
+                    <h2>Why Choose Profiling?</h2>
                     <p>Understand the advantages of our profiling service</p>
                 </div>
                 
@@ -281,7 +302,7 @@
             </div>
 
             <!-- Sample Report Section -->
-            <div class="content-section">
+            <!-- <div class="content-section">
                 <div class="section-header">
                     <h2>Sample Profile Report</h2>
                     <p>Preview what you'll receive after completing the assessment</p>
@@ -312,7 +333,7 @@
                         <p>Recommended career paths with match percentages, required skills, and growth opportunities in each field.</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -321,27 +342,27 @@
         <div class="container">
             <div class="section-header">
                 <h2>Frequently Asked Questions</h2>
-                <p>Get answers to common questions about our Basic Profiling service</p>
+                <p>Get answers to common questions about our Profiling service</p>
             </div>
             
             <div class="faq-container">
                 <div class="faq-item">
                     <button class="faq-question">
-                        How long does the basic profiling assessment take?
+                        How long does the profiling assessment take?
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>The basic profiling assessment typically takes 30-45 minutes to complete. You can save your progress and return to finish it later if needed.</p>
+                        <p>The profiling assessment typically takes 30-45 minutes to complete. You can save your progress and return to finish it later if needed.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <button class="faq-question">
-                        Is the basic profiling really free?
+                        Is theprofiling really free?
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes, our basic profiling service is completely free with no hidden charges. You'll receive a comprehensive report at no cost.</p>
+                        <p>Yes, ourprofiling service is completely free with no hidden charges. You'll receive a comprehensive report at no cost.</p>
                     </div>
                 </div>
                 
@@ -371,7 +392,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Basic profiling provides fundamental insights into personality and interests. AI-based profiling offers more detailed analysis, predictive insights, and personalized recommendations using advanced algorithms.</p>
+                        <p>Profiling provides fundamental insights into personality and interests. AI-based profiling offers more detailed analysis, predictive insights, and personalized recommendations using advanced algorithms.</p>
                     </div>
                 </div>
             </div>
@@ -383,21 +404,21 @@
         <div class="container">
             <div class="cta-content">
                 <h2>Ready to Discover Your Career Potential?</h2>
-                <p>Start your journey with our free basic profiling assessment and unlock insights about your career path.</p>
-                <div class="cta-actions">
+                <p>Start your journey with our free profiling assessment and unlock insights about your career path.</p>
+                <!-- <div class="cta-actions">
                     <a href="#" class="btn-primary" id="startAssessmentBtn">
                         <i class="fas fa-play"></i>
                         Profiling 
                     </a>
                     
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
     <!-- Assessment Modal -->
     <style>
-        .assessment-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .assessment-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 10002; padding: 20px; }
         .assessment-modal-overlay.open { display: flex; }
         .assessment-modal { background: #fff; width: 100%; max-width: 780px; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; }
         .assessment-modal-header { display:flex; justify-content: space-between; align-items:center; padding: 16px 20px; background: linear-gradient(135deg, #667eea, #764ba2); color:#fff; }
@@ -479,7 +500,7 @@
 
     <!-- Results Modal -->
     <style>
-        .results-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 10001; padding: 20px; }
+        .results-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 10003; padding: 20px; }
         .results-modal-overlay.open { display: flex; }
         .results-modal { background: #fff; width: 100%; max-width: 900px; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; }
         .results-modal-header { display:flex; justify-content: space-between; align-items:center; padding: 20px; background: linear-gradient(135deg, #28a745, #20c997); color:#fff; }
