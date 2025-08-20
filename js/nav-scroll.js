@@ -39,3 +39,24 @@
     // Ensure shown at load
     nav.classList.remove('nav-hidden');
 })();
+
+// Fallback: make 'Students' top-level button navigate on all pages that don't include dropdown-nav.js
+// This ensures clicking 'Students' always goes to students.html from any page where this script is loaded.
+document.addEventListener('DOMContentLoaded', function () {
+    const studentBtns = document.querySelectorAll('.navbar .dropdown > .dropbtn');
+    studentBtns.forEach(btn => {
+        const label = (btn.textContent || '').trim().toLowerCase();
+        if (label === 'students') {
+            const href = btn.getAttribute('href');
+            if (!href || href === '#') {
+                btn.setAttribute('href', 'students.html');
+            }
+            btn.addEventListener('click', function (e) {
+                const to = this.getAttribute('href');
+                if (to && to !== '#') {
+                    window.location.href = to;
+                }
+            });
+        }
+    });
+});
