@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -169,6 +169,33 @@
         .icon-4 { bottom: 10%; right: 10%; animation-delay: 3s; }
         .icon-5 { top: 50%; left: 50%; animation-delay: 4s; }
         .icon-6 { top: 30%; left: 70%; animation-delay: 5s; }
+        /* Flow section (circular navigation) */
+        .flow-section { padding: 60px 0; background: linear-gradient(135deg, #0f2238 0%, #0d1b2a 100%); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .flow-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center; }
+        .flow-title { color: #fff; font-size: 2rem; margin-bottom: .5rem; }
+        .flow-subtitle { color: rgba(255,255,255,0.8); margin: 0 auto 1.5rem; max-width: 760px; line-height: 1.6; }
+        .flow-figure { margin: 0; padding: 6px 0; }
+        .flow-caption { color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-top: 10px; }
+        /* Circular flow core styles */
+        .circular-flow { width: 100%; max-width: clamp(320px, 48vw, 860px); height: auto; margin: 0 auto; display: block; transform-origin: center; transition: transform .25s ease, filter .25s ease; filter: drop-shadow(0 10px 28px rgba(0,0,0,0.18)); }
+        @media (max-width: 1024px) {
+            .circular-flow { max-width: clamp(300px, 60vw, 780px); }
+        }
+        @media (max-width: 768px) {
+            .circular-flow { max-width: clamp(280px, 88vw, 520px); }
+            .cf-text { font-size: clamp(12px, 3.4vw, 15px); }
+        }
+        @media (max-width: 480px) {
+            .circular-flow { max-width: clamp(260px, 94vw, 440px); }
+        }
+        .circular-flow:hover { transform: scale(1.02); }
+        .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(11px, 1.3vw, 14px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
+        .cf-center { fill: #ffffff; stroke: rgba(0,0,0,0.06); stroke-width: 1.5; }
+        .cf-center-title { fill: #0d1b2a; font-weight: 800; font-size: 16px; }
+        .seg { stroke: #fff; stroke-width: 6; stroke-linejoin: round; transition: filter .2s ease, transform .2s ease, opacity .2s ease; cursor: pointer; }
+        .seg.active { filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); transform: scale(1.015); opacity: 1; }
+        .arrow-tip { opacity: 1; filter: drop-shadow(0 3px 6px rgba(0,0,0,.25)); stroke: #fff; stroke-width: 4; stroke-linejoin: round; transition: transform .2s ease, filter .2s ease; }
+        .arrow-tip.active { transform: scale(1.06); filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
     </style>
     <script src="js/nav-scroll.js" defer></script>
 </head>
@@ -188,7 +215,7 @@
 
                      <a href="basic-profiling.html">Hire me Profile</a>
 
-                     <a href="resume-building-watermark.html">Resume builder</a>
+                     <a href="resume-building-watermark.html">Enhance Your Resume</a>
 
                      <a href="demo-courses.html">Courses</a>
 
@@ -268,23 +295,109 @@
         <div class="hero-background">
             <div class="bg-pattern"></div>
             <div class="floating-icons">
-                <div class="floating-icon icon-1">💼</div>
-                <div class="floating-icon icon-2">🏭</div>
-                <div class="floating-icon icon-3">📊</div>
-                <div class="floating-icon icon-4">🚀</div>
-                <div class="floating-icon icon-5">🔍</div>
-                <div class="floating-icon icon-6">🤝</div>
+                <div class="floating-icon icon-1">ðŸ’¼</div>
+                <div class="floating-icon icon-2">ðŸ­</div>
+                <div class="floating-icon icon-3">ðŸ“Š</div>
+                <div class="floating-icon icon-4">ðŸš€</div>
+                <div class="floating-icon icon-5">ðŸ”</div>
+                <div class="floating-icon icon-6">ðŸ¤</div>
             </div>
         </div>
         
-        <div class="services-container">
-            <h1 class="services-title">Industry Services</h1>
-            <p class="services-description">
-                Discover how SaarthiX can help your organization find the right talent, streamline your 
-                recruitment process, and engage with the academic community. Our industry services are 
-                designed to connect you with qualified candidates and future leaders.
-            </p>
+      
             
+            <!-- Industry Flow Section -->
+            <section class="flow-section">
+                <div class="flow-container">
+                    <h1 class="flow-title">Industry Flow</h1>
+                    <p class="flow-subtitle">Quick navigation to key actions for employers and recruiters.</p>
+                    <figure class="flow-figure">
+                        <svg class="circular-flow" viewBox="-240 -240 480 480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs>
+                                <!-- Midline arcs for labels -->
+                                <path id="i-arc1" d="M0,-135 A135,135 0 0,1 117,-67.5" />
+                                <path id="i-arc2" d="M117,-67.5 A135,135 0 0,1 117,67.5" />
+                                <path id="i-arc3" d="M117,67.5 A135,135 0 0,1 0,135" />
+                                <path id="i-arc4" d="M0,135 A135,135 0 0,1 -117,67.5" />
+                                <path id="i-arc5" d="M-117,67.5 A135,135 0 0,1 -117,-67.5" />
+                                <path id="i-arc6" d="M-117,-67.5 A135,135 0 0,1 0,-135" />
+                                <!-- Rich gradients for segments -->
+                                <linearGradient id="i-g1" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#46c2ff"/>
+                                    <stop offset="100%" stop-color="#0aa0d6"/>
+                                </linearGradient>
+                                <linearGradient id="i-g2" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#48e1c1"/>
+                                    <stop offset="100%" stop-color="#13b798"/>
+                                </linearGradient>
+                                <linearGradient id="i-g3" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#b073ff"/>
+                                    <stop offset="100%" stop-color="#7b4fe6"/>
+                                </linearGradient>
+                                <linearGradient id="i-g4" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#ff6b5b"/>
+                                    <stop offset="100%" stop-color="#d83d2b"/>
+                                </linearGradient>
+                                <linearGradient id="i-g5" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#3fb4ff"/>
+                                    <stop offset="100%" stop-color="#1d79c4"/>
+                                </linearGradient>
+                                <linearGradient id="i-g6" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#ff64c3"/>
+                                    <stop offset="100%" stop-color="#d43d96"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Segments -->
+                            <g transform="translate(0,0)">
+                                <!-- 1: Post Jobs -->
+                                <path class="seg seg1" fill="url(#i-g1)" d="M0,-200 A200,200 0 0,1 173,-100 L90,-52 A105,105 0 0,0 0,-105 Z" data-target="job-dashboard.html" />
+                                <polygon class="arrow-tip seg1" points="173,-100 200,-95 182,-70" />
+                                <a xlink:href="job-dashboard.html"><text class="cf-text" dy="-2"><textPath href="#i-arc1" startOffset="50%">Post Jobs</textPath></text></a>
+                                <!-- 2: Database Access -->
+                                <path class="seg seg2" fill="url(#i-g2)" d="M173,-100 A200,200 0 0,1 173,100 L90,52 A105,105 0 0,0 90,-52 Z" data-target="database-access.html" />
+                                <polygon class="arrow-tip seg2" points="173,100 200,105 182,130" />
+                                <a xlink:href="database-access.html"><text class="cf-text" dy="-2"><textPath href="#i-arc2" startOffset="50%">Database Access</textPath></text></a>
+                                <!-- 3: Assessment AI -->
+                                <path class="seg seg3" fill="url(#i-g3)" d="M173,100 A200,200 0 0,1 0,200 L0,105 A105,105 0 0,0 90,52 Z" data-target="ai-interview-glimpse.html" />
+                                <polygon class="arrow-tip seg3" points="0,200 -5,228 -28,210" />
+                                <a xlink:href="ai-interview-glimpse.html"><text class="cf-text" dy="-2"><textPath href="#i-arc3" startOffset="50%">Assessment AI</textPath></text></a>
+                                <!-- 4: Hackathons -->
+                                <path class="seg seg4" fill="url(#i-g4)" d="M0,200 A200,200 0 0,1 -173,100 L-90,52 A105,105 0 0,0 0,105 Z" data-target="hackathon-info.html" />
+                                <polygon class="arrow-tip seg4" points="-173,100 -200,105 -182,130" />
+                                <a xlink:href="hackathon-info.html"><text class="cf-text" dy="-2"><textPath href="#i-arc4" startOffset="50%">Post Hackathons</textPath></text></a>
+                                <!-- 5: Hiring Drives -->
+                                <path class="seg seg5" fill="url(#i-g5)" d="M-173,100 A200,200 0 0,1 -173,-100 L-90,-52 A105,105 0 0,0 -90,52 Z" data-target="drive-glimpse.html" />
+                                <polygon class="arrow-tip seg5" points="-173,-100 -200,-95 -182,-70" />
+                                <a xlink:href="drive-glimpse.html"><text class="cf-text" dy="-2"><textPath href="#i-arc5" startOffset="50%">Hiring Drives</textPath></text></a>
+                                <!-- 6: Expert Session -->
+                                <path class="seg seg6" fill="url(#i-g6)" d="M-173,-100 A200,200 0 0,1 0,-200 L0,-105 A105,105 0 0,0 -90,-52 Z" data-target="Expert-session.html" />
+                                <polygon class="arrow-tip seg6" points="0,-200 5,-228 28,-210" />
+                                <a xlink:href="Expert-session.html"><text class="cf-text" dy="-2"><textPath href="#i-arc6" startOffset="50%">Expert Session</textPath></text></a>
+                                <!-- Center -->
+                                <circle class="cf-center" r="65" />
+                                <text class="cf-center-title" y="-2" text-anchor="middle" style="font-size:15px;">Hire</text>
+                                <text class="cf-center-title" y="18" text-anchor="middle" style="font-size:15px;">Engage</text>
+                            </g>
+                            <script>
+                                (function(){
+                                    const svg = document.currentScript.closest('figure').querySelector('svg');
+                                    const group = svg.querySelector('g');
+                                    const segments = group.querySelectorAll('path.seg');
+                                    const tips = group.querySelectorAll('polygon.arrow-tip');
+                                    function clearActive(){ segments.forEach(s=>s.classList.remove('active')); tips.forEach(t=>t.classList.remove('active')); }
+                                    segments.forEach((seg, idx)=>{
+                                        seg.addEventListener('mouseenter', ()=>{ clearActive(); seg.classList.add('active'); const tip=tips[idx]; if (tip) tip.classList.add('active'); });
+                                        seg.addEventListener('mouseleave', clearActive);
+                                        seg.addEventListener('click', ()=>{ const t=seg.getAttribute('data-target'); if(t) window.location.href=t; });
+                                    });
+                                })();
+                            </script>
+                        </svg>
+                        <figcaption class="flow-caption">Quick actions for industry partners</figcaption>
+                    </figure>
+                </div>
+            </section>
+
             <div class="services-grid">
                 <!-- Post Jobs -->
                 <div class="service-card">

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -182,6 +182,7 @@
             margin: 0 auto;
             padding: 0 20px;
             text-align: center;
+            overflow: visible; /* prevent inner overflow clipping */
         }
         .student-flow-title {
             color: #fff;
@@ -196,6 +197,8 @@
         }
         .student-flow-figure {
             margin: 0;
+            overflow: visible; /* ensure teardrop tips and guides aren't clipped */
+            padding: 6px 0; /* small breathing space */
         }
         .student-flow-img {
             width: 100%;
@@ -235,6 +238,110 @@
         @keyframes flowDash {
             to { stroke-dashoffset: -24; }
         }
+
+        /* Teardrop flow styles */
+        .flow-rail {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px; /* slightly larger to avoid overlap */
+            padding: 18px 12px; /* more breathing around edges */
+            overflow-x: auto;
+            overflow-y: visible; /* allow vertical guides to show */
+            scrollbar-width: thin;
+        }
+        .flow-rail::-webkit-scrollbar { height: 8px; }
+        .flow-rail::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .flow-step {
+            position: relative;
+            width: 150px;
+            height: 74px;
+            border-radius: 37px; /* round pill base */
+            background: linear-gradient(135deg, var(--c1), var(--c2));
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.15);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: .2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 18px;
+            flex: 0 0 auto; /* prevent shrinking in horizontal rail */
+        }
+        .flow-step::after {
+            content: '';
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0; height: 0;
+            border-left: 18px solid var(--c2); /* pointed tip */
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.25));
+        }
+        .step-label { font-size: 0.95rem; line-height: 1.2; }
+        .flow-step .sub { display:block; font-weight:600; opacity:.95; font-size: .85rem; }
+
+        /* optional vertical guide above each step */
+        .flow-step::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            top: -42px;
+            left: calc(50% - 1px);
+            border-radius: 2px;
+        }
+        @media (max-width: 520px) {
+            .flow-step::before { display: none; }
+            .flow-step { width: 118px; height: 60px; border-radius: 30px; }
+        }
+
+        /* Color themes similar to your sample */
+        .t1 { --c1: #46c2ff; --c2: #0aa0d6; }
+        .t2 { --c1: #48e1c1; --c2: #13b798; }
+        .t3 { --c1: #9bd64a; --c2: #63b132; }
+        .t4 { --c1: #ff6b5b; --c2: #d83d2b; }
+        .t5 { --c1: #ff64c3; --c2: #d43d96; }
+        .t6 { --c1: #b073ff; --c2: #7b4fe6; }
+        .t7 { --c1: #3fb4ff; --c2: #1d79c4; }
+
+        @media (max-width: 768px) {
+            .flow-step { width: 130px; height: 66px; border-radius: 33px; }
+            .step-label { font-size: 0.9rem; }
+        }
+
+        /* Circular arrow flow (like your screenshot) */
+        .circular-flow { width: 100%; max-width: clamp(320px, 48vw, 860px); height: auto; margin: 0 auto; display: block; transform-origin: center; transition: transform .25s ease, filter .25s ease; filter: drop-shadow(0 10px 28px rgba(0,0,0,0.18)); }
+        @media (max-width: 1024px) {
+            .circular-flow { max-width: clamp(300px, 60vw, 780px); }
+        }
+        @media (max-width: 768px) {
+            .circular-flow { max-width: clamp(280px, 88vw, 520px); }
+            .cf-text { font-size: clamp(12px, 3.4vw, 15px); }
+        }
+        @media (max-width: 480px) {
+            .circular-flow { max-width: clamp(260px, 94vw, 440px); }
+        }
+.circular-flow:hover { transform: scale(1.02); }
+        .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(11px, 1.3vw, 14px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
+        .cf-center { fill: #ffffff; stroke: rgba(0,0,0,0.06); stroke-width: 1.5; }
+        .cf-center-title { fill: #0d1b2a; font-weight: 800; font-size: 16px; }
+        .seg { stroke: #fff; stroke-width: 6; stroke-linejoin: round; transition: filter .2s ease, transform .2s ease, opacity .2s ease; cursor: pointer; }
+        .seg.active { filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); transform: scale(1.015); opacity: 1; }
+        .arrow-tip { transition: transform .2s ease, filter .2s ease; }
+        .arrow-tip.active { transform: scale(1.06); filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
+        /* Rich, modern palette */
+        .seg1 { fill: url(#g1); }
+        .seg2 { fill: url(#g2); }
+        .seg3 { fill: url(#g3); }
+        .seg4 { fill: url(#g4); }
+        .seg5 { fill: url(#g5); }
+        .seg6 { fill: url(#g6); }
+        .arrow-tip { opacity: 1; filter: drop-shadow(0 3px 6px rgba(0,0,0,.25)); stroke: #fff; stroke-width: 4; stroke-linejoin: round; }
     </style>
 </head>
 <body>
@@ -253,7 +360,7 @@
 
                      <a href="basic-profiling.html">Hire me Profile</a>
 
-                     <a href="resume-building-watermark.html">Resume builder</a>
+                     <a href="resume-building-watermark.html">Enhance Your Resume</a>
 
                      <a href="demo-courses.html">Courses</a>
 
@@ -266,7 +373,7 @@
                         <h4>Additional Services</h4>
                         <a href="psychometric-independent.html">Psychometric Test</a>
                         <a href="communication-skills.html">Apply Jobs/ Internships/ Hackathons</a>
-                        <a href="certification-courses.html">Advance Role-ready🎓Training</a>
+                        <a href="certification-courses.html">Advance Role-readyðŸŽ“Training</a>
                     </div>
                 </div>
             </li>
@@ -281,7 +388,7 @@
                         <a href="recorded-sessions.html">Expert Sessions</a>
                          <a href="collaboration-events.html">Collaboration</a>
                         <a href="student-training.html">Student Training(On demand)</a>
-                        <a href="student-training-role-ready.html">Student Training(Role🎯Ready)</a>
+                        <a href="student-training-role-ready.html">Student Training(RoleðŸŽ¯Ready)</a>
                     </div>
                 </div>
             </li>
@@ -295,7 +402,7 @@
                         <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Hiring Drives</a>
-                          <a href="Expert-session.html">Expert💬Session</a>
+                          <a href="Expert-session.html">ExpertðŸ’¬Session</a>
                     </div>
                 </div>
             </li>
@@ -333,12 +440,12 @@
         <div class="hero-background">
             <div class="bg-pattern"></div>
             <div class="floating-icons">
-                <div class="floating-icon icon-1">🎓</div>
-                <div class="floating-icon icon-2">📝</div>
-                <div class="floating-icon icon-3">💼</div>
-                <div class="floating-icon icon-4">🚀</div>
-                <div class="floating-icon icon-5">⚡</div>
-                <div class="floating-icon icon-6">🌟</div>
+                <div class="floating-icon icon-1">ðŸŽ“</div>
+                <div class="floating-icon icon-2">ðŸ“</div>
+                <div class="floating-icon icon-3">ðŸ’¼</div>
+                <div class="floating-icon icon-4">ðŸš€</div>
+                <div class="floating-icon icon-5">âš¡</div>
+                <div class="floating-icon icon-6">ðŸŒŸ</div>
             </div>
         </div>
         
@@ -349,13 +456,186 @@
             <section class="student-flow-section" id="student-journey-flow">
                 <div class="student-flow-container">
                     <h2 class="student-flow-title">Student Journey Flow</h2>
-                    <p class="student-flow-subtitle">A visual overview of the complete flow: Career Blueprint → Hire Me Profile → Resume Builder → Skill Chart → Interviews → Final Report.</p>
+                    <p class="student-flow-subtitle">A visual overview of the complete flow: Job blueprint â†’ Skill chart â†’ Hire me profile â†’ Personalized career Guidance â†’ Create a winning resume â†’ Ace every interview.</p>
                     <figure class="student-flow-figure">
-                       
+                        <svg class="circular-flow" viewBox="0 0 900 520" role="img" aria-label="Circular Student Journey Flow">
+                            <!-- Outer ring segments with arrow-like tips -->
+                            <g transform="translate(450,260)">
+                                <defs>
+                                    <!-- Gradients for segments -->
+                                    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#2fd0a3"/>
+                                        <stop offset="100%" stop-color="#1ab08b"/>
+                                    </linearGradient>
+                                    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#ff7a2f"/>
+                                        <stop offset="100%" stop-color="#ff5a00"/>
+                                    </linearGradient>
+                                    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#21c3b6"/>
+                                        <stop offset="100%" stop-color="#0fade1"/>
+                                    </linearGradient>
+                                    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#ffc340"/>
+                                        <stop offset="100%" stop-color="#f4ae00"/>
+                                    </linearGradient>
+                                    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#7a74ff"/>
+                                        <stop offset="100%" stop-color="#5c55f6"/>
+                                    </linearGradient>
+                                    <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#36a8ff"/>
+                                        <stop offset="100%" stop-color="#1b87f2"/>
+                                    </linearGradient>
+
+                                    <!-- Midline arcs (for text) at radius 135 (wider ring) -->
+                                    <path id="arc1" d="M0,-135 A135,135 0 0,1 117,-67.5" />
+                                    <path id="arc2" d="M117,-67.5 A135,135 0 0,1 117,67.5" />
+                                    <path id="arc3" d="M117,67.5 A135,135 0 0,1 0,135" />
+                                    <path id="arc4" d="M0,135 A135,135 0 0,1 -117,67.5" />
+                                    <path id="arc5" d="M-117,67.5 A135,135 0 0,1 -117,-67.5" />
+                                    <path id="arc6" d="M-117,-67.5 A135,135 0 0,1 0,-135" />
+                                </defs>
+                                <!-- Define radius -->
+                                <!-- Each path is a donut segment with a triangular tip overlay -->
+                                <!-- Segment 1 -->
+                                <path class="seg seg1" d="M0,-200 A200,200 0 0,1 173,-100 L90,-52 A105,105 0 0,0 0,-105 Z" data-target="job-metrics.html" />
+                                <polygon class="arrow-tip seg1" points="173,-100 200,-95 182,-70" />
+                                <a xlink:href="job-metrics.html">
+                                    <text class="cf-text" dy="-2"><textPath href="#arc1" startOffset="50%">Job blueprint</textPath></text>
+                              
+                                </a>
+
+                                <!-- Segment 2 -->
+                                <path class="seg seg2" d="M173,-100 A200,200 0 0,1 173,100 L90,52 A105,105 0 0,0 90,-52 Z" data-target="basic-profiling.html" />
+                                <polygon class="arrow-tip seg2" points="173,100 200,105 182,130" />
+                                <a xlink:href="basic-profiling.html">
+                                    <text class="cf-text" dy="-2"><textPath href="#arc2" startOffset="50%">Skill chart</textPath></text>
+                                </a>
+
+                                <!-- Segment 3 -->
+                                <path class="seg seg3" d="M173,100 A200,200 0 0,1 0,200 L0,105 A105,105 0 0,0 90,52 Z" data-target="basic-profiling.html" />
+                                <polygon class="arrow-tip seg3" points="0,200 -5,228 -28,210" />
+                                <a xlink:href="basic-profiling.html">
+                                    <text class="cf-text" dy="-2"><textPath href="#arc3" startOffset="50%">Hire me profile</textPath></text>
+                                </a>
+
+                                <!-- Segment 4 -->
+                                <path class="seg seg4" d="M0,200 A200,200 0 0,1 -173,100 L-90,52 A105,105 0 0,0 0,105 Z" data-target="career-counselling-ai.html" />
+                                <polygon class="arrow-tip seg4" points="-173,100 -200,105 -182,130" />
+                                <a xlink:href="career-counselling-ai.html">
+                                    <text class="cf-text" dy="-2"><textPath href="#arc4" startOffset="50%">Career Guidance</textPath></text>
+                                </a>
+
+                                <!-- Segment 5 -->
+                                <path class="seg seg5" d="M-173,100 A200,200 0 0,1 -173,-100 L-90,-52 A105,105 0 0,0 -90,52 Z" data-target="resume-building-watermark.html" />
+                                <polygon class="arrow-tip seg5" points="-173,-100 -200,-95 -182,-70" />
+                                <a xlink:href="resume-building-watermark.html">
+                                    <text class="cf-text" dy="-2"><textPath href="#arc5" startOffset="50%">Enhance My Resume</textPath></text>
+                                </a>
+
+                                <!-- Segment 6 -->
+                                <path class="seg seg6" d="M-173,-100 A200,200 0 0,1 0,-200 L0,-105 A105,105 0 0,0 -90,-52 Z" data-target="interview-questions.html" />
+                                <polygon class="arrow-tip seg6" points="0,-200 5,-228 28,-210" />
+                                <a xlink:href="interview-questions.html">
+                                    <text class="cf-text" dy="-2"><textPath href="#arc6" startOffset="50%">Interview Preparation</textPath></text>
+                                </a>
+
+                                <!-- Center donut -->
+                                <circle class="cf-center" r="65" />
+                                <text class="cf-center-title" y="-2" text-anchor="middle" style="font-size:15px;">Mentoring</text>
+                                <text class="cf-center-title" y="18" text-anchor="middle" style="font-size:15px;">Apply Jobs</text>
+                            </g>
+                        </svg>
+                   
                     </figure>
 
+                    <script>
+                    // Interactivity for circular segments
+                    (function(){
+                        const svg = document.querySelector('.circular-flow');
+                        if (!svg) return;
+                        const group = svg.querySelector('g');
+                        if (!group) return;
+                        const segments = group.querySelectorAll('path.seg');
+                        const tips = group.querySelectorAll('polygon.arrow-tip');
+
+                        function clearActive() {
+                            segments.forEach(s => s.classList.remove('active'));
+                            tips.forEach(t => t.classList.remove('active'));
+                        }
+
+                        segments.forEach((seg, idx) => {
+                            seg.addEventListener('mouseenter', () => {
+                                clearActive();
+                                seg.classList.add('active');
+                                const tip = tips[idx];
+                                if (tip) tip.classList.add('active');
+                            });
+                            seg.addEventListener('mouseleave', clearActive);
+                            seg.addEventListener('click', () => {
+                                const target = seg.getAttribute('data-target');
+                                if (target) window.location.href = target;
+                            });
+                        });
+
+                        // Animated dots moving along the midline paths
+                        for (let i=1; i<=6; i++) {
+                            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                            circle.setAttribute('r','3');
+                            circle.setAttribute('fill','#ffffff');
+                            circle.setAttribute('opacity','0.85');
+                            const mp = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+                            mp.setAttributeNS('http://www.w3.org/1999/xlink','href',`#arc${i}`);
+                            const animate = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                            animate.setAttribute('dur', `${5 + i}s`);
+                            animate.setAttribute('repeatCount','indefinite');
+                            animate.setAttribute('rotate','auto');
+                            animate.appendChild(mp);
+                            circle.appendChild(animate);
+                            group.appendChild(circle);
+                        }
+
+                        // Auto-scale curved labels to fit arcs
+                        function scaleCurvedLabels() {
+                            const texts = group.querySelectorAll('text.cf-text');
+                            texts.forEach((t) => {
+                                const textPath = t.querySelector('textPath');
+                                if (!textPath) return;
+                                const href = textPath.getAttribute('href') || textPath.getAttributeNS('http://www.w3.org/1999/xlink','href');
+                                if (!href) return;
+                                const arc = group.querySelector(href);
+                                if (!arc) return;
+
+                                // Reset to base size first (matches .cf-text)
+                                const baseSize = 13;
+                                t.style.fontSize = baseSize + 'px';
+
+                                // Measure available arc length vs label length
+                                const pathLen = typeof arc.getTotalLength === 'function' ? arc.getTotalLength() : 0;
+                                const labelLen = t.getComputedTextLength ? t.getComputedTextLength() : 0;
+                                const padding = 22; // avoid arrow tips and stroke
+                                const available = Math.max(0, pathLen - padding);
+
+                                if (labelLen > 0 && available > 0 && labelLen > available) {
+                                    const scale = available / labelLen;
+                                    const newSize = Math.max(10, Math.floor(baseSize * scale));
+                                    t.style.fontSize = newSize + 'px';
+                                }
+                            });
+                        }
+
+                        // Run after layout is ready and on resize
+                        requestAnimationFrame(() => {
+                            scaleCurvedLabels();
+                            setTimeout(scaleCurvedLabels, 50);
+                        });
+                        window.addEventListener('resize', scaleCurvedLabels);
+                    })();
+                    </script>
+
                     <!-- Option B: Clean, responsive SVG recreation -->
-                    <svg class="flow-svg" viewBox="0 0 900 540" role="img" aria-label="Student Journey Flow Diagram">
+                    <svg class="flow-svg" viewBox="0 0 900 540" role="img" aria-label="Student Journey Flow Diagram" style="display:none;">
                         <defs>
                             <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
                                 <path d="M0,0 L9,3 L0,6 Z" class="flow-marker" />
@@ -373,17 +653,17 @@
                         <text x="450" y="300" class="flow-label">Monitoring</text>
 
                         <!-- Outer circular nodes (clockwise) -->
-                        <!-- 1. Career Blueprint -->
+                        <!-- 1. Job Blueprint -->
                         <ellipse class="flow-node" cx="680" cy="280" rx="90" ry="35" />
-                        <text x="680" y="280" class="flow-label">Career Blueprint</text>
+                        <text x="680" y="280" class="flow-label">Job Blueprint</text>
 
                         <!-- 2. Hire Me Profile -->
                         <ellipse class="flow-node" cx="600" cy="410" rx="90" ry="35" />
                         <text x="600" y="410" class="flow-label">Hire Me Profile</text>
 
-                        <!-- 3. Resume Builder -->
+                        <!-- 3. Enhance Your Resume -->
                         <ellipse class="flow-node" cx="450" cy="470" rx="90" ry="35" />
-                        <text x="450" y="470" class="flow-label">Resume Builder</text>
+                        <text x="450" y="470" class="flow-label">Enhance Your Resume</text>
 
                         <!-- 4. Skill Chart -->
                         <ellipse class="flow-node" cx="300" cy="410" rx="90" ry="35" />
@@ -414,12 +694,12 @@
             </section>
 
             <div class="services-grid">
-                <!-- Career Blueprint -->
+                <!-- Job Blueprint -->
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
-                    <h3 class="service-title">Career Blueprint</h3>
+                    <h3 class="service-title">Job Blueprint</h3>
                     <p class="service-description">
                         Explore career opportunities based on your educational background. Discover industry requirements, 
                         skills needed, and certification roadmaps tailored to your course and specialization.
@@ -440,12 +720,12 @@
                     <a href="basic-profiling.html" class="service-link">Create Profile</a>
                 </div>
                 
-                <!-- Resume Builder -->
+                <!-- Enhance Your Resume -->
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-file-alt"></i>
                     </div>
-                    <h3 class="service-title">Resume Builder</h3>
+                    <h3 class="service-title">Enhance Your Resume</h3>
                     <p class="service-description">
                         Build a professional, ATS-friendly resume with our intuitive builder. Choose from industry-specific 
                         templates and get expert tips to highlight your strengths effectively.
@@ -714,3 +994,4 @@
     </script>
 </body>
 </html>
+
