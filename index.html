@@ -272,77 +272,198 @@
         </div>
     </section>
 
-    <!-- AI Features Section -->
-    <section class="ai-features-section">
-        <div class="ai-features container">
-            <div class="ai-header">
-                <h2>AI-Powered Career Platform</h2>
-                <p>Smarter guidance, faster outcomes. Our services leverage AI to personalize, evaluate, and accelerate your journey.</p>
+ 
+    <!-- Student Section -->
+    <section class="student-section" id="student">
+        <div class="student-wrapper">
+            <h2 class="section-title">Students</h2>
+
+            <!-- Flow like provided image -->
+            <div class="flow-area">
+                <!-- Curved career path with arrow -->
+                <svg class="flow-path" viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                        <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,12 L12,6 z" fill="#bdbdbd"></path>
+                        </marker>
+                    </defs>
+                    <!-- Main road -->
+                    <path d="M40 360 C 220 340, 380 320, 520 300 S 880 260, 1120 220" stroke="#d9d9d9" stroke-width="22" fill="none" stroke-linecap="round" marker-end="url(#arrow)"/>
+                    <!-- Inner lighter line for depth -->
+                    <path d="M60 350 C 240 330, 400 310, 540 290 S 900 250, 1140 210" stroke="#e9e9e9" stroke-width="10" fill="none" stroke-linecap="round"/>
+                </svg>
+
+                <!-- Cards along the path -->
+                <div class="flow-card card-1" style="left: 8%; top: 255px;">
+                    <div class="card-title">Job Readiness<br/>Plan</div>
+                    <span class="drop-line"></span>
+                    <span class="path-pin pin-1"></span>
+                </div>
+
+                <div class="flow-card card-2" style="left: 29%; top: 130px;">
+                    <div class="card-title">Create a Winning<br/>Resume</div>
+                    <span class="drop-line"></span>
+                    <span class="path-pin pin-2"></span>
+                </div>
+
+                <div class="flow-card card-3" style="left: 42%; top: 210px;">
+                    <div class="card-title">Career Profile<br/>Builder</div>
+                    <span class="drop-line"></span>
+                    <span class="path-pin pin-3"></span>
+                </div>
+
+                <div class="flow-card card-4" style="left: 60%; top: 100px;">
+                    <div class="card-title">Ace Every<br/>Interview</div>
+                    <span class="drop-line"></span>
+                    <span class="path-pin pin-4"></span>
+                </div>
+
+                <div class="flow-card card-5 highlight" style="left: 72%; top: 190px;">
+                    <div class="card-title">Personalized<br/>Career Guidance</div>
+                    <span class="drop-line"></span>
+                    <span class="path-pin pin-5"></span>
+                </div>
+
+                <div class="flow-card card-6" style="left: 84%; top: 90px;">
+                    <div class="card-title">Job Ready<br/>Student</div>
+                    <span class="drop-line"></span>
+                    <span class="path-pin pin-6"></span>
+                </div>
             </div>
-            <div class="ai-grid">
-                <div class="ai-card">
-                    <div class="ai-icon">🧠</div>
-                    <h3>Smart Profiling</h3>
-                    <p>AI analyzes your skills, interests, and goals to craft a tailored career blueprint.</p>
-                </div>
-                <div class="ai-card">
-                    <div class="ai-icon">🤖</div>
-                    <h3>Interview Intelligence</h3>
-                    <p>Adaptive AI interviews simulate real scenarios and give instant, actionable feedback.</p>
-                </div>
-                <div class="ai-card">
-                    <div class="ai-icon">📝</div>
-                    <h3>Resume Enhancer</h3>
-                    <p>AI suggests stronger wording, impact metrics, and ATS-friendly structure.</p>
-                </div>
-                <div class="ai-card">
-                    <div class="ai-icon">📊</div>
-                    <h3>Skill Gap Analytics</h3>
-                    <p>Identify strengths and gaps, then get curated learning paths to level up faster.</p>
-                </div>
-                <div class="ai-card">
-                    <div class="ai-icon">🎯</div>
-                    <h3>Job Match Engine</h3>
-                    <p>Match with roles that fit your profile and career trajectory using AI ranking.</p>
-                </div>
-                <div class="ai-card">
-                    <div class="ai-icon">🔎</div>
-                    <h3>Insights & Reports</h3>
-                    <p>Clear dashboards and AI-generated reports for informed decisions.</p>
+
+            <!-- Horizontal scrollable USP blocks -->
+            <div class="usp-scroll" aria-label="Student USPs">
+                <div class="usp-track">
+                    <div class="usp-card">
+                        <div class="usp-title">Future Ready Skills</div>
+                        <p class="usp-text">Hands-on learning paths aligned with trending roles and tools.</p>
+                    </div>
+                    <div class="usp-card">
+                        <div class="usp-title">Job Ready Edge</div>
+                        <p class="usp-text">Interview prep, resume upgrades, and role-ready practice.</p>
+                    </div>
+                    <div class="usp-card">
+                        <div class="usp-title">Opportunity Hub</div>
+                        <p class="usp-text">Access to jobs, internships, hackathons, and projects.</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Scoped styles for student section -->
         <style>
-            .ai-features-section { padding: 60px 20px; background: #0e1b2a; color: #e6f1ff; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
-            .ai-features.container { max-width: 1200px; margin: 0 auto; }
-            .ai-header { text-align: center; margin-bottom: 32px; }
-            .ai-header h2 { margin: 0 0 10px; font-size: 2rem; }
-            .ai-header p { color: rgba(230,241,255,0.8); }
-            .ai-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-            .ai-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; transition: all .25s ease; }
-            .ai-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.25); background: rgba(255,255,255,0.08); }
-            .ai-icon { font-size: 28px; margin-bottom: 10px; }
-            @media (max-width: 600px) { .ai-header h2 { font-size: 1.6rem; } }
-            .ai-badge { position: absolute; top: -12px; right: -12px; background: #111827; color: #10b981; border: 1px solid rgba(16,185,129,.3); padding: 6px 10px; border-radius: 999px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+            .student-section { padding: 60px 0 20px; background: #ffffff; }
+            .student-section .section-title {
+                text-align: center; font-size: 32px; font-weight: 800; color: #111827; margin: 0 0 18px;
+            }
+            .student-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+            /* Flow area */
+            .flow-area { position: relative; height: 420px; margin: 16px auto 12px; overflow: hidden; }
+            .flow-path { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+            .flow-card {
+                position: absolute; min-width: 220px; background: #0ea5e9; color: #fff;
+                border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+                padding: 16px 18px; transform: translate(-50%, 0);
+            }
+            .flow-card .card-title { font-weight: 700; line-height: 1.2; letter-spacing: 0.2px; }
+            .flow-card::after { /* subtle shadow flap */
+                content: ""; position: absolute; left: 8px; right: 8px; bottom: -14px; height: 14px; background: rgba(0,0,0,0.06);
+                filter: blur(8px); border-radius: 12px; z-index: -1;
+            }
+            .flow-card .drop-line {
+                position: absolute; left: 50%; bottom: -68px; width: 2px; height: 60px; background: repeating-linear-gradient( to bottom, #0f172a 0 6px, transparent 6px 12px ); opacity: .6;
+                transform: translateX(-50%);
+            }
+            .flow-card .path-pin { position: absolute; left: 50%; bottom: -84px; transform: translateX(-50%); width: 26px; height: 10px; border-radius: 50%; background: #0ea5e9; opacity: .9; }
+
+            /* Theme colors per card to mimic image */
+            .card-1 { background: #0f5b78; }
+            .card-2 { background: #0ea5e9; }
+            .card-3 { background: #ef7f3d; }
+            .card-4 { background: #9b329d; }
+            .card-5 { background: #1f7a3b; }
+            .card-6 { background: #9b329d; }
+            .highlight { box-shadow: 0 10px 24px rgba(31,122,59,0.35); }
+
+            .pin-1 { background: #0f5b78; }
+            .pin-2 { background: #0ea5e9; }
+            .pin-3 { background: #ef7f3d; }
+            .pin-4 { background: #9b329d; }
+            .pin-5 { background: #1f7a3b; }
+            .pin-6 { background: #9b329d; }
+
+            /* USP scroll */
+            .usp-scroll { margin-top: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .usp-track { display: flex; gap: 16px; padding: 6px 2px 14px; min-width: 720px; }
+            .usp-card { flex: 0 0 280px; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+            .usp-title { font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+            .usp-text { color: #475569; font-size: 14px; line-height: 1.45; }
+
+            /* Responsiveness */
+            @media (max-width: 900px) {
+                .flow-area { height: 520px; }
+                .flow-card { min-width: 200px; }
+                /* re-position for smaller screens */
+                .card-1 { left: 15% !important; top: 320px !important; }
+                .card-2 { left: 35% !important; top: 180px !important; }
+                .card-3 { left: 50% !important; top: 280px !important; }
+                .card-4 { left: 65% !important; top: 150px !important; }
+                .card-5 { left: 78% !important; top: 260px !important; }
+                .card-6 { left: 88% !important; top: 120px !important; }
+            }
+            @media (max-width: 640px) {
+                .flow-area { height: 620px; }
+                .flow-card { min-width: 180px; padding: 12px 14px; }
+                .student-section .section-title { font-size: 26px; }
+            }
         </style>
     </section>
 
     <!-- Clients Section -->
     <section class="clients partners-section">
         <div class="clients-header">
-            <h2>Dream big, learn from the best, and make it happen...</h2>
-            <p>Collaborating with industry leaders to shape the future</p>
+            <h2>SaarthiX Powered by</h2>
+            <h4>Wanna be the best? Learn from the best—Human Intelligentsia and Artificial Intelligentsia.
+Get the wisdom of mentors, the precision of GenAI, and real-world industry hacks.
+Together, they fuel your journey from ambition to achievement.</h4>
         </div>
-        
-        <!-- Scoped styles for the partners grid -->
+
+        <!-- Scoped styles for the two-column layout -->
         <style>
             .partners-section { padding-top: 10px; }
-            .partners-grid {
+            .clients-header { text-align: center; }
+
+            /* Two-column wrapper */
+            .human-ai-grid {
                 display: grid;
-                grid-template-columns: repeat(5, minmax(160px, 1fr));
-                gap: 20px;
-                margin: 20px 0 10px;
+                grid-template-columns: 1.1fr 0.9fr; /* left: leaders, right: tools */
+                gap: 24px;
+                align-items: start;
+                margin: 20px auto 10px;
+                max-width: 1100px; /* center the whole block */
+                padding: 0 16px;
             }
+
+            /* Column headings */
+            .column-title {
+                font-weight: 700;
+                font-size: 18px;
+                margin-bottom: 12px;
+                color: #1f2937;
+                text-align: center; /* center titles */
+            }
+
+            /* Leader cards grid */
+            .leaders-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(180px, 1fr));
+                gap: 16px;
+                justify-items: stretch; /* stretch cards to fill cells */
+                grid-auto-rows: minmax(250px, auto); /* equal min height per row */
+            }
+
             .partner-card {
                 background: #fff;
                 border-radius: 12px;
@@ -351,138 +472,136 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                min-height: 150px;
+                justify-content: flex-start; /* start so image + text stack naturally */
+                min-height: 250px; /* equalize card heights */
+                width: 100%; /* fill grid cell */
                 transition: transform .2s ease, box-shadow .2s ease;
             }
             .partner-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.12); }
-            .industry-card h3 {
-                margin: 0 0 12px 0;
-                font-size: 16px;
-                color: #222;
-            }
-            .logos { display:flex; flex-wrap: wrap; gap: 10px; align-items:center; justify-content:center; }
-            .logos img { height: 26px; max-width: 110px; object-fit: contain; opacity: 1; }
-            .logos img:hover { filter: none; opacity: 1; }
-            .leader-photo { width: 100%; height: 110px; object-fit: cover; border-radius: 8px; }
-            .leader-name { margin-top: 10px; font-weight: 600; font-size: 14px; color:#222; text-align:center; }
+            .leader-photo { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; }
+            .leader-name { margin-top: 10px; font-weight: 700; font-size: 15px; color:#222; text-align:center; }
             .leader-role { font-size: 12px; color:#666; text-align:center; }
-            .leader-desc { font-size: 12px; color:#555; text-align:center; margin-top: 4px; line-height: 1.4; }
-            @media (max-width: 1200px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
-            @media (max-width: 720px)  { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
+
+            /* Tools list cards */
+            .tools-list {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                max-width: 520px;
+                margin: 0 auto; /* center the list */
+            }
+            .tool-card {
+                background: #fff;
+                border-radius: 12px;
+                padding: 14px 16px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                min-height: 56px;
+                justify-content: flex-start;
+            }
+            .tool-badge {
+                width: 36px; height: 36px; border-radius: 8px;
+                display:flex; align-items:center; justify-content:center;
+                background: #ffffff; border: 1px solid #e5e7eb; overflow: hidden;
+            }
+            .tool-logo { width: 22px; height: 22px; object-fit: contain; }
+            .tool-name { font-weight: 600; color:#1f2937; }
+            .tool-desc { font-size: 12px; color:#6b7280; }
+
+            @media (max-width: 900px) {
+                .human-ai-grid { grid-template-columns: 1fr; }
+                .leaders-grid { grid-template-columns: 1fr 1fr; }
+            }
+            @media (max-width: 560px) {
+                .leaders-grid { grid-template-columns: 1fr; }
+            }
         </style>
 
-        <!-- Two-row, five-column grid -->
-        <div class="partners-grid">
-            <!-- Row 1: Industries with logos -->
-            <div class="partner-card industry-card">
-                <h3>Technology</h3>
-                <div class="logos">
-                    <img src="assets/partners/microsoft.png" alt="Microsoft" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/google.png" alt="Google" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/amazon.png" alt="Amazon" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Healthcare</h3>
-                <div class="logos">
-                    <img src="assets/partners/pfizer.png" alt="Pfizer" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/jnj.png" alt="Johnson & Johnson" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/unitedhealth.png" alt="UnitedHealth Group" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Life Sciences</h3>
-                <div class="logos">
-                    <img src="assets/partners/thermo-fisher.png" alt="Thermo Fisher Scientific" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/roche.png" alt="Roche" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/novartis.png" alt="Novartis" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Finance</h3>
-                <div class="logos">
-                    <img src="assets/partners/jpmorgan.png" alt="JPMorgan Chase" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/goldman-sachs.png" alt="Goldman Sachs" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/visa.png" alt="Visa" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Energy</h3>
-                <div class="logos">
-                    <img src="assets/partners/siemens-energy.png" alt="Siemens Energy" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/shell.png" alt="Shell" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/bp.png" alt="BP" onerror="this.src='assets/partners/placeholder-logo.png'">
+        <!-- Two-column content -->
+        <div class="human-ai-grid">
+            <!-- Left: Human Intelligence (leaders) -->
+            <div>
+                <div class="column-title"><h3>Human Intelligence</h3></div>
+                <div class="leaders-grid">
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-1.jpg" alt="Aarav Malhotra" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Priyanshu Malhotra</div>
+                        <div class="leader-role">Chief AI Architect, NexaCore</div>
+                    </div>
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-2.jpg" alt="Mira Chen" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Mira Chen</div>
+                        <div class="leader-role">VP, Applied ML, Quantara</div>
+                    </div>
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-3.jpg" alt="Leo Martínez" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Leo Martínez</div>
+                        <div class="leader-role">Head of Foundation Models, OrbiVerse</div>
+                    </div>
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-5.jpg" alt="Kenji Sato" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Kenji Sato</div>
+                        <div class="leader-role">Principal Scientist, NovaSense</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Row 2: Leaders -->
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-1.jpg" alt="Aarav Malhotra" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Aarav Malhotra</div>
-                <div class="leader-role">Chief AI Architect, NexaCore</div>
-                <div class="leader-desc">Leads multi-modal AI platforms for real-time analytics and privacy-first personalization.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-2.jpg" alt="Mira Chen" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Mira Chen</div>
-                <div class="leader-role">VP, Applied ML, Quantara</div>
-                <div class="leader-desc">Focuses on robust ML systems, fairness auditing, and edge deployment at scale.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-3.jpg" alt="Leo MartÃ­nez" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Leo MartÃ­nez</div>
-                <div class="leader-role">Head of Foundation Models, OrbiVerse</div>
-                <div class="leader-desc">Builds domain-tuned LLMs and efficient RAG stacks for enterprise knowledge bases.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-4.jpg" alt="Hana Alâ€‘Khalid" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Hana Alâ€‘Khalid</div>
-                <div class="leader-role">Director of Cognitive Systems, LuminaTech</div>
-                <div class="leader-desc">Drives human-centered AI, agentic workflows, and safety guardrails for autonomy.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-5.jpg" alt="Kenji Sato" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Kenji Sato</div>
-                <div class="leader-role">Principal Scientist, NovaSense</div>
-                <div class="leader-desc">Specializes in vision-language systems and synthetic data pipelines for QA.</div>
-            </div>
-        </div>
-        
-        <!-- Animated Statistics -->
-        <div class="partnership-overview">
-            <div class="overview-stat">
-                <div class="stat-icon">ðŸ¤</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="25">0</span>
-                    <span class="stat-description">Active Partnerships</span>
-                </div>
-            </div>
-            <div class="overview-stat">
-                <div class="stat-icon">ðŸŽ“</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="2500">0</span>
-                    <span class="stat-description">Students Placed</span>
-                </div>
-            </div>
-            <div class="overview-stat">
-                <div class="stat-icon">ðŸ“</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="150">0</span>
-                    <span class="stat-description">Projects Completed</span>
-                </div>
-            </div>
-            <div class="overview-stat">
-                <div class="stat-icon">ðŸŒŸ</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="98">0</span>
-                    <span class="stat-description">Success Rate %</span>
+            <!-- Right: Artificial Intelligence (tools) -->
+            <div>
+                <div class="column-title"><h3>Artificial Intelligence</h3></div>
+                <div class="tools-list">
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/openai.png" alt="OpenAI" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">OpenAI</div>
+                            <div class="tool-desc">GPT models for reasoning, chat, and assistants.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/synthesia.png" alt="Synthesia" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Synthesia</div>
+                            <div class="tool-desc">Create AI-powered training videos with avatars in 120+ languages.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/coursebox.png" alt="CourseBox AI" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">CourseBox AI</div>
+                            <div class="tool-desc">Generates full course structures with activities, assessments, and gaps filled.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/scribe.png" alt="Scribe" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Scribe</div>
+                            <div class="tool-desc">Turns processes into step-by-step visual guides automatically.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/otter.png" alt="Otter.ai" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Otter.ai</div>
+                            <div class="tool-desc">Live transcription and knowledge capture from training sessions.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/learnwords.png" alt="Learnwords" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Learnwords</div>
+                            <div class="tool-desc">AI-powered LMS with personalized learning paths, videos, and analytics.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Who is Suitable Section -->
+
+
+    <!-- Who is Suitable Section 
     <section class="suitable-for">
         <h2>Seamless Collaboration for a Smarter Future</h2>
         <div class="suitable-for-categories">
@@ -1262,6 +1381,7 @@
             }, 4000);
         }
     </script>
+-->
 
     <!-- Footer -->
     <footer class="footer">

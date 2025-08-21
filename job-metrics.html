@@ -239,6 +239,7 @@
     <!-- Main Content -->
     <section class="career-explorer">
         <div class="container">
+           
             <!-- Step 1: Choose Career Path Method -->
             <div class="explorer-step active" id="step1">
                 <div class="step-header">
@@ -1098,6 +1099,41 @@
     <script src="script.js"></script>
     <script src="job-metrics-new.js"></script>
     
+    <script>
+        // Global search filtering for active step cards
+        (function(){
+            const input = document.getElementById('globalSearch');
+            const clearBtn = document.getElementById('clearSearch');
+            if (!input) return;
+
+            const getActiveStep = () => document.querySelector('.explorer-step.active');
+            const getCardsInStep = (step) => step ? step.querySelectorAll('[class*="-card"]') : [];
+            const normalize = (s) => (s || '').toLowerCase();
+
+            const applyFilter = () => {
+                const step = getActiveStep();
+                const cards = getCardsInStep(step);
+                const q = normalize(input.value);
+                if (!cards.length) return;
+                cards.forEach(card => {
+                    const text = normalize(card.textContent);
+                    card.style.display = (!q || text.includes(q)) ? '' : 'none';
+                });
+            };
+
+            input.addEventListener('input', applyFilter);
+            clearBtn && clearBtn.addEventListener('click', () => {
+                input.value = '';
+                applyFilter();
+                input.focus();
+            });
+
+            // In case steps change dynamically, re-apply filter
+            const observer = new MutationObserver(applyFilter);
+            observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+        })();
+    </script>
+
     <script>
         // Footer stats animation
         const footerStatsObserver = new IntersectionObserver((entries) => {
