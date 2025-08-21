@@ -67,9 +67,9 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="job-dashboard.html">Post Jobs</a>
+                       <a href="job-dashboard.html">Post Jobs / Internship</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview / Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Access To Universities</a>
                           <a href="Expert-session.html">ExpertðŸ’¬Session</a>
@@ -642,7 +642,7 @@ Together, they fuel your journey from ambition to achievement.</h4>
                         <div class="slider-track" id="industrySlider">
                             <div class="service-slide">Job Blueprint</div>
                             <div class="service-slide">Database Access</div>
-                            <div class="service-slide">Technical Interview/Assessment AI</div>
+                            <div class="service-slide">Technical Interview / Assessment AI</div>
                             <div class="service-slide">Post Hackathons</div>
                             <div class="service-slide">Hiring Drives </div>
                                  <div class="service-slide"> Expert-session</div>
@@ -1382,6 +1382,129 @@ Together, they fuel your journey from ambition to achievement.</h4>
         }
     </script>
 -->
+
+    <!-- Developers Carousel (inserted before footer) -->
+    <style>
+        /* Testimonial-style developer cards */
+        .dev-carousel { position: relative; padding: 56px 0; background: #fafbff; }
+        .dev-carousel .section-title { font-size: 32px; font-weight: 700; letter-spacing: .2px; margin: 0 0 26px; text-align: center; color: #1d2939; }
+        .dev-wrapper { position: relative; max-width: 1400px; margin: 0 auto; padding: 0 80px; }
+        .dev-track {
+            display: flex; gap: 28px; overflow-x: auto; padding: 10px 6px 24px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        }
+        .dev-track::-webkit-scrollbar { height: 8px; }
+        .dev-track::-webkit-scrollbar-thumb { background: #cfd4df; border-radius: 8px; }
+        .dev-card {
+            /* Fit exactly 3 cards on desktop (gap = 28px => 2 gaps = 56px) */
+            flex: 0 0 auto; min-width: calc((100% - 56px)/3); max-width: 520px; background: #fff; border: 1px solid rgba(16,24,40,.06);
+            border-radius: 22px; padding: 36px 40px; box-shadow: 0 16px 40px rgba(16,24,40,.08);
+            scroll-snap-align: start; transition: transform .2s ease, box-shadow .2s ease; display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .dev-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(16,24,40,.12); }
+        .avatar-wrap { position: relative; width: 112px; height: 112px; border-radius: 50%; display: grid; place-items: center; margin: 6px 0 18px; }
+        .avatar-wrap .ring { position: absolute; inset: -6px; border: 2px dashed #78d6cf; border-radius: 50%; opacity: .9; }
+        .dev-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+        .dev-name { font-size: 24px; font-weight: 800; margin: 6px 0 6px; color: #1f2937; }
+        .dev-title { font-size: 14px; color: #667085; margin: 0 0 14px; }
+        .dev-desc { font-size: 16px; color: #425466; line-height: 1.9; text-align: left; }
+        .dev-desc::before { content: "\201C"; font-size: 28px; line-height: 0; vertical-align: -6px; margin-right: 4px; color: #7bd7d0; }
+        .dev-desc::after { content: "\201D"; font-size: 28px; line-height: 0; vertical-align: -6px; margin-left: 2px; color: #7bd7d0; }
+        /* Nav buttons */
+        .dev-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 56px; height: 56px; border-radius: 50%; border: none; display: grid; place-items: center; color: #fff; box-shadow: 0 12px 20px rgba(16,24,40,.15); cursor: pointer; z-index: 2; }
+        .dev-nav-prev { left: 16px; background: linear-gradient(135deg,#FFC24A,#FFB300); }
+        .dev-nav-next { right: -6px; background: #073b4c; }
+        .dev-nav-btn i { font-size: 18px; }
+        @media (max-width: 1024px) {
+            .dev-card { min-width: 420px; padding: 28px 28px; }
+        }
+        @media (max-width: 768px) {
+            .dev-card { min-width: 320px; }
+            .dev-nav-btn { display: none; }
+        }
+    </style>
+    <section class="dev-carousel" aria-label="Developers">
+        <h2 class="section-title">Meet Our Developers</h2>
+        <div class="dev-wrapper">
+            <button class="dev-nav-btn dev-nav-prev" id="devPrev" aria-label="Previous">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="dev-track" id="devTrack">
+                <article class="dev-card">
+                    <div class="avatar-wrap">
+                        <span class="ring"></span>
+                        <img class="dev-avatar" src="assets/images/Raja C.jpg" alt="Profile photo of Raja C" />
+                    </div>
+                    <h3 class="dev-name">Raja C</h3>
+                    <p class="dev-title">Program Lead</p>
+                    <p class="dev-desc">" As a Program Lead, I’ve witnessed how this platform transforms potential into performance. With the right mix of mentorship, structured training, and AI-driven insights, students become career-ready, institutes achieve greater placement success, and industries gain skilled professionals. It’s more than a program—it’s a bridge to the future of talent." </p>
+                </article>
+                <article class="dev-card">
+                    <div class="avatar-wrap">
+                        <span class="ring"></span>
+                        <img class="dev-avatar" src="assets/images/khushi.jpg" alt="Profile photo of Khushi Gupta" />
+                    </div>
+                    <h3 class="dev-name">Khushi Gupta</h3>
+                    <p class="dev-title">Project Manager</p>
+                    <p class="dev-desc"> "As a Project Manager, I’ve seen how structured planning, expert guidance, and AI-powered tools accelerate outcomes. This platform doesn’t just prepare candidates—it ensures institutes and industries get talent that is job-ready from Day 1. It’s rewarding to lead projects that truly create measurable impact." - Project Manager (Khushi)</p>
+                </article>
+                <article class="dev-card">
+                    <div class="avatar-wrap">
+                        <span class="ring"></span>
+                        <img class="dev-avatar" src="assets/images/Priyanshu.jpg" alt="Profile photo of Priyanshu Pandey" />
+                    </div>
+                    <h3 class="dev-name">Priyanshu Pandey</h3>
+                    <p class="dev-title">Software Developer</p>
+                    <p class="dev-desc">As a Software Developer, I value how this platform bridges learning with real-world application. The blend of mentoring, AI-powered upskilling, and hands-on projects helped me sharpen my skills and stay industry-ready. It’s not just training—it’s building confidence to code, create, and contribute from day one. - Software Developer (Priyanshu)</p>
+                </article>
+                <article class="dev-card">
+                    <div class="avatar-wrap">
+                        <span class="ring"></span>
+                        <img class="dev-avatar" src="assets/images/Pratistha.jpg" alt="Profile photo of Pratistha Singh" />
+                    </div>
+                    <h3 class="dev-name">Pratistha Singh</h3>
+                    <p class="dev-title">Junior Developer</p>
+                    <p class="dev-desc"> I’ve experienced how this platform empowers learners to master both breadth and depth of development. With mentorship, AI-driven insights, and real-world projects, it transforms students into versatile professionals ready</p>
+                </article>
+                <article class="dev-card">
+                    <div class="avatar-wrap">
+                        <span class="ring"></span>
+                        <img class="dev-avatar" src="assets/images/Hari om.jpg" alt="Profile photo of Hari Om" />
+                    </div>
+                    <h3 class="dev-name">Hari Om</h3>
+                    <p class="dev-title">Android Developer </p>
+                    <p class="dev-desc"> I’ve seen how this platform turns learning into real innovation. With guided mentorship, AI-powered tools, and hands-on projects, it equips learners to build apps that are not just functional but future-ready</p>
+                </article>
+                <article class="dev-card">
+                    <div class="avatar-wrap">
+                        <span class="ring"></span>
+                        <img class="dev-avatar" src="assets/images/Meenakshi .jpg" alt="Profile photo of Meenakshi Tripathi" />
+                    </div>
+                    <h3 class="dev-name">Meenakshi Tripathi</h3>
+                    <p class="dev-title">Junior Developer </p>
+                    <p class="dev-desc"> I’ve experienced how this platform bridges creativity with real-world impact. With expert guidance, AI-driven insights, and hands-on projects, it helps learners craft user experiences that are both innovative and industry-ready from day one." </p>
+                </article>
+            </div>
+            <button class="dev-nav-btn dev-nav-next" id="devNext" aria-label="Next">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        <script>
+            (function(){
+                const track = document.getElementById('devTrack');
+                const prev = document.getElementById('devPrev');
+                const next = document.getElementById('devNext');
+                function cardStep(){
+                    const firstCard = track.querySelector('.dev-card');
+                    if(!firstCard) return 400; // default
+                    const styles = getComputedStyle(track);
+                    const gap = parseInt(styles.columnGap || styles.gap || 28);
+                    return firstCard.getBoundingClientRect().width + gap;
+                }
+                prev.addEventListener('click', e => { e.preventDefault(); track.scrollBy({ left: -cardStep(), behavior: 'smooth' }); });
+                next.addEventListener('click', e => { e.preventDefault(); track.scrollBy({ left: cardStep(),  behavior: 'smooth' }); });
+            })();
+        </script>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
