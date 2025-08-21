@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/dropdown-nav.js" defer></script>
     <script src="js/nav-scroll.js" defer></script>
+    <link rel="stylesheet" href="pricing.css">
     <style>
         /* Additional styles for the services page */
         .services-hero {
@@ -195,6 +196,13 @@
             max-width: 760px;
             line-height: 1.6;
         }
+        .student-flow-description {
+            color: white;
+            line-height: 1.6;
+            margin: 0 auto 1.5rem;
+            max-width: 800px;
+            text-align: center;
+        }
         .student-flow-figure {
             margin: 0;
             overflow: visible; /* ensure teardrop tips and guides aren't clipped */
@@ -315,16 +323,16 @@
         }
 
         /* Circular arrow flow (like your screenshot) */
-        .circular-flow { width: 100%; max-width: clamp(320px, 48vw, 860px); height: auto; margin: 0 auto; display: block; transform-origin: center; transition: transform .25s ease, filter .25s ease; filter: drop-shadow(0 10px 28px rgba(0,0,0,0.18)); }
+        .circular-flow { width: 100%; max-width: clamp(500px, 75vw, 1300px); height: auto; margin: 0 auto; display: block; transform-origin: center; transition: transform .25s ease, filter .25s ease; filter: drop-shadow(0 10px 28px rgba(0,0,0,0.18)); }
         @media (max-width: 1024px) {
-            .circular-flow { max-width: clamp(300px, 60vw, 780px); }
+            .circular-flow { max-width: clamp(450px, 85vw, 1100px); }
         }
         @media (max-width: 768px) {
-            .circular-flow { max-width: clamp(280px, 88vw, 520px); }
+            .circular-flow { max-width: clamp(380px, 92vw, 750px); }
             .cf-text { font-size: clamp(12px, 3.4vw, 15px); }
         }
         @media (max-width: 480px) {
-            .circular-flow { max-width: clamp(260px, 94vw, 440px); }
+            .circular-flow { max-width: clamp(340px, 96vw, 600px); }
         }
 .circular-flow:hover { transform: scale(1.02); }
         .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(11px, 1.3vw, 14px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
@@ -342,6 +350,200 @@
         .seg5 { fill: url(#g5); }
         .seg6 { fill: url(#g6); }
         .arrow-tip { opacity: 1; filter: drop-shadow(0 3px 6px rgba(0,0,0,.25)); stroke: #fff; stroke-width: 4; stroke-linejoin: round; }
+        /* Special themes for highlighted cards */
+        .service-card.card-psychometric { background: linear-gradient(135deg, rgba(66, 165, 245, 0.18), rgba(30, 136, 229, 0.18)); border-color: rgba(144, 202, 249, 0.35); }
+        .service-card.card-psychometric .service-icon { color: #e3f2fd; background: rgba(227, 242, 253, 0.15); }
+        .service-card.card-psychometric .service-link { background: linear-gradient(135deg, #64b5f6, #1e88e5); }
+
+        .service-card.card-apply { background: linear-gradient(135deg, rgba(77, 182, 172, 0.2), rgba(38, 166, 154, 0.2)); border-color: rgba(128, 203, 196, 0.35); }
+        .service-card.card-apply .service-icon { color: #e0f2f1; background: rgba(224, 242, 241, 0.15); }
+        .service-card.card-apply .service-link { background: linear-gradient(135deg, #4db6ac, #26a69a); }
+
+        .service-card.card-advanced { background: linear-gradient(135deg, rgba(186, 104, 200, 0.2), rgba(126, 87, 194, 0.2)); border-color: rgba(206, 147, 216, 0.35); }
+        .service-card.card-advanced .service-icon { color: #f3e5f5; background: rgba(243, 229, 245, 0.15); }
+        .service-card.card-advanced .service-link { background: linear-gradient(135deg, #ba68c8, #7e57c2); }
+
+        /* Special Featured Services Block */
+        .featured-services-block {
+            background: linear-gradient(135deg, rgba(15, 34, 56, 0.95) 0%, rgba(13, 27, 42, 0.95) 100%);
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .featured-services-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(110, 142, 251, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .featured-services-block::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #64ffda, #6e8efb, #a777e3, #64ffda);
+            border-radius: 20px;
+            z-index: -2;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 0.8; }
+        }
+
+        .featured-block-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .featured-block-title {
+            color: #64ffda;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(100, 255, 218, 0.3);
+        }
+
+        .featured-block-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .featured-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .featured-services-block .service-card {
+            transform: scale(1.02);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-services-block .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .featured-services-block .service-card:hover::before {
+            animation: shimmer 1.5s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .featured-services-block .service-card:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Enhanced card styling for featured block */
+        .featured-services-block .service-card.card-psychometric {
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.25), rgba(30, 136, 229, 0.25));
+            border: 2px solid rgba(144, 202, 249, 0.4);
+        }
+
+        .featured-services-block .service-card.card-apply {
+            background: linear-gradient(135deg, rgba(77, 182, 172, 0.25), rgba(38, 166, 154, 0.25));
+            border: 2px solid rgba(128, 203, 196, 0.4);
+        }
+
+        .featured-services-block .service-card.card-advanced {
+            background: linear-gradient(135deg, rgba(186, 104, 200, 0.25), rgba(126, 87, 194, 0.25));
+            border: 2px solid rgba(206, 147, 216, 0.4);
+        }
+
+        .featured-services-block .service-icon {
+            font-size: 3rem;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-services-block .service-title {
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+        }
+
+        .featured-services-block .service-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .featured-services-block .service-link {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-services-block .service-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .featured-services-block .service-link:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .featured-services-block {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .featured-block-title {
+                font-size: 1.8rem;
+            }
+            
+            .featured-services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -397,9 +599,9 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                       <a href="job-dashboard.html">Post Jobs</a>
+                       <a href="job-dashboard.html">Post Jobs / Internship</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview / Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Access To Universities</a>
                           <a href="Expert-session.html">ExpertðŸ’¬Session</a>
@@ -456,7 +658,10 @@
             <section class="student-flow-section" id="student-journey-flow">
                 <div class="student-flow-container">
                     <h2 class="student-flow-title">Student Journey Flow</h2>
-
+<p class="student-flow-description">"Empowering Students, Shaping Futures"</p>
+<p class="student-flow-description">
+We guide students on a career-aligned learning and development journey through role-ready training, Gen AI workshops, and expert mentorship.
+Our platform ensures they gain the skills, insights, and opportunities needed to thrive in the industry from day one</p>
                     <figure class="student-flow-figure">
                         <svg class="circular-flow" viewBox="0 0 900 520" role="img" aria-label="Circular Student Journey Flow">
                             <!-- Outer ring segments with arrow-like tips -->
@@ -764,7 +969,7 @@
                     <div class="service-icon">
                         <i class="fas fa-compass"></i>
                     </div>
-                    <h3 class="service-title">Career Counselling</h3>
+                    <h3 class="service-title">Career Guidance</h3>
                     <p class="service-description">
                         Get personalized guidance from career experts who can help you identify your strengths, explore suitable 
                         career paths, and develop a strategic plan for your professional growth.
@@ -772,46 +977,128 @@
                     <a href="career-counselling-ai.html" class="service-link">Get Guidance</a>
                 </div>
                 
-                <!-- Psychometric Test -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-brain"></i>
+                <!-- Featured Services Block -->
+                <div class="featured-services-block" style="grid-column: 1 / -1;">
+                    <div class="featured-block-header">
+                        <h2 class="featured-block-title">🌟 Next Up for You</h2>
+                        <p class="featured-block-subtitle">
+                            Take your career to the next level with these essential services designed to unlock your potential and accelerate your professional growth.
+                        </p>
                     </div>
-                    <h3 class="service-title">Psychometric Test</h3>
-                    <p class="service-description">
-                        Discover your personality traits, work preferences, and aptitudes with our comprehensive psychometric 
-                        assessments. Gain insights that help align your career choices with your natural strengths.
-                    </p>
-                    <a href="psychometric-independent.html" class="service-link">Take Test</a>
-                </div>
-                
-                <!-- Apply Jobs/Internships -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-briefcase"></i>
+                    
+                    <div class="featured-services-grid">
+                        <!-- Psychometric Test -->
+                        <div class="service-card card-psychometric">
+                            <div class="service-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="service-title">Psychometric Test</h3>
+                            <p class="service-description">
+                                Discover your personality traits, work preferences, and aptitudes with our comprehensive psychometric 
+                                assessments. Gain insights that help align your career choices with your natural strengths.
+                            </p>
+                            <a href="psychometric-independent.html" class="service-link">Take Test</a>
+                        </div>
+                        
+                        <!-- Apply Jobs/Internships -->
+                        <div class="service-card card-apply">
+                            <div class="service-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="service-title">Apply Jobs/Internships</h3>
+                            <p class="service-description">
+                                Browse and apply for jobs, internships, and hackathons that match your skills and interests. 
+                                Get exclusive access to opportunities from our partner companies.
+                            </p>
+                            <a href="communication-skills.html" class="service-link">Find Opportunities</a>
+                        </div>
+                        
+                        <!-- Advanced Role-ready Training -->
+                        <div class="service-card card-advanced">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="service-title">Advanced Role-ready Training</h3>
+                            <p class="service-description">
+                                Participate in intensive training programs designed to prepare you for specific job roles. 
+                                Develop industry-relevant skills and gain practical experience through hands-on projects.
+                            </p>
+                            <a href="certification-courses.html" class="service-link">Start Training</a>
+                        </div>
                     </div>
-                    <h3 class="service-title">Apply for Opportunities</h3>
-                    <p class="service-description">
-                        Browse and apply for jobs, internships, and hackathons that match your skills and interests. 
-                        Get exclusive access to opportunities from our partner companies.
-                    </p>
-                    <a href="communication-skills.html" class="service-link">Find Opportunities</a>
-                </div>
-                
-                <!-- Advanced Role-ready Training -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="service-title">Advanced Role-ready Training</h3>
-                    <p class="service-description">
-                        Participate in intensive training programs designed to prepare you for specific job roles. 
-                        Develop industry-relevant skills and gain practical experience through hands-on projects.
-                    </p>
-                    <a href="certification-courses.html" class="service-link">Start Training</a>
                 </div>
             </div>
         </div>
+    </section>
+    <!-- Student Pricing Section -->
+    <section id="student-pricing" class="pricing-section">
+      <div class="services-container">
+        <h2 class="services-title">Student Pricing</h2>
+        <p class="services-description">Choose a plan that fits your learning and career goals.</p>
+        <div class="plan-grid">
+          <!-- Free Plan -->
+          <article class="plan-card plan-free">
+            <header class="plan-header">
+              <div class="plan-badge">FREE</div>
+              <div class="plan-price"><span class="currency">₹</span><span class="amount">0</span></div>
+              <div class="plan-period">forever</div>
+              <a href="signup.html" class="plan-cta">Get Started</a>
+            </header>
+            <div class="plan-blurb">Kick the tires and explore the basics.</div>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-circle-check"></i> Basic Job Requirement by Industry Metric</li>
+              <li><i class="fa-solid fa-circle-check"></i> Basic Profiling</li>
+              <li><i class="fa-solid fa-circle-check"></i> Resume Building with Watermark</li>
+              <li><i class="fa-solid fa-circle-check"></i> Interview Question Topic Wise</li>
+              <li><i class="fa-solid fa-circle-check"></i> Career Counselling through AI</li>
+            </ul>
+          </article>
+
+          <!-- Basic Plan -->
+          <article class="plan-card plan-basic">
+            <header class="plan-header">
+              <div class="plan-badge">BASIC</div>
+              <div class="plan-price"><span class="currency">₹</span><span class="amount">1,499</span></div>
+              <div class="plan-period">for 6 months</div>
+              <a href="signup.html" class="plan-cta">Get Started</a>
+            </header>
+            <div class="plan-blurb">Activate AI-powered tools and assessments.</div>
+            <div class="plan-subtitle">Everything in FREE, plus:</div>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-circle-check"></i> AI-Based Profiling &amp; Interest Evaluation</li>
+              <li><i class="fa-solid fa-circle-check"></i> AI-Based Resume Building (No Watermark) &amp; AI Resume Review</li>
+              <li><i class="fa-solid fa-circle-check"></i> AI-Based Interview Preparation &amp; Test + Video Demo</li>
+              <li><i class="fa-solid fa-circle-check"></i> Psychometric Test</li>
+            </ul>
+          </article>
+
+          <!-- Premium Plan -->
+          <article class="plan-card plan-premium">
+            <header class="plan-header">
+              <div class="plan-badge">PREMIUM</div>
+              <div class="plan-price"><span class="currency">₹</span><span class="amount">5,999</span></div>
+              <div class="plan-period">for 6 months</div>
+              <a href="signup.html" class="plan-cta">Get Started</a>
+            </header>
+            <div class="plan-blurb">Unlock mentor-led guidance and pro features.</div>
+            <div class="plan-subtitle">Everything in BASIC, plus:</div>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-circle-check"></i> Resume Review by Industry Expert</li>
+              <li><i class="fa-solid fa-circle-check"></i> Interview by Video Conferencing + Communication &amp; Soft Skills</li>
+              <li><i class="fa-solid fa-circle-check"></i> Career Counselling through Mentor</li>
+              <li><i class="fa-solid fa-circle-check"></i> Psychometric Test</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- Use pricing.css plan styles inside this dark page -->
+      <style>
+        #student-pricing { padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        /* override card backgrounds to better blend with dark gradient */
+        #student-pricing .plan-card { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.06) 100%); border: 1px solid rgba(100,255,218,0.18); }
+        #student-pricing .plan-blurb, #student-pricing .feature-list li { color: rgba(255,255,255,0.9); }
+      </style>
     </section>
 
  <!-- Footer -->
@@ -960,6 +1247,20 @@
             <div class="floating-shape shape-2"></div>
             <div class="floating-shape shape-3"></div>
         </div>
+
+        <!-- Student Pricing Section -->
+        <section id="student-pricing" class="pricing-section">
+          
+
+          <!-- Use pricing.css plan styles inside this dark page -->
+          <style>
+            #student-pricing { padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); background: linear-gradient(135deg, #0f2238 0%, #0d1b2a 100%); }
+            /* override card backgrounds to better blend with dark gradient */
+            #student-pricing .plan-card { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.06) 100%); border: 1px solid rgba(100,255,218,0.18); }
+            #student-pricing .plan-blurb, #student-pricing .feature-list li { color: rgba(255,255,255,0.9); }
+          </style>
+        </section>
+
     </footer>
 
 
@@ -992,6 +1293,9 @@
             });
         });
     </script>
+
+    
+
 </body>
 </html>
 

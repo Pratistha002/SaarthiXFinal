@@ -355,6 +355,44 @@
             margin-left: 4px;
         }
 
+        /* Header + Search bar UI improvements */
+        .responses-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap; /* keep nice on smaller screens */
+        }
+        .responses-header .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            max-width: 420px;
+            width: 100%;
+        }
+        .responses-header .search-bar i { color: #fff; }
+        .responses-header .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: transparent;
+            color: #fff;
+        }
+        .responses-header .search-bar input::placeholder { color: rgba(255, 255, 255, 0.85); }
+        .responses-header .search-bar #clearSearch {
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .database-layout {
                 flex-direction: column;
@@ -425,9 +463,9 @@
                 <div class="dropdown-content cols-1">
                     <div class="dropdown-section">
                         <h4>Services</h4>
-                        <a href="job-dashboard.html">Post Jobs</a>
+                        <a href="job-dashboard.html">Post Jobs / Internship</a>
                         <a href="database-access.html">Database Access</a>
-                        <a href="ai-interview-glimpse.html">Technical Interview/Assessment AI</a>
+                        <a href="ai-interview-glimpse.html">Technical Interview / Assessment AI</a>
                         <a href="hackathon-info.html">Post Hackathons</a>
                         <a href="drive-glimpse.html">Access To Universities</a>
                         <a href="Expert-session.html">Expert Session</a>
@@ -566,6 +604,13 @@
                         <!-- Responses Header -->
                         <div class="responses-header">
                             Responses <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; margin-left: 10px;">5</span>
+                            
+    <!-- Global Search Bar -->
+            <div class="search-bar" style="display:flex;align-items:center;gap:8px;margin:16px 0;padding:8px 12px;border:1px solid #ddd;border-radius:8px;max-width:640px;">
+                <i class="fas fa-search" style="color:#888;"></i>
+                <input type="text" id="globalSearch" placeholder="Search roles, industries, education..." aria-label="Search" style="flex:1;border:none;outline:none;font-size:16px;" />
+                <button type="button" id="clearSearch" title="Clear" style="border:none;background:transparent;font-size:20px;color:#888;cursor:pointer;line-height:1;">×</button>
+            </div>
                         </div>
 
                         <!-- Stats Bar -->
