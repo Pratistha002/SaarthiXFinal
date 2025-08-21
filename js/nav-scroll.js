@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!href || href === '#') {
                 btn.setAttribute('href', 'students.html');
             }
-            btn.addEventListener('click', function (e) {
+            btn.addEventListener('click', function () {
                 const to = this.getAttribute('href');
                 if (to && to !== '#') {
                     window.location.href = to;
@@ -59,4 +59,19 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+
+    // Ensure Login button opens login page on all pages
+    const loginBtn = document.querySelector('.login-btn');
+    if (loginBtn) {
+        if (!loginBtn.getAttribute('href') || loginBtn.getAttribute('href') === '#') {
+            loginBtn.setAttribute('href', 'login.html');
+        }
+        // Fallback redirect if some script prevents default
+        loginBtn.addEventListener('click', function (e) {
+            if (!this.getAttribute('href')) {
+                e.preventDefault();
+                window.location.href = 'login.html';
+            }
+        });
+    }
 });
