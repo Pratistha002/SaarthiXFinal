@@ -59,3 +59,24 @@
   .pricing-hero h1{font-size:1.6rem}
   .pricing-btn{padding:9px 12px}
 }
+
+/* Independent services strip */
+.independent-strip{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;border:2px solid #0ea5e9;border-radius:14px;padding:18px 20px;margin-top:20px;box-shadow:0 8px 20px rgba(0,0,0,.05)}
+.independent-left{display:flex;flex-direction:column;gap:8px}
+.independent-title{text-transform:capitalize;font-size:1.1rem;margin:0;color:#0f172a}
+.independent-list{margin:0;padding-left:18px}
+.independent-list li{margin:4px 0;color:#1f2937}
+.independent-right{display:flex;align-items:center}
+.independent-cta{display:inline-block;padding:10px 18px;border:2px solid #0ea5e9;border-radius:999px;color:#0ea5e9;text-decoration:none;font-weight:700;background:#e0f2fe}
+.independent-cta:hover{background:#bae6fd}
+
+/* Institute independent cards */
+.inst-independent{margin-top:16px}
+.inst-independent-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.inst-independent-card{background:#fff;border:2px solid #94a3b8;border-radius:14px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.05)}
+.inst-card-title{margin:0 0 12px 0;font-size:1.05rem;color:#0f172a}
+.inst-card-row{display:flex;justify-content:space-between;gap:12px}
+.inst-tier{flex:1;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.inst-tier-name{font-weight:600;color:#1f2937}
+.inst-price-tag{align-self:flex-start;background:#e2e8f0;border:2px solid #475569;border-radius:8px;padding:6px 10px;font-weight:800;color:#0f172a}
+@media (max-width:1024px){.inst-independent-grid{grid-template-columns:1fr}}
