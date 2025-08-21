@@ -1,0 +1,26 @@
+/* Shared styles for pricing pages and dropdown button */
+.pricing-container{max-width:1200px;margin:60px auto;padding:0 16px}
+.pricing-hero{margin-top:90px;text-align:center}
+.pricing-hero h1{font-size:2rem;margin-bottom:8px}
+.pricing-hero p{color:#555}
+.pricing-card{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08);padding:20px;margin:24px 0;overflow:hidden}
+.pricing-card h2{margin:0 0 12px}
+.pricing-image{width:100%;display:block;border-radius:12px;border:1px solid #eee}
+.pricing-note{font-size:.9rem;color:#666;margin-top:6px}
+
+/* Nav button + dropdown combo (hover to open) */
+.pricing-btn-wrapper{position:relative;margin-left:12px}
+.pricing-btn{position:relative;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:28px;background:linear-gradient(135deg,#6a5acd,#00bcd4);color:#fff;text-decoration:none;font-weight:600;cursor:pointer;border:none}
+.pricing-btn .chev{transition:transform .2s ease}
+.pricing-btn-wrapper:hover .chev{transform:rotate(180deg)}
+.pricing-menu{position:absolute;right:0;top:110%;background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.1);min-width:230px;padding:8px;display:none;z-index:1000}
+.pricing-btn-wrapper:hover .pricing-menu{display:block}
+.pricing-menu a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;color:#222}
+.pricing-menu a:hover{background:#f5f7ff}
+.pricing-menu .all{border-top:1px dashed #e5e7eb;margin-top:6px;padding-top:8px}
+
+/* Responsive */
+@media (max-width:768px){
+  .pricing-hero h1{font-size:1.6rem}
+  .pricing-btn{padding:9px 12px}
+}

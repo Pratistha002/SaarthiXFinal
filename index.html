@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/dropdown-nav.js" defer></script>
     <script src="js/nav-scroll.js" defer></script>
+    <link rel="stylesheet" href="pricing.css">
+    <script src="pricing.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -88,6 +90,19 @@
             </li>
         </ul>
         <div class="account-options">
+            <div class="pricing-btn-wrapper">
+                <a href="pricing.html" class="pricing-btn" id="pricingToggleBtn" aria-expanded="false">
+                    <i class="fas fa-tags"></i>
+                    <span>Pricing</span>
+                    <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
+                </a>
+                <div class="pricing-menu" id="pricingDropdown" role="menu">
+                    <a href="pricing-students.html" role="menuitem"><i class="fas fa-user-graduate"></i> Students</a>
+                    <a href="pricing-institutes.html" role="menuitem"><i class="fas fa-school"></i> Institute</a>
+                    <a href="pricing-industry.html" role="menuitem"><i class="fas fa-industry"></i> Industry</a>
+                    <a href="pricing.html" class="all" role="menuitem"><i class="fas fa-layer-group"></i> All Pricing</a>
+                </div>
+            </div>
             <a href="#" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
