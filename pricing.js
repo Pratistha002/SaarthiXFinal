@@ -1,4 +1,4 @@
-// Navigation for Pricing button; dropdown opens on hover via CSS
+// Minimal script: keep Pricing button behavior only
 (function(){
   const btn = document.querySelector('#pricingToggleBtn');
   if(!btn) return;
