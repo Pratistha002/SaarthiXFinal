@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Opening NattLabs demo website...');
             } else if (this.id === 'signupBtn' || this.textContent.includes('Start Your Journey')) {
                 // Navigate to psychometric tests page
-                window.location.href = 'psychometric-tests.html';
-                console.log('Navigating to psychometric tests...');
+                window.location.href = 'login.html';
+                // console.log('Navigating to psychometric tests...');
             } else {
                 // You can add other navigation logic here
                 console.log('Button clicked:', this.textContent.trim());

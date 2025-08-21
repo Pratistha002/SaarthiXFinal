@@ -9,6 +9,15 @@
     justify-content: center;
     overflow: hidden;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    padding-top: 90px;
+    /* Offset for fixed navbar height */
+}
+
+@media (max-width: 768px) {
+    .service-hero {
+        padding-top: 110px;
+        /* Extra space on small screens where navbar may wrap */
+    }
 }
 
 /* CTA buttons unified style */
@@ -28,6 +37,17 @@
 }
 
 .btn-primary {
+    /* Include base button styles so it looks good even without the .btn class */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .25s ease;
+
+    /* Primary visuals */
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: #fff;
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
@@ -151,6 +171,26 @@
 .service-content {
     padding: 80px 0;
     background: #ffffff;
+}
+
+/* CTA actions container used in multiple service pages */
+.cta-actions,
+.service-hero-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.cta-actions .btn-primary,
+.service-hero-actions .btn-primary {
+    min-width: 220px;
+    justify-content: center;
+}
+
+.cta-actions .btn-primary i,
+.service-hero-actions .btn-primary i {
+    font-size: 16px;
 }
 
 .content-section {
