@@ -745,6 +745,44 @@ nav.nav-hidden {
     background: #FF6B6B;
 }
 
+/* Site-wide themed background (matches Hero colors/pattern) */
+body.theme-bg {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+}
+
+/* Moving dot pattern layer */
+body.theme-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.08) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+    background-size: 50px 50px;
+    animation: patternMove 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Soft gradient overlay layer */
+body.theme-bg::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(102, 126, 234, 0.90) 0%,
+            rgba(118, 75, 162, 0.80) 50%,
+            rgba(240, 147, 251, 0.70) 100%);
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* Optional utility to make sections blend with themed background */
+.section-transparent {
+    background: transparent !important;
+}
+
 /* Enhanced Hero Section */
 .hero {
     position: relative;

@@ -861,7 +861,7 @@
         rec.push("Practice pattern recognition and logical reasoning puzzles");
       }
       
-      document.getElementById('recommendationsList').innerHTML=rec.map(r=>`<div class="recommendation-item">🚀’¡ ${r}</div>`).join("");
+      document.getElementById('recommendationsList').innerHTML = rec.map(r => `<div class="recommendation-item">🚀 ${r}</div>`).join("");
     }
 
     function generateQuestionBreakdown(){
@@ -879,7 +879,7 @@
             <span class="status ${statusClass}">${statusText}</span>
           </div>
           <div style="font-size:.9rem;color:#4a5568;">
-            Your answer: ${ua!==null?q.options[ua]:"â€”"} <br>
+            Your answer: ${ua!==null ? q.options[ua] : "—"} <br>
             Correct: ${q.options[ca]}
           </div>
         </div>`;
