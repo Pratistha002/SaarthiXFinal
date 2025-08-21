@@ -9,12 +9,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/dropdown-nav.js" defer></script>
     <script src="js/nav-scroll.js" defer></script>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html">SaarthiX</a>
+            <a href="index.html">
+                <img src="logo-saarthix.png" alt="SaarthiX" class="logo-img">
+                <span class="logo-text">SaarthiX</span>
+            </a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -261,22 +267,127 @@
         </div>
     </section>
 
+    <!-- Students Section -->
+    <section class="students-section">
+        <div class="container">
+            <div class="students-header">
+                <h2>Students</h2>
+                <p>Your journey to success starts here</p>
+            </div>
+            
+            <!-- Student Journey Flow -->
+            <div class="student-flow">
+                <div class="flow-container">
+                    <div class="flow-step" data-step="1">
+                        <div class="flow-circle">
+                            <span>Job Readiness Plan</span>
+                        </div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-step" data-step="2">
+                        <div class="flow-circle">
+                            <span>My Skill Dashboard </span>
+                        </div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-step" data-step="3">
+                        <div class="flow-circle">
+                            <span>Smart Career Profile Builder </span>
+                        </div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-step" data-step="4">
+                        <div class="flow-circle">
+                            <span>Personalized Career Guidance</span>
+                        </div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-step" data-step="5">
+                        <div class="flow-circle">
+                            <span>Create a Winning Resume</span>
+                        </div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-step" data-step="6">
+                        <div class="flow-circle">
+                            <span>Ace Every Interview</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Student USP Blocks -->
+            <div class="student-usp">
+                <div class="usp-container">
+                    <div class="usp-block">
+                        <div class="usp-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Future Ready Skills</h3>
+                        <p>Master the skills that tomorrow's employers demand</p>
+                    </div>
+                    <div class="usp-block">
+                        <div class="usp-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Job Ready Edge</h3>
+                        <p>Get the competitive advantage to land your dream job</p>
+                    </div>
+                    <div class="usp-block">
+                        <div class="usp-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Opportunity Hub</h3>
+                        <p>Connect with endless career opportunities and growth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Clients Section -->
     <section class="clients partners-section">
         <div class="clients-header">
-            <h2>Dream big, learn from the best, and make it happen...</h2>
-            <p>Collaborating with industry leaders to shape the future</p>
+            <h2>SaarthiX Powered by</h2>
+            <h4>Wanna be the best? Learn from the best—Human Intelligentsia and Artificial Intelligentsia.
+Get the wisdom of mentors, the precision of GenAI, and real-world industry hacks.
+Together, they fuel your journey from ambition to achievement.</h4>
         </div>
-        
-        <!-- Scoped styles for the partners grid -->
+
+        <!-- Scoped styles for the two-column layout -->
         <style>
             .partners-section { padding-top: 10px; }
-            .partners-grid {
+            .clients-header { text-align: center; }
+
+            /* Two-column wrapper */
+            .human-ai-grid {
                 display: grid;
-                grid-template-columns: repeat(5, minmax(160px, 1fr));
-                gap: 20px;
-                margin: 20px 0 10px;
+                grid-template-columns: 1.1fr 0.9fr; /* left: leaders, right: tools */
+                gap: 24px;
+                align-items: start;
+                margin: 20px auto 10px;
+                max-width: 1100px; /* center the whole block */
+                padding: 0 16px;
             }
+
+            /* Column headings */
+            .column-title {
+                font-weight: 700;
+                font-size: 18px;
+                margin-bottom: 12px;
+                color: #1f2937;
+                text-align: center; /* center titles */
+            }
+
+            /* Leader cards grid */
+            .leaders-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(180px, 1fr));
+                gap: 16px;
+                justify-items: stretch; /* stretch cards to fill cells */
+                grid-auto-rows: minmax(250px, auto); /* equal min height per row */
+            }
+
             .partner-card {
                 background: #fff;
                 border-radius: 12px;
@@ -285,138 +396,134 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                min-height: 150px;
+                justify-content: flex-start; /* start so image + text stack naturally */
+                min-height: 250px; /* equalize card heights */
+                width: 100%; /* fill grid cell */
                 transition: transform .2s ease, box-shadow .2s ease;
             }
             .partner-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.12); }
-            .industry-card h3 {
-                margin: 0 0 12px 0;
-                font-size: 16px;
-                color: #222;
-            }
-            .logos { display:flex; flex-wrap: wrap; gap: 10px; align-items:center; justify-content:center; }
-            .logos img { height: 26px; max-width: 110px; object-fit: contain; opacity: 1; }
-            .logos img:hover { filter: none; opacity: 1; }
-            .leader-photo { width: 100%; height: 110px; object-fit: cover; border-radius: 8px; }
-            .leader-name { margin-top: 10px; font-weight: 600; font-size: 14px; color:#222; text-align:center; }
+            .leader-photo { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; }
+            .leader-name { margin-top: 10px; font-weight: 700; font-size: 15px; color:#222; text-align:center; }
             .leader-role { font-size: 12px; color:#666; text-align:center; }
-            .leader-desc { font-size: 12px; color:#555; text-align:center; margin-top: 4px; line-height: 1.4; }
-            @media (max-width: 1200px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
-            @media (max-width: 720px)  { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
+
+            /* Tools list cards */
+            .tools-list {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                max-width: 520px;
+                margin: 0 auto; /* center the list */
+            }
+            .tool-card {
+                background: #fff;
+                border-radius: 12px;
+                padding: 14px 16px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                min-height: 56px;
+                justify-content: flex-start;
+            }
+            .tool-badge {
+                width: 36px; height: 36px; border-radius: 8px;
+                display:flex; align-items:center; justify-content:center;
+                background: #ffffff; border: 1px solid #e5e7eb; overflow: hidden;
+            }
+            .tool-logo { width: 22px; height: 22px; object-fit: contain; }
+            .tool-name { font-weight: 600; color:#1f2937; }
+            .tool-desc { font-size: 12px; color:#6b7280; }
+
+            @media (max-width: 900px) {
+                .human-ai-grid { grid-template-columns: 1fr; }
+                .leaders-grid { grid-template-columns: 1fr 1fr; }
+            }
+            @media (max-width: 560px) {
+                .leaders-grid { grid-template-columns: 1fr; }
+            }
         </style>
 
-        <!-- Two-row, five-column grid -->
-        <div class="partners-grid">
-            <!-- Row 1: Industries with logos -->
-            <div class="partner-card industry-card">
-                <h3>Technology</h3>
-                <div class="logos">
-                    <img src="assets/partners/microsoft.png" alt="Microsoft" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/google.png" alt="Google" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/amazon.png" alt="Amazon" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Healthcare</h3>
-                <div class="logos">
-                    <img src="assets/partners/pfizer.png" alt="Pfizer" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/jnj.png" alt="Johnson & Johnson" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/unitedhealth.png" alt="UnitedHealth Group" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Life Sciences</h3>
-                <div class="logos">
-                    <img src="assets/partners/thermo-fisher.png" alt="Thermo Fisher Scientific" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/roche.png" alt="Roche" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/novartis.png" alt="Novartis" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Finance</h3>
-                <div class="logos">
-                    <img src="assets/partners/jpmorgan.png" alt="JPMorgan Chase" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/goldman-sachs.png" alt="Goldman Sachs" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/visa.png" alt="Visa" onerror="this.src='assets/partners/placeholder-logo.png'">
-                </div>
-            </div>
-            <div class="partner-card industry-card">
-                <h3>Energy</h3>
-                <div class="logos">
-                    <img src="assets/partners/siemens-energy.png" alt="Siemens Energy" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/shell.png" alt="Shell" onerror="this.src='assets/partners/placeholder-logo.png'">
-                    <img src="assets/partners/bp.png" alt="BP" onerror="this.src='assets/partners/placeholder-logo.png'">
+        <!-- Two-column content -->
+        <div class="human-ai-grid">
+            <!-- Left: Human Intelligence (leaders) -->
+            <div>
+                <div class="column-title"><h3>Human Intelligence</h3></div>
+                <div class="leaders-grid">
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-1.jpg" alt="Aarav Malhotra" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Priyanshu Malhotra</div>
+                        <div class="leader-role">Chief AI Architect, NexaCore</div>
+                    </div>
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-2.jpg" alt="Mira Chen" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Mira Chen</div>
+                        <div class="leader-role">VP, Applied ML, Quantara</div>
+                    </div>
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-3.jpg" alt="Leo Martínez" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Leo Martínez</div>
+                        <div class="leader-role">Head of Foundation Models, OrbiVerse</div>
+                    </div>
+                    <div class="partner-card leader-card">
+                        <img class="leader-photo" src="assets/partners/ai-leader-5.jpg" alt="Kenji Sato" onerror="this.src='assets/partners/placeholder-leader.jpg'">
+                        <div class="leader-name">Kenji Sato</div>
+                        <div class="leader-role">Principal Scientist, NovaSense</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Row 2: Leaders -->
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-1.jpg" alt="Aarav Malhotra" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Aarav Malhotra</div>
-                <div class="leader-role">Chief AI Architect, NexaCore</div>
-                <div class="leader-desc">Leads multi-modal AI platforms for real-time analytics and privacy-first personalization.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-2.jpg" alt="Mira Chen" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Mira Chen</div>
-                <div class="leader-role">VP, Applied ML, Quantara</div>
-                <div class="leader-desc">Focuses on robust ML systems, fairness auditing, and edge deployment at scale.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-3.jpg" alt="Leo Martínez" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Leo Martínez</div>
-                <div class="leader-role">Head of Foundation Models, OrbiVerse</div>
-                <div class="leader-desc">Builds domain-tuned LLMs and efficient RAG stacks for enterprise knowledge bases.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-4.jpg" alt="Hana Al‑Khalid" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Hana Al‑Khalid</div>
-                <div class="leader-role">Director of Cognitive Systems, LuminaTech</div>
-                <div class="leader-desc">Drives human-centered AI, agentic workflows, and safety guardrails for autonomy.</div>
-            </div>
-            <div class="partner-card leader-card">
-                <img class="leader-photo" src="assets/partners/ai-leader-5.jpg" alt="Kenji Sato" onerror="this.src='assets/partners/placeholder-leader.jpg'">
-                <div class="leader-name">Kenji Sato</div>
-                <div class="leader-role">Principal Scientist, NovaSense</div>
-                <div class="leader-desc">Specializes in vision-language systems and synthetic data pipelines for QA.</div>
-            </div>
-        </div>
-        
-        <!-- Animated Statistics -->
-        <div class="partnership-overview">
-            <div class="overview-stat">
-                <div class="stat-icon">🤝</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="25">0</span>
-                    <span class="stat-description">Active Partnerships</span>
-                </div>
-            </div>
-            <div class="overview-stat">
-                <div class="stat-icon">🎓</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="2500">0</span>
-                    <span class="stat-description">Students Placed</span>
-                </div>
-            </div>
-            <div class="overview-stat">
-                <div class="stat-icon">📁</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="150">0</span>
-                    <span class="stat-description">Projects Completed</span>
-                </div>
-            </div>
-            <div class="overview-stat">
-                <div class="stat-icon">🌟</div>
-                <div class="stat-info">
-                    <span class="big-number" data-target="98">0</span>
-                    <span class="stat-description">Success Rate %</span>
+            <!-- Right: Artificial Intelligence (tools) -->
+            <div>
+                <div class="column-title"><h3>Artificial Intelligence</h3></div>
+                <div class="tools-list">
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/openai.png" alt="OpenAI" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">OpenAI</div>
+                            <div class="tool-desc">GPT models for reasoning, chat, and assistants.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/synthesia.png" alt="Synthesia" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Synthesia</div>
+                            <div class="tool-desc">Create AI-powered training videos with avatars in 120+ languages.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/coursebox.png" alt="CourseBox AI" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">CourseBox AI</div>
+                            <div class="tool-desc">Generates full course structures with activities, assessments, and gaps filled.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/scribe.png" alt="Scribe" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Scribe</div>
+                            <div class="tool-desc">Turns processes into step-by-step visual guides automatically.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/otter.png" alt="Otter.ai" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Otter.ai</div>
+                            <div class="tool-desc">Live transcription and knowledge capture from training sessions.</div>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-badge"><img class="tool-logo" src="assets/partners/learnwords.png" alt="Learnwords" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
+                        <div>
+                            <div class="tool-name">Learnwords</div>
+                            <div class="tool-desc">AI-powered LMS with personalized learning paths, videos, and analytics.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Who is Suitable Section -->
+    <!-- Who is Suitable Section 
     <section class="suitable-for">
         <h2>Seamless Collaboration for a Smarter Future</h2>
         <div class="suitable-for-categories">
@@ -486,13 +593,13 @@
                             <div class="service-slide">Student Training (on Demand)</div>
                             <div class="service-slide">Student Training (Role Ready)</div>
                         </div>
-                    </div>
+                    </div> 
                     <div class="slider-dots" id="instituteDots"></div>
                 </div>
             </div>
         </div>
     </section>
-
+-->
     <script>
         // Slider functionality
         class ServiceSlider {

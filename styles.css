@@ -124,6 +124,23 @@ nav.nav-hidden {
     text-decoration: none;
     font-size: 24px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .nav-links {
@@ -3137,6 +3154,264 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+/* Students Section Styles */
+.students-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.students-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 100%);
+}
+
+.students-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.students-header h2 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.students-header p {
+    font-size: 1.1rem;
+    color: #b8b8b8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Student Flow Styles */
+.student-flow {
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.flow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.flow-step {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.flow-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.flow-step[data-step="1"] .flow-circle {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.flow-step[data-step="2"] .flow-circle {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+
+.flow-step[data-step="3"] .flow-circle {
+    background: linear-gradient(135deg, #17a2b8, #117a8b);
+}
+
+.flow-step[data-step="4"] .flow-circle {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+}
+
+.flow-step[data-step="5"] .flow-circle {
+    background: linear-gradient(135deg, #fd7e14, #e55100);
+}
+
+.flow-step[data-step="6"] .flow-circle {
+    background: linear-gradient(135deg, #6f42c1, #5a32a3);
+}
+
+.flow-circle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.flow-connector {
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.6));
+    border-radius: 2px;
+    position: relative;
+}
+
+.flow-connector::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid #ffffff;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+
+.flow-step:last-child .flow-connector {
+    display: none;
+}
+
+/* Student USP Styles */
+.student-usp {
+    position: relative;
+    z-index: 2;
+}
+
+.usp-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.usp-block {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    min-width: 220px;
+    max-width: 250px;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.usp-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.usp-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.2rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,212,255,0.4);
+}
+
+.usp-block:nth-child(2) .usp-icon {
+    background: linear-gradient(135deg, #00ff88, #00cc6a);
+    box-shadow: 0 4px 15px rgba(0,255,136,0.4);
+}
+
+.usp-block:nth-child(3) .usp-icon {
+    background: linear-gradient(135deg, #ff6b9d, #e91e63);
+    box-shadow: 0 4px 15px rgba(255,107,157,0.4);
+}
+
+.usp-block h3 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.usp-block p {
+    color: #b8b8b8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .flow-container {
+        gap: 10px;
+        padding: 0 10px;
+    }
+    
+    .flow-circle {
+        width: 100px;
+        height: 100px;
+        font-size: 11px;
+        padding: 10px;
+    }
+    
+    .flow-connector {
+        width: 20px;
+        height: 2px;
+    }
+    
+    .flow-connector::after {
+        right: -4px;
+        border-left: 4px solid #ffffff;
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+    }
+    
+    .usp-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .usp-block {
+        min-width: 200px;
+        max-width: 280px;
+        padding: 20px 15px;
+    }
+    
+    .students-header h2 {
+        font-size: 2rem;
+    }
 }
 
 /* Prevent horizontal scroll from dropdowns */
