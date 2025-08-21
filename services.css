@@ -316,6 +316,35 @@
     transition: all 0.3s ease;
 }
 
+/* Compare-grid (new component) */
+.compare-grid{background:#fff;border-radius:20px;box-shadow:0 16px 40px rgba(0,0,0,.08);padding:20px;overflow-x:auto;border:1px solid #e5e7eb;margin:48px 0}
+.compare-table{min-width:820px;width:100%;border-collapse:separate;border-spacing:0;border-radius:14px;overflow:hidden}
+/* Column headers */
+.compare-table thead th{color:#fff;padding:16px 14px;border-right:1px solid rgba(255,255,255,.25);text-align:center;font-weight:800}
+.compare-table thead th:first-child{background:#0f172a;color:#fff;text-align:left}
+.compare-table thead th:nth-child(2){background:linear-gradient(135deg,#f59e0b,#f97316)}
+.compare-table thead th:nth-child(3){background:linear-gradient(135deg,#0ea5e9,#3b82f6)}
+.compare-table thead th:nth-child(4){background:linear-gradient(135deg,#8b5cf6,#a855f7)}
+/* Body cells */
+.compare-table tbody td{padding:14px;border-top:1px solid #eef2ff;text-align:center;vertical-align:top}
+.compare-table tbody td:first-child{text-align:left;font-weight:700;color:#0f172a;background:linear-gradient(180deg,#f8fafc,#ffffff)}
+/* Column backgrounds for more color */
+.compare-table tbody td:nth-child(2){background:linear-gradient(180deg,rgba(249,115,22,.06),transparent)}
+.compare-table tbody td:nth-child(3){background:linear-gradient(180deg,rgba(59,130,246,.06),transparent)}
+.compare-table tbody td:nth-child(4){background:linear-gradient(180deg,rgba(168,85,247,.06),transparent)}
+/* Icon colors per column */
+.compare-table tbody td:nth-child(2) .compare-check{color:#f59e0b}
+.compare-table tbody td:nth-child(3) .compare-check{color:#3b82f6}
+.compare-table tbody td:nth-child(4) .compare-check{color:#8b5cf6}
+.compare-check{color:#16a34a}
+.compare-cross{color:#ef4444}
+.compare-cta{display:inline-block;margin-top:16px;padding:12px 22px;border-radius:12px;background:linear-gradient(135deg,#22c55e,#16a34a,#06b6d4);color:#fff;text-decoration:none;font-weight:800;box-shadow:0 10px 25px rgba(34,197,94,.25)}
+.compare-cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(34,197,94,.35)}
+.buy-strip{text-align:center;margin-top:18px}
+.compare-list{margin:6px 0 0 18px;padding:0}
+.compare-list li{list-style:disc;margin:6px 0;color:#0f172a}
+.compare-table tr.what-you-get td{text-align:left}
+
 .pricing-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
