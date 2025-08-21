@@ -361,22 +361,62 @@ class CareerPathExplorer {
         this.attachGanttTooltips();
     }
 
+    // Build a merged-bar Gantt row: contiguous months become one span
     renderGanttRow(row) {
-        // Build 6 month cells, mark active ones
-        const cells = [];
-        for (let m = 1; m <= 6; m++) {
-            const active = row.months.includes(m);
-            const detail = (row.details && row.details[m]) ? row.details[m] : `${row.skill} focus`;
-            const cls = active ? 'active' : '';
-            const detailAttr = active ? ` data-detail="${detail.replace(/"/g, '&quot;')}"` : '';
-            cells.push(`<div class="gantt-cell ${cls}"${detailAttr}></div>`);
+        // Always render 6 slots so grid lines remain
+        const slots = Array.from({ length: 6 }, () => '<div class="gantt-cell gantt-slot"></div>');
+
+        // Compute contiguous ranges from months (e.g., [1,2,3] -> [[1,3]])
+        const ranges = [];
+        const months = [...new Set(row.months)].sort((a,b)=>a-b);
+        let start = null, prev = null;
+        for (const m of months) {
+            if (start === null) { start = m; prev = m; continue; }
+            if (m === prev + 1) { prev = m; continue; }
+            ranges.push([start, prev]);
+            start = m; prev = m;
         }
+        if (start !== null) ranges.push([start, prev]);
+
+        // Color per skill
+        const color = this.getColorForSkill(row.skill);
+
+        // Build spans covering contiguous ranges
+        const spans = ranges.map(([s,e]) => {
+            const colStart = 1 + s; // grid col 1 is skill, months start at 2
+            const spanLen = e - s + 1;
+            // Build combined details for all months in the range
+            const parts = [];
+            for (let m = s; m <= e; m++) {
+                if (row.details && row.details[m]) parts.push(`M${m}: ${row.details[m]}`);
+            }
+            const detail = parts.length ? parts.join(' | ') : `${row.skill} focus M${s}-${e}`;
+            return `<div class="gantt-span" style="grid-column: ${colStart} / span ${spanLen}; --bar:${color.bg}; --barEdge:${color.edge};" data-detail="${detail.replace(/\"/g, '&quot;')}"></div>`;
+        }).join('');
+
         return `
             <div class="gantt-row">
                 <div class="gantt-cell gantt-skill-col">${row.skill}</div>
-                ${cells.join('')}
+                ${slots.join('')}
+                ${spans}
             </div>
         `;
+    }
+
+    // Pleasant color palette per skill name
+    getColorForSkill(name) {
+        const palette = [
+            { bg: 'linear-gradient(90deg, #66bb6a, #43a047)', edge: '#2e7d32' },
+            { bg: 'linear-gradient(90deg, #42a5f5, #1e88e5)', edge: '#1565c0' },
+            { bg: 'linear-gradient(90deg, #ab47bc, #8e24aa)', edge: '#6a1b9a' },
+            { bg: 'linear-gradient(90deg, #ffa726, #fb8c00)', edge: '#ef6c00' },
+            { bg: 'linear-gradient(90deg, #26c6da, #00acc1)', edge: '#00838f' },
+            { bg: 'linear-gradient(90deg, #ec407a, #d81b60)', edge: '#ad1457' }
+        ];
+        let hash = 0;
+        for (let i=0;i<name.length;i++) hash = (hash*31 + name.charCodeAt(i)) & 0xffffffff;
+        const idx = Math.abs(hash) % palette.length;
+        return palette[idx];
     }
 
     attachGanttTooltips() {
@@ -387,7 +427,7 @@ class CareerPathExplorer {
             tooltip.className = 'gantt-tooltip';
             document.body.appendChild(tooltip);
         }
-        const cells = document.querySelectorAll('.gantt-cell.active');
+        const cells = document.querySelectorAll('.gantt-span, .gantt-cell.active');
         cells.forEach(cell => {
             cell.addEventListener('mouseenter', (e) => {
                 const text = e.currentTarget.getAttribute('data-detail') || '';

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing - Students | SaarthiX</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pricing.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">SaarthiX</a></div>
+    <ul class="nav-links"></ul>
+    <div class="account-options">
+      <div class="pricing-btn-wrapper">
+        <a href="pricing.html" class="pricing-btn" id="pricingToggleBtn"><i class="fas fa-tags"></i><span>Pricing</span><i class="fas fa-chevron-down chev"></i></a>
+        <div class="pricing-menu" id="pricingDropdown">
+          <a href="pricing-students.html"><i class="fas fa-user-graduate"></i> Students</a>
+          <a href="pricing-institutes.html"><i class="fas fa-school"></i> Institute</a>
+          <a href="pricing-industry.html"><i class="fas fa-industry"></i> Industry</a>
+          <a href="pricing.html" class="all"><i class="fas fa-layer-group"></i> All Pricing</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pricing-container">
+    <section class="pricing-hero">
+      <h1>Student Services Pricing</h1>
+      <p>Compare free, basic, and premium plans for students.</p>
+    </section>
+
+    <section class="pricing-card">
+      <h2>Student Services</h2>
+      <section class="plan-grid">
+        <!-- Free Plan -->
+        <article class="plan-card plan-free">
+          <header class="plan-header">
+            <div class="plan-badge">FREE</div>
+            <div class="plan-price"><span class="currency">₹</span><span class="amount">0</span></div>
+            <div class="plan-period">forever</div>
+            <a href="signup.html" class="plan-cta">Get Started</a>
+          </header>
+          <div class="plan-blurb">
+            Kick the tires and explore the basics.
+          </div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-circle-check"></i> Basic Job Requirement by Industry Metric</li>
+            <li><i class="fa-solid fa-circle-check"></i> Basic Profiling</li>
+            <li><i class="fa-solid fa-circle-check"></i> Resume Building with Watermark</li>
+            <li><i class="fa-solid fa-circle-check"></i> Interview Question Topic Wise</li>
+            <li><i class="fa-solid fa-circle-check"></i> Career Counselling through AI</li>
+            <!-- Not available items omitted to match reference design -->
+          </ul>
+        </article>
+
+        <!-- Basic Plan -->
+        <article class="plan-card plan-basic">
+          <header class="plan-header">
+            <div class="plan-badge">BASIC</div>
+            <div class="plan-price"><span class="currency">₹</span><span class="amount">1,499</span></div>
+            <div class="plan-period">for 6 months</div>
+            <a href="signup.html" class="plan-cta">Get Started</a>
+          </header>
+          <div class="plan-blurb">
+            Activate AI-powered tools and assessments.
+          </div>
+          <div class="plan-subtitle">Everything in FREE, plus:</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-circle-check"></i> AI-Based Profiling &amp; Interest Evaluation</li>
+            <li><i class="fa-solid fa-circle-check"></i> AI-Based Resume Building (No Watermark) &amp; AI Resume Review</li>
+            <li><i class="fa-solid fa-circle-check"></i> AI-Based Interview Preparation &amp; Test + Video Demo</li>
+            <li><i class="fa-solid fa-circle-check"></i> Psychometric Test</li>
+            <!-- Add-ons available -->
+            <li class="addon"><i class="fa-solid fa-plus"></i> Add-on: Apply to Job/Internship/Hackathon (Independent Services)</li>
+            <li class="addon"><i class="fa-solid fa-plus"></i> Add-on: Advanced Role-Ready Training (Independent Services)</li>
+          </ul>
+        </article>
+
+        <!-- Premium Plan -->
+        <article class="plan-card plan-premium">
+          <header class="plan-header">
+            <div class="plan-badge">PREMIUM</div>
+            <div class="plan-price"><span class="currency">₹</span><span class="amount">5,999</span></div>
+            <div class="plan-period">for 6 months</div>
+            <a href="signup.html" class="plan-cta">Get Started</a>
+          </header>
+          <div class="plan-blurb">
+            Unlock mentor-led guidance and pro features.
+          </div>
+          <div class="plan-subtitle">Everything in BASIC, plus:</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-circle-check"></i> Resume Review by Industry Expert</li>
+            <li><i class="fa-solid fa-circle-check"></i> Interview by Video Conferencing + Communication &amp; Soft Skills</li>
+            <li><i class="fa-solid fa-circle-check"></i> Career Counselling through Mentor</li>
+            <li><i class="fa-solid fa-circle-check"></i> Psychometric Test</li>
+            <!-- Add-ons available -->
+            <li class="addon"><i class="fa-solid fa-plus"></i> Add-on: Apply to Job/Internship/Hackathon (Independent Services)</li>
+            <li class="addon"><i class="fa-solid fa-plus"></i> Add-on: Advanced Role-Ready Training (Independent Services)</li>
+          </ul>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <script src="pricing.js" defer></script>
+</body>
+</html>

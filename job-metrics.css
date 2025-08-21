@@ -2379,6 +2379,26 @@ html, body {
     display: grid;
     grid-template-columns: 2fr repeat(6, 1fr);
     align-items: center;
+    position: relative;
+}
+
+/* slot cells keep the grid lines/light background */
+.gantt-slot { background: transparent; }
+
+/* merged span styling */
+.gantt-span {
+    height: 28px;
+    margin: 4px 6px;
+    border-radius: 8px;
+    background: var(--bar, linear-gradient(90deg,#667eea,#764ba2));
+    border: 2px solid var(--barEdge, rgba(102,126,234,0.6));
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    z-index: 2; /* ensure spans are above slot cells for hover */
+}
+
+/* hover ring + tooltip compatibility */
+.gantt-span:hover {
+    filter: brightness(1.03) saturate(1.1);
 }
 .gantt-header {
     background: #f8f9fa;
