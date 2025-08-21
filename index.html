@@ -103,7 +103,7 @@
                     <a href="pricing.html" class="all" role="menuitem"><i class="fas fa-layer-group"></i> All Pricing</a>
                 </div>
             </div>
-            <a href="#" class="login-btn" id="loginBtn">
+            <a href="login.html" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
                     <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
@@ -1297,38 +1297,9 @@ Together, they fuel your journey from ambition to achievement.</h4>
             let isLoggedIn = false;
             
             if (loginBtn) {
-                loginBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const btnText = this.querySelector('.btn-text');
-                    const loginIcon = this.querySelector('.login-icon');
-                    const logoutIcon = this.querySelector('.logout-icon');
-                    
-                    if (!isLoggedIn) {
-                        // Login animation
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                            this.classList.add('logged-in');
-                            btnText.textContent = 'Logout';
-                            loginIcon.style.display = 'none';
-                            logoutIcon.style.display = 'inline';
-                            isLoggedIn = true;
-                            showNotification('Successfully logged in!', 'success');
-                        }, 150);
-                    } else {
-                        // Logout animation
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                            this.classList.remove('logged-in');
-                            btnText.textContent = 'Login';
-                            loginIcon.style.display = 'inline';
-                            logoutIcon.style.display = 'none';
-                            isLoggedIn = false;
-                            showNotification('Successfully logged out!', 'info');
-                        }, 150);
-                    }
+                // Always navigate to login page on click. Remove preventDefault to allow href.
+                loginBtn.addEventListener('click', function() {
+                    // default anchor navigation to login.html will occur
                 });
             }
             
@@ -1546,7 +1517,7 @@ Together, they fuel your journey from ambition to achievement.</h4>
                         <img class="dev-avatar" src="assets/images/Meenakshi .jpg" alt="Profile photo of Meenakshi Tripathi" />
                     </div>
                     <h3 class="dev-name">Meenakshi Tripathi</h3>
-                    <p class="dev-title">UI/UX Designer </p>
+                    <p class="dev-title">Junior Developer </p>
                     <p class="dev-desc"> I’ve experienced how this platform bridges creativity with real-world impact. With expert guidance, AI-driven insights, and hands-on projects, it helps learners craft user experiences that are both innovative and industry-ready from day one." </p>
                 </article>
             </div>

@@ -329,15 +329,15 @@
         }
         @media (max-width: 768px) {
             .circular-flow { max-width: clamp(380px, 92vw, 750px); }
-            .cf-text { font-size: clamp(12px, 3.4vw, 15px); }
+            .cf-text { font-size: clamp(16px, 4vw, 20px); }
         }
         @media (max-width: 480px) {
             .circular-flow { max-width: clamp(340px, 96vw, 600px); }
         }
 .circular-flow:hover { transform: scale(1.02); }
-        .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(11px, 1.3vw, 14px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
+        .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(16px, 1.8vw, 20px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
         .cf-center { fill: #ffffff; stroke: rgba(0,0,0,0.06); stroke-width: 1.5; }
-        .cf-center-title { fill: #0d1b2a; font-weight: 800; font-size: 16px; }
+        .cf-center-title { fill: #0d1b2a; font-weight: 800; font-size: 22px; }
         .seg { stroke: #fff; stroke-width: 6; stroke-linejoin: round; transition: filter .2s ease, transform .2s ease, opacity .2s ease; cursor: pointer; }
         .seg.active { filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); transform: scale(1.015); opacity: 1; }
         .arrow-tip { transition: transform .2s ease, filter .2s ease; }
@@ -620,7 +620,7 @@
             </li>
         </ul>
         <div class="account-options">
-            <a href="#" class="login-btn" id="loginBtn">
+            <a href="login.html" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
                     <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
@@ -663,7 +663,8 @@
 We guide students on a career-aligned learning and development journey through role-ready training, Gen AI workshops, and expert mentorship.
 Our platform ensures they gain the skills, insights, and opportunities needed to thrive in the industry from day one</p>
                     <figure class="student-flow-figure">
-                        <svg class="circular-flow" viewBox="0 0 900 520" role="img" aria-label="Circular Student Journey Flow">
+                        <img src="assets/images/sss.jpg" alt="Student Journey Flow" class="student-flow-img">
+                        <svg class="circular-flow" viewBox="0 0 900 520" role="img" aria-label="Circular Student Journey Flow" style="display:none;">
                             <!-- Outer ring segments with arrow-like tips -->
                             <g transform="translate(450,260)">
                                 <defs>
@@ -743,7 +744,9 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                                 <path class="seg seg6" d="M-173,-100 A200,200 0 0,1 0,-200 L0,-105 A105,105 0 0,0 -90,-52 Z" data-target="interview-questions.html" />
                                 <polygon class="arrow-tip seg6" points="0,-200 5,-228 28,-210" />
                                 <a xlink:href="interview-questions.html">
-                                    <text class="cf-text" dy="-2"><textPath href="#arc6" startOffset="50%">Interview Preparation</textPath></text>
+                                    <text class="cf-text" dy="-2"><textPath href="#arc6" startOffset="50%">Interview 
+                                        Preparation</textPath>
+                                    </text>
                                 </a>
 
                                 <!-- Center donut -->
@@ -813,7 +816,7 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                                 if (!arc) return;
 
                                 // Reset to base size first (matches .cf-text)
-                                const baseSize = 13;
+                                const baseSize = 18;
                                 t.style.fontSize = baseSize + 'px';
 
                                 // Measure available arc length vs label length
@@ -924,6 +927,19 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                     </p>
                     <a href="basic-profiling.html" class="service-link">Create Profile</a>
                 </div>
+
+                <!-- Career Counselling -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3 class="service-title">Career Guidance</h3>
+                    <p class="service-description">
+                        Get personalized guidance from career experts who can help you identify your strengths, explore suitable 
+                        career paths, and develop a strategic plan for your professional growth.
+                    </p>
+                    <a href="career-counselling-ai.html" class="service-link">Get Guidance</a>
+                </div>
                 
                 <!-- Enhance Your Resume -->
                 <div class="service-card">
@@ -936,6 +952,19 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                         templates and get expert tips to highlight your strengths effectively.
                     </p>
                     <a href="resume-building-watermark.html" class="service-link">Build Resume</a>
+                </div>
+
+                <!-- Interview Preparation -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="service-title">Interview Preparation</h3>
+                    <p class="service-description">
+                        Prepare for job interviews with our comprehensive resources including mock interviews, common questions, 
+                        and expert tips to help you make a great impression.
+                    </p>
+                    <a href="interview-questions.html" class="service-link">Prepare Now</a>
                 </div>
                 
                 <!-- Courses -->
@@ -951,31 +980,9 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                     <a href="demo-courses.html" class="service-link">Browse Courses</a>
                 </div>
                 
-                <!-- Interview Preparation -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3 class="service-title">Interview Preparation</h3>
-                    <p class="service-description">
-                        Prepare for job interviews with our comprehensive resources including mock interviews, common questions, 
-                        and expert tips to help you make a great impression.
-                    </p>
-                    <a href="interview-questions.html" class="service-link">Prepare Now</a>
-                </div>
                 
-                <!-- Career Counselling -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-compass"></i>
-                    </div>
-                    <h3 class="service-title">Career Guidance</h3>
-                    <p class="service-description">
-                        Get personalized guidance from career experts who can help you identify your strengths, explore suitable 
-                        career paths, and develop a strategic plan for your professional growth.
-                    </p>
-                    <a href="career-counselling-ai.html" class="service-link">Get Guidance</a>
-                </div>
+                
+                
                 
                 <!-- Featured Services Block -->
                 <div class="featured-services-block" style="grid-column: 1 / -1;">
