@@ -197,8 +197,10 @@ class CareerPathExplorer {
             </div>
         `).join('');
 
-        // Update chart
+        // Update chart (legacy, if present)
         this.updateSkillChart(roleData.chartData);
+        // Render Gantt plan
+        this.renderDefaultGantt();
     }
 
     getRoleData(role) {
@@ -228,6 +230,7 @@ class CareerPathExplorer {
                     { name: 'Database Management (SQL)', level: 'Important' },
                     { name: 'Web Technologies (HTML, CSS, JS)', level: 'Important' },
                     { name: 'Testing & Debugging', level: 'Important' },
+                    { name: 'Gen AI (Prompt Engineering, LLMs, AI APIs)', level: 'Important' },
                     { name: 'API Development', level: 'Useful' },
                     { name: 'Cloud Platforms (AWS, Azure)', level: 'Useful' }
                 ],
@@ -332,57 +335,74 @@ class CareerPathExplorer {
     }
 
     initializeChart() {
-        const ctx = document.getElementById('skillChart');
-        if (ctx) {
-            this.skillChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
-                    datasets: []
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Skill Development Progress Over 6 Months'
-                        },
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            title: {
-                                display: true,
-                                text: 'Skill Level (%)'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Timeline'
-                            }
-                        }
-                    },
-                    interaction: {
-                        intersect: false,
-                        mode: 'index'
-                    }
-                }
-            });
-        }
+        // Chart removed in favor of Gantt; keep no-op to avoid errors
+        this.skillChart = null;
     }
 
     updateSkillChart(chartData) {
-        if (this.skillChart) {
-            this.skillChart.data = chartData;
-            this.skillChart.update();
+        // No-op: legacy function retained for compatibility
+    }
+
+    renderDefaultGantt() {
+        const container = document.getElementById('ganttRows');
+        if (!container) return;
+
+        const rows = [
+            { skill: 'Programming Languages', months: [1,2], details: { 1: 'Syntax, variables, control flow; setup IDE', 2: 'OOP, modules/packages, error handling' } },
+            { skill: 'Data Structures & Algorithms', months: [1,2,3], details: { 1: 'Arrays, strings, hash maps basics', 2: 'Stacks, queues, linked lists', 3: 'Sorting, searching, Big-O basics' } },
+            { skill: 'Version Control (Git)', months: [1], details: { 1: 'git init/clone, add/commit, branch, merge, PRs' } },
+            { skill: 'Database Management', months: [3,4], details: { 3: 'SQL CRUD, constraints, indexing basics', 4: 'Joins, normalization, transactions' } },
+            { skill: 'Web Technologies', months: [3,4], details: { 3: 'HTML semantics, CSS layout (Flex/Grid)', 4: 'JavaScript DOM, fetch API' } },
+            { skill: 'Testing & Debugging', months: [5], details: { 5: 'Unit testing (e.g., Jest/PyTest), debugging tools' } },
+            { skill: 'Gen AI (Prompt Engineering, LLMs, AI APIs)', months: [5,6], details: { 5: 'Prompt patterns, token limits, model basics', 6: 'Integrate LLM APIs, safety, evaluation' } }
+        ];
+
+        container.innerHTML = rows.map(r => this.renderGanttRow(r)).join('');
+        this.attachGanttTooltips();
+    }
+
+    renderGanttRow(row) {
+        // Build 6 month cells, mark active ones
+        const cells = [];
+        for (let m = 1; m <= 6; m++) {
+            const active = row.months.includes(m);
+            const detail = (row.details && row.details[m]) ? row.details[m] : `${row.skill} focus`;
+            const cls = active ? 'active' : '';
+            const detailAttr = active ? ` data-detail="${detail.replace(/"/g, '&quot;')}"` : '';
+            cells.push(`<div class="gantt-cell ${cls}"${detailAttr}></div>`);
         }
+        return `
+            <div class="gantt-row">
+                <div class="gantt-cell gantt-skill-col">${row.skill}</div>
+                ${cells.join('')}
+            </div>
+        `;
+    }
+
+    attachGanttTooltips() {
+        let tooltip = document.getElementById('ganttTooltip');
+        if (!tooltip) {
+            tooltip = document.createElement('div');
+            tooltip.id = 'ganttTooltip';
+            tooltip.className = 'gantt-tooltip';
+            document.body.appendChild(tooltip);
+        }
+        const cells = document.querySelectorAll('.gantt-cell.active');
+        cells.forEach(cell => {
+            cell.addEventListener('mouseenter', (e) => {
+                const text = e.currentTarget.getAttribute('data-detail') || '';
+                tooltip.textContent = text;
+                tooltip.style.display = 'block';
+            });
+            cell.addEventListener('mousemove', (e) => {
+                const pad = 12;
+                tooltip.style.left = (e.pageX + pad) + 'px';
+                tooltip.style.top = (e.pageY + pad) + 'px';
+            });
+            cell.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        });
     }
 
     formatText(text) {
