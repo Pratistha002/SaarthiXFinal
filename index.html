@@ -15,8 +15,13 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">SaarthiX</a>
+        <div class="logo" aria-label="SaarthiX Home">
+            <a href="index.html" class="brand">
+                <img src="assets/images/logo-sx.jpg" alt="SaarthiX logo" class="brand-logo" />
+                <span class="brand-text">
+                    <span class="brand-primary">Saarthi</span><span class="brand-accent">X</span>
+                </span>
+            </a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -103,7 +108,7 @@
                     <a href="pricing.html" class="all" role="menuitem"><i class="fas fa-layer-group"></i> All Pricing</a>
                 </div>
             </div>
-            <a href="#" class="login-btn" id="loginBtn">
+            <a href="login.html" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
                     <i class="fas fa-sign-out-alt logout-icon" style="display: none;"></i>
@@ -278,73 +283,35 @@
         <div class="student-wrapper">
             <h2 class="section-title">Students</h2>
 
-            <!-- Flow like provided image -->
-            <div class="flow-area">
-                <!-- Curved career path with arrow -->
-                <svg class="flow-path" viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true">
-                    <defs>
-                        <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-                            <path d="M0,0 L0,12 L12,6 z" fill="#bdbdbd"></path>
-                        </marker>
-                    </defs>
-                    <!-- Main road -->
-                    <path d="M40 360 C 220 340, 380 320, 520 300 S 880 260, 1120 220" stroke="#d9d9d9" stroke-width="22" fill="none" stroke-linecap="round" marker-end="url(#arrow)"/>
-                    <!-- Inner lighter line for depth -->
-                    <path d="M60 350 C 240 330, 400 310, 540 290 S 900 250, 1140 210" stroke="#e9e9e9" stroke-width="10" fill="none" stroke-linecap="round"/>
-                </svg>
+            <!-- Student intro info card -->
+            <div class="student-intro">
+                <h4>Empowering Students, Shaping Futures</h4>
+                <p>We guide students on a career-aligned learning and development journey through role-ready training, Gen AI workshops, and expert mentorship.
+                Our platform ensures they gain the skills, insights, and opportunities needed to thrive in the industry from day one.</p>
+            </div>
 
-                <!-- Cards along the path -->
-                <div class="flow-card card-1" style="left: 8%; top: 255px;">
-                    <div class="card-title">Job Readiness<br/>Plan</div>
-                    <span class="drop-line"></span>
-                    <span class="path-pin pin-1"></span>
-                </div>
-
-                <div class="flow-card card-2" style="left: 29%; top: 130px;">
-                    <div class="card-title">Create a Winning<br/>Resume</div>
-                    <span class="drop-line"></span>
-                    <span class="path-pin pin-2"></span>
-                </div>
-
-                <div class="flow-card card-3" style="left: 42%; top: 210px;">
-                    <div class="card-title">Career Profile<br/>Builder</div>
-                    <span class="drop-line"></span>
-                    <span class="path-pin pin-3"></span>
-                </div>
-
-                <div class="flow-card card-4" style="left: 60%; top: 100px;">
-                    <div class="card-title">Ace Every<br/>Interview</div>
-                    <span class="drop-line"></span>
-                    <span class="path-pin pin-4"></span>
-                </div>
-
-                <div class="flow-card card-5 highlight" style="left: 72%; top: 190px;">
-                    <div class="card-title">Personalized<br/>Career Guidance</div>
-                    <span class="drop-line"></span>
-                    <span class="path-pin pin-5"></span>
-                </div>
-
-                <div class="flow-card card-6" style="left: 84%; top: 90px;">
-                    <div class="card-title">Job Ready<br/>Student</div>
-                    <span class="drop-line"></span>
-                    <span class="path-pin pin-6"></span>
-                </div>
+            <!-- Flow replaced with static image -->
+            <div class="flow-area" aria-label="Student journey image">
+                <img src="assets/images/workflow.jpg" alt="Student journey roadmap" style="width:70%; height:auto; display:block; margin:0 auto; border-radius:16px; box-shadow: 0 8px 24px rgba(16,24,40,.08);" />
             </div>
 
             <!-- Horizontal scrollable USP blocks -->
             <div class="usp-scroll" aria-label="Student USPs">
                 <div class="usp-track">
                     <div class="usp-card">
-                        <div class="usp-title">Future Ready Skills</div>
-                        <p class="usp-text">Hands-on learning paths aligned with trending roles and tools.</p>
+                        <div class="usp-title">Your Career, Our Blueprint</div>
+                        <p class="usp-text">From career-aligned planning to structured upskilling, we shape futures.
+With mentoring, training, and nationwide exposure, students become industry-ready.</p>
                     </div>
                     <div class="usp-card">
-                        <div class="usp-title">Job Ready Edge</div>
-                        <p class="usp-text">Interview prep, resume upgrades, and role-ready practice.</p>
+                        <div class="usp-title">Job-Ready, Not Just Degree-Ready</div>
+                        <p class="usp-text">Job readiness isn’t luck — it’s training, mentoring, and expert guidance.
+We equip students with skills and nationwide exposure to thrive.</p>
                     </div>
                     <div class="usp-card">
-                        <div class="usp-title">Opportunity Hub</div>
-                        <p class="usp-text">Access to jobs, internships, hackathons, and projects.</p>
+                        <div class="usp-title">Skills That Open Doors</div>
+                        <p class="usp-text">Structured upskilling + real mentoring = career-aligned success.
+Students gain industry insights, job readiness, and nationwide opportunities.</p>
                     </div>
                 </div>
             </div>
@@ -359,7 +326,7 @@
             .student-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
             /* Flow area */
-            .flow-area { position: relative; height: 420px; margin: 16px auto 12px; overflow: hidden; }
+            .flow-area { position: relative; height: auto; margin: 16px auto 12px; overflow: visible; }
             .flow-path { position: absolute; inset: 0; width: 100%; height: 100%; }
 
             .flow-card {
@@ -395,28 +362,123 @@
             .pin-6 { background: #9b329d; }
 
             /* USP scroll */
-            .usp-scroll { margin-top: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .usp-track { display: flex; gap: 16px; padding: 6px 2px 14px; min-width: 720px; }
+            .usp-scroll { margin-top: 10px; overflow: visible; -webkit-overflow-scrolling: touch; }
+            .usp-track { display: flex; gap: 16px; padding: 6px 2px 14px; justify-content: center; flex-wrap: wrap; }
             .usp-card { flex: 0 0 280px; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
             .usp-title { font-weight: 800; color: #0f172a; margin-bottom: 6px; }
             .usp-text { color: #475569; font-size: 14px; line-height: 1.45; }
 
+            /* Student intro info card */
+            .student-intro { 
+                max-width: 980px; margin: 10px auto 12px; padding: 18px 22px; background: #ffffff; color: #334155;
+                border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 12px 28px rgba(2,6,23,0.06);
+                text-align: center;
+            }
+            .student-intro h4 { margin: 0 0 8px; font-size: 22px; font-weight: 800; color: #0f172a; }
+            .student-intro p { margin: 0; line-height: 1.6; }
+
             /* Responsiveness */
             @media (max-width: 900px) {
-                .flow-area { height: 520px; }
-                .flow-card { min-width: 200px; }
-                /* re-position for smaller screens */
-                .card-1 { left: 15% !important; top: 320px !important; }
-                .card-2 { left: 35% !important; top: 180px !important; }
-                .card-3 { left: 50% !important; top: 280px !important; }
-                .card-4 { left: 65% !important; top: 150px !important; }
-                .card-5 { left: 78% !important; top: 260px !important; }
-                .card-6 { left: 88% !important; top: 120px !important; }
+                .flow-area { height: auto; }
             }
             @media (max-width: 640px) {
-                .flow-area { height: 620px; }
-                .flow-card { min-width: 180px; padding: 12px 14px; }
-                .student-section .section-title { font-size: 26px; }
+                .flow-area { height: auto; }
+            }
+        </style>
+    </section>
+
+    <!-- Institute Section -->
+    <section class="institute-section" id="institute">
+        <div class="student-wrapper">
+            <h2 class="section-title">Institute</h2>
+
+            <!-- Institute intro info card -->
+            <div class="student-intro">
+                <h4>Connecting Industries with Job-Ready Talent</h4>
+                <p>We help industries access skilled candidates through job and internship postings, AI-powered assessments, expert sessions, and a curated talent database.
+                Our platform ensures organizations hire efficiently, engage with top talent, and build a future-ready workforce.</p>
+            </div>
+
+            <!-- Flow replaced with static image -->
+            <div class="flow-area" aria-label="Institute journey image">
+                <img src="assets/images/institute.jpg" alt="Institute T&P solution roadmap" style="width:70%; height:auto; display:block; margin:0 auto; border-radius:16px; box-shadow: 0 8px 24px rgba(16,24,40,.08);" />
+            </div>
+
+            <!-- Centered USP blocks (same as student) -->
+            <div class="usp-scroll" aria-label="Institute USPs">
+                <div class="usp-track">
+                    <div class="usp-card">
+                        <div class="usp-title">Your Career, Our Blueprint</div>
+                        <p class="usp-text">From career-aligned planning to structured upskilling, we shape futures.
+With mentoring, training, and nationwide exposure, students become industry-ready.</p>
+                    </div>
+                    <div class="usp-card">
+                        <div class="usp-title">Job-Ready, Not Just Degree-Ready</div>
+                        <p class="usp-text">Job readiness isn’t luck — it’s training, mentoring, and expert guidance.
+We equip students with skills and nationwide exposure to thrive.</p>
+                    </div>
+                    <div class="usp-card">
+                        <div class="usp-title">Skills That Open Doors</div>
+                        <p class="usp-text">Structured upskilling + real mentoring = career-aligned success.
+Students gain industry insights, job readiness, and nationwide opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scoped styles for institute section (reuse student styles) -->
+        <style>
+            .institute-section { padding: 40px 0 10px; background: #ffffff; }
+            .institute-section .section-title {
+                text-align: center; font-size: 32px; font-weight: 800; color: #111827; margin: 0 0 18px;
+            }
+        </style>
+    </section>
+
+    <!-- Industry Section -->
+    <section class="industry-section" id="industry">
+        <div class="student-wrapper">
+            <h2 class="section-title">Industry</h2>
+
+            <!-- Industry intro info card -->
+            <div class="student-intro">
+                <h4>Connecting Industries with Job-Ready Talent</h4>
+                <p>We help industries access skilled candidates through job and internship postings, AI-powered assessments, expert sessions, and a curated talent database.
+                Our platform ensures organizations hire efficiently, engage with top talent, and build a future-ready workforce.</p>
+            </div>
+
+            <!-- Flow replaced with static image -->
+            <div class="flow-area" aria-label="Industry solutions image">
+                <img src="assets/images/industry.jpg" alt="Industry hiring solutions roadmap" style="width:70%; height:auto; display:block; margin:0 auto; border-radius:16px; box-shadow: 0 8px 24px rgba(16,24,40,.08);" />
+            </div>
+
+            <!-- Centered USP blocks (same as student) -->
+            <div class="usp-scroll" aria-label="Industry USPs">
+                <div class="usp-track">
+                    <div class="usp-card">
+                        <div class="usp-title">Your Career, Our Blueprint</div>
+                        <p class="usp-text">From career-aligned planning to structured upskilling, we shape futures.
+With mentoring, training, and nationwide exposure, students become industry-ready.</p>
+                    </div>
+                    <div class="usp-card">
+                        <div class="usp-title">Job-Ready, Not Just Degree-Ready</div>
+                        <p class="usp-text">Job readiness isn’t luck — it’s training, mentoring, and expert guidance.
+We equip students with skills and nationwide exposure to thrive.</p>
+                    </div>
+                    <div class="usp-card">
+                        <div class="usp-title">Skills That Open Doors</div>
+                        <p class="usp-text">Structured upskilling + real mentoring = career-aligned success.
+Students gain industry insights, job readiness, and nationwide opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scoped styles for industry section -->
+        <style>
+            .industry-section { padding: 40px 0 10px; background: #ffffff; }
+            .industry-section .section-title {
+                text-align: center; font-size: 32px; font-weight: 800; color: #111827; margin: 0 0 18px;
             }
         </style>
     </section>
@@ -428,12 +490,52 @@
             <h4>Wanna be the best? Learn from the best—Human Intelligentsia and Artificial Intelligentsia.
 Get the wisdom of mentors, the precision of GenAI, and real-world industry hacks.
 Together, they fuel your journey from ambition to achievement.</h4>
+
         </div>
 
         <!-- Scoped styles for the two-column layout -->
         <style>
             .partners-section { padding-top: 10px; }
             .clients-header { text-align: center; }
+
+            /* Styled info card under heading */
+            .clients-header h4 {
+                position: relative;
+                display: block;
+                max-width: 980px;
+                margin: 14px auto 4px;
+                padding: 22px 26px;
+                background: #ffffff;
+                color: #334155;
+                border: 1px solid #e5e7eb;
+                border-radius: 16px;
+                box-shadow: 0 12px 28px rgba(2,6,23,0.08);
+                line-height: 1.65;
+                font-weight: 500;
+                white-space: pre-line; /* keep the intended line breaks */
+            }
+            /* Gradient top bar */
+            .clients-header h4::before {
+                content: "";
+                position: absolute;
+                left: 0; right: 0; top: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #0ea5e9, #22c55e, #a78bfa);
+                border-radius: 16px 16px 0 0;
+            }
+            /* Subtle corner ribbon */
+            .clients-header h4::after {
+                content: "Human + AI Advantage";
+                position: absolute;
+                top: -10px; right: 14px;
+                background: #0ea5e9;
+                color: #fff;
+                font-size: 12px;
+                letter-spacing: .2px;
+                padding: 4px 10px;
+                border-radius: 999px;
+                box-shadow: 0 6px 14px rgba(14,165,233,.25);
+            }
 
             /* Two-column wrapper */
             .human-ai-grid {
@@ -552,6 +654,7 @@ Together, they fuel your journey from ambition to achievement.</h4>
             <div>
                 <div class="column-title"><h3>Artificial Intelligence</h3></div>
                 <div class="tools-list">
+                            <!-- Logos show even if network is offline using local fallbacks -->
                     <div class="tool-card">
                         <div class="tool-badge"><img class="tool-logo" src="assets/partners/openai.png" alt="OpenAI" onerror="this.src='assets/partners/placeholder-logo.png'"></div>
                         <div>
@@ -1231,38 +1334,9 @@ Together, they fuel your journey from ambition to achievement.</h4>
             let isLoggedIn = false;
             
             if (loginBtn) {
-                loginBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const btnText = this.querySelector('.btn-text');
-                    const loginIcon = this.querySelector('.login-icon');
-                    const logoutIcon = this.querySelector('.logout-icon');
-                    
-                    if (!isLoggedIn) {
-                        // Login animation
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                            this.classList.add('logged-in');
-                            btnText.textContent = 'Logout';
-                            loginIcon.style.display = 'none';
-                            logoutIcon.style.display = 'inline';
-                            isLoggedIn = true;
-                            showNotification('Successfully logged in!', 'success');
-                        }, 150);
-                    } else {
-                        // Logout animation
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                            this.classList.remove('logged-in');
-                            btnText.textContent = 'Login';
-                            loginIcon.style.display = 'inline';
-                            logoutIcon.style.display = 'none';
-                            isLoggedIn = false;
-                            showNotification('Successfully logged out!', 'info');
-                        }, 150);
-                    }
+                // Always navigate to login page on click. Remove preventDefault to allow href.
+                loginBtn.addEventListener('click', function() {
+                    // default anchor navigation to login.html will occur
                 });
             }
             
@@ -1423,7 +1497,7 @@ Together, they fuel your journey from ambition to achievement.</h4>
         }
     </style>
     <section class="dev-carousel" aria-label="Developers">
-        <h2 class="section-title">Meet Our Developers</h2>
+        <h2 class="section-title">Testimonial</h2>
         <div class="dev-wrapper">
             <button class="dev-nav-btn dev-nav-prev" id="devPrev" aria-label="Previous">
                 <i class="fas fa-arrow-left"></i>

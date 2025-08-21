@@ -454,7 +454,7 @@
                     </div>
                     
                     <div class="signup-link">
-                        <p>Don't have an account? <a href="#" id="signupLink">Sign up here</a></p>
+                        <p>Don't have an account? <a href="signup.html" id="signupLink">Sign up here</a></p>
                     </div>
                 </form>
             </div>
@@ -558,11 +558,14 @@
                 });
             });
 
-            // Handle signup link
+            // Handle signup link (works even if browser blocks default)
             if (signupLink) {
                 signupLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.location.href = 'signup.html';
+                    // allow default href to work; fallback redirect for safety
+                    if (!this.href) {
+                        e.preventDefault();
+                        window.location.href = 'signup.html';
+                    }
                 });
             }
 

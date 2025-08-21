@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -554,8 +554,13 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">SaarthiX</a>
+                <div class="logo" aria-label="SaarthiX Home">
+            <a href="index.html" class="brand">
+                <img src="assets/images/logo-sx.jpg" alt="SaarthiX logo" class="brand-logo" />
+                <span class="brand-text">
+                    <span class="brand-primary">Saarthi</span><span class="brand-accent">X</span>
+                </span>
+            </a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -1073,7 +1078,7 @@
                     <h2>Plan Collaborative Event</h2>
                     <p>Create impactful educational experiences together</p>
                 </div>
-                <button class="event-planner-close" onclick="closeEventPlanner()">×</button>
+                <button class="event-planner-close" onclick="closeEventPlanner()">�</button>
             </div>
             
             <div class="event-planner-content">
@@ -1131,11 +1136,11 @@
                             <label for="budget">Budget Range</label>
                             <select id="budget" name="budget" required>
                                 <option value="">Select Budget</option>
-                                <option value="1-5L">₹1-5 Lakhs</option>
-                                <option value="5-10L">₹5-10 Lakhs</option>
-                                <option value="10-25L">₹10-25 Lakhs</option>
-                                <option value="25-50L">₹25-50 Lakhs</option>
-                                <option value="50L+">₹50+ Lakhs</option>
+                                <option value="1-5L">?1-5 Lakhs</option>
+                                <option value="5-10L">?5-10 Lakhs</option>
+                                <option value="10-25L">?10-25 Lakhs</option>
+                                <option value="25-50L">?25-50 Lakhs</option>
+                                <option value="50L+">?50+ Lakhs</option>
                             </select>
                         </div>
                     </div>
