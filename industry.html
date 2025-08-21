@@ -482,7 +482,7 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
             </div>
         </div>
     </section>
-<section id="industry-pricing" class="pricing-section">
+    <section id="industry-pricing" class="pricing-section">
           <div class="services-container">
             <h2 class="services-title">Industry Pricing</h2>
             <p class="services-description">Transparent packages for job postings, talent access, and more.</p>
@@ -520,7 +520,7 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
                   <div class="inst-card-row">
                     <div class="inst-tier">
                       <div class="inst-tier-name">Direct access to trainers and mentors for 1:1 sessions or group mentoring</div>
-                      <div class="inst-price-tag">₹19,999</div>
+                      <div class="inst-price-tag">Buy Now</div>
                     </div>
                   </div>
                 </article>
@@ -530,11 +530,11 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
                   <div class="inst-card-row">
                     <div class="inst-tier">
                       <div class="inst-tier-name">Valid for 30 Candidates</div>
-                      <div class="inst-price-tag">₹14,999</div>
+                      <div class="inst-price-tag">Buy Now</div>
                     </div>
                     <div class="inst-tier">
                       <div class="inst-tier-name">Limit for 50 Candidate</div>
-                      <div class="inst-price-tag">₹24,999</div>
+                      <div class="inst-price-tag">Buy Now</div>
                     </div>
                   </div>
                 </article>
@@ -544,7 +544,7 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
                   <div class="inst-card-row">
                     <div class="inst-tier">
                       <div class="inst-tier-name">Post a hackathon (problem statement, rules, rewards)</div>
-                      <div class="inst-price-tag">₹49,999</div>
+                      <div class="inst-price-tag">Buy Now</div>
                     </div>
                   </div>
                 </article>
@@ -554,7 +554,7 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
                   <div class="inst-card-row">
                     <div class="inst-tier">
                       <div class="inst-tier-name">Universities Names</div>
-                      <div class="inst-price-tag">₹29,999</div>
+                      <div class="inst-price-tag">Buy Now</div>
                     </div>
                   </div>
                 </article>
@@ -562,18 +562,84 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
             </div>
           </div>
 
-          <!-- Scoped styles to match dark theme of this page -->
+          <!-- Scoped styles aligned with page color (deep blue + teal accents) -->
           <style>
-            #industry-pricing { padding: 60px 0; background: linear-gradient(135deg, #0f2238 0%, #0d1b2a 100%); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-            #industry-pricing .table-wrap { width: 100%; overflow-x: auto; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: rgba(255,255,255,0.02); }
-            #industry-pricing .pricing-table-dark { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 720px; color: #e6f1ff; }
-            #industry-pricing .pricing-table-dark thead th { position: sticky; top: 0; background: linear-gradient(135deg, #1a1a2e, #0f3460); color: #fff; padding: 14px; text-align: left; font-weight: 800; }
+            /* Section background + separators */
+            #industry-pricing {
+              padding: 60px 0;
+              background: linear-gradient(135deg, #0e1f33 0%, #0f2c4a 50%, #0a3a3e 100%);
+              border-top: 1px solid rgba(100,255,218,0.12);
+              border-bottom: 1px solid rgba(100,255,218,0.12);
+            }
+
+            /* Table wrapper and table base */
+            #industry-pricing .table-wrap {
+              width: 100%;
+              overflow-x: auto;
+              border: 1px solid rgba(100,255,218,0.22);
+              border-radius: 14px;
+              background: linear-gradient(180deg, rgba(10,30,50,0.35) 0%, rgba(10,30,50,0.2) 100%);
+              box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+            }
+            #industry-pricing .pricing-table-dark {
+              width: 100%;
+              border-collapse: separate;
+              border-spacing: 0;
+              min-width: 720px;
+              color: #e6f1ff;
+            }
+
+            /* Header with catchy teal sheen */
+            #industry-pricing .pricing-table-dark thead th {
+              position: sticky; top: 0;
+              background: linear-gradient(135deg, rgba(100,255,218,0.22), rgba(100,255,218,0.08));
+              color: #ffffff;
+              padding: 14px;
+              text-align: left;
+              font-weight: 800;
+              letter-spacing: .2px;
+              border-bottom: 1px solid rgba(100,255,218,0.35);
+            }
+
+            /* Rows */
             #industry-pricing .pricing-table-dark tbody td { padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
-            #industry-pricing .pricing-table-dark tbody tr:nth-child(odd) { background: rgba(255,255,255,0.03); }
+            #industry-pricing .pricing-table-dark tbody tr:nth-child(odd) { background: rgba(255,255,255,0.035); }
             #industry-pricing .pricing-table-dark tbody tr:nth-child(even) { background: rgba(255,255,255,0.06); }
-            #industry-pricing .pricing-table-dark tbody tr:hover { background: rgba(100,255,218,0.08); }
-            #industry-pricing .pricing-table-dark td:first-child { font-weight: 700; color: #64ffda; border-left: 4px solid rgba(100,255,218,0.35); }
+            #industry-pricing .pricing-table-dark tbody tr:hover { background: rgba(100,255,218,0.10); }
+
+            /* First column accent */
+            #industry-pricing .pricing-table-dark td:first-child {
+              font-weight: 700;
+              color: #64ffda;
+              border-left: 4px solid rgba(100,255,218,0.45);
+            }
             #industry-pricing .pricing-table-dark td:first-child strong { color: inherit; }
+
+            /* Independent services grid styled as on-page cards */
+            #industry-pricing .inst-independent { margin-top: 20px; }
+            #industry-pricing .inst-independent-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+              gap: 18px;
+            }
+            #industry-pricing .inst-independent-card {
+              background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.06) 100%);
+              backdrop-filter: blur(8px);
+              border-radius: 12px;
+              border: 1px solid rgba(100,255,218,0.20);
+              padding: 18px;
+              transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            }
+            #industry-pricing .inst-independent-card:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+              border-color: rgba(100,255,218,0.38);
+            }
+            #industry-pricing .inst-card-title { color: #64ffda; margin-bottom: 10px; font-weight: 700; }
+            #industry-pricing .inst-card-row { display: grid; gap: 10px; }
+            #industry-pricing .inst-tier { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: rgba(15, 52, 96, 0.25); border: 1px solid rgba(100,255,218,0.18); border-radius: 10px; }
+            #industry-pricing .inst-tier-name { color: rgba(230,241,255,0.95); font-weight: 500; }
+            #industry-pricing .inst-price-tag { background: linear-gradient(135deg, #64ffda, #3ecfb5); color: #0d1b2a; font-weight: 800; padding: 6px 10px; border-radius: 999px; box-shadow: 0 6px 18px rgba(100,255,218,0.35); }
           </style>
         </section>
     <!-- Footer -->
@@ -771,6 +837,9 @@ Our platform ensures organizations hire efficiently, engage with top talent, and
         #industry-pricing .pricing-table-dark tbody tr:hover { background: rgba(100,255,218,0.08); }
         #industry-pricing .pricing-table-dark td:first-child { font-weight: 700; color: #64ffda; border-left: 4px solid rgba(100,255,218,0.35); }
         #industry-pricing .pricing-table-dark td:first-child strong { color: inherit; }
+        #industry-pricing .independent-title {
+          color: #fff;
+        }
       </style>
     </section>
 
