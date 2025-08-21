@@ -11,6 +11,60 @@
     <script src="js/nav-scroll.js" defer></script>
     <link rel="stylesheet" href="pricing.css">
     <script src="pricing.js" defer></script>
+
+    <!-- Local theme smoothing: softer brand tones and better contrast -->
+    <style>
+      /* Navbar: translucent layered background for smoother blend */
+      .navbar {
+        background: linear-gradient(180deg, rgba(16, 27, 44, 0.92), rgba(16, 27, 44, 0.78));
+        backdrop-filter: saturate(120%) blur(6px);
+        -webkit-backdrop-filter: saturate(120%) blur(6px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* Hero background: subtle gradient with soft pattern overlay */
+      .hero {
+        background: radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.18), transparent 60%),
+                    radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.16), transparent 65%),
+                    linear-gradient(180deg, #0f2238 0%, #0b1a2c 60%, #0a1727 100%);
+      }
+      .hero .bg-gradient-overlay { display: none; }
+      .hero .bg-pattern { opacity: 0.08; }
+
+      /* Cards/sections sitting on hero should float clearly */
+      .hero .hero-content {
+        color: #eef5ff;
+      }
+      .hero .hero-title .gradient-text {
+        background: linear-gradient(90deg, #b9d1ff, #a8c6ff 55%, #8ab7ff);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        text-shadow: 0 0 24px rgba(138, 183, 255, 0.25);
+      }
+
+      /* Buttons: increase contrast and glow subtle */
+      .btn.btn-primary {
+        background: linear-gradient(135deg, #2f6ef5, #5a8cff);
+        box-shadow: 0 8px 24px rgba(47, 110, 245, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .btn.btn-primary:hover { filter: brightness(1.05); }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #e9f2ff;
+      }
+
+      /* Trust indicators: soften contrast */
+      .trust-indicators .trust-number { color: #cfe2ff; }
+      .trust-indicators .trust-label { color: rgba(233, 242, 255, 0.85); }
+
+      /* Responsive tweaks */
+      @media (max-width: 768px) {
+        .navbar { background: rgba(16, 27, 44, 0.96); }
+        .hero { background: linear-gradient(180deg, #0f2238 0%, #0b1a2c 60%, #0a1727 100%); }
+      }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -319,6 +373,59 @@ Students gain industry insights, job readiness, and nationwide opportunities.</
 
         <!-- Scoped styles for student section -->
         <style>
+
+    
+      /* Navbar: translucent layered background for smoother blend */
+      .navbar {
+        background: linear-gradient(180deg, rgba(16, 27, 44, 0.92), rgba(16, 27, 44, 0.78));
+        backdrop-filter: saturate(120%) blur(6px);
+        -webkit-backdrop-filter: saturate(120%) blur(6px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* Hero background: subtle gradient with soft pattern overlay */
+      .hero {
+        background: radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.18), transparent 60%),
+                    radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.16), transparent 65%),
+                    linear-gradient(180deg, #0f2238 0%, #0b1a2c 60%, #0a1727 100%);
+      }
+      .hero .bg-gradient-overlay { display: none; }
+      .hero .bg-pattern { opacity: 0.08; }
+
+      /* Cards/sections sitting on hero should float clearly */
+      .hero .hero-content {
+        color: #eef5ff;
+      }
+      .hero .hero-title .gradient-text {
+        background: linear-gradient(90deg, #b9d1ff, #a8c6ff 55%, #8ab7ff);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        text-shadow: 0 0 24px rgba(138, 183, 255, 0.25);
+      }
+
+      /* Buttons: increase contrast and glow subtle */
+      .btn.btn-primary {
+        background: linear-gradient(135deg, #2f6ef5, #5a8cff);
+        box-shadow: 0 8px 24px rgba(47, 110, 245, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .btn.btn-primary:hover { filter: brightness(1.05); }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #e9f2ff;
+      }
+
+      /* Trust indicators: soften contrast */
+      .trust-indicators .trust-number { color: #cfe2ff; }
+      .trust-indicators .trust-label { color: rgba(233, 242, 255, 0.85); }
+
+      /* Responsive tweaks */
+      @media (max-width: 768px) {
+        .navbar { background: rgba(16, 27, 44, 0.96); }
+        .hero { background: linear-gradient(180deg, #0f2238 0%, #0b1a2c 60%, #0a1727 100%); }
+      }
+   
             .student-section { padding: 60px 0 20px; background: #ffffff; }
             .student-section .section-title {
                 text-align: center; font-size: 32px; font-weight: 800; color: #111827; margin: 0 0 18px;
