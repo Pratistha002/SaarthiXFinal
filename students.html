@@ -342,6 +342,18 @@
         .seg5 { fill: url(#g5); }
         .seg6 { fill: url(#g6); }
         .arrow-tip { opacity: 1; filter: drop-shadow(0 3px 6px rgba(0,0,0,.25)); stroke: #fff; stroke-width: 4; stroke-linejoin: round; }
+        /* Special themes for highlighted cards */
+        .service-card.card-psychometric { background: linear-gradient(135deg, rgba(66, 165, 245, 0.18), rgba(30, 136, 229, 0.18)); border-color: rgba(144, 202, 249, 0.35); }
+        .service-card.card-psychometric .service-icon { color: #e3f2fd; background: rgba(227, 242, 253, 0.15); }
+        .service-card.card-psychometric .service-link { background: linear-gradient(135deg, #64b5f6, #1e88e5); }
+
+        .service-card.card-apply { background: linear-gradient(135deg, rgba(77, 182, 172, 0.2), rgba(38, 166, 154, 0.2)); border-color: rgba(128, 203, 196, 0.35); }
+        .service-card.card-apply .service-icon { color: #e0f2f1; background: rgba(224, 242, 241, 0.15); }
+        .service-card.card-apply .service-link { background: linear-gradient(135deg, #4db6ac, #26a69a); }
+
+        .service-card.card-advanced { background: linear-gradient(135deg, rgba(186, 104, 200, 0.2), rgba(126, 87, 194, 0.2)); border-color: rgba(206, 147, 216, 0.35); }
+        .service-card.card-advanced .service-icon { color: #f3e5f5; background: rgba(243, 229, 245, 0.15); }
+        .service-card.card-advanced .service-link { background: linear-gradient(135deg, #ba68c8, #7e57c2); }
     </style>
 </head>
 <body>
@@ -764,7 +776,7 @@
                     <div class="service-icon">
                         <i class="fas fa-compass"></i>
                     </div>
-                    <h3 class="service-title">Career Counselling</h3>
+                    <h3 class="service-title">Career Guidance</h3>
                     <p class="service-description">
                         Get personalized guidance from career experts who can help you identify your strengths, explore suitable 
                         career paths, and develop a strategic plan for your professional growth.
@@ -772,8 +784,9 @@
                     <a href="career-counselling-ai.html" class="service-link">Get Guidance</a>
                 </div>
                 
+                <h2 class="grid-heading" style="grid-column: 1 / -1; color: #fff; margin: 10px 0 10px;">Next Up for You</h2>
                 <!-- Psychometric Test -->
-                <div class="service-card">
+                <div class="service-card card-psychometric">
                     <div class="service-icon">
                         <i class="fas fa-brain"></i>
                     </div>
@@ -786,11 +799,11 @@
                 </div>
                 
                 <!-- Apply Jobs/Internships -->
-                <div class="service-card">
+                <div class="service-card card-apply">
                     <div class="service-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
-                    <h3 class="service-title">Apply for Opportunities</h3>
+                    <h3 class="service-title">Apply Jobs/Internships</h3>
                     <p class="service-description">
                         Browse and apply for jobs, internships, and hackathons that match your skills and interests. 
                         Get exclusive access to opportunities from our partner companies.
@@ -799,7 +812,7 @@
                 </div>
                 
                 <!-- Advanced Role-ready Training -->
-                <div class="service-card">
+                <div class="service-card card-advanced">
                     <div class="service-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
