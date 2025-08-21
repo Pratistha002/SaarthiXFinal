@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -322,7 +322,7 @@
         }
 
         .feature-list li:before {
-            content: "âœ“";
+            content: "✓";
             position: absolute;
             left: 0;
             color: #4CAF50;
@@ -400,8 +400,13 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">SaarthiX</a>
+                <div class="logo" aria-label="SaarthiX Home">
+            <a href="index.html" class="brand">
+                <img src="assets/images/logo-sx.jpg" alt="SaarthiX logo" class="brand-logo" />
+                <span class="brand-text">
+                    <span class="brand-primary">Saarthi</span><span class="brand-accent">X</span>
+                </span>
+            </a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -732,7 +737,7 @@
                         </div>
 
                         <div class="time-limit">
-                            <div class="time-limit-value">â±ï¸ Test duration (maximum): 1 hour 5 mins</div>
+                            <div class="time-limit-value">⏱️ Test duration (maximum): 1 hour 5 mins</div>
                             <div class="time-limit-label">Recommended time for this assessment</div>
                         </div>
                     </form>
