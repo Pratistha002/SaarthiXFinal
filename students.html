@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -329,15 +329,15 @@
         }
         @media (max-width: 768px) {
             .circular-flow { max-width: clamp(380px, 92vw, 750px); }
-            .cf-text { font-size: clamp(12px, 3.4vw, 15px); }
+            .cf-text { font-size: clamp(16px, 4vw, 20px); }
         }
         @media (max-width: 480px) {
             .circular-flow { max-width: clamp(340px, 96vw, 600px); }
         }
 .circular-flow:hover { transform: scale(1.02); }
-        .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(11px, 1.3vw, 14px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
+        .cf-text { fill: #e6f1ff; font-weight: 700; font-size: clamp(16px, 1.8vw, 20px); text-anchor: middle; dominant-baseline: middle; letter-spacing: .2px; pointer-events: auto; cursor: pointer; paint-order: stroke; stroke: rgba(0,0,0,0.25); stroke-width: 2; }
         .cf-center { fill: #ffffff; stroke: rgba(0,0,0,0.06); stroke-width: 1.5; }
-        .cf-center-title { fill: #0d1b2a; font-weight: 800; font-size: 16px; }
+        .cf-center-title { fill: #0d1b2a; font-weight: 800; font-size: 22px; }
         .seg { stroke: #fff; stroke-width: 6; stroke-linejoin: round; transition: filter .2s ease, transform .2s ease, opacity .2s ease; cursor: pointer; }
         .seg.active { filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); transform: scale(1.015); opacity: 1; }
         .arrow-tip { transition: transform .2s ease, filter .2s ease; }
@@ -743,7 +743,9 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                                 <path class="seg seg6" d="M-173,-100 A200,200 0 0,1 0,-200 L0,-105 A105,105 0 0,0 -90,-52 Z" data-target="interview-questions.html" />
                                 <polygon class="arrow-tip seg6" points="0,-200 5,-228 28,-210" />
                                 <a xlink:href="interview-questions.html">
-                                    <text class="cf-text" dy="-2"><textPath href="#arc6" startOffset="50%">Interview Preparation</textPath></text>
+                                    <text class="cf-text" dy="-2"><textPath href="#arc6" startOffset="50%">Interview 
+                                        Preparation</textPath>
+                                    </text>
                                 </a>
 
                                 <!-- Center donut -->
@@ -813,7 +815,7 @@ Our platform ensures they gain the skills, insights, and opportunities needed to
                                 if (!arc) return;
 
                                 // Reset to base size first (matches .cf-text)
-                                const baseSize = 13;
+                                const baseSize = 18;
                                 t.style.fontSize = baseSize + 'px';
 
                                 // Measure available arc length vs label length
