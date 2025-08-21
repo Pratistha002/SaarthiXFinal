@@ -1,5 +1,10 @@
 /* Career Path Explorer Styles */
 
+/* Page background */
+html, body {
+    background-color: #f5f5f7 !important;
+}
+
 /* Hero Section */
 .career-hero {
     position: relative;
@@ -8,7 +13,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: none !important; /* ensure no gradient covers emojis */
     padding-top: 100px; /* Add space for navbar */
 }
 
@@ -18,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 0; /* push behind emojis */
 }
 
 .floating-icons {
@@ -26,14 +31,30 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 1; /* above background */
 }
 
 .floating-icon {
     position: absolute;
-    font-size: 2rem;
-    opacity: 0.3;
+    font-size: 2.2rem; /* slightly larger */
+    opacity: 0.5; /* more visible */
+    color: transparent; /* ensure only ::before shows */
     animation: floatIcon 6s ease-in-out infinite;
 }
+
+.floating-icon::before {
+    position: absolute;
+    inset: 0;
+    display: block;
+}
+
+/* Add education/job growth themed emojis */
+.icon-1::before { content: '🎓'; }
+.icon-2::before { content: '🚀'; }
+.icon-3::before { content: '💼'; }
+.icon-4::before { content: '📈'; }
+.icon-5::before { content: '🧠'; }
+.icon-6::before { content: '🛠️'; }
 
 .icon-1 { top: 20%; left: 10%; animation-delay: 0s; }
 .icon-2 { top: 60%; right: 15%; animation-delay: 1.5s; }
@@ -247,6 +268,57 @@
     color: #667eea;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+/* Student summary card */
+.student-summary {
+    background: #ffffff;
+    border: 2px solid #e3e7ee;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 64px 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    margin: 16px 0 24px;
+}
+.student-summary .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #ffb74d;
+    box-shadow: 0 0 0 4px rgba(255,183,77,0.2);
+}
+.student-summary .avatar img { width: 100%; height: 100%; object-fit: cover; }
+.student-summary .row { display: flex; gap: 24px; align-items: baseline; }
+.student-summary .label { color: #6b7280; font-weight: 600; min-width: 70px; }
+.student-summary .value { color: #111827; font-weight: 700; }
+.student-summary .divider { display: none; }
+@media (max-width: 720px) {
+  .student-summary { grid-template-columns: 56px 1fr; gap: 12px; }
+  .student-summary .row { flex-direction: column; gap: 6px; }
+}
+
+/* Orange glow markers for specified cards */
+.glow-marker {
+    position: absolute;
+    width: 10px; /* smaller size */
+    height: 10px; /* smaller size */
+    background: radial-gradient(circle, rgba(255,165,0,0.95) 0%, rgba(255,140,0,0.6) 40%, rgba(255,140,0,0.0) 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255,140,0,0.9), 0 0 16px rgba(255,140,0,0.6);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.path-card, .tech-card, .education-card, .specialization-card, .role-card {
+    position: relative; /* allow absolute marker */
+}
+
+/* Position markers slightly below the card center */
+.card-has-glow .glow-marker { bottom: -6px; left: 50%; }
 
 /* Metrics Grid */
 .metrics-grid {
@@ -2293,9 +2365,84 @@
 }
 
 .roadmap-chart {
-    height: 400px;
-    margin-bottom: 40px;
+    display: none; /* replaced by gantt */
+}
+
+.gantt-container {
+    width: 100%;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+.gantt-header, .gantt-row {
+    display: grid;
+    grid-template-columns: 2fr repeat(6, 1fr);
+    align-items: center;
     position: relative;
+}
+
+/* slot cells keep the grid lines/light background */
+.gantt-slot { background: transparent; }
+
+/* merged span styling */
+.gantt-span {
+    height: 28px;
+    margin: 4px 6px;
+    border-radius: 8px;
+    background: var(--bar, linear-gradient(90deg,#667eea,#764ba2));
+    border: 2px solid var(--barEdge, rgba(102,126,234,0.6));
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    z-index: 2; /* ensure spans are above slot cells for hover */
+}
+
+/* hover ring + tooltip compatibility */
+.gantt-span:hover {
+    filter: brightness(1.03) saturate(1.1);
+}
+.gantt-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 600;
+}
+.gantt-rows .gantt-row:nth-child(odd) { background: #ffffff; }
+.gantt-rows .gantt-row:nth-child(even) { background: #fcfcfc; }
+.gantt-cell {
+    padding: 10px 12px;
+    border-right: 1px solid #f1f3f4;
+}
+.gantt-row .gantt-cell:last-child, .gantt-header .gantt-cell:last-child { border-right: none; }
+.gantt-skill-col { font-weight: 500; color: #2c3e50; }
+.gantt-row .gantt-cell.active {
+    background: linear-gradient(135deg, rgba(102,126,234,0.25), rgba(118,75,162,0.25));
+    position: relative;
+}
+.gantt-row .gantt-cell.active:after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 6px;
+    border: 2px solid rgba(102,126,234,0.6);
+}
+
+/* Tooltip */
+.gantt-tooltip {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    z-index: 9999;
+    max-width: 260px;
+    line-height: 1.4;
+}
+
+.plan-context {
+    margin: 0 0 8px;
+    color: #495057;
 }
 
 .roadmap-timeline {
@@ -2804,5 +2951,9 @@
     
     .stat-number {
         font-size: 1.5rem;
+    }
+
+    .centered-text {
+    text-align: center;
     }
 }

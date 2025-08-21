@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/dropdown-nav.js" defer></script>
     <script src="js/nav-scroll.js" defer></script>
+    <link rel="stylesheet" href="pricing.css">
+    <script src="pricing.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -32,7 +34,7 @@
 
                      <a href="interview-questions.html">Interview Preparation</a>
 
-                     <a href="career-counselling-ai.html">Carrier Counselling</a>
+                     <a href="career-counselling-ai.html">Career Counselling</a>
                     </div>
 <div class="dropdown-section">
                        
@@ -88,6 +90,19 @@
             </li>
         </ul>
         <div class="account-options">
+            <div class="pricing-btn-wrapper">
+                <a href="pricing.html" class="pricing-btn" id="pricingToggleBtn" aria-expanded="false">
+                    <i class="fas fa-tags"></i>
+                    <span>Pricing</span>
+                    <i class="fas fa-chevron-down chev" aria-hidden="true"></i>
+                </a>
+                <div class="pricing-menu" id="pricingDropdown" role="menu">
+                    <a href="pricing-students.html" role="menuitem"><i class="fas fa-user-graduate"></i> Students</a>
+                    <a href="pricing-institutes.html" role="menuitem"><i class="fas fa-school"></i> Institute</a>
+                    <a href="pricing-industry.html" role="menuitem"><i class="fas fa-industry"></i> Industry</a>
+                    <a href="pricing.html" class="all" role="menuitem"><i class="fas fa-layer-group"></i> All Pricing</a>
+                </div>
+            </div>
             <a href="#" class="login-btn" id="loginBtn">
                 <div class="btn-content">
                     <i class="fas fa-sign-in-alt login-icon"></i>
@@ -116,12 +131,7 @@
             
             <!-- Floating Elements -->
             <div class="floating-icons">
-                <div class="floating-icon icon-1">ðŸŽ¯</div>
-                <div class="floating-icon icon-2">ðŸš€</div>
-                <div class="floating-icon icon-3">ðŸ’¡</div>
-                <div class="floating-icon icon-4">âš™ï¸</div>
-                <div class="floating-icon icon-5">?</div>
-                <div class="floating-icon icon-6">ðŸŒŸ</div>
+
             </div>
             
             <!-- Particle System -->
@@ -150,9 +160,9 @@
                 </h1>
                 
                 <p class="hero-description">
-                    Transforming academic excellence into professional success. We bridge the gap between 
+                    Transforming academic excellence into professional success with <span class="highlight-text">AI-powered</span> solutions. We bridge the gap between 
                     <span class="highlight-text">education and industry</span> through personalized mentorship, 
-                    cutting-edge training, and strategic career placement solutions.
+                    adaptive training, and intelligent career placement tools.
                 </p>
                 
                 <!-- Action Buttons -->
@@ -196,6 +206,7 @@
             
             <!-- Hero Visual -->
             <div class="hero-visual">
+                <div class="ai-badge" title="AI-Powered Platform">🤖 AI Inside</div>
                 <div class="visual-container">
                     <div class="main-graphic">
                         <div class="graphic-circle circle-1"></div>
@@ -259,6 +270,61 @@
                 <i class="fas fa-chevron-down"></i>
             </div>
         </div>
+    </section>
+
+    <!-- AI Features Section -->
+    <section class="ai-features-section">
+        <div class="ai-features container">
+            <div class="ai-header">
+                <h2>AI-Powered Career Platform</h2>
+                <p>Smarter guidance, faster outcomes. Our services leverage AI to personalize, evaluate, and accelerate your journey.</p>
+            </div>
+            <div class="ai-grid">
+                <div class="ai-card">
+                    <div class="ai-icon">🧠</div>
+                    <h3>Smart Profiling</h3>
+                    <p>AI analyzes your skills, interests, and goals to craft a tailored career blueprint.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">🤖</div>
+                    <h3>Interview Intelligence</h3>
+                    <p>Adaptive AI interviews simulate real scenarios and give instant, actionable feedback.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">📝</div>
+                    <h3>Resume Enhancer</h3>
+                    <p>AI suggests stronger wording, impact metrics, and ATS-friendly structure.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">📊</div>
+                    <h3>Skill Gap Analytics</h3>
+                    <p>Identify strengths and gaps, then get curated learning paths to level up faster.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">🎯</div>
+                    <h3>Job Match Engine</h3>
+                    <p>Match with roles that fit your profile and career trajectory using AI ranking.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">🔎</div>
+                    <h3>Insights & Reports</h3>
+                    <p>Clear dashboards and AI-generated reports for informed decisions.</p>
+                </div>
+            </div>
+        </div>
+        <style>
+            .ai-features-section { padding: 60px 20px; background: #0e1b2a; color: #e6f1ff; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .ai-features.container { max-width: 1200px; margin: 0 auto; }
+            .ai-header { text-align: center; margin-bottom: 32px; }
+            .ai-header h2 { margin: 0 0 10px; font-size: 2rem; }
+            .ai-header p { color: rgba(230,241,255,0.8); }
+            .ai-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+            .ai-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; transition: all .25s ease; }
+            .ai-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.25); background: rgba(255,255,255,0.08); }
+            .ai-icon { font-size: 28px; margin-bottom: 10px; }
+            @media (max-width: 600px) { .ai-header h2 { font-size: 1.6rem; } }
+            .ai-badge { position: absolute; top: -12px; right: -12px; background: #111827; color: #10b981; border: 1px solid rgba(16,185,129,.3); padding: 6px 10px; border-radius: 999px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+        </style>
     </section>
 
     <!-- Clients Section -->
