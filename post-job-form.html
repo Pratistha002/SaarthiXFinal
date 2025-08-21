@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -206,8 +206,13 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">SaarthiX</a>
+                <div class="logo" aria-label="SaarthiX Home">
+            <a href="index.html" class="brand">
+                <img src="assets/images/logo-sx.jpg" alt="SaarthiX logo" class="brand-logo" />
+                <span class="brand-text">
+                    <span class="brand-primary">Saarthi</span><span class="brand-accent">X</span>
+                </span>
+            </a>
         </div>
         <ul class="nav-links">
             <li class="dropdown">
@@ -374,8 +379,8 @@
                         <label class="form-label">Currency</label>
                         <select class="form-select" name="currency">
                             <option value="USD">USD ($)</option>
-                            <option value="EUR">EUR (â‚¬)</option>
-                            <option value="GBP">GBP (Â£)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
                             <option value="INR">INR (?)</option>
                         </select>
                     </div>
@@ -398,23 +403,23 @@
 
                 <div class="form-group">
                     <label class="form-label">Key Responsibilities <span class="required">*</span></label>
-                    <textarea class="form-textarea" name="responsibilities" required placeholder="â€¢ List the main responsibilities
-â€¢ Use bullet points for clarity
-â€¢ Be specific about daily tasks"></textarea>
+                    <textarea class="form-textarea" name="responsibilities" required placeholder="• List the main responsibilities
+• Use bullet points for clarity
+• Be specific about daily tasks"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Required Qualifications <span class="required">*</span></label>
-                    <textarea class="form-textarea" name="qualifications" required placeholder="â€¢ Education requirements
-â€¢ Years of experience
-â€¢ Must-have skills and certifications"></textarea>
+                    <textarea class="form-textarea" name="qualifications" required placeholder="• Education requirements
+• Years of experience
+• Must-have skills and certifications"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Preferred Qualifications</label>
-                    <textarea class="form-textarea" name="preferredQualifications" placeholder="â€¢ Nice-to-have skills
-â€¢ Additional certifications
-â€¢ Bonus qualifications"></textarea>
+                    <textarea class="form-textarea" name="preferredQualifications" placeholder="• Nice-to-have skills
+• Additional certifications
+• Bonus qualifications"></textarea>
                 </div>
             </div>
 
