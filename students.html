@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="js/dropdown-nav.js" defer></script>
     <script src="js/nav-scroll.js" defer></script>
+    <link rel="stylesheet" href="pricing.css">
     <style>
         /* Additional styles for the services page */
         .services-hero {
@@ -813,6 +814,76 @@
             </div>
         </div>
     </section>
+    <!-- Student Pricing Section -->
+    <section id="student-pricing" class="pricing-section">
+      <div class="services-container">
+        <h2 class="services-title">Student Pricing</h2>
+        <p class="services-description">Choose a plan that fits your learning and career goals.</p>
+        <div class="plan-grid">
+          <!-- Free Plan -->
+          <article class="plan-card plan-free">
+            <header class="plan-header">
+              <div class="plan-badge">FREE</div>
+              <div class="plan-price"><span class="currency">₹</span><span class="amount">0</span></div>
+              <div class="plan-period">forever</div>
+              <a href="signup.html" class="plan-cta">Get Started</a>
+            </header>
+            <div class="plan-blurb">Kick the tires and explore the basics.</div>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-circle-check"></i> Basic Job Requirement by Industry Metric</li>
+              <li><i class="fa-solid fa-circle-check"></i> Basic Profiling</li>
+              <li><i class="fa-solid fa-circle-check"></i> Resume Building with Watermark</li>
+              <li><i class="fa-solid fa-circle-check"></i> Interview Question Topic Wise</li>
+              <li><i class="fa-solid fa-circle-check"></i> Career Counselling through AI</li>
+            </ul>
+          </article>
+
+          <!-- Basic Plan -->
+          <article class="plan-card plan-basic">
+            <header class="plan-header">
+              <div class="plan-badge">BASIC</div>
+              <div class="plan-price"><span class="currency">₹</span><span class="amount">1,499</span></div>
+              <div class="plan-period">for 6 months</div>
+              <a href="signup.html" class="plan-cta">Get Started</a>
+            </header>
+            <div class="plan-blurb">Activate AI-powered tools and assessments.</div>
+            <div class="plan-subtitle">Everything in FREE, plus:</div>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-circle-check"></i> AI-Based Profiling &amp; Interest Evaluation</li>
+              <li><i class="fa-solid fa-circle-check"></i> AI-Based Resume Building (No Watermark) &amp; AI Resume Review</li>
+              <li><i class="fa-solid fa-circle-check"></i> AI-Based Interview Preparation &amp; Test + Video Demo</li>
+              <li><i class="fa-solid fa-circle-check"></i> Psychometric Test</li>
+            </ul>
+          </article>
+
+          <!-- Premium Plan -->
+          <article class="plan-card plan-premium">
+            <header class="plan-header">
+              <div class="plan-badge">PREMIUM</div>
+              <div class="plan-price"><span class="currency">₹</span><span class="amount">5,999</span></div>
+              <div class="plan-period">for 6 months</div>
+              <a href="signup.html" class="plan-cta">Get Started</a>
+            </header>
+            <div class="plan-blurb">Unlock mentor-led guidance and pro features.</div>
+            <div class="plan-subtitle">Everything in BASIC, plus:</div>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-circle-check"></i> Resume Review by Industry Expert</li>
+              <li><i class="fa-solid fa-circle-check"></i> Interview by Video Conferencing + Communication &amp; Soft Skills</li>
+              <li><i class="fa-solid fa-circle-check"></i> Career Counselling through Mentor</li>
+              <li><i class="fa-solid fa-circle-check"></i> Psychometric Test</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <!-- Use pricing.css plan styles inside this dark page -->
+      <style>
+        #student-pricing { padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        /* override card backgrounds to better blend with dark gradient */
+        #student-pricing .plan-card { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.06) 100%); border: 1px solid rgba(100,255,218,0.18); }
+        #student-pricing .plan-blurb, #student-pricing .feature-list li { color: rgba(255,255,255,0.9); }
+      </style>
+    </section>
 
  <!-- Footer -->
     <footer class="footer">
@@ -960,6 +1031,20 @@
             <div class="floating-shape shape-2"></div>
             <div class="floating-shape shape-3"></div>
         </div>
+
+        <!-- Student Pricing Section -->
+        <section id="student-pricing" class="pricing-section">
+          
+
+          <!-- Use pricing.css plan styles inside this dark page -->
+          <style>
+            #student-pricing { padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); background: linear-gradient(135deg, #0f2238 0%, #0d1b2a 100%); }
+            /* override card backgrounds to better blend with dark gradient */
+            #student-pricing .plan-card { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.06) 100%); border: 1px solid rgba(100,255,218,0.18); }
+            #student-pricing .plan-blurb, #student-pricing .feature-list li { color: rgba(255,255,255,0.9); }
+          </style>
+        </section>
+
     </footer>
 
 
@@ -992,6 +1077,9 @@
             });
         });
     </script>
+
+    
+
 </body>
 </html>
 
