@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -210,7 +210,7 @@
                         </div>
                         <div>16 days</div>
                         <div class="status-dropdown">
-                            <span class="status-badge status-open">● Open</span>
+                            <span class="status-badge status-open">â— Open</span>
                             <div class="status-dropdown-content">
                                 <div class="status-option">Pause job</div>
                                 <div class="status-option">Close job</div>
@@ -248,7 +248,7 @@
                         </div>
                         <div>16 days</div>
                         <div class="status-dropdown">
-                            <span class="status-badge status-open">● Open</span>
+                            <span class="status-badge status-open">â— Open</span>
                             <div class="status-dropdown-content">
                                 <div class="status-option">Pause job</div>
                                 <div class="status-option">Close job</div>
@@ -286,7 +286,7 @@
                         </div>
                         <div>16 days</div>
                         <div class="status-dropdown">
-                            <span class="status-badge status-open">● Open</span>
+                            <span class="status-badge status-open">â— Open</span>
                             <div class="status-dropdown-content">
                                 <div class="status-option">Pause job</div>
                                 <div class="status-option">Close job</div>
@@ -324,7 +324,7 @@
                         </div>
                         <div>2 months</div>
                         <div class="status-dropdown">
-                            <span class="status-badge status-open">● Open</span>
+                            <span class="status-badge status-open">â— Open</span>
                             <div class="status-dropdown-content">
                                 <div class="status-option">Pause job</div>
                                 <div class="status-option">Close job</div>
@@ -362,7 +362,7 @@
                         </div>
                         <div>3 months</div>
                         <div class="status-dropdown">
-                            <span class="status-badge status-open">● Open</span>
+                            <span class="status-badge status-open">â— Open</span>
                             <div class="status-dropdown-content">
                                 <div class="status-option">Pause job</div>
                                 <div class="status-option">Close job</div>
@@ -498,18 +498,22 @@
                 const action = this.textContent;
                 
                 if (action === 'Pause job') {
-                    statusBadge.textContent = '● Paused';
+                    statusBadge.textContent = 'â— Paused';
                     statusBadge.className = 'status-badge status-paused';
                 } else if (action === 'Close job') {
-                    statusBadge.textContent = '● Closed';
+                    statusBadge.textContent = 'â— Closed';
                     statusBadge.className = 'status-badge status-closed';
                 }
             });
         });
     </script>
     <script src="script.js"></script>
+    <!-- Chatbot: Your Personal Assistance -->
+    <link rel="stylesheet" href="chat-assistant.css">
+    <script src="chat-assistant.js" defer></script>
 </body>
 </html>
+
 
 
 
