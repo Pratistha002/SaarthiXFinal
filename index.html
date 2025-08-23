@@ -349,7 +349,9 @@
 
             <!-- Flow replaced with static image -->
             <div class="flow-area" aria-label="Student journey image">
-                <img src="assets/images/workflow.jpg" alt="Student journey roadmap" style="width:70%; height:auto; display:block; margin:0 auto; border-radius:16px; box-shadow: 0 8px 24px rgba(16,24,40,.08);" />
+                <div class="flow-frame match-bg">
+                    <img class="flow-img" src="assets/images/workflow.jpg" alt="Student journey roadmap" />
+                </div>
             </div>
 
             <!-- Horizontal scrollable USP blocks -->
@@ -463,11 +465,66 @@ Students gain industry insights, job readiness, and nationwide opportunities.</
                 height: 1px;
                 background: rgba(2,6,23,0.08);
             }
-            .student-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+            .student-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 18px 16px; /* add inner space so content doesn't touch border */
+                background: #ffffff;
+                border-radius: 20px;
+                position: relative;
+                box-shadow: 0 12px 28px rgba(2,6,23,0.06);
+            }
+            /* Gradient border that matches page background */
+            .student-section .student-wrapper::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 20px;
+                padding: 2px; /* border thickness */
+                background: radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.28), transparent 60%),
+                            radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.24), transparent 65%),
+                            linear-gradient(135deg, #2f6ef5, #5a8cff, #38bdf8);
+                -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+                -webkit-mask-composite: xor;
+                        mask-composite: exclude;
+                /* animation removed */
+                pointer-events: none;
+            }
 
             /* Flow area */
             .flow-area { position: relative; height: auto; margin: 16px auto 12px; overflow: visible; }
             .flow-path { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+            /* Matched-with-background fancy border */
+            .flow-frame.match-bg {
+                width: 70%;
+                margin: 0 auto;
+                border-radius: 18px;
+                padding: 2px; /* border thickness */
+                background: radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.28), transparent 60%),
+                            radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.24), transparent 65%),
+                            linear-gradient(135deg, #2f6ef5, #5a8cff, #38bdf8);
+                box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18), 0 6px 18px rgba(56, 189, 248, 0.20);
+                position: relative;
+            }
+            .flow-frame.match-bg::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 18px;
+                padding: 2px;
+                background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent 40%, transparent 60%, rgba(255,255,255,0.12));
+                -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+                -webkit-mask-composite: xor;
+                        mask-composite: exclude;
+                /* animation removed */
+                pointer-events: none;
+            }
+            @keyframes sheen { 0% { opacity: .18; transform: translateX(-12%) } 50% { opacity: .36; transform: translateX(12%) } 100% { opacity: .18; transform: translateX(-12%) } }
+            .flow-img {
+                width: 100%; height: auto; display: block; border-radius: 16px;
+                background: #0f2238; box-shadow: 0 8px 24px rgba(16,24,40,.08);
+            }
 
             .flow-card {
                 position: absolute; min-width: 220px; background: #0ea5e9; color: #fff;
@@ -541,7 +598,9 @@ Students gain industry insights, job readiness, and nationwide opportunities.</
 
             <!-- Flow replaced with static image -->
             <div class="flow-area" aria-label="Institute journey image">
-                <img src="assets/images/institute.jpg" alt="Institute T&P solution roadmap" style="width:70%; height:auto; display:block; margin:0 auto; border-radius:16px; box-shadow: 0 8px 24px rgba(16,24,40,.08);" />
+                <div class="flow-frame match-bg">
+                    <img class="flow-img" src="assets/images/institute.jpg" alt="Institute T&P solution roadmap" />
+                </div>
             </div>
 
             <!-- Centered USP blocks (same as student) -->
@@ -573,6 +632,31 @@ Internship and placement pathways, backed by expert-led initiatives, transform t
         <!-- Scoped styles for institute section (reuse student styles) -->
         <style>
             .institute-section { padding: 40px 0 10px; background: #ffffff; }
+            /* Apply same wrapper gradient border as Students */
+            .institute-section .student-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 18px 16px;
+                background: #ffffff;
+                border-radius: 20px;
+                position: relative;
+                box-shadow: 0 12px 28px rgba(2,6,23,0.06);
+            }
+            .institute-section .student-wrapper::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 20px;
+                padding: 2px;
+                background: radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.28), transparent 60%),
+                            radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.24), transparent 65%),
+                            linear-gradient(135deg, #2f6ef5, #5a8cff, #38bdf8);
+                -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+                -webkit-mask-composite: xor;
+                        mask-composite: exclude;
+                /* animation removed */
+                pointer-events: none;
+            }
             .institute-section .section-title {
                 position: relative;
                 display: block;
@@ -623,7 +707,9 @@ Internship and placement pathways, backed by expert-led initiatives, transform t
 
             <!-- Flow replaced with static image -->
             <div class="flow-area" aria-label="Industry solutions image">
-                <img src="assets/images/industry.jpg" alt="Industry hiring solutions roadmap" style="width:70%; height:auto; display:block; margin:0 auto; border-radius:16px; box-shadow: 0 8px 24px rgba(16,24,40,.08);" />
+                <div class="flow-frame match-bg">
+                    <img class="flow-img" src="assets/images/industry.jpg" alt="Industry hiring solutions roadmap" />
+                </div>
             </div>
 
             <!-- Centered USP blocks (same as student) -->
@@ -658,6 +744,31 @@ Through collaborative hiring and internship opportunities, industries build futu
         <!-- Scoped styles for industry section -->
         <style>
             .industry-section { padding: 40px 0 10px; background: #ffffff; }
+            /* Apply same wrapper gradient border as Students */
+            .industry-section .student-wrapper {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 18px 16px;
+                background: #ffffff;
+                border-radius: 20px;
+                position: relative;
+                box-shadow: 0 12px 28px rgba(2,6,23,0.06);
+            }
+            .industry-section .student-wrapper::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 20px;
+                padding: 2px;
+                background: radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.28), transparent 60%),
+                            radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.24), transparent 65%),
+                            linear-gradient(135deg, #2f6ef5, #5a8cff, #38bdf8);
+                -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+                -webkit-mask-composite: xor;
+                        mask-composite: exclude;
+                /* animation removed */
+                pointer-events: none;
+            }
             .industry-section .section-title {
                 position: relative;
                 display: block;
