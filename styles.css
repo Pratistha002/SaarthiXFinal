@@ -246,6 +246,32 @@ nav.nav-hidden {
     text-decoration: none;
 }
 
+/* Animated underline for specific words in hero description */
+.hero-description .u-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-description .u-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: linear-gradient(90deg, #60a5fa, #34d399);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underlineSweep .8s ease forwards;
+    border-radius: 2px;
+}
+
+@keyframes underlineSweep {
+    to {
+        transform: scaleX(1);
+    }
+}
+
 .nav-links {
     display: flex;
     gap: 20px;
@@ -1122,8 +1148,8 @@ body.theme-bg::after {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
-    animation: underlineExpand 2s ease-out 1s both;
+    /* background: linear-gradient(90deg, #FFD700, #FFA500); */
+    /* animation: underlineExpand 2s ease-out 1s both; */
 }
 
 @keyframes underlineExpand {
