@@ -148,6 +148,80 @@
     <!-- Service Content -->
     <section class="service-content">
         <div class="container">
+            <!-- Quick Library Section -->
+            <div class="content-section" id="materials-library">
+                <div class="section-header">
+                    <h2>Study Materials Library</h2>
+                    <p>Browse curated PDFs across popular categories</p>
+                </div>
+
+                <style>
+                    .materials-grid { display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 16px; }
+                    .material-card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+                    .material-card h3 { margin:0 0 10px; font-size:18px; }
+                    .pdf-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+                    .pdf-list a { display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid #e5e7eb; border-radius:8px; text-decoration:none; color:#111827; background:#fafafa; }
+                    .pdf-list a:hover { background:#f3f4f6; }
+                    .pdf-icon { width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center; color:#ef4444; }
+                    @media (max-width: 900px) { .materials-grid { grid-template-columns: 1fr; } }
+                </style>
+
+                <div class="materials-grid">
+                    <div class="material-card">
+                        <h3>B.Tech Books</h3>
+                        <ul class="pdf-list">
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Engineering Mathematics - Vol 1 (PDF)
+                            </a></li>
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Data Structures & Algorithms (PDF)
+                            </a></li>
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Computer Networks (PDF)
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="material-card">
+                        <h3>B.Com Books</h3>
+                        <ul class="pdf-list">
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Financial Accounting (PDF)
+                            </a></li>
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Business Economics (PDF)
+                            </a></li>
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Corporate Law (PDF)
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="material-card">
+                        <h3>Web Development</h3>
+                        <ul class="pdf-list">
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                HTML & CSS Handbook (PDF)
+                            </a></li>
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                Modern JavaScript Guide (PDF)
+                            </a></li>
+                            <li><a href="#" download>
+                                <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+                                React Basics (PDF)
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <!-- Features Section -->
             <div class="content-section">
                 <div class="section-header">
