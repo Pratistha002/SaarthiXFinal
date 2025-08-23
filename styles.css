@@ -11,6 +11,17 @@ body {
     overflow-x: hidden;
 }
 
+/* Full-page gradient background */
+html,
+body,
+body.theme-bg {
+    background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(44, 76, 128, 0.18), transparent 60%),
+        radial-gradient(1000px 500px at 80% 20%, rgba(86, 118, 197, 0.16), transparent 65%),
+        linear-gradient(180deg, #0f2238 0%, #0b1a2c 60%, #0a1727 100%);
+    background-attachment: fixed, fixed, fixed;
+}
+
 /* Container for 16:9 laptop optimization */
 .container {
     max-width: 1920px;
@@ -99,11 +110,13 @@ body {
 }
 
 nav {
-    background-color: #1f2937; /* deeper tone for contrast */
+    background-color: #1f2937;
+    /* deeper tone for contrast */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px; /* tighter to fit logo nicely */
+    padding: 10px 20px;
+    /* tighter to fit logo nicely */
     position: fixed;
     top: 0;
     left: 0;
@@ -141,25 +154,27 @@ nav.nav-hidden {
     content: "";
     position: absolute;
     inset: -60% -20% -60% -20%;
-    background: radial-gradient(60% 60% at 15% 50%, rgba(59,130,246,0.25) 0%, rgba(59,130,246,0) 60%),
-                radial-gradient(50% 50% at 60% 40%, rgba(16,185,129,0.25) 0%, rgba(16,185,129,0) 60%);
+    background: radial-gradient(60% 60% at 15% 50%, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0) 60%),
+        radial-gradient(50% 50% at 60% 40%, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0) 60%);
     filter: blur(20px);
     opacity: 0;
     transition: opacity .35s ease;
     pointer-events: none;
 }
 
-.logo .brand:hover::before { opacity: 1; }
+.logo .brand:hover::before {
+    opacity: 1;
+}
 
 .brand-logo {
     width: 38px;
     height: 38px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
     transform: translateZ(0);
-    transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), filter .35s ease;
 }
 
 .brand-text {
@@ -172,7 +187,9 @@ nav.nav-hidden {
     position: relative;
 }
 
-.brand-primary { opacity: 0.95; }
+.brand-primary {
+    opacity: 0.95;
+}
 
 /* Gradient animated accent on X */
 .brand-accent {
@@ -188,29 +205,46 @@ nav.nav-hidden {
 .brand-accent::after {
     content: "";
     position: absolute;
-    top: 0; left: -120%;
-    width: 120%; height: 100%;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.7), transparent);
+    top: 0;
+    left: -120%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent);
     transform: skewX(-20deg);
     animation: xShine 3.2s ease-in-out infinite;
 }
 
 @keyframes xShine {
-    0%, 60% { left: -120%; }
-    75% { left: 20%; }
-    100% { left: 120%; }
+
+    0%,
+    60% {
+        left: -120%;
+    }
+
+    75% {
+        left: 20%;
+    }
+
+    100% {
+        left: 120%;
+    }
 }
 
 /* hover micro-interaction */
 .logo .brand:hover .brand-logo {
     transform: translateY(-1px) scale(1.04) rotate(-1deg);
-    filter: drop-shadow(0 8px 18px rgba(59,130,246,0.35));
+    filter: drop-shadow(0 8px 18px rgba(59, 130, 246, 0.35));
 }
 
-.logo .brand:hover .brand-text { transform: translateY(-0.5px); }
+.logo .brand:hover .brand-text {
+    transform: translateY(-0.5px);
+}
 
 /* keep existing default link style for other nav items */
-.logo a { color: white; text-decoration: none; }
+.logo a {
+    color: white;
+    text-decoration: none;
+}
 
 .nav-links {
     display: flex;
@@ -1584,8 +1618,20 @@ body.theme-bg::after {
 }
 
 /* Tooltips disabled */
-.node[data-tooltip]:hover::before { content: none; display: none; }
-@keyframes tooltipFadeIn { from { opacity: 1; } to { opacity: 1; } }
+.node[data-tooltip]:hover::before {
+    content: none;
+    display: none;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
 
 /* Node Labels */
 .node-label {
@@ -3793,5 +3839,4 @@ nav {
 
 .login-btn.logged-in:hover {
     background: linear-gradient(135deg, #059669 0%, #047857 100%);
-}
 }
