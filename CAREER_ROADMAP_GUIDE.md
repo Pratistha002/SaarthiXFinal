@@ -6,7 +6,7 @@ The Job Metrics page has been transformed into a comprehensive career roadmap na
 1. **Course Selection** → Choose your educational background
 2. **Stream Selection** → Pick your specialization 
 3. **Industry Selection** → Explore hiring industries
-4. **Roadmap View** → Get detailed career guidance
+4. **Roadmap View** → Get detailed career guidance.
 
 ## How It Works
 
