@@ -1816,6 +1816,18 @@ Together, they fuel your journey from ambition to achievement.</h4>
         @media (max-width: 768px) {
             .dev-card { min-width: 320px; }
             .dev-nav-btn { display: none; }
+            .dev-track {
+                flex-direction: column;
+                overflow-x: hidden;
+                scroll-snap-type: y mandatory;
+            }
+            .dev-card {
+                min-width: 100%;
+                margin-bottom: 20px;
+            }
+            .dev-desc {
+                text-align: center;
+            }
         }
     </style>
     <section class="dev-carousel" aria-label="Developers">
