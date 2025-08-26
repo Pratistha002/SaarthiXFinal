@@ -64,6 +64,22 @@
         .navbar { background: rgba(16, 27, 44, 0.96); }
         .hero { background: linear-gradient(180deg, #0f2238 0%, #0b1a2c 60%, #0a1727 100%); }
       }
+
+      /* Mobile: place Pricing and Logout at top-right */
+      @media (max-width: 600px) {
+        .navbar { position: fixed; }
+        .navbar .nav-links { display: none; }
+        .navbar .account-options {
+          position: absolute; /* keep at top-right */
+          right: 12px;
+          top: 8px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-left: auto;
+        }
+        .navbar .pricing-btn { padding: 8px 10px; }
+      }
     </style>
 </head>
 <body class="theme-bg">
