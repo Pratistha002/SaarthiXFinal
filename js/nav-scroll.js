@@ -74,4 +74,63 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // ===== Global responsive navbar (works across pages) =====
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelector('.navbar .nav-links');
+
+    // Inject hamburger toggle if not present
+    if (navbar && navLinks && !navbar.querySelector('.nav-toggle')) {
+        const toggle = document.createElement('button');
+        toggle.className = 'nav-toggle';
+        toggle.setAttribute('aria-label', 'Toggle menu');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-controls', 'primaryNav');
+        // Bars
+        for (let i = 0; i < 3; i++) {
+            const bar = document.createElement('span');
+            bar.className = 'bar';
+            toggle.appendChild(bar);
+        }
+        // Ensure nav list has an id
+        if (!navLinks.id) navLinks.id = 'primaryNav';
+        // Place toggle before nav-links
+        navLinks.parentNode.insertBefore(toggle, navLinks);
+    }
+
+    const toggleBtn = document.querySelector('.navbar .nav-toggle');
+    if (toggleBtn && navbar) {
+        toggleBtn.addEventListener('click', function () {
+            const open = navbar.classList.toggle('nav-open');
+            toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    }
+
+    // Mobile dropdown tap behavior
+    function isMobile() { return window.matchMedia('(max-width: 992px)').matches; }
+
+    if (navLinks) {
+        // Toggle dropdowns by tap on small screens
+        navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                if (isMobile()) {
+                    e.preventDefault();
+                    const li = this.parentElement;
+                    // Close siblings
+                    navLinks.querySelectorAll('.dropdown.open').forEach(d => { if (d !== li) d.classList.remove('open'); });
+                    li.classList.toggle('open');
+                }
+            });
+        });
+
+        // Close menu after selecting a leaf link
+        navLinks.querySelectorAll('.dropdown-content a, .nav-links > li > a:not(.dropbtn)').forEach(a => {
+            a.addEventListener('click', function () {
+                if (isMobile() && navbar) {
+                    navbar.classList.remove('nav-open');
+                    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
 });
