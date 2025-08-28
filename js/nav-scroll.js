@@ -110,21 +110,34 @@ document.addEventListener('DOMContentLoaded', function () {
     function isMobile() { return window.matchMedia('(max-width: 992px)').matches; }
 
     if (navLinks) {
-        // Toggle dropdowns by tap on small screens
+        // Mobile behavior: first tap opens submenu; second tap navigates (if href is not '#')
         navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
             btn.addEventListener('click', function (e) {
-                if (isMobile()) {
+                if (!isMobile()) return; // Desktop: default behavior
+                const li = this.parentElement;
+                const href = (this.getAttribute('href') || '').trim();
+                const alreadyOpen = li.classList.contains('open');
+
+                // Close other open dropdowns
+                navLinks.querySelectorAll('.dropdown.open').forEach(d => { if (d !== li) d.classList.remove('open'); });
+
+                if (!alreadyOpen) {
+                    // First tap: open submenu
                     e.preventDefault();
-                    const li = this.parentElement;
-                    // Close siblings
-                    navLinks.querySelectorAll('.dropdown.open').forEach(d => { if (d !== li) d.classList.remove('open'); });
-                    li.classList.toggle('open');
+                    li.classList.add('open');
+                } else {
+                    // Second tap: navigate if a valid href exists; otherwise toggle close
+                    if (!href || href === '#') {
+                        e.preventDefault();
+                        li.classList.remove('open');
+                    }
+                    // else: allow navigation
                 }
             });
         });
 
-        // Close menu after selecting a leaf link
-        navLinks.querySelectorAll('.dropdown-content a, .nav-links > li > a:not(.dropbtn)').forEach(a => {
+        // Close menu after selecting any link
+        navLinks.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', function () {
                 if (isMobile() && navbar) {
                     navbar.classList.remove('nav-open');
