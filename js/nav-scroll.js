@@ -46,6 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
     topBtns.forEach(btn => {
         const label = (btn.textContent || '').trim().toLowerCase();
         const current = btn.getAttribute('href');
+        // Mark Resources parent for styling and logic
+        if (label === 'resources' && btn.parentElement && !btn.parentElement.classList.contains('resources')) {
+            btn.parentElement.classList.add('resources');
+        }
         if (!current || current === '#') {
             if (label === 'students') btn.setAttribute('href', 'students.html');
             if (label === 'institute') btn.setAttribute('href', 'institute.html');
@@ -125,16 +129,29 @@ document.addEventListener('DOMContentLoaded', function () {
     function isMobile() { return window.matchMedia('(max-width: 992px)').matches; }
 
     if (navLinks) {
-        // Mobile behavior: no second-level dropdown; top-level links navigate directly
+        // Mobile behavior:
+        // - Students/Institute/Industry navigate directly (no submenu)
+        // - Resources toggles its submenu (second-level) with Jobs and Blogs
         navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 if (!isMobile()) return; // Desktop: default behavior
+                const li = this.parentElement;
+                const label = (this.textContent || '').trim().toLowerCase();
                 const href = (this.getAttribute('href') || '').trim();
-                // Do not open any submenu; if href is valid, navigate; otherwise prevent
+
+                if (label === 'resources') {
+                    // Toggle only Resources submenu
+                    e.preventDefault();
+                    // Close other dropdowns
+                    navLinks.querySelectorAll('.dropdown.open').forEach(d => { if (d !== li) d.classList.remove('open'); });
+                    li.classList.toggle('open');
+                    return;
+                }
+
+                // For other top-level buttons: navigate directly
                 if (!href || href === '#') {
                     e.preventDefault();
                 } else {
-                    // Ensure navigation (in case any other handler prevents default)
                     e.preventDefault();
                     window.location.href = href;
                 }
