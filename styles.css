@@ -3926,7 +3926,7 @@ nav {
         border-radius: 10px;
         padding: 16px;
     }
-    .navbar .dropdown.open > .dropdown-content { display: flex !important; }
+    .navbar .dropdown.open > .dropdown-content { display: none !important; }
     .navbar .dropdown:hover > .dropdown-content { display: none !important; }
 
     /* Adjust account options spacing */
