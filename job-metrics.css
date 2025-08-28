@@ -3231,6 +3231,32 @@ body {
         margin: 0 20px;
         padding: 20px 25px;
     }
+
+    /* Explorer: stack grids on tablets/phones */
+    .step-header h2 { font-size: 1.6rem; }
+    .step-subtitle { font-size: 0.95rem; }
+    .path-options,
+    .industry-grid,
+    .education-grid,
+    .specialization-grid,
+    .roles-grid,
+    .tech-options { grid-template-columns: 1fr; gap: 16px; }
+    .path-card,
+    .industry-card,
+    .education-card,
+    .specialization-card,
+    .role-card,
+    .tech-card { padding: 20px; }
+    .role-overview,
+    .skills-section { grid-template-columns: 1fr; }
+    .section-header h2 { font-size: 1.5rem; }
+    .progress-indicator { gap: 10px; }
+    .progress-dot { width: 10px; height: 10px; }
+
+    /* Gantt: enable horizontal scroll */
+    .gantt-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .gantt-header,
+    .gantt-row { min-width: 680px; }
 }
 
 @media (max-width: 480px) {
@@ -3264,4 +3290,20 @@ body {
     .centered-text {
         text-align: center;
     }
+
+    /* Tighter on small phones */
+    .step-header { margin-bottom: 30px; }
+    .step-header h2 { font-size: 1.35rem; }
+    .back-btn { position: static; transform: none; margin-bottom: 10px; }
+    .breadcrumb-section { padding: 12px 0; }
+    .path-card h3,
+    .industry-card h3,
+    .education-card h3,
+    .specialization-card h3,
+    .role-card h3 { font-size: 1.1rem; }
+    .overview-card,
+    .skills-card { padding: 20px; }
+    .roadmap-section { padding: 20px; }
+    .gantt-header,
+    .gantt-row { min-width: 560px; }
 }
