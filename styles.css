@@ -3909,9 +3909,9 @@ nav {
     .navbar.nav-open .nav-links { display: flex; }
 
     .navbar .nav-links > li { border-top: 1px solid rgba(255,255,255,0.06); }
-    .navbar .nav-links a.dropbtn { padding: 14px 6px; display: block; }
+    .navbar .nav-links a.dropbtn { padding: 14px 6px; display: inline-block; }
 
-    /* Disable hover dropdowns on touch; use tap to open */
+    /* Disable hover dropdowns on touch; open when parent has .open */
     .navbar .dropdown-content {
         position: static;
         display: none;
@@ -3919,7 +3919,7 @@ nav {
         visibility: visible;
         transform: none;
         background: rgba(255,255,255,0.98);
-        margin: 0 0 10px 0;
+        margin: 8px 0 10px 0;
         box-shadow: none;
         max-width: 100%;
         min-width: 0;
