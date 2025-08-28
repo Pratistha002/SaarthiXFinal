@@ -40,24 +40,28 @@
     nav.classList.remove('nav-hidden');
 })();
 
-// Fallback: make 'Students' top-level button navigate on all pages that don't include dropdown-nav.js
-// This ensures clicking 'Students' always goes to students.html from any page where this script is loaded.
+// Fallback: ensure top-level buttons have valid hrefs across all pages
 document.addEventListener('DOMContentLoaded', function () {
-    const studentBtns = document.querySelectorAll('.navbar .dropdown > .dropbtn');
-    studentBtns.forEach(btn => {
+    const topBtns = document.querySelectorAll('.navbar .dropdown > .dropbtn');
+    topBtns.forEach(btn => {
         const label = (btn.textContent || '').trim().toLowerCase();
-        if (label === 'students') {
-            const href = btn.getAttribute('href');
-            if (!href || href === '#') {
-                btn.setAttribute('href', 'students.html');
-            }
-            btn.addEventListener('click', function () {
-                const to = this.getAttribute('href');
-                if (to && to !== '#') {
+        const current = btn.getAttribute('href');
+        if (!current || current === '#') {
+            if (label === 'students') btn.setAttribute('href', 'students.html');
+            if (label === 'institute') btn.setAttribute('href', 'institute.html');
+            if (label === 'industry') btn.setAttribute('href', 'industry.html');
+            if (label === 'resources') btn.setAttribute('href', 'blogs.html'); // landing for resources
+        }
+        // Ensure navigation in case other handlers prevent default (desktop only)
+        btn.addEventListener('click', function () {
+            const to = this.getAttribute('href');
+            if (to && to !== '#') {
+                // On desktop allow default; on mobile separate handler manages navigation
+                if (window.matchMedia('(min-width: 993px)').matches) {
                     window.location.href = to;
                 }
-            });
-        }
+            }
+        });
     });
 
     // Ensure Login button opens login page on all pages
@@ -121,28 +125,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function isMobile() { return window.matchMedia('(max-width: 992px)').matches; }
 
     if (navLinks) {
-        // Mobile behavior: first tap opens submenu; second tap navigates (if href is not '#')
+        // Mobile behavior: no second-level dropdown; top-level links navigate directly
         navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
             btn.addEventListener('click', function (e) {
                 if (!isMobile()) return; // Desktop: default behavior
-                const li = this.parentElement;
                 const href = (this.getAttribute('href') || '').trim();
-                const alreadyOpen = li.classList.contains('open');
-
-                // Close other open dropdowns
-                navLinks.querySelectorAll('.dropdown.open').forEach(d => { if (d !== li) d.classList.remove('open'); });
-
-                if (!alreadyOpen) {
-                    // First tap: open submenu
+                // Do not open any submenu; if href is valid, navigate; otherwise prevent
+                if (!href || href === '#') {
                     e.preventDefault();
-                    li.classList.add('open');
                 } else {
-                    // Second tap: navigate if a valid href exists; otherwise toggle close
-                    if (!href || href === '#') {
-                        e.preventDefault();
-                        li.classList.remove('open');
-                    }
-                    // else: allow navigation
+                    // Ensure navigation (in case any other handler prevents default)
+                    e.preventDefault();
+                    window.location.href = href;
                 }
             });
         });
