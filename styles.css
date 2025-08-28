@@ -3927,7 +3927,12 @@ nav {
         padding: 16px;
     }
     .navbar .dropdown.open > .dropdown-content { display: none !important; }
+    .navbar .dropdown.resources.open > .dropdown-content { display: flex !important; }
     .navbar .dropdown:hover > .dropdown-content { display: none !important; }
+
+    /* Center dropdown panel; keep Resources button left-aligned on mobile */
+    .navbar .nav-links > li.resources { display: flex; flex-direction: column; align-items: flex-start; }
+    .navbar .dropdown.resources > .dropdown-content { margin-left: auto; margin-right: auto; width: auto; max-width: 92vw; }
 
     /* Adjust account options spacing */
     .navbar .account-options { gap: 10px; }
