@@ -79,6 +79,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelector('.navbar .nav-links');
 
+    // Apply top padding to body on mobile so content isn't hidden behind fixed navbar
+    function applyNavOffset() {
+        if (navbar && window.matchMedia('(max-width: 992px)').matches) {
+            document.body.style.paddingTop = navbar.offsetHeight + 'px';
+        } else {
+            document.body.style.paddingTop = '';
+        }
+    }
+    applyNavOffset();
+    window.addEventListener('resize', applyNavOffset);
+
     // Inject hamburger toggle if not present
     if (navbar && navLinks && !navbar.querySelector('.nav-toggle')) {
         const toggle = document.createElement('button');
