@@ -72,6 +72,9 @@ body{background:linear-gradient(135deg,rgba(124,58,237,.06),rgba(6,182,212,.06))
 @media (max-width:768px){
   .pricing-hero h1{font-size:1.6rem}
   .pricing-btn{padding:9px 12px}
+  /* Center the pricing dropdown under the button on mobile */
+  .pricing-btn-wrapper{position:relative}
+  .pricing-menu{left:50%; right:auto; transform:translateX(-50%); max-width:92vw; min-width:220px}
 }
 
 /* Independent services strip */
