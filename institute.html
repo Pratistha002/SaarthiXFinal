@@ -197,8 +197,35 @@
         .seg.active { filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); transform: scale(1.015); opacity: 1; }
         .arrow-tip { opacity: 1; filter: drop-shadow(0 3px 6px rgba(0,0,0,.25)); stroke: #fff; stroke-width: 4; stroke-linejoin: round; transition: transform .2s ease, filter .2s ease; }
         .arrow-tip.active { transform: scale(1.06); filter: drop-shadow(0 6px 14px rgba(0,0,0,.35)); }
+
+        /* Responsive tweaks for services grid/cards */
+        @media (max-width: 992px) {
+            .services-title { font-size: 2.1rem; }
+            .services-description { font-size: 1.05rem; }
+            .services-grid { gap: 24px; }
+            .service-card { padding: 24px; }
+            .service-icon { width: 60px; height: 60px; font-size: 2.1rem; }
+            .service-title { font-size: 1.35rem; }
+        }
+        @media (max-width: 768px) {
+            .services-container { padding: 0 14px; }
+            .services-title { font-size: 1.9rem; }
+            .services-description { font-size: 1rem; margin-bottom: 2rem; }
+            .services-grid { grid-template-columns: 1fr; gap: 20px; }
+            .service-card { padding: 20px; }
+            .service-icon { width: 56px; height: 56px; font-size: 1.9rem; }
+            .service-title { font-size: 1.2rem; }
+            .service-description { font-size: 0.97rem; }
+            .service-link { width: 100%; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .services-hero { padding: 64px 0 28px; }
+            .services-title { font-size: 1.7rem; }
+            .services-description { font-size: 0.98rem; }
+            .service-card { padding: 16px; }
+            .service-icon { width: 52px; height: 52px; font-size: 1.7rem; }
+        }
     </style>
-    <script src="js/nav-scroll.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
