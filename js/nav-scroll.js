@@ -1,4 +1,4 @@
-// Hide/show navbar on scroll across pages
+// Hide/show navbar on scroll across pages 
 (function () {
     let lastScrollY = window.pageYOffset;
     let ticking = false;
