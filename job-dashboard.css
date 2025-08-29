@@ -4,7 +4,8 @@ html {
 }
 
 body {
-    padding-top: 80px; /* Account for fixed navbar */
+    padding-top: 80px;
+    /* Account for fixed navbar */
 }
 
 .job-dashboard {
@@ -19,6 +20,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -35,7 +37,7 @@ body {
     overflow-y: auto;
     z-index: 100;
     flex-shrink: 0;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-header {
@@ -86,11 +88,217 @@ body {
     padding: 20px;
 }
 
+/* Hackathon stats grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Table container and table */
+.table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+    /* allow horizontal scroll on small screens */
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.data-table thead th {
+    background: #f8f9fa;
+    font-weight: 600;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* Hackathon page specific cell content */
+.hackathon-info h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #111827;
+}
+
+.hackathon-id {
+    display: inline-block;
+    font-size: 12px;
+    color: #6b7280;
+    background: #f3f4f6;
+    border-radius: 6px;
+    padding: 2px 6px;
+}
+
+.participant-count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.participant-count .count {
+    font-weight: 700;
+}
+
+.participant-count .registered {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.prize-amount {
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Header and table controls responsiveness */
+@media (max-width: 768px) {
+    .dashboard-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .dashboard-header .header-right {
+        width: 100%;
+    }
+
+    .dashboard-header .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .table-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .table-actions {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box input {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+}
+
+/* Search box within table header */
+.search-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.search-box i {
+    color: #6b7280;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    min-width: 160px;
+}
+
+/* Action buttons in table */
+.action-buttons {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.btn-action:hover {
+    background: #f3f4f6;
+    transform: translateY(-1px);
+}
+
+/* Status badges (hackathon-specific) */
+.status-badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-upcoming {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.status-completed {
+    background: #e5e7eb;
+    color: #374151;
+}
+
 .dashboard-header {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
@@ -125,7 +333,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -182,7 +390,7 @@ body {
 .jobs-table {
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
@@ -199,6 +407,21 @@ body {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .table-header h2 {
+        font-size: 16px;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    .search-box input {
+        min-width: 120px;
+    }
 }
 
 .jobs-list {
@@ -310,7 +533,7 @@ body {
     background: white;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     min-width: 150px;
     z-index: 1000;
     display: none;
@@ -359,7 +582,7 @@ body {
     position: absolute;
     background-color: white;
     min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     z-index: 1;
     top: 100%;
@@ -442,6 +665,30 @@ body {
     }
 }
 
+/* Extra-small screens tweaks */
+@media (max-width: 480px) {
+
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .btn-action {
+        width: 28px;
+        height: 28px;
+    }
+
+    .status-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+}
+
 /* Additional Enhancements */
 .create-campaign-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -470,7 +717,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex: 1;
     text-align: center;
 }
@@ -499,7 +746,7 @@ body {
     padding: 12px;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,123,255,0.3);
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -515,7 +762,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 999;
     opacity: 0;
     transition: opacity 0.3s ease;
