@@ -87,6 +87,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelector('.navbar .nav-links');
 
+    // Inject a floating circular Back button at bottom (except on index.html)
+    const currentPage = (window.location.pathname.split('/').pop() || '').toLowerCase();
+    const isHome = currentPage === '' || currentPage === 'index.html';
+    if (!isHome && !document.querySelector('.floating-back-btn')) {
+        const shouldShowBack = (window.history.length > 1) || (document.referrer && document.referrer !== '');
+        if (shouldShowBack) {
+            const btn = document.createElement('button');
+            btn.className = 'floating-back-btn';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', 'Go back to previous page');
+            btn.innerHTML = '<span class="chev" aria-hidden="true"></span>';
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (window.history.length > 1) {
+                    window.history.back();
+                    return;
+                }
+                if (document.referrer) {
+                    try {
+                        const ref = new URL(document.referrer);
+                        if (ref.origin === window.location.origin) {
+                            window.location.href = document.referrer;
+                            return;
+                        }
+                    } catch (_) { }
+                }
+                window.location.href = 'index.html';
+            });
+            document.body.appendChild(btn);
+        }
+    }
+
     // Apply top padding to body on mobile so content isn't hidden behind fixed navbar
     function applyNavOffset() {
         if (navbar && window.matchMedia('(max-width: 992px)').matches) {
