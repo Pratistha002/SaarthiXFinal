@@ -1,0 +1,103 @@
+/* Responsive navbar for this page (hamburger menu) */
+
+/* Hamburger toggle button (injected by JS) */
+.navbar .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.navbar .nav-toggle .bar {
+    display: block;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .25s ease, top .25s ease;
+}
+
+.navbar .nav-toggle .bar:nth-child(1) {
+    top: 12px;
+}
+
+.navbar .nav-toggle .bar:nth-child(2) {
+    top: 20px;
+}
+
+.navbar .nav-toggle .bar:nth-child(3) {
+    top: 28px;
+}
+
+/* Animate to X when open */
+.navbar.nav-open .nav-toggle .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.navbar.nav-open .nav-toggle .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar.nav-open .nav-toggle .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile layout */
+@media (max-width: 992px) {
+
+    /* Show toggle */
+    .navbar .nav-toggle {
+        display: inline-block;
+    }
+
+    /* Stack nav links under the fixed navbar */
+    .navbar .nav-links {
+        display: none;
+        /* hidden by default */
+        position: absolute;
+        top: 100%;
+        /* just below the navbar */
+        left: 0;
+        right: 0;
+        background: #1f2937;
+        /* same as navbar */
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 10000;
+    }
+
+    /* Open state */
+    .navbar.nav-open .nav-links {
+        display: flex;
+    }
+
+    /* Larger tap targets */
+    .navbar .nav-links>li>a.dropbtn {
+        display: block;
+        padding: 12px 20px;
+    }
+
+    /* Don’t show hover dropdowns on mobile */
+    .navbar .dropdown .dropdown-content {
+        display: none !important;
+        position: static;
+        min-width: auto;
+        padding: 0;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    /* Keep account options visible within the slide-down */
+    .navbar .account-options {
+        margin-left: auto;
+        padding: 8px 16px;
+    }
+}
