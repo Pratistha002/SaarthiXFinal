@@ -1063,7 +1063,7 @@
                 closeSidebar();
             } else {
                 sidebar.classList.add('open');
-                overlay.classList.add('show');
+                overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
         }
@@ -1073,7 +1073,7 @@
             const overlay = document.getElementById('mobileOverlay');
             
             sidebar.classList.remove('open');
-            overlay.classList.remove('show');
+            overlay.classList.remove('active');
             document.body.style.overflow = '';
         }
 
